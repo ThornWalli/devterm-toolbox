@@ -1,0 +1,55 @@
+{
+  "name": "@devterm-toolbox/electron",
+  "productName": "DevTerm-ToolBox",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Electron App",
+  "license": "MIT",
+  "author": "Thorn-Welf Walli <lammpee@gmail.com> (https://lammpee.de)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThornWalli/devterm-toolbox/packages/electron"
+  },
+  "main": "src/main/main.js",
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "dev": "node scripts/dev-server.js",
+    "build": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json",
+    "build:win": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json --win",
+    "build:mac": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json --mac",
+    "build:linux": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json --linux",
+    "build:devterm": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json --linux deb rpm --arm64 --armv7l",
+    "rebuild": "electron-rebuild -f -w @serialport"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/cli": "^4.5.14",
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.2",
+    "cssnano": "^5.0.14",
+    "electron": "15.3.4",
+    "electron-builder": "^22.13.1",
+    "electron-rebuild": "^3.2.5",
+    "esm": "^3.2.25",
+    "husky": "^7.0.4",
+    "postcss-html": "^1.3.0",
+    "postcss-nesting": "^10.1.1",
+    "postcss-preset-env": "^7.2.0",
+    "vite": "^2.6.10",
+    "vite-babel-plugin": "0.0.2",
+    "vite-plugin-vue2": "^1.9.0",
+    "vite-plugin-vue2-svg": "^0.1.8"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "events": "^3.3.0",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.0",
+    "vue": "^2.6.14"
+  },
+  "optionalDependencies": {
+    "canvas": "^2.8.0",
+    "devterm": "^1.0.0-beta.7",
+    "serialport": "^9.2.8"
+  }
+}

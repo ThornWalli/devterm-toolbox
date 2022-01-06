@@ -1,0 +1,14 @@
+# Common
+node_modules
+dist
+build
+.nuxt
+coverage
+.reports
+publish
+sw.js
+.history
+
+lib/templates/**/*
+lib/components/SpeedkitLayer.vue
+lib/components/SpeedkitYoutube/test/**/*

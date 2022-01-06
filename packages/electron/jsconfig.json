@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "es2015",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@devterm-toolbox/electron/*": [
+        "../electron/*"
+      ],
+      "@devterm-toolbox/frontend/*": [
+        "../frontend/*"
+      ],
+      "@devterm-toolbox/web/*": [
+        "../web/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

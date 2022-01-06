@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order"
+  ],
+  "customSyntax": "postcss-html",
+  "ignoreFiles": [
+    "./**/*.js"
+  ],
+  "rules": {
+    "max-line-length": null,
+    "no-descending-specificity": null
+  }
+}

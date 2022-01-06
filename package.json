@@ -1,0 +1,53 @@
+{
+  "name": "devterm-toolbox",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A tool for using the DevTerm.",
+  "license": "MIT",
+  "author": "Thorn-Welf Walli <lammpee@gmail.com> (https://lammpee.de)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThornWalli/devterm-toolbox"
+  },
+  "scripts": {
+    "postinstall": "husky install",
+    "dev::electron": "npm run dev --workspace=@devterm-toolbox/electron",
+    "build:electron": "npm run build --workspace=@devterm-toolbox/electron",
+    "build:electron:win": "npm run build:win --workspace=@devterm-toolbox/electron",
+    "build:electron:mac": "npm run build:mac --workspace=@devterm-toolbox/electron",
+    "build:electron:linux": "npm run build:linux --workspace=@devterm-toolbox/electron",
+    "build:electron:devterm": "npm run build:devterm --workspace=@devterm-toolbox/electron",
+    "rebuild": "npm run rebuild --workspace=@devterm-toolbox/electron",
+    "dev:web": "npm run dev --workspace=@devterm-toolbox/web",
+    "build:web": "npm run build --workspace=@devterm-toolbox/web",
+    "preview:web": "npm run build --workspace=@devterm-toolbox/web && npm run preview --workspace=@devterm-toolbox/web",
+    "lint": "npm run lint:css && npm run lint:es",
+    "lint:es": "eslint --ext .js,.vue .",
+    "lint:css": "stylelint \"packages/**/*.vue\"",
+    "test": "npm run lint"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.5",
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
+    "commitlint": "^16.0.1",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-unicorn": "^39.0.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.5",
+    "stylelint": "^14.1.0",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard": "^24.0.0"
+  },
+  "workspaces": [
+    "./packages/electron",
+    "./packages/frontend",
+    "./packages/web"
+  ]
+}

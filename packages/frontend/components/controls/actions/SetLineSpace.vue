@@ -1,0 +1,46 @@
+<template>
+  <action-dialog title="Set Line Space" class="action-set-line-space" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
+    <template #head>
+      <slot name="head" />
+    </template>
+    <template #default>
+      <input-text-field
+        step="1"
+        min="0"
+        type="number"
+        :value="value"
+        :label="label"
+        @input="$emit('input', $even || 0)"
+      />
+    </template>
+  </action-dialog>
+</template>
+
+<script>
+import ActionDialog from '../../controls/ActionDialog.vue';
+import MixinDialog from '../../../mixins/Dialog.vue';
+
+import InputTextField from '../../inputs/TextField.vue';
+export default {
+  components: { ActionDialog, InputTextField },
+  mixins: [MixinDialog],
+  inheritAttrs: false,
+  props: {
+    value: {
+      type: [Number, String],
+      default: 0
+    }
+  },
+  data () {
+    return {
+      label: 'Set Line-space'
+    };
+  }
+};
+</script>
+
+<style lang="postcss" scoped>
+.action-set-line-space {
+  /* empty */
+}
+</style>
