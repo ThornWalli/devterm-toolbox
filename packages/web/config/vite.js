@@ -16,7 +16,7 @@ const config = defineConfig({
     port: 8080
   },
   define: {
-    __VERSION__: JSON.stringify(process.env.npm_package_version)
+    __VERSION__: process.env.nextRelease || JSON.stringify(process.env.npm_package_version)
   },
   open: true,
   build: {
