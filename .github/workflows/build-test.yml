@@ -31,8 +31,8 @@ jobs:
             sudo npm install -g n
             sudo n auto
             
-            npm ci --unsafe-perm=true
-            npm run build:devterm
+            sudo npm ci
+            sudo npm run build:devterm
             cp "/packages/electron/dist" "/artifacts/${artifact_name}"
             echo "Produced artifact at /artifacts/${artifact_name}"
 
