@@ -28,19 +28,24 @@ const ipc = (server, options) => {
   const userDataPath = app.getPath('userData');
   const configFile = resolve(userDataPath, 'config.json');
 
-  ipcMain.handle('loadConfig', async (event) => {
+  // Load config
+  const onLoadConfig = async (event) => {
     try {
       return JSON.parse(await fs.promises.readFile(configFile, 'utf-8'));
     } catch (error) {
       return getDefaultConfig();
     }
-  });
+  };
+  ipcMain.handle('loadConfig', onLoadConfig);
 
-  ipcMain.handle('saveConfig', (event, data) => {
+  // Save config
+  const onSaveConfig = (event, data) => {
     fs.promises.writeFile(configFile, JSON.stringify(data), 'utf-8');
-  });
+  };
+  ipcMain.handle('saveConfig', onSaveConfig);
 
-  ipcMain.handle('window', (event, type, value) => {
+  // Window
+  const onWindow = (event, type, value) => {
     const window = BrowserWindow.getFocusedWindow();
     switch (type) {
       case 'minimize':
@@ -53,12 +58,17 @@ const ipc = (server, options) => {
         window.setFullScreen(value && !window.isFullScreen());
         break;
     }
-  });
-  ipcMain.handle('close', (event) => {
-    app.exit();
-  });
+  };
+  ipcMain.handle('window', onWindow);
 
-  ipcMain.handle('save', (event, data) => {
+  // Close
+  const onClose = (event) => {
+    app.exit();
+  };
+  ipcMain.handle('close', onClose);
+
+  // Save
+  const onSave = (event, data) => {
     return dialog.showSaveDialog({
       title: 'Save template',
       defaultPath: 'template.json',
@@ -76,9 +86,11 @@ const ipc = (server, options) => {
     }).catch(err => {
       console.error(err);
     });
-  });
+  };
+  ipcMain.handle('save', onSave);
 
-  ipcMain.handle('load', async (event) => {
+  // Load
+  const onLoad = async (event) => {
     const data = await dialog.showOpenDialog({
       title: 'Load template',
       // defaultPath: 'template.json',
@@ -100,7 +112,8 @@ const ipc = (server, options) => {
       console.error(err);
     });
     return data;
-  });
+  };
+  ipcMain.handle('load', onLoad);
 
   return {
     registerWindowEvents: (window) => {

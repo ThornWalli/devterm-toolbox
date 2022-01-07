@@ -33,6 +33,7 @@ export default {
 .base-input-label {
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
 
   & > .label {
     box-sizing: border-box;

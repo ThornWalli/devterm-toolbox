@@ -1,3 +1,4 @@
+
 const { join } = require('path');
 // const vuePlugin = require('@vitejs/plugin-vue');
 const { createVuePlugin } = require('vite-plugin-vue2');
@@ -5,6 +6,17 @@ const { createVuePlugin } = require('vite-plugin-vue2');
 const { createSvgPlugin } = require('vite-plugin-vue2-svg');
 
 const { defineConfig } = require('vite');
+
+const { dependencies } = require('../../frontend/package.json');
+
+function renderChunks (deps) {
+  const chunks = {};
+  Object.keys(deps).forEach((key) => {
+    if (['vue'].includes(key)) return;
+    chunks[key] = [key];
+  });
+  return chunks;
+}
 
 /**
  * https://vitejs.dev/config
@@ -21,7 +33,16 @@ const config = defineConfig({
   open: true,
   build: {
     outDir: join(__dirname, '..', 'build'),
-    emptyOutDir: true
+    emptyOutDir: true,
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue'],
+          ...renderChunks(dependencies)
+        }
+      }
+    }
   },
   plugins: [createVuePlugin(), createSvgPlugin()],
   resolve: {

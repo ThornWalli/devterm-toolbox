@@ -1,5 +1,4 @@
 import EventEmitter from 'events';
-import { io } from 'socket.io-client';
 import ACTION_DEFINITIONS from '../utils/action/definitions';
 export default class Client extends EventEmitter {
   constructor () {
@@ -10,7 +9,8 @@ export default class Client extends EventEmitter {
 
   async connect (port = 3000, host = 'localhost', secure = false) {
     const protocol = secure ? 'wss' : 'ws';
-    const socket = io(`${protocol}://${host}:${port}`, {
+    this.io = this.ready();
+    const socket = this.io(`${protocol}://${host}:${port}`, {
       // reconnectionDelayMax: 10000,
       autoConnect: false,
       reconnection: false,
@@ -36,6 +36,15 @@ export default class Client extends EventEmitter {
       socket.connect();
     });
     this.emit('connect');
+  }
+
+  async ready () {
+    if (this.io) {
+      return this.io;
+    }
+    const { io } = await import('socket.io-client');
+    this.io = io;
+    return io;
   }
 
   get host () {

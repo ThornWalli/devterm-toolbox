@@ -13,9 +13,9 @@
       <component :is="item.component" v-for="(item, index) in footerItems" :key="index" v-bind="item.props" v-on="item.on" />
     </app-menu>
     <dialog-error v-for="(error,index) in $errorList.errors" v-bind="error" :key="index" init-open />
-    <dialog-remote ref="dialogRemote" />
-    <dialog-server ref="dialogServer" />
-    <dialog-options ref="dialogOptions" />
+    <dialog-remote v-if="ready" ref="dialogRemote" />
+    <dialog-server v-if="ready" ref="dialogServer" />
+    <dialog-options v-if="ready" ref="dialogOptions" />
   </div>
 </template>
 <script>
@@ -44,14 +44,6 @@ import AppMenuItem from './app/MenuItem.vue';
 import AppMenuText from './app/MenuText.vue';
 import AppMenuSpacer from './app/MenuSpacer.vue';
 import AppMenuDivider from './app/MenuDivider.vue';
-import DialogError from './dialogs/Error.vue';
-import DialogRemote from './dialogs/Remote.vue';
-import DialogServer from './dialogs/Server.vue';
-import DialogOptions from './dialogs/Options.vue';
-
-import ViewPrinter from './views/Printer.vue';
-import ViewStart from './views/Start.vue';
-import ViewInfo from './views/Info.vue';
 
 const VIEWS = {
   NONE: null,
@@ -109,18 +101,19 @@ function exampleData () {
 
 export default {
   components: {
-    ViewPrinter,
-    ViewStart,
-    ViewInfo,
+
+    ViewPrinter: () => import('./views/Printer.vue'),
+    ViewStart: () => import('./views/Start.vue'),
+    ViewInfo: () => import('./views/Info.vue'),
     AppMenu,
     AppMenuItem,
     AppMenuText,
     AppMenuSpacer,
     AppMenuDivider,
-    DialogError,
-    DialogRemote,
-    DialogServer,
-    DialogOptions
+    DialogError: () => import('./dialogs/Error.vue'),
+    DialogRemote: () => import('./dialogs/Remote.vue'),
+    DialogServer: () => import('./dialogs/Server.vue'),
+    DialogOptions: () => import('./dialogs/Options.vue')
   },
 
   data () {
@@ -204,9 +197,9 @@ export default {
             click: this.onClickClose
           },
           props: { text: 'Close' }
-        }].flat()
+        }]
 
-      ].filter(Boolean);
+      ].flat().filter(Boolean);
     },
 
     footerItems () {
@@ -243,7 +236,7 @@ export default {
         },
         {
           component: AppMenuDivider
-        }].flat(),
+        }],
         {
           component: AppMenuText,
           on: {
@@ -259,7 +252,7 @@ export default {
           props: { class: 'info-version', text: this.version }
         }
 
-      ].filter(Boolean);
+      ].flat().filter(Boolean);
     },
 
     hasServer () {

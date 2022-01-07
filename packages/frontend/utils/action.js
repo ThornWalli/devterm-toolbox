@@ -12,11 +12,6 @@ import ActionQrCode from '@devterm-toolbox/frontend/components/controls/actions/
 import ActionFeedPitch from '@devterm-toolbox/frontend/components/controls/actions/FeedPitch.vue';
 import { DropDownOptionDescription } from '@devterm-toolbox/frontend/components/base/DropDown.vue';
 
-import PreviewTextCanvas from '@devterm-toolbox/frontend/components/preview/TextCanvas.vue';
-import PreviewImageCanvas from '@devterm-toolbox/frontend/components/preview/ImageCanvas.vue';
-import PreviewQrCodeCanvas from '@devterm-toolbox/frontend/components/preview/QrCodeCanvas.vue';
-import PreviewBarcodeCanvas from '@devterm-toolbox/frontend/components/preview/BarcodeCanvas.vue';
-import PreviewFeedPitch from '@devterm-toolbox/frontend/components/preview/FeedPitch.vue';
 import ActionDescription from '@devterm-toolbox/frontend/classes/ActionDescription';
 
 export const getActionTypeOptions = () => {
@@ -145,7 +140,7 @@ export const executeAction = (action, options) => {
     case 'cutLine':
       return {
         id: action.id,
-        component: PreviewTextCanvas,
+        component: () => import('@devterm-toolbox/frontend/components/preview/TextCanvas.vue'),
         options: {
           ...options,
           // reset options
@@ -162,7 +157,7 @@ export const executeAction = (action, options) => {
     case 'barcode':
       return {
         id: action.id,
-        component: PreviewBarcodeCanvas,
+        component: () => import('@devterm-toolbox/frontend/components/preview/BarcodeCanvas.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -170,7 +165,7 @@ export const executeAction = (action, options) => {
     case 'qrCode':
       return {
         id: action.id,
-        component: PreviewQrCodeCanvas,
+        component: () => import('@devterm-toolbox/frontend/components/preview/QrCodeCanvas.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -178,7 +173,7 @@ export const executeAction = (action, options) => {
     case 'image':
       return {
         id: action.id,
-        component: PreviewImageCanvas,
+        component: () => import('@devterm-toolbox/frontend/components/preview/ImageCanvas.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -186,7 +181,7 @@ export const executeAction = (action, options) => {
     case 'text':
       return {
         id: action.id,
-        component: PreviewTextCanvas,
+        component: () => import('@devterm-toolbox/frontend/classes/ActionDescription'),
         options: { ...options },
         props: { ...action }
       };
@@ -194,7 +189,7 @@ export const executeAction = (action, options) => {
     case 'feedPitch':
       return {
         id: action.id,
-        component: PreviewFeedPitch,
+        component: () => import('@devterm-toolbox/frontend/components/preview/FeedPitch.vue'),
         options: { ...options },
         props: { ...action.value }
       };

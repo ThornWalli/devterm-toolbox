@@ -48,7 +48,6 @@ import { keyUpObserver } from '../../utils/dom';
 export default {
   components: {
     AppView,
-
     InputIconButton,
     InputTextButton,
     InputDropDown,

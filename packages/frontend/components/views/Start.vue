@@ -2,12 +2,18 @@
   <app-view class="view-start">
     <div>
       <h2>Welcome DevTerm User!</h2>
-      <p>
+      <p v-if="'$server' in this">
         Do you work locally or remotely?
-        <br>
-        <br>
-        <input-check-box v-model="remember" label="Remember choice" delimiter="?" />
       </p>
+      <p v-else>
+        Your session does not support server, only available in remote.
+      </p>
+      <p>
+        Click on "Use Remote" and enter the connection data <br>to connect to the DevTerm.
+      </p>
+      <div>
+        <input-check-box v-model="remember" label="Remember choice" delimiter="?" />
+      </div>
 
       <div class="buttons">
         <input-text-button v-if="'$server' in this" color="primary" text="Use Local" @click="onClickLocal" />
@@ -53,6 +59,16 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  & p {
+    font-size: calc(12 /  16 * 1em);
+    line-height: calc(20 / 12);
+  }
+
+  & div {
+    text-align: center;
+    margin: calc(20 /  16 * 1em);
+  }
 
   & .buttons {
     & > * + * {
