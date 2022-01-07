@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.2](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-01-07)
+
+
+### Bug Fixes
+
+* **lint:** fix vscode stylelinter and lint problems ([f82312a](https://github.com/ThornWalli/devterm-toolbox/commit/f82312a95d1b2c7df21602df78872edfc11f3996))
+
 # 1.0.0-beta.1 (2022-01-06)
 
 
