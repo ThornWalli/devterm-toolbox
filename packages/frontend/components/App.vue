@@ -2,7 +2,7 @@
 <template>
   <div class="app" :style="style" :class="{ready}">
     <app-menu class="header">
-      <component :is="item.component" v-for="(item, index) in headerItems" :key="index" v-bind="item.props" v-on="item.on" />
+      <component v-bind="item.props" :is="item.component" v-for="(item, index) in headerItems" :key="index" v-on="item.on" />
     </app-menu>
     <div class="app-content">
       <view-start v-if="!$client.connected && ready" @apply="onApplyViewStart" />
@@ -10,7 +10,7 @@
       <view-info v-else-if="currentView === VIEWS.INFO" />
     </div>
     <app-menu class="footer">
-      <component :is="item.component" v-for="(item, index) in footerItems" :key="index" v-bind="item.props" v-on="item.on" />
+      <component v-bind="item.props" :is="item.component" v-for="(item, index) in footerItems" :key="index" v-on="item.on" />
     </app-menu>
     <dialog-error v-for="(error,index) in $errorList.errors" v-bind="error" :key="index" init-open />
     <dialog-remote v-if="ready" ref="dialogRemote" />
@@ -461,10 +461,6 @@ export default {
 <style lang="postcss">
 ::-webkit-scrollbar {
   width: calc(10 / 16 * 1em);
-}
-
-::-webkit-scrollbar-track {
-  /* empty */
 }
 
 ::-webkit-scrollbar-thumb {

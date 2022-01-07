@@ -61,13 +61,13 @@ export default {
   text-align: center;
 
   & p {
-    font-size: calc(12 /  16 * 1em);
+    font-size: calc(12 / 16 * 1em);
     line-height: calc(20 / 12);
   }
 
   & div {
+    margin: calc(20 / 16 * 1em);
     text-align: center;
-    margin: calc(20 /  16 * 1em);
   }
 
   & .buttons {

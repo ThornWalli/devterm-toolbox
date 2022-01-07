@@ -46,6 +46,12 @@
       "**/node_modules": true,
       "**/.history": true
     },
+    "emmet.includeLanguages": {
+      "postcss": "css"
+    },
+    "emmet.syntaxProfiles": {
+      "postcss": "css"
+    },
     "files.associations": {
       ".branchlintrc": "json",
       ".huskyrc": "json",
@@ -72,10 +78,11 @@
   },
   "extensions": {
     "recommendations": [
-      "octref.vetur",
+      "johnsoncodehk.volar",
       "jcbuisson.vue",
       "stylelint.vscode-stylelint",
-      "dbaeumer.vscode-eslint"
+      "dbaeumer.vscode-eslint",
+      "cpylua.language-postcss"
     ]
   }
 }
