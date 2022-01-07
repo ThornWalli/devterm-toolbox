@@ -20,6 +20,7 @@
         "changelogTitle": "# Project Changelog"
       }
     ],
+    "@semantic-release/npm",
     [
       "@semantic-release/git",
       {
@@ -33,7 +34,10 @@
       }
     ],
     [
-      "@semantic-release/github"
+      "@semantic-release/github",
+      {
+        "assets": []
+      }
     ]
   ]
 }
