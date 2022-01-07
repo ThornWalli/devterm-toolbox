@@ -25,11 +25,9 @@ jobs:
           # Set an output parameter `uname` for use in subsequent steps
           run: |
             apt-get update -q -y
-            apt-get install -q -y git sudo
+            apt-get install -q -y git sudo nodejs
             sudo apt-get install -q -y nodejs build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
-            uname -a
-            echo ::set-output name=uname::$(uname -a)
-
+            
             npm ci
             npm run build:devterm
             cp "/packages/electron/dist" "/artifacts/${artifact_name}"
