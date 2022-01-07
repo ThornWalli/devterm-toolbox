@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.3](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* **publish:** fix package.json version ([38f8517](https://github.com/ThornWalli/devterm-toolbox/commit/38f8517d2d5cfbf694bc7a73d212958a4826d6eb))
+
 # [1.0.0-beta.2](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-01-07)
 
 
