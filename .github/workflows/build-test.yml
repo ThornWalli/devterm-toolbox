@@ -48,10 +48,10 @@ jobs:
             
             PATH="$PATH"
             
-            sudo npm install -g electron@v15.3.4
+            npm install -g electron@v15.3.4
             sudo mkdir -p /root/.npm
             sudo chmod -R ugo+rwx /root/.npm
-            sudo mkdir -p /root/.cache/
+            sudo mkdir -p /root/.cache
             sudo chmod -R ugo+rwx /root/.cache
             npm ci --unsafe-perm=true --allow-root
 
