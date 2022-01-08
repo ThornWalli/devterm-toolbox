@@ -117,7 +117,7 @@ const getTrayIcon = (options = {}) => {
   } else {
     path = `${type}-light/icons/png/16x16.png`;
   }
-  return join(__dirname, `.generates/icon-${path}`);
+  return join(__dirname, `assets/icon-${path}`);
 };
 
 module.exports = {

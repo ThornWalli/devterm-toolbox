@@ -33,10 +33,13 @@ const config = defineConfig({
   open: true,
   build: {
     outDir: join(__dirname, '..', 'build'),
-    emptyOutDir: true,
+    emptyOutDir: false,
     sourcemap: false,
     rollupOptions: {
       output: {
+        // entryFileNames: 'assets/[name].js',
+        // chunkFileNames: 'assets/[name].js',
+        // assetFileNames: 'assets/[name].[ext]',
         manualChunks: {
           vendor: ['vue'],
           ...renderChunks(dependencies)
