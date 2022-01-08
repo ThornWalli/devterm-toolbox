@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.4](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-01-08)
+
+
+### Bug Fixes
+
+* **release:** publish test ([df79818](https://github.com/ThornWalli/devterm-toolbox/commit/df798188dfd80ec025609f334de1885aa6f57691))
+* **update:** add tray icon, improve electron main ([b83eb80](https://github.com/ThornWalli/devterm-toolbox/commit/b83eb80a3e34c9a7addba39411bcb63c2a27aadb))
+
 # [1.0.0-beta.3](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-01-07)
 
 
