@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.5](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-01-08)
+
+
+### Bug Fixes
+
+* **relesae:** version test ([77c9116](https://github.com/ThornWalli/devterm-toolbox/commit/77c9116a3b5471b5b62727348d62fe2334861876))
+
 # [1.0.0-beta.4](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-01-08)
 
 
