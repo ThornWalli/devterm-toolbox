@@ -24,8 +24,7 @@
     [
       "@semantic-release/exec",
       {
-        "verifyConditionsCmd": "./verify.sh",
-        "publishCmd": "npm version ${nextRelease.version} --workspace=@devterm-toolbox/electron && npm version ${nextRelease.version} --workspace=@devterm-toolbox/frontend && npm version ${nextRelease.version} --workspace=@devterm-toolbox/web"
+        "shell": "npm version ${nextRelease.version} --workspace=@devterm-toolbox/electron && npm version ${nextRelease.version} --workspace=@devterm-toolbox/frontend && npm version ${nextRelease.version} --workspace=@devterm-toolbox/web"
       }
     ],
     [
