@@ -31,6 +31,8 @@ jobs:
             npm install -g n
             n auto
             
+            PATH="$PATH"
+            
             npm ci
             npm run build:devterm
             cp "/packages/electron/dist" "/artifacts/${artifact_name}"
