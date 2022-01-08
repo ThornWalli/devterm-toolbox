@@ -49,7 +49,9 @@ jobs:
             PATH="$PATH"
             
             sudo mkdir -p /root/.npm
-            sudo chmod ugo+rwx /root/.npm
+            sudo chmod -R ugo+rwx /root/.npm
+            sudo mkdir -p /root/.cache/
+            sudo chmod -R ugo+rwx /root/.cache/
             npm ci --unsafe-perm --allow-root
 
       - name: Get the output
