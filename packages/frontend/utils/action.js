@@ -1,18 +1,18 @@
 
 import { DEFAULT_DENSITY, ALIGN, FONT, getDefaultConfig, MAX_PIXELS_FONT } from 'devterm/config';
-import ActionSetAlign from '@devterm-toolbox/frontend/components/controls/actions/SetAlign.vue';
-import ActionSetFont from '@devterm-toolbox/frontend/components/controls/actions/SetFont.vue';
-import ActionSetMargin from '@devterm-toolbox/frontend/components/controls/actions/SetMargin.vue';
-import ActionSetLineSpace from '@devterm-toolbox/frontend/components/controls/actions/SetLineSpace.vue';
-import ActionSetWordGap from '@devterm-toolbox/frontend/components/controls/actions/SetWordGap.vue';
-import ActionSetDensity from '@devterm-toolbox/frontend/components/controls/actions/SetDensity.vue';
-import ActionText from '@devterm-toolbox/frontend/components/controls/actions/Text.vue';
-import ActionImage from '@devterm-toolbox/frontend/components/controls/actions/Image.vue';
-import ActionQrCode from '@devterm-toolbox/frontend/components/controls/actions/QrCode.vue';
-import ActionFeedPitch from '@devterm-toolbox/frontend/components/controls/actions/FeedPitch.vue';
-import { DropDownOptionDescription } from '@devterm-toolbox/frontend/components/base/DropDown.vue';
+import ActionSetAlign from '../components/controls/actions/SetAlign.vue';
+import ActionSetFont from '../components/controls/actions/SetFont.vue';
+import ActionSetMargin from '../components/controls/actions/SetMargin.vue';
+import ActionSetLineSpace from '../components/controls/actions/SetLineSpace.vue';
+import ActionSetWordGap from '../components/controls/actions/SetWordGap.vue';
+import ActionSetDensity from '../components/controls/actions/SetDensity.vue';
+import ActionText from '../components/controls/actions/Text.vue';
+import ActionImage from '../components/controls/actions/Image.vue';
+import ActionQrCode from '../components/controls/actions/QrCode.vue';
+import ActionFeedPitch from '../components/controls/actions/FeedPitch.vue';
+import { DropDownOptionDescription } from '../components/base/DropDown.vue';
 
-import ActionDescription from '@devterm-toolbox/frontend/classes/ActionDescription';
+import ActionDescription from '../classes/ActionDescription';
 
 export const getActionTypeOptions = () => {
   return [
@@ -140,7 +140,7 @@ export const executeAction = (action, options) => {
     case 'cutLine':
       return {
         id: action.id,
-        component: () => import('@devterm-toolbox/frontend/components/preview/TextCanvas.vue'),
+        component: () => import('../components/preview/TextCanvas.vue'),
         options: {
           ...options,
           // reset options
@@ -157,7 +157,7 @@ export const executeAction = (action, options) => {
     case 'barcode':
       return {
         id: action.id,
-        component: () => import('@devterm-toolbox/frontend/components/preview/BarcodeCanvas.vue'),
+        component: () => import('../components/preview/BarcodeCanvas.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -165,7 +165,7 @@ export const executeAction = (action, options) => {
     case 'qrCode':
       return {
         id: action.id,
-        component: () => import('@devterm-toolbox/frontend/components/preview/QrCodeCanvas.vue'),
+        component: () => import('../components/preview/QrCodeCanvas.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -173,7 +173,7 @@ export const executeAction = (action, options) => {
     case 'image':
       return {
         id: action.id,
-        component: () => import('@devterm-toolbox/frontend/components/preview/ImageCanvas.vue'),
+        component: () => import('../components/preview/ImageCanvas.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -181,7 +181,7 @@ export const executeAction = (action, options) => {
     case 'text':
       return {
         id: action.id,
-        component: () => import('@devterm-toolbox/frontend/classes/ActionDescription'),
+        component: () => import('../components/preview/TextCanvas.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -189,7 +189,7 @@ export const executeAction = (action, options) => {
     case 'feedPitch':
       return {
         id: action.id,
-        component: () => import('@devterm-toolbox/frontend/components/preview/FeedPitch.vue'),
+        component: () => import('../components/preview/FeedPitch.vue'),
         options: { ...options },
         props: { ...action.value }
       };

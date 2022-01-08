@@ -25,7 +25,7 @@ const config = defineConfig({
   root: join(__dirname, '..'),
   publicDir: 'public',
   server: {
-    port: 8080
+    port: 8050
   },
   define: {
     __VERSION__: process.env.nextRelease || JSON.stringify(process.env.npm_package_version)

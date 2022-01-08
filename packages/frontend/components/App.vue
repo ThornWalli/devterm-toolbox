@@ -31,7 +31,8 @@ import {
   templateSave,
   templateLoad,
 
-  listenFullscreenChange
+  listenFullscreenChange,
+  listenDialogOpen
 
 } from '../utils/electron';
 
@@ -300,6 +301,29 @@ export default {
 
     listenFullscreenChange(value => {
       this.fullscreen = value;
+    });
+    listenDialogOpen((type, value) => {
+      switch (type) {
+        case 'open':
+          switch (value) {
+            case 'options':
+              this.showOptionsDialog();
+              break;
+            case 'remote':
+              this.showRemoteDialog();
+              break;
+            case 'server':
+              this.showServerDialog();
+              break;
+
+            default:
+              break;
+          }
+          break;
+
+        default:
+          break;
+      }
     });
   },
   methods: {

@@ -1,4 +1,13 @@
 
+export const registerClient = (client) => {
+  client.on('connect', () => {
+    window.electron.ipcRenderer.invoke('client', 'connect', true);
+  });
+  client.on('disconnect', () => {
+    window.electron.ipcRenderer.invoke('client', 'connect', false);
+  });
+};
+
 export const minimizeWindow = () => {
   window.electron.ipcRenderer.invoke('window', 'minimize');
 };
@@ -58,6 +67,12 @@ export const templateLoad = () => {
         input.remove();
       });
     });
+  }
+};
+
+export const listenDialogOpen = (cb) => {
+  if (isElectron()) {
+    window.electron.ipcRendererReceive('dialog', cb);
   }
 };
 

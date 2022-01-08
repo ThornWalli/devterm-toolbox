@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld('electron', {
   //   }
   // },
   ipcRendererReceive: (channel, func) => {
-    const validChannels = ['window'];
+    const validChannels = ['window', 'dialog'];
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, (event, ...args) => func(...args));

@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require('fs');
+const Events = require('events');
 const { Server: SocketIoServer } = require('socket.io');
 const { SERIAL_PORT_IN } = require('devterm/utils/devterm');
 
@@ -17,8 +18,9 @@ const hasPrinterSerialPort = async () => {
 };
 
 const DEFAULT_PORT = (process.env.DEVTERM_TOOLBOX_PORT || 3000);
-class Server {
+class Server extends Events {
   constructor () {
+    super();
     this.disabled = false;
     this.port = DEFAULT_PORT;
     this.active = false;
@@ -36,21 +38,23 @@ class Server {
 
   checkBefore
 
-  start (port) {
+  async start (port) {
+    this.disabled = !await hasPrinterSerialPort();
+    if (this.disabled) {
+      console.log('Printer not found, serivce is disabled!');
+    }
     return new Promise((resolve, reject) => {
       this.port = port || this.port;
       this.server.listen(port, async () => {
         try {
-          this.disabled = !await hasPrinterSerialPort();
-          if (this.disabled) {
-            console.log('Printer not found, serivce is disabled!');
-          }
           !this.disabled && await this.printer.connect();
           this.active = true;
           console.log(`listening on \`*:${port}\``);
+          this.emit('start', this);
           resolve();
         } catch (error) {
           this.io.emit('error', error);
+          this.emit('error', error);
           reject(error);
         }
       });
@@ -62,6 +66,7 @@ class Server {
     await new Promise(resolve => (this.io && this.io.close(resolve)) || resolve());
     this.active = false;
     this.sockets = new Map();
+    this.emit('stop');
   }
 
   registerEvents (socket) {

@@ -2,10 +2,18 @@
 const fs = require('fs');
 const { resolve } = require('path');
 const { app, ipcMain, dialog, BrowserWindow } = require('electron');
-const esmRequire = require('esm')(module);
-const { getDefaultConfig } = esmRequire('../../../frontend/utils/config');
+const { updateTrayIcon } = require('./tray');
 
-const ipc = (server, options) => {
+const registerWindow = window => {
+  window.addListener('enter-full-screen', () => {
+    window.webContents.send('window', 'fullscreen', true);
+  });
+  window.addListener('leave-full-screen', () => {
+    window.webContents.send('window', 'fullscreen', false);
+  });
+};
+
+const ipc = (server) => {
   ipcMain.handle('startServer', async (event, port) => {
     try {
       return await server.start(port);
@@ -33,7 +41,7 @@ const ipc = (server, options) => {
     try {
       return JSON.parse(await fs.promises.readFile(configFile, 'utf-8'));
     } catch (error) {
-      return getDefaultConfig();
+      return null;
     }
   };
   ipcMain.handle('loadConfig', onLoadConfig);
@@ -43,6 +51,18 @@ const ipc = (server, options) => {
     fs.promises.writeFile(configFile, JSON.stringify(data), 'utf-8');
   };
   ipcMain.handle('saveConfig', onSaveConfig);
+
+  const onClient = (event, type, value) => {
+    switch (type) {
+      case 'connect':
+        updateTrayIcon({ remote: value });
+        break;
+
+      default:
+        break;
+    }
+  };
+  ipcMain.handle('client', onClient);
 
   // Window
   const onWindow = (event, type, value) => {
@@ -114,17 +134,6 @@ const ipc = (server, options) => {
     return data;
   };
   ipcMain.handle('load', onLoad);
-
-  return {
-    registerWindowEvents: (window) => {
-      window.addListener('enter-full-screen', () => {
-        window.webContents.send('window', 'fullscreen', true);
-      });
-      window.addListener('leave-full-screen', () => {
-        window.webContents.send('window', 'fullscreen', false);
-      });
-    }
-  };
 };
 
 const getServerOptions = (server) => {
@@ -136,4 +145,4 @@ const getServerOptions = (server) => {
   };
 };
 
-module.exports = { default: ipc };
+module.exports = { registerWindow, default: ipc };
