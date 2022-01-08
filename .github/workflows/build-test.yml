@@ -44,6 +44,7 @@ jobs:
             
             npm install n -g
             n auto
+            npm install -g npm@latest
             
             PATH="$PATH"
             
