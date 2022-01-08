@@ -18,7 +18,7 @@ export const maximizeWindow = () => {
 
 export const fullscreenWindow = (value) => {
   if (isElectron()) {
-    window.electron.ipcRenderer.invoke('window', 'fullscreen', !value);
+    window.electron.ipcRenderer.invoke('window', 'fullscreen', value);
   } else if (!value) {
     return document.exitFullscreen();
   } else {
