@@ -42,7 +42,7 @@ jobs:
             apt-get install -q -y git sudo curl wget nodejs npm
             
             npm install n
-            n auto
+            node node_modules/n/bin/n auto
             
             PATH="$PATH"
             
