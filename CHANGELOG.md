@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.7](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2022-01-08)
+
+
+### Bug Fixes
+
+* **update:** improve server integration ([4c41027](https://github.com/ThornWalli/devterm-toolbox/commit/4c41027cefe91b0272b700e9485048cebe2841f8))
+
 # [1.0.0-beta.6](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-01-08)
 
 
