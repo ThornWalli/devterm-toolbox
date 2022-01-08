@@ -42,14 +42,16 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget
             
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-            nvm use
-            
-            mkdir ~/.npm-global
-            npm config set prefix '~/.npm-global'
-            export PATH=~/.npm-global/bin:$PATH
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
+            && . $NVM_DIR/nvm.sh \ 
+            && nvm use
             
             npm ci
+
+#   mkdir ~/.npm-global
+#   npm config set prefix '~/.npm-global'
+#   export PATH=~/.npm-global/bin:$PATH
+            
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
