@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.8](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-01-08)
+
+
+### Bug Fixes
+
+* **app:** fix fullscreen ([f32cdde](https://github.com/ThornWalli/devterm-toolbox/commit/f32cdde4c0d73d804bbb7f460fe73bbf31bb0d1d))
+
 # [1.0.0-beta.7](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2022-01-08)
 
 
