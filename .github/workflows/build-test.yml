@@ -48,7 +48,11 @@ jobs:
             
             PATH="$PATH"
             
-            sudo npm install -g electron
+            sudo npm install -g electron@v15.3.4
+            sudo mkdir -p /root/.npm
+            sudo chmod -R ugo+rwx /root/.npm
+            sudo mkdir -p /root/.cache/
+            sudo chmod -R ugo+rwx /root/.cache
             npm ci --unsafe-perm=true --allow-root
 
       - name: Get the output
@@ -57,11 +61,6 @@ jobs:
           ls -al "${PWD}/artifacts"
           
           
-
-#   sudo mkdir -p /root/.npm
-#   sudo chmod -R ugo+rwx /root/.npm
-#   sudo mkdir -p /root/.cache/
-#   sudo chmod -R ugo+rwx /root/.cache
 
 # jobs:
 #   build_job:
