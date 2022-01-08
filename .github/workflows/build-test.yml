@@ -48,8 +48,8 @@ jobs:
             
             PATH="$PATH"
             
-            mkdir -p /root/.npm
-            sudo chmod u+x -R 775 /root/.npm
+            sudo mkdir -p /root/.npm
+            sudo chmod ugo+rwx /root/.npm
             npm ci --unsafe-perm --allow-root
 
       - name: Get the output
