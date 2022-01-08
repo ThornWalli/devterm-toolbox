@@ -45,7 +45,7 @@ jobs:
             sudo npm install -g n
             sudo n auto
             
-            sudo PATH="$PATH"
+            PATH="$PATH"
             
             sudo npm ci --unsafe-perm --allow-root
 
