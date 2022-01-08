@@ -40,14 +40,14 @@ jobs:
           run: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget
-            sudo apt-get install -q -y nodejs npm
+            apt-get install -q -y nodejs npm
 
-            sudo npm install -g n
-            sudo n auto
+            npm install -g n
+            n auto
             
             PATH="$PATH"
             
-            sudo npm ci --unsafe-perm --allow-root
+            npm ci --unsafe-perm --allow-root
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
