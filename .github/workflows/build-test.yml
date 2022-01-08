@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-18.04
     name: Build on ubuntu-18.04 armv7
     steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.1.1
         name: Run commands
@@ -40,12 +43,7 @@ jobs:
           run: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget
-            apt-get install -q -y nodejs npm
-
-            npm install -g n
-            n auto
             
-            PATH="$PATH"
             
             npm ci --unsafe-perm --allow-root
 
