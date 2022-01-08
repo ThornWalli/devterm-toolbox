@@ -39,8 +39,7 @@ jobs:
 #             echo "Produced artifact at /artifacts/${artifact_name}"
           run: |
             apt-get update -q -y
-            apt-get install -q -y git sudo nodejs npm ca-certificates
-            update-ca-certificates
+            apt-get install -q -y git sudo nodejs npm curl wget
 
             npm install -g n
             n auto
