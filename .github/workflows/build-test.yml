@@ -33,7 +33,7 @@ jobs:
             
             PATH="$PATH"
             
-            npm ci
+            npm ci --unsafe-perm=true --allow-root
             npm run build:devterm
             cp "/packages/electron/dist" "/artifacts/${artifact_name}"
             echo "Produced artifact at /artifacts/${artifact_name}"
