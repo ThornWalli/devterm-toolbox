@@ -46,7 +46,7 @@ jobs:
             
             PATH="$PATH"
             
-            npm ci --unsafe-perm=true --allow-root
+            sudo npm ci --unsafe-perm=true --allow-root
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
