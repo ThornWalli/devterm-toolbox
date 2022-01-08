@@ -48,7 +48,7 @@ jobs:
             
             PATH="$PATH"
             
-            sudo chmod u+x -R 775 ~/.npm
+            sudo chmod u+x -R 775 /root/.npm
             npm ci --unsafe-perm --allow-root
 
       - name: Get the output
