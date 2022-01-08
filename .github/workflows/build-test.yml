@@ -39,14 +39,15 @@ jobs:
 #             echo "Produced artifact at /artifacts/${artifact_name}"
           run: |
             apt-get update -q -y
-            apt-get install -q -y git sudo nodejs npm curl wget
+            apt-get install -q -y git sudo curl wget
+            sudo apt-get install -q -y nodejs npm
 
-            npm install -g n
-            n auto
+            sudo npm install -g n
+            sudo n auto
             
-            PATH="$PATH"
+            sudo PATH="$PATH"
             
-            sudo npm ci --unsafe-perm=true --allow-root
+            sudo npm ci --unsafe-perm --allow-root
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
