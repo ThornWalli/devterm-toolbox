@@ -37,15 +37,13 @@ jobs:
 #             npm run build:devterm
 #             cp "/packages/electron/dist" "/artifacts/${artifact_name}"
 #             echo "Produced artifact at /artifacts/${artifact_name}"
+#sudo apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
           run: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget nodejs npm
-            sudo apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
             
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-            export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-            
+            source ~/.bashrc
             nvm use
             
             mkdir ~/.npm-global
