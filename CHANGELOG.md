@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.6](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-01-08)
+
+
+### Bug Fixes
+
+* **deps:** remove electron-icon-maker ([bb0fdcb](https://github.com/ThornWalli/devterm-toolbox/commit/bb0fdcb3e1aca877591595272049a0367f50a6c0))
+
 # [1.0.0-beta.5](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-01-08)
 
 
