@@ -42,11 +42,11 @@ jobs:
             apt-get install -q -y git sudo curl wget nodejs npm
             sudo apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
             
-            npm install n -g
-            n auto
-            npm install -g npm@latest --unsafe-perm=true --allow-root
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+            export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
             
-            PATH="$PATH"
+            nvm use
             
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
