@@ -48,12 +48,11 @@ jobs:
             
             PATH="$PATH"
             
-            npm install -g electron@v15.3.4
-            sudo mkdir -p /root/.npm
-            sudo chmod -R ugo+rwx /root/.npm
-            sudo mkdir -p /root/.cache
-            sudo chmod -R ugo+rwx /root/.cache
-            npm ci --unsafe-perm=true --allow-root
+            mkdir ~/.npm-global
+            npm config set prefix '~/.npm-global'
+            export PATH=~/.npm-global/bin:$PATH
+            
+            npm ci
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
