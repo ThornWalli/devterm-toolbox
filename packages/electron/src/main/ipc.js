@@ -16,7 +16,8 @@ const registerWindow = window => {
 const ipc = (server) => {
   ipcMain.handle('startServer', async (event, port) => {
     try {
-      return await server.start(port);
+      await server.start(port);
+      return { ...server.toJSON() };
     } catch (error) {
       server.stop();
       return error;
@@ -31,6 +32,9 @@ const ipc = (server) => {
   });
   ipcMain.handle('getServerOptions', (event) => {
     return getServerOptions(server);
+  });
+  ipcMain.handle('serverSupported', (event) => {
+    return server.supported();
   });
 
   const userDataPath = app.getPath('userData');

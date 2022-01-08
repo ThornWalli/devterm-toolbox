@@ -257,7 +257,7 @@ export default {
     },
 
     hasServer () {
-      return '$server' in this;
+      return !this.$server.disabled;
     },
 
     version () {
@@ -281,13 +281,15 @@ export default {
   async  mounted () {
     await loadFonts();
     await this.$config.init();
+    await this.$server.init();
+
     this.hasServer && await this.$server.refresh();
     await this.$config.load();
 
-    if (this.$config.get('startType')) {
+    const port = this.$config.get('port');
+    const host = this.$config.get('host');
+    if (this.$config.get('startType') && port && host) {
       try {
-        const port = this.$config.get('port');
-        const host = this.$config.get('host');
         if (this.$server && this.$config.get('startType') === 'local' && !this.$server.options.active) {
           await this.$server.start(port);
         }

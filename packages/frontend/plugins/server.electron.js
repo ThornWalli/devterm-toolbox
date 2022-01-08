@@ -1,15 +1,20 @@
 
 import Vue from 'vue';
-import { getServerOptions, startServer, stopServer } from '../utils/electron';
+import { getServerOptions, startServer, stopServer, serverSupported } from '../utils/electron';
 
 class ServerControl {
   constructor () {
+    this.disabled = false;
     this.options = {
       active: false,
       hosts: [],
       port: null,
       activeSessions: 0
     };
+  }
+
+  async init () {
+    this.disabled = !(await serverSupported());
   }
 
   async start (port) {

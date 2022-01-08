@@ -12,10 +12,6 @@ module.exports = {
   mac: {
     icon: 'build/icons/mac/icon.icns'
   },
-  win: {
-    icon: 'build/icons/win/icon.ico',
-    target: 'nsis'
-  },
   linux: {
     icon: 'build/icons/png/512x512.png',
     target: [

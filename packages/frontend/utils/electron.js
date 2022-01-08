@@ -127,3 +127,7 @@ export const stopServer = () => {
 export const getServerOptions = () => {
   return window.electron.ipcRenderer.invoke('getServerOptions');
 };
+
+export const serverSupported = () => {
+  return window.electron.ipcRenderer.invoke('serverSupported');
+};

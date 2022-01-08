@@ -2,7 +2,7 @@
   <app-view class="view-start">
     <div>
       <h2>Welcome DevTerm User!</h2>
-      <p v-if="'$server' in this">
+      <p v-if="!$server.disabled">
         Do you work locally or remotely?
       </p>
       <p v-else>
@@ -14,9 +14,8 @@
       <div>
         <input-check-box v-model="remember" label="Remember choice" delimiter="?" />
       </div>
-
       <div class="buttons">
-        <input-text-button v-if="'$server' in this" color="primary" text="Use Local" @click="onClickLocal" />
+        <input-text-button v-if="!$server.disabled" color="primary" text="Use Local" @click="onClickLocal" />
         <input-text-button color="primary" text="Use Remote" @click="onClickRemote" />
       </div>
     </div>

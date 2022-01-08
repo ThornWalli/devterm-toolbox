@@ -15,7 +15,6 @@
     "postinstall": "electron-builder install-app-deps && npm run rebuild",
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build-vue.js && electron-builder -c config/electron-builder.js",
-    "build:win": "node scripts/build-vue.js && electron-builder -c config/electron-builder.js --win",
     "build:mac": "node scripts/build-vue.js && electron-builder -c config/electron-builder.js --mac",
     "build:linux": "node scripts/build-vue.js && electron-builder -c config/electron-builder.js --linux",
     "build:devterm": "node scripts/build-vue.js && electron-builder -c config/electron-builder.js --linux deb rpm --arm64 --armv7l",

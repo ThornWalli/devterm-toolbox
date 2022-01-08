@@ -8,6 +8,8 @@ const { createPrinter, getThermalPrinterTemperature, getTemperatures, isDevTermA
 const { getNetworkAddresses } = require('../utils/network');
 const { ACTION_PRINTER_COMMANDS } = require('../utils/action');
 
+const isDev = process.env.NODE_ENV === 'development';
+
 const hasPrinterSerialPort = async () => {
   try {
     await fs.promises.access(SERIAL_PORT_IN, fs.F_OK);
@@ -21,6 +23,7 @@ const DEFAULT_PORT = (process.env.DEVTERM_TOOLBOX_PORT || 3000);
 class Server extends Events {
   constructor () {
     super();
+    this.debug = isDev;
     this.disabled = false;
     this.port = DEFAULT_PORT;
     this.active = false;
@@ -36,12 +39,27 @@ class Server extends Events {
     return getNetworkAddresses();
   }
 
-  checkBefore
+  toJSON () {
+    return {
+      debug: this.debug,
+      disabled: this.disabled,
+      port: this.port,
+      active: true
+    };
+  }
+
+  supported () {
+    return this.debug || hasPrinterSerialPort();
+  }
 
   async start (port) {
     this.disabled = !await hasPrinterSerialPort();
+    port = port || 3000;
     if (this.disabled) {
       console.log('Printer not found, serivce is disabled!');
+      if (!this.debug) {
+        return this;
+      }
     }
     return new Promise((resolve, reject) => {
       this.port = port || this.port;
@@ -51,7 +69,7 @@ class Server extends Events {
           this.active = true;
           console.log(`listening on \`*:${port}\``);
           this.emit('start', this);
-          resolve();
+          resolve(this);
         } catch (error) {
           this.io.emit('error', error);
           this.emit('error', error);
