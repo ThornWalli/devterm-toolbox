@@ -44,15 +44,15 @@ jobs:
             
             npm install n -g
             n auto
-            npm install -g npm@latest
+            npm install -g npm@latest --unsafe-perm=true --allow-root
             
             PATH="$PATH"
             
             sudo mkdir -p /root/.npm
             sudo chmod -R ugo+rwx /root/.npm
             sudo mkdir -p /root/.cache/
-            sudo chmod -R ugo+rwx /root/.cache/
-            sudo npm ci --unsafe-perm --allow-root
+            sudo chmod -R ugo+rwx /root/.cache
+            npm ci --unsafe-perm=true --allow-root
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
