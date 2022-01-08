@@ -23,10 +23,23 @@ jobs:
           githubToken: ${{ github.token }}
 
           # Set an output parameter `uname` for use in subsequent steps
+#           run: |
+#             apt-get update -q -y
+#             apt-get install -q -y git sudo nodejs npm
+#             sudo apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+            
+#             npm install -g n
+#             n auto
+            
+#             PATH="$PATH"
+            
+#             npm ci --unsafe-perm=true --allow-root
+#             npm run build:devterm
+#             cp "/packages/electron/dist" "/artifacts/${artifact_name}"
+#             echo "Produced artifact at /artifacts/${artifact_name}"
           run: |
             apt-get update -q -y
             apt-get install -q -y git sudo nodejs npm
-            sudo apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
             
             npm install -g n
             n auto
@@ -34,9 +47,6 @@ jobs:
             PATH="$PATH"
             
             npm ci --unsafe-perm=true --allow-root
-            npm run build:devterm
-            cp "/packages/electron/dist" "/artifacts/${artifact_name}"
-            echo "Produced artifact at /artifacts/${artifact_name}"
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
