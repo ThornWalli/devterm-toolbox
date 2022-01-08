@@ -48,16 +48,20 @@ jobs:
             
             PATH="$PATH"
             
-            sudo mkdir -p /root/.npm
-            sudo chmod -R ugo+rwx /root/.npm
-            sudo mkdir -p /root/.cache/
-            sudo chmod -R ugo+rwx /root/.cache
+            sudo npm install -g electron
             npm ci --unsafe-perm=true --allow-root
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
         run: |
           ls -al "${PWD}/artifacts"
+          
+          
+
+#   sudo mkdir -p /root/.npm
+#   sudo chmod -R ugo+rwx /root/.npm
+#   sudo mkdir -p /root/.cache/
+#   sudo chmod -R ugo+rwx /root/.cache
 
 # jobs:
 #   build_job:
