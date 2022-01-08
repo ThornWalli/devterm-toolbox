@@ -24,7 +24,7 @@
     [
       "@semantic-release/exec",
       {
-        "shell": "npm version ${nextRelease.version} --workspace=@devterm-toolbox/electron && npm version ${nextRelease.version} --workspace=@devterm-toolbox/frontend && npm version ${nextRelease.version} --workspace=@devterm-toolbox/web"
+        "prepareCmd": "npm version ${nextRelease.version} --workspace=@devterm-toolbox/electron && npm version ${nextRelease.version} --workspace=@devterm-toolbox/frontend && npm version ${nextRelease.version} --workspace=@devterm-toolbox/web"
       }
     ],
     [
