@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.10](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-01-09)
+
+
+### Bug Fixes
+
+* **app:** add prompt dialog; improve server control ([151e9dd](https://github.com/ThornWalli/devterm-toolbox/commit/151e9dd41e01e75e670a5b920c72a5459320be85))
+
 # [1.0.0-beta.9](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-01-09)
 
 
