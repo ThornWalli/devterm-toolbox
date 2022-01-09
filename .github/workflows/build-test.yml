@@ -57,7 +57,7 @@ jobs:
             nvm use
             
             npm config set user 0
-            npm ci
+            npm ci --unsafe-perm
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
