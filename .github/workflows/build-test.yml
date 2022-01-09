@@ -56,8 +56,13 @@ jobs:
           run: |
             source /.profile
             nvm use
-            
             nvm list
+            
+            sudo source /.profile
+            sudo nvm list
+            sudo nvm use
+            sudo nvm list
+            
             sudo chmod 755 /usr/bin/node
 #           npm ci --unsafe-perm
 
