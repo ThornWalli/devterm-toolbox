@@ -55,7 +55,10 @@ jobs:
           run: |
             source /.profile
             nvm use
-            npm ci
+            
+            which node
+            which nodejs
+#           npm ci
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
@@ -65,7 +68,7 @@ jobs:
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step
         run: |
-          ls -al "${PWD}/artifacts"
+#       ls -al "${PWD}/artifacts"
           
           
 
