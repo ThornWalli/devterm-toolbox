@@ -45,13 +45,15 @@ jobs:
             apt-get install -q -y git sudo curl wget
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
             set -u 
+            
+            cd /home/runner/work/devterm-toolbox/devterm-toolbox
 
             touch .profile
             echo 'export NVM_DIR="$HOME/.nvm"' >> .profile
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
             source .profile
           run: |
-            pwd
+            source .profile
             nvm use
             npm ci
 
