@@ -60,7 +60,7 @@ jobs:
             sudo ln -s "$(which npm)" /usr/bin/npm
             sudo chmod 755 /usr/bin/node
             sudo chmod 755 /usr/bin/npm
-            
+            sudo chmod 755 /usr/bin/env
             npm ci --unsafe-perm          
 
 #   mkdir ~/.npm-global
