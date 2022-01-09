@@ -42,8 +42,7 @@ jobs:
 
           install: |
             apt-get update -q -y
-            apt-get install -q -y git sudo curl wget libatomic1
-            sudo apt-get install -y -q  nodejs python3.8
+            apt-get install -q -y git sudo curl wget libatomic1 python3.8 python
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
             set -u 
             
@@ -58,14 +57,8 @@ jobs:
             nvm use
             nvm list
             
-            sudo -s
-            source /.profile
-            sudo nvm list
-            sudo nvm use
-            sudo nvm list
-            
-            sudo chmod 755 /usr/bin/node
-#           npm ci --unsafe-perm
+#         sudo chmod 755 /usr/bin/node
+            npm ci --unsafe-perm
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
