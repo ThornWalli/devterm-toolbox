@@ -42,10 +42,9 @@ jobs:
 
           install: |
             
-            ls -al usr/local/etc
-            ls -al ../
+#           ls -al usr/local/etc
+#           ls -al ../
             
-            echo $GITHUB_WORKSPACE
 #           apt-get update -q -y
 #           apt-get install -q -y git sudo curl wget
 #           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -57,8 +56,9 @@ jobs:
 #           source .profile
 #           nvm use
           run: |
+            ls -al .
             
-            npm ci
+#           npm ci
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
