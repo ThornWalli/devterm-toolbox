@@ -56,9 +56,8 @@ jobs:
             source /.profile
             nvm use
             
-            which node
-            which nodejs
-#           npm ci
+            npm config set user 0
+            npm ci
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
