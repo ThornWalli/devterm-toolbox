@@ -42,7 +42,8 @@ jobs:
 
           install: |
             apt-get update -q -y
-            apt-get install -q -y git sudo curl wget libatomic1 nodejs
+            apt-get install -q -y git sudo curl wget libatomic1
+            sudo apt-get install -y -q  nodejs python pyhton3
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
             set -u 
             
