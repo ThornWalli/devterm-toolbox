@@ -56,7 +56,7 @@ jobs:
             source /.profile
             nvm use
             
-            chmod 755 /usr/bin/node
+            sudo chmod 755 /usr/bin/node
             npm ci --unsafe-perm
 
 #   mkdir ~/.npm-global
