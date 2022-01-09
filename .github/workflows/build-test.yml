@@ -41,24 +41,18 @@ jobs:
 
 
           install: |
-            ls -al src
-            
-#           ls -al usr/local/etc
-            
-#           apt-get update -q -y
-#           apt-get install -q -y git sudo curl wget
-#           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-#           set -u 
+            apt-get update -q -y
+            apt-get install -q -y git sudo curl wget
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+            set -u 
 
-#           touch .profile
-#           echo 'export NVM_DIR="$HOME/.nvm"' >> .profile
-#           echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
-#           source .profile
-#           nvm use
+            touch .profile
+            echo 'export NVM_DIR="$HOME/.nvm"' >> .profile
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
+            source .profile
           run: |
-            ls -al .
-            
-#           npm ci
+            nvm use
+            npm ci
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
