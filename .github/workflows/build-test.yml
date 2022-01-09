@@ -56,9 +56,8 @@ jobs:
             source /.profile
             nvm use
             nvm list
-            
+            npm ci --unsafe-perm            
 #         sudo chmod 755 /usr/bin/node
-            npm ci --unsafe-perm
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
