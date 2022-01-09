@@ -14,9 +14,10 @@ const registerWindow = window => {
 };
 
 const ipc = (server) => {
-  ipcMain.handle('startServer', async (event, port) => {
+  ipcMain.handle('startServer', async (event, port, ssl) => {
+    console.log(port, ssl);
     try {
-      await server.start(port);
+      await server.start(port, ssl);
       return { ...server.toJSON() };
     } catch (error) {
       server.stop();
@@ -145,6 +146,8 @@ const getServerOptions = (server) => {
     active: server.active,
     port: server.port,
     hosts: server.hosts,
+    ssl: server.ssl,
+    secure: server.secure,
     activeSessions: server.sockets.size
   };
 };

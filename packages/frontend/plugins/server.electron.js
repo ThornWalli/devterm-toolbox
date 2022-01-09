@@ -17,8 +17,8 @@ class ServerControl {
     this.disabled = !(await serverSupported());
   }
 
-  async start (port) {
-    const result = await startServer(port);
+  async start (port, ssl) {
+    const result = await startServer(port, ssl);
     if (result instanceof Error) {
       throw result;
     } else {

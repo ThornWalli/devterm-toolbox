@@ -13,6 +13,7 @@
       <component v-bind="item.props" :is="item.component" v-for="(item, index) in footerItems" :key="index" v-on="item.on" />
     </app-menu>
     <dialog-error v-for="(error,index) in $errorList.errors" v-bind="error" :key="index" init-open />
+    <dialog-prompt v-for="(prompt,index) in $dialog.prompts" v-bind="prompt" :key="index" init-open />
     <dialog-remote v-if="ready" ref="dialogRemote" />
     <dialog-server v-if="ready" ref="dialogServer" />
     <dialog-options v-if="ready" ref="dialogOptions" />
@@ -114,7 +115,8 @@ export default {
     DialogError: () => import('./dialogs/Error.vue'),
     DialogRemote: () => import('./dialogs/Remote.vue'),
     DialogServer: () => import('./dialogs/Server.vue'),
-    DialogOptions: () => import('./dialogs/Options.vue')
+    DialogOptions: () => import('./dialogs/Options.vue'),
+    DialogPrompt: () => import('./dialogs/Prompt.vue')
   },
 
   data () {
@@ -233,7 +235,7 @@ export default {
           on: {
             click: this.showServerDialog
           },
-          props: { class: { connection: true, connected: this.$server.options.active }, text: `${this.$server.options.active ? `Server Port: ${this.$server.options.port}` : 'Server Offline'}` }
+          props: { class: { connection: true, connected: this.$server.options.active }, text: `${this.$server.options.active ? `Server (*:${this.$server.options.port}${this.$server.options.secure ? '/SSL' : ''})` : 'Server Offline'}` }
         },
         {
           component: AppMenuDivider
@@ -243,7 +245,7 @@ export default {
           on: {
             click: this.showRemoteDialog
           },
-          props: { class: { connection: true, connected: this.clientConnected }, text: `${this.clientConnected ? `Online (${this.$client.host}:${this.$client.port})` : 'Offline'}` }
+          props: { class: { connection: true, connected: this.clientConnected }, text: `${this.clientConnected ? `Online (${this.$client.host}:${this.$client.port}${this.$client.secure ? '/SSL' : ''})` : 'Offline'}` }
         },
         {
           component: AppMenuDivider
@@ -288,13 +290,8 @@ export default {
 
     const profile = this.$config.get('profiles').find(({ name }) => name === this.$config.get('profile'));
 
-    console.log('has profile selected?', !!profile);
-
     if (profile) {
       const { port, host, ssl, secure } = profile;
-
-      console.log('set selected profile', profile);
-      console.log('has starttype ', this.$config.get('startType'));
 
       if (this.$config.get('startType') && port) {
         try {
@@ -309,35 +306,38 @@ export default {
       }
     }
     this.ready = true;
-
-    listenFullscreenChange(value => {
-      this.fullscreen = value;
-    });
-    listenDialogOpen((type, value) => {
-      switch (type) {
-        case 'open':
-          switch (value) {
-            case 'options':
-              this.showOptionsDialog();
-              break;
-            case 'remote':
-              this.showRemoteDialog();
-              break;
-            case 'server':
-              this.showServerDialog();
-              break;
-
-            default:
-              break;
-          }
-          break;
-
-        default:
-          break;
-      }
-    });
+    this.registerListeners();
   },
   methods: {
+
+    registerListeners () {
+      listenFullscreenChange(value => {
+        this.fullscreen = value;
+      });
+      listenDialogOpen((type, value) => {
+        switch (type) {
+          case 'open':
+            switch (value) {
+              case 'options':
+                this.showOptionsDialog();
+                break;
+              case 'remote':
+                this.showRemoteDialog();
+                break;
+              case 'server':
+                this.showServerDialog();
+                break;
+
+              default:
+                break;
+            }
+            break;
+
+          default:
+            break;
+        }
+      });
+    },
 
     onClickMinimizeWindow () {
       return minimizeWindow();

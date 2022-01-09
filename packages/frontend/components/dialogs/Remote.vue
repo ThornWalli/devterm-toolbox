@@ -5,7 +5,9 @@
     title="Remote"
     class="dialog-remote"
     :class="{connected}"
+    form
     v-on="$listeners"
+    @submit="onSubmit"
   >
     <template #default>
       <div class="profile-select">
@@ -29,7 +31,7 @@
       />
     </template>
     <template #buttons>
-      <input-text-button v-if="!connected" color="primary" text="Connect" @click="onClickConnect" />
+      <input-text-button v-if="!connected" color="primary" type="submit" text="Connect" />
       <input-text-button v-else color="primary" text="Disconnect" @click="onClickDisconnect" />
       <input-text-button color="secondary" text="Close" @click="close()" />
     </template>
@@ -100,7 +102,8 @@ export default {
     }
   },
   methods: {
-    async onClickConnect () {
+    async onSubmit (e) {
+      e.preventDefault();
       try {
         await this.$client.connect(this.port, this.host, this.secure);
         await this.$config.saveProfile({ name: this.profileName, port: this.port, host: this.host, secure: this.secure });

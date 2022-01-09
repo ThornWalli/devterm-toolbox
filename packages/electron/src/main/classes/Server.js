@@ -43,6 +43,10 @@ class Server extends Events {
     return getNetworkAddresses();
   }
 
+  get secure () {
+    return Object.entries(this.ssl).filter(([, v]) => Boolean(v)).length > 0;
+  }
+
   toJSON () {
     return {
       debug: this.debug,
@@ -52,9 +56,11 @@ class Server extends Events {
     };
   }
 
-  createServer () {
+  async createServer () {
     if ((this.ssl.key && this.ssl.cert) || this.ssl.pfx) {
-      this.sslServer = https.createServer(this.ssl);
+      // resolve certifacte paths
+      const options = Object.fromEntries(await Promise.all(Object.entries(this.ssl).filter(([, v]) => Boolean(v)).map(async ([key, value]) => value && ([key, await fs.promises.readFile(value)]))));
+      this.server = https.createServer(options);
     } else {
       this.server = http.createServer();
     }
@@ -67,8 +73,8 @@ class Server extends Events {
   }
 
   async start (port, ssl) {
-    this.ssl = { ...this.ssl, ssl };
-    this.createServer();
+    this.ssl = { ...this.ssl, ...ssl };
+    await this.createServer();
     this.disabled = !await hasPrinterSerialPort();
     port = port || 3000;
     if (this.disabled) {
@@ -83,7 +89,7 @@ class Server extends Events {
         try {
           !this.disabled && await this.printer.connect();
           this.active = true;
-          console.log(`listening on \`*:${port}\`${this.ssl && ' (ssl)'}`);
+          console.log(`listening on \`*:${port}\`${Object.entries(this.ssl).filter(([, v]) => Boolean(v)).length && ' (ssl)'}`);
           this.emit('start', this);
           resolve(this);
         } catch (error) {

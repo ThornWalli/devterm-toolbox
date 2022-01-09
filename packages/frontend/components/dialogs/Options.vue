@@ -1,10 +1,10 @@
 <template>
   <app-dialog
+    v-bind="$attrs"
     ref="dialog"
     :escape-close="false"
     title="Options"
     class="dialog-options"
-    v-bind="$attrs"
     v-on="$listeners"
     @open="onDialogOpen"
   >
@@ -22,7 +22,7 @@
         @input="model.port = parseInt($event)"
       />
       <div class="buttons">
-        <input-text-button color="danger" text="Reset Options" @click="onClickResetOptions" />
+        <input-text-button color="danger" text="Reset Options and Profiles" @click="onClickResetOptions" />
       </div>
     </template>
     <template #buttons>
@@ -76,8 +76,10 @@ export default {
       this.$config.save();
       this.close();
     },
-    onClickResetOptions () {
-      this.$config.reset();
+    async onClickResetOptions () {
+      if (await this.$dialog.prompt('Do you really want to reset everything?', 'Options Reset')) {
+        this.$config.reset();
+      }
     }
   }
 };

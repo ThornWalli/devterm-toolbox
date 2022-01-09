@@ -1,5 +1,5 @@
 <template>
-  <base-generic-button :type="type" class="input-text-button" :class="{[`color-${color}`]: color}" v-bind="$attrs" v-on="$listeners">
+  <base-generic-button v-bind="$attrs" :type="type" class="input-text-button" :class="{[`color-${color}`]: color}" v-on="$listeners">
     <slot>{{ text }}</slot>
   </base-generic-button>
 </template>

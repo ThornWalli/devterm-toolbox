@@ -30,7 +30,7 @@
                 </base-input-label>
               </div>
             </div>
-            <input-drop-down baseline-label size="5" readonly label="Active Hosts" :options="hostsOptions" />
+            <input-drop-down v-model="host" baseline-label size="5" label="For SSL, select valid host" :options="hostsOptions" />
             <input-text-field
               type="Number"
               label="Port"
@@ -47,7 +47,7 @@
             <input-file-select label="Key" :accept="['.key', '.pem']" :value="ssl.key" @input="ssl.key = $event.path" />
             <input-file-select label="Cert" :accept="['.cert','.crt', '.pem']" :value="ssl.cert" @input="ssl.cert = $event.path" />
             <input-file-select label="PFX" :accept="['.pfx']" :value="ssl.pfx" @input="ssl.pfx = $event.path" />
-            <input-text-field v-model="ssl.passphrase" label="Passphrase" />
+            <input-text-field v-model="ssl.passphrase" placeholder="Passphrase" label="Passphrase" />
           </base-tab-container-content>
         </template>
       </base-tab-container>
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import { DEFAULT_PROFILE } from '../../classes/Config';
 import { DropDownOptionDescription } from '../base/DropDown.vue';
 import AppDialog from '../app/Dialog.vue';
 import BaseInputLabel from '../base/InputLabel.vue';
@@ -89,7 +90,7 @@ export default {
   inheritAttrs: false,
   data () {
     return {
-      host: 'localhost',
+      host: null,
       port: 3000,
       refreshIntervalDuration: 3000,
       refreshInterval: null,
@@ -100,8 +101,8 @@ export default {
         pfx: null,
         passphrase: null
       },
-      selectedProfile: null,
-      profileName: null
+      selectedProfile: this.$config.get('profile'),
+      profileName: DEFAULT_PROFILE
     };
   },
   computed: {
@@ -116,17 +117,22 @@ export default {
     }
   },
   watch: {
-    selectedProfile (value, lastValue) {
-      if (value !== lastValue) {
-        const {
-          name,
-          port,
-          ssl
-        } = this.$config.get('profiles').find(({ name }) => name === value);
-        this.profileName = name;
-        this.port = port;
-        this.ssl = { ...ssl };
-      }
+    selectedProfile: {
+      handler (value, lastValue) {
+        if (value && value !== lastValue) {
+          const {
+            name,
+            port,
+            host,
+            ssl
+          } = this.$config.get('profiles').find(({ name }) => name === value);
+          this.profileName = name;
+          this.port = port;
+          this.host = host;
+          this.ssl = { ...ssl };
+        }
+      },
+      immediate: true
     },
     open (value) {
       this.toggleRefreshInterval(value);
@@ -152,8 +158,8 @@ export default {
       try {
         await this.$server.start(this.port, this.ssl);
         const secure = Object.values(this.ssl).find(Boolean);
-        this.autoConnect && await this.$client.connect(this.port, this.$server.options.hosts[0], secure);
-        await this.$config.saveProfile({ name: this.profileName, port: this.port, ssl: { ...this.ssl } });
+        this.autoConnect && await this.$client.connect(this.port, this.host || this.$server.options.hosts[0], secure);
+        await this.$config.saveProfile({ name: this.profileName, port: this.port, host: this.host, secure, ssl: { ...this.ssl } });
         return this.close({
           profile: this.profileName
         });

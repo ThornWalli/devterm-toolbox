@@ -62,7 +62,7 @@ export default class Config {
       console.log('update profile', profile.name, profile);
       profiles[profiles.indexOf(profile)] = { ...profile, ...options };
     } else {
-      console.log('create profile', profile.name, profile);
+      console.log('create profile', options.name, options);
       profile = { ...getDefaultProfile(), ...options };
       profiles.push(profile);
     }

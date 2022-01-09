@@ -3,8 +3,7 @@
     v-bind="$attrs"
     ref="dialog"
     :escape-close="false"
-    :title="`Error${title? ': '+title : ''}`"
-    class="dialog-error"
+    class="dialog-prompt"
     v-on="$listeners"
   >
     <template #default>
@@ -13,7 +12,8 @@
       </p>
     </template>
     <template #buttons>
-      <input-text-button color="primary" text="Close" @click="callback(); close()" />
+      <input-text-button color="secondary" :text="abortText" @click="callback(false); close()" />
+      <input-text-button color="primary" :text="applyText" @click="callback(true); close()" />
     </template>
   </app-dialog>
 </template>
@@ -31,10 +31,6 @@ export default {
   mixins: [MixinDialog],
   inheritAttrs: false,
   props: {
-    title: {
-      type: String,
-      default: null
-    },
     message: {
       type: String,
       default: 'Error Message'
@@ -42,19 +38,33 @@ export default {
     callback: {
       type: Function,
       default: null
+    },
+    abortText: {
+      type: String,
+      default: 'No'
+    },
+    applyText: {
+      type: String,
+      default: 'Yes'
     }
   }
 };
 </script>
 
 <style lang="postcss" scoped>
-.dialog-error {
-  --color-primary: red;
-  --dialog-width: calc(480 / 16 * 1em);
+.dialog-prompt {
+  --dialog-width: 40%;
+
+  min-width: 300px;
+
+  /* --color-primary: red;
+  --dialog-width: calc(480 / 16 * 1em); */
 
   & p {
+    padding: calc(8 / 12 * 1em) 0;
     margin: 0;
     font-size: calc(12 / 16 * 1em);
+    text-align: center;
   }
 }
 </style>

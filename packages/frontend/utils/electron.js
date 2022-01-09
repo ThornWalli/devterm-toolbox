@@ -119,8 +119,8 @@ export const getVersion = () => {
   }
 };
 
-export const startServer = port => {
-  return window.electron.ipcRenderer.invoke('startServer', port);
+export const startServer = (port, ssl) => {
+  return window.electron.ipcRenderer.invoke('startServer', port, ssl);
 };
 export const stopServer = () => {
   return window.electron.ipcRenderer.invoke('stopServer');
