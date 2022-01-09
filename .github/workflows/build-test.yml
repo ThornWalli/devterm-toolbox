@@ -42,8 +42,8 @@ jobs:
 
           install: |
             
-            ls -al usr/local
-            ls -al usr/share
+            ls -al usr/local/etc
+            ls -al ../
             
             echo $GITHUB_WORKSPACE
 #           apt-get update -q -y
