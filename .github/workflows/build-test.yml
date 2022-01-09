@@ -41,7 +41,10 @@ jobs:
 
 
           install: |
-            ls -al .
+            echo "${PWD}"
+            ls -al ${PWD}
+            
+            ls -al usr
 #           apt-get update -q -y
 #           apt-get install -q -y git sudo curl wget
 #           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
