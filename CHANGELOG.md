@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.9](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-01-09)
+
+
+### Bug Fixes
+
+* **app:** improve server and remote dialog, add ssl server ([7cdb2e5](https://github.com/ThornWalli/devterm-toolbox/commit/7cdb2e5f896fd49367857a413626b2921c0f9fcb))
+
 # [1.0.0-beta.8](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-01-08)
 
 
