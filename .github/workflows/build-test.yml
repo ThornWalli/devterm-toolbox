@@ -42,7 +42,6 @@ jobs:
 
           install: |
             
-            ls -al src
             ls -al usr
             ls -al var
 #           apt-get update -q -y
