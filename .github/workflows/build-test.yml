@@ -56,8 +56,8 @@ jobs:
             source /.profile
             nvm use
             
-            which node
-            which npm
+            sudo which node
+            sudo which npm
 #           sudo ln -s "$(which node)" /usr/bin/node
 #           sudo ln -s "$(which npm)" /usr/bin/npm
 #           sudo chmod 755 /usr/bin/node
