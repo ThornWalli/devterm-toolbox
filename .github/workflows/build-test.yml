@@ -55,7 +55,10 @@ jobs:
           run: |
             source /.profile
             nvm use
-            nvm list
+            
+            sudo ln -s "$(which node)" /usr/bin/node
+            sudo ln -s "$(which npm)" /usr/bin/npm
+            
             npm ci --unsafe-perm            
 #         sudo chmod 755 /usr/bin/node
 
