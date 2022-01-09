@@ -58,7 +58,8 @@ jobs:
             nvm use
             nvm list
             
-            sudo source /.profile
+            sudo -s
+            source /.profile
             sudo nvm list
             sudo nvm use
             sudo nvm list
