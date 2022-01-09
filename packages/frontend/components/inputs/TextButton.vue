@@ -1,5 +1,5 @@
 <template>
-  <base-generic-button class="input-text-button" :class="{[`color-${color}`]: color}" v-bind="$attrs" v-on="$listeners">
+  <base-generic-button :type="type" class="input-text-button" :class="{[`color-${color}`]: color}" v-bind="$attrs" v-on="$listeners">
     <slot>{{ text }}</slot>
   </base-generic-button>
 </template>
@@ -19,6 +19,10 @@ export default {
     text: {
       type: String,
       default: 'Text Button'
+    },
+    type: {
+      type: String,
+      default: 'button'
     }
   }
 };
@@ -48,6 +52,18 @@ export default {
     &:active {
       color: var(--color-primary);
       background: var(--color-secondary);
+      transition: background 0.3s, color 0.3s;
+    }
+  }
+
+  &.color-danger {
+    color: red;
+    background: #000;
+    border-color: red;
+
+    &:active {
+      color: #000;
+      background: red;
       transition: background 0.3s, color 0.3s;
     }
   }

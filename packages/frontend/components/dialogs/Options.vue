@@ -21,6 +21,9 @@
         :value="model.port"
         @input="model.port = parseInt($event)"
       />
+      <div class="buttons">
+        <input-text-button color="danger" text="Reset Options" @click="onClickResetOptions" />
+      </div>
     </template>
     <template #buttons>
       <input-text-button color="primary" text="Apply" @click="onClickApply" />
@@ -72,6 +75,9 @@ export default {
       this.$config.set(this.model);
       this.$config.save();
       this.close();
+    },
+    onClickResetOptions () {
+      this.$config.reset();
     }
   }
 };

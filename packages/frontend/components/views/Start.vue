@@ -11,9 +11,6 @@
       <p>
         Click on "Use Remote" and enter the connection data <br>to connect to the DevTerm.
       </p>
-      <div>
-        <input-check-box v-model="remember" label="Remember choice" delimiter="?" />
-      </div>
       <div class="buttons">
         <input-text-button v-if="!$server.disabled" color="primary" text="Use Local" @click="onClickLocal" />
         <input-text-button color="primary" text="Use Remote" @click="onClickRemote" />
@@ -23,28 +20,23 @@
 </template>
 
 <script>
+
 import AppView from '../app/View.vue';
 import InputTextButton from '../inputs/TextButton.vue';
-import InputCheckBox from '../inputs/CheckBox.vue';
+
 export default {
   components: {
     AppView,
-    InputTextButton,
-    InputCheckBox
-  },
-  data () {
-    return { remember: false };
+    InputTextButton
   },
   methods: {
     onClickLocal () {
       this.$emit('apply', {
-        remember: this.remember,
         type: 'local'
       });
     },
     onClickRemote () {
       this.$emit('apply', {
-        remember: this.remember,
         type: 'remote'
       });
     }

@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const Events = require('events');
 const { Server: SocketIoServer } = require('socket.io');
@@ -25,14 +26,17 @@ class Server extends Events {
     super();
     this.debug = isDev;
     this.disabled = false;
-    this.port = DEFAULT_PORT;
     this.active = false;
+    this.port = DEFAULT_PORT;
+    this.ssl = {
+      key: null,
+      cert: null,
+      pfx: null,
+      passphrase: null
+    };
     this.sockets = new Map();
-    this.server = http.createServer();
     this.printer = createPrinter();
     this.printer.debug = true;
-    this.io = new SocketIoServer(this.server);
-    this.io.on('connection', this.onIoConnection.bind(this));
   }
 
   get hosts () {
@@ -48,11 +52,23 @@ class Server extends Events {
     };
   }
 
+  createServer () {
+    if ((this.ssl.key && this.ssl.cert) || this.ssl.pfx) {
+      this.sslServer = https.createServer(this.ssl);
+    } else {
+      this.server = http.createServer();
+    }
+    this.io = new SocketIoServer(this.server);
+    this.io.on('connection', this.onIoConnection.bind(this));
+  }
+
   supported () {
     return this.debug || hasPrinterSerialPort();
   }
 
-  async start (port) {
+  async start (port, ssl) {
+    this.ssl = { ...this.ssl, ssl };
+    this.createServer();
     this.disabled = !await hasPrinterSerialPort();
     port = port || 3000;
     if (this.disabled) {
@@ -67,7 +83,7 @@ class Server extends Events {
         try {
           !this.disabled && await this.printer.connect();
           this.active = true;
-          console.log(`listening on \`*:${port}\``);
+          console.log(`listening on \`*:${port}\`${this.ssl && ' (ssl)'}`);
           this.emit('start', this);
           resolve(this);
         } catch (error) {

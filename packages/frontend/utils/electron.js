@@ -1,11 +1,13 @@
 
 export const registerClient = (client) => {
-  client.on('connect', () => {
-    window.electron.ipcRenderer.invoke('client', 'connect', true);
-  });
-  client.on('disconnect', () => {
-    window.electron.ipcRenderer.invoke('client', 'connect', false);
-  });
+  if (isElectron()) {
+    client.on('connect', () => {
+      window.electron.ipcRenderer.invoke('client', 'connect', true);
+    });
+    client.on('disconnect', () => {
+      window.electron.ipcRenderer.invoke('client', 'connect', false);
+    });
+  }
 };
 
 export const minimizeWindow = () => {

@@ -4,14 +4,14 @@
     <div v-if="title" class="dialog-title">
       {{ title }}
     </div>
-    <div class="dialog-content">
+    <form class="dialog-content" @submit="$emit('submit', $event)">
       <div>
         <slot>Dialog Content</slot>
       </div>
       <div v-if="$slots.buttons" class="buttons">
         <slot name="buttons" />
       </div>
-    </div>
+    </form>
   </dialog>
 </template>
 
@@ -126,7 +126,8 @@ export default {
     }
   }
 
-  & > div {
+  & > div,
+  & > form {
     position: relative;
     box-sizing: border-box;
     padding: calc(8 / 16 * 1em);
@@ -212,6 +213,14 @@ export default {
     }
 
     margin: calc(8 / 16 * 1em) calc(-4 / 16 * 1em);
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

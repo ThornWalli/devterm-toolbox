@@ -286,17 +286,26 @@ export default {
     this.hasServer && await this.$server.refresh();
     await this.$config.load();
 
-    const port = this.$config.get('port');
-    const host = this.$config.get('host');
-    if (this.$config.get('startType') && port && host) {
-      try {
-        if (this.$server && this.$config.get('startType') === 'local' && !this.$server.options.active) {
-          await this.$server.start(port);
+    const profile = this.$config.get('profiles').find(({ name }) => name === this.$config.get('profile'));
+
+    console.log('has profile selected?', !!profile);
+
+    if (profile) {
+      const { port, host, ssl, secure } = profile;
+
+      console.log('set selected profile', profile);
+      console.log('has starttype ', this.$config.get('startType'));
+
+      if (this.$config.get('startType') && port) {
+        try {
+          if (this.$server && this.$config.get('startType') === 'local' && !this.$server.options.active) {
+            await this.$server.start(port, ssl);
+          }
+          if (host) {
+            await this.$client.connect(port, host, secure);
+          }
+        } catch (error) {
         }
-        if (port) {
-          await this.$client.connect(port, host);
-        }
-      } catch (error) {
       }
     }
     this.ready = true;
@@ -368,20 +377,26 @@ export default {
     },
 
     async onApplyViewStart ({ type, remember }) {
-      this.$config.set('startType', (remember && type) || '');
-      this.$client.once('connect', async () => {
-        this.$config.set('host', this.$client.host);
-        this.$config.set('port', this.$client.port);
-        await this.$config.save();
-      });
+      this.$config.set('startType', type);
+      // this.$client.once('connect', async () => {
+
+      //   this.$config.set('host', this.$client.host);
+      //   this.$config.set('port', this.$client.port);
+      //   await this.$config.save();
+      // });
+      let options = {};
       switch (type) {
         case 'local':
-          await this.showServerDialog();
+          options = await this.showServerDialog();
           break;
         case 'remote':
-          await this.showRemoteDialog();
+          options = await this.showRemoteDialog();
           break;
       }
+
+      const { profile } = options;
+      this.$config.set('profile', profile);
+      await this.$config.save();
     },
     showServerDialog () {
       return this.$refs.dialogServer.show();
