@@ -41,9 +41,9 @@ jobs:
 
 
           install: |
+            ls -al src
             
 #           ls -al usr/local/etc
-#           ls -al ../
             
 #           apt-get update -q -y
 #           apt-get install -q -y git sudo curl wget
