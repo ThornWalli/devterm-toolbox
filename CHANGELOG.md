@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.11](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-01-10)
+
+
+### Bug Fixes
+
+* **ci:** fix sematic-release config ([af458f1](https://github.com/ThornWalli/devterm-toolbox/commit/af458f1d04fe2735878dd53e8aca279447679a2e))
+* **update:** add monorepo semantic; clean dialogs ([546e792](https://github.com/ThornWalli/devterm-toolbox/commit/546e792a42e346642fff6e1d8d9d6521700cbacb))
+
 # [1.0.0-beta.10](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-01-09)
 
 
