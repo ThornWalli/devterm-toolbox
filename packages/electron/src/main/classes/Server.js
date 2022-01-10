@@ -1,11 +1,15 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
+const Events = require('events');
 const { Server: SocketIoServer } = require('socket.io');
 const { SERIAL_PORT_IN } = require('devterm/utils/devterm');
 
 const { createPrinter, getThermalPrinterTemperature, getTemperatures, isDevTermA06, getBattery } = require('devterm');
 const { getNetworkAddresses } = require('../utils/network');
 const { ACTION_PRINTER_COMMANDS } = require('../utils/action');
+
+const isDev = process.env.NODE_ENV === 'development';
 
 const hasPrinterSerialPort = async () => {
   try {
@@ -17,40 +21,80 @@ const hasPrinterSerialPort = async () => {
 };
 
 const DEFAULT_PORT = (process.env.DEVTERM_TOOLBOX_PORT || 3000);
-class Server {
+class Server extends Events {
   constructor () {
+    super();
+    this.debug = isDev;
     this.disabled = false;
-    this.port = DEFAULT_PORT;
     this.active = false;
+    this.port = DEFAULT_PORT;
+    this.ssl = {
+      key: null,
+      cert: null,
+      pfx: null,
+      passphrase: null
+    };
     this.sockets = new Map();
-    this.server = http.createServer();
     this.printer = createPrinter();
     this.printer.debug = true;
-    this.io = new SocketIoServer(this.server);
-    this.io.on('connection', this.onIoConnection.bind(this));
   }
 
   get hosts () {
     return getNetworkAddresses();
   }
 
-  checkBefore
+  get secure () {
+    return Object.entries(this.ssl).filter(([, v]) => Boolean(v)).length > 0;
+  }
 
-  start (port) {
+  toJSON () {
+    return {
+      debug: this.debug,
+      disabled: this.disabled,
+      port: this.port,
+      active: true
+    };
+  }
+
+  async createServer () {
+    if ((this.ssl.key && this.ssl.cert) || this.ssl.pfx) {
+      // resolve certifacte paths
+      const options = Object.fromEntries(await Promise.all(Object.entries(this.ssl).filter(([, v]) => Boolean(v)).map(async ([key, value]) => value && ([key, await fs.promises.readFile(value)]))));
+      this.server = https.createServer(options);
+    } else {
+      this.server = http.createServer();
+    }
+    this.io = new SocketIoServer(this.server);
+    this.io.on('connection', this.onIoConnection.bind(this));
+  }
+
+  supported () {
+    return this.debug || hasPrinterSerialPort();
+  }
+
+  async start (port, ssl) {
+    this.ssl = { ...this.ssl, ...ssl };
+    await this.createServer();
+    this.disabled = !await hasPrinterSerialPort();
+    port = port || 3000;
+    if (this.disabled) {
+      console.log('Printer not found, serivce is disabled!');
+      if (!this.debug) {
+        return this;
+      }
+    }
     return new Promise((resolve, reject) => {
       this.port = port || this.port;
       this.server.listen(port, async () => {
         try {
-          this.disabled = !await hasPrinterSerialPort();
-          if (this.disabled) {
-            console.log('Printer not found, serivce is disabled!');
-          }
           !this.disabled && await this.printer.connect();
           this.active = true;
-          console.log(`listening on \`*:${port}\``);
-          resolve();
+          console.log(`listening on \`*:${port}\`${Object.entries(this.ssl).filter(([, v]) => Boolean(v)).length && ' (ssl)'}`);
+          this.emit('start', this);
+          resolve(this);
         } catch (error) {
           this.io.emit('error', error);
+          this.emit('error', error);
           reject(error);
         }
       });
@@ -62,6 +106,7 @@ class Server {
     await new Promise(resolve => (this.io && this.io.close(resolve)) || resolve());
     this.active = false;
     this.sockets = new Map();
+    this.emit('stop');
   }
 
   registerEvents (socket) {

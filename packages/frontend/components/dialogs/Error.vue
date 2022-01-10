@@ -1,10 +1,10 @@
 <template>
   <app-dialog
+    v-bind="$attrs"
     ref="dialog"
     :escape-close="false"
     :title="`Error${title? ': '+title : ''}`"
     class="dialog-error"
-    v-bind="$attrs"
     v-on="$listeners"
   >
     <template #default>

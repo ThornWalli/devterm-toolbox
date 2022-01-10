@@ -1,6 +1,6 @@
 <template>
   <base-input-label class="input-text-field" :text="label" :delimiter="$attrs.delimiter || undefined" :top-label="$attrs['top-label']" :baseline-label="$attrs['baseline-label']">
-    <input :type="type" v-bind="$attrs" :value="value" @input="onInput">
+    <input v-bind="$attrs" :type="type" :value="value" @input="onInput">
   </base-input-label>
 </template>
 
@@ -29,12 +29,20 @@ export default {
       default: ''
     }
   },
+  data () {
+    return { inputTimeout: null };
+  },
+
   methods: {
     onInput (e) {
-      window.clearTimeout(this.inputTimeout);
-      this.inputTimeout = window.setTimeout(() => {
-        this.$emit('input', e.target.value);
-      }, 300);
+      console.log('inputTimeout', this.inputTimeout);
+      // window.clearTimeout(this.inputTimeout);
+
+      console.log('test a', this.inputTimeout, e.target.value);
+      // this.inputTimeout = window.setTimeout(() => {
+      console.log('test b', e.target.value);
+      this.$emit('input', e.target.value);
+      // }, 500);
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
   <base-input-label class="input-check-box" :text="label" :delimiter="$attrs.delimiter || undefined" :top-label="$attrs['top-label']" :baseline-label="$attrs['baseline-label']">
-    <input type="checkbox" v-bind="$attrs" :checked="value" @change="$emit('input', $event.target.checked)"><span />
+    <input v-bind="$attrs" type="checkbox" :checked="value" @change="$emit('input', $event.target.checked)"><span />
   </base-input-label>
 </template>
 

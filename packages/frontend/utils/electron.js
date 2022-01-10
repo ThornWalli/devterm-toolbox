@@ -1,4 +1,15 @@
 
+export const registerClient = (client) => {
+  if (isElectron()) {
+    client.on('connect', () => {
+      window.electron.ipcRenderer.invoke('client', 'connect', true);
+    });
+    client.on('disconnect', () => {
+      window.electron.ipcRenderer.invoke('client', 'connect', false);
+    });
+  }
+};
+
 export const minimizeWindow = () => {
   window.electron.ipcRenderer.invoke('window', 'minimize');
 };
@@ -9,7 +20,7 @@ export const maximizeWindow = () => {
 
 export const fullscreenWindow = (value) => {
   if (isElectron()) {
-    window.electron.ipcRenderer.invoke('window', 'fullscreen', !value);
+    window.electron.ipcRenderer.invoke('window', 'fullscreen', value);
   } else if (!value) {
     return document.exitFullscreen();
   } else {
@@ -61,6 +72,12 @@ export const templateLoad = () => {
   }
 };
 
+export const listenDialogOpen = (cb) => {
+  if (isElectron()) {
+    window.electron.ipcRendererReceive('dialog', cb);
+  }
+};
+
 export const listenFullscreenChange = (cb) => {
   if (isElectron()) {
     window.electron.ipcRendererReceive('window', (type, value) => {
@@ -102,8 +119,8 @@ export const getVersion = () => {
   }
 };
 
-export const startServer = port => {
-  return window.electron.ipcRenderer.invoke('startServer', port);
+export const startServer = (port, ssl) => {
+  return window.electron.ipcRenderer.invoke('startServer', port, ssl);
 };
 export const stopServer = () => {
   return window.electron.ipcRenderer.invoke('stopServer');
@@ -111,4 +128,8 @@ export const stopServer = () => {
 
 export const getServerOptions = () => {
   return window.electron.ipcRenderer.invoke('getServerOptions');
+};
+
+export const serverSupported = () => {
+  return window.electron.ipcRenderer.invoke('serverSupported');
 };

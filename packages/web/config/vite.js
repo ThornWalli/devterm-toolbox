@@ -25,7 +25,7 @@ const config = defineConfig({
   root: join(__dirname, '..'),
   publicDir: 'public',
   server: {
-    port: 8080
+    port: 8050
   },
   define: {
     __VERSION__: process.env.nextRelease || JSON.stringify(process.env.npm_package_version)
@@ -33,10 +33,13 @@ const config = defineConfig({
   open: true,
   build: {
     outDir: join(__dirname, '..', 'build'),
-    emptyOutDir: true,
+    emptyOutDir: false,
     sourcemap: false,
     rollupOptions: {
       output: {
+        // entryFileNames: 'assets/[name].js',
+        // chunkFileNames: 'assets/[name].js',
+        // assetFileNames: 'assets/[name].[ext]',
         manualChunks: {
           vendor: ['vue'],
           ...renderChunks(dependencies)

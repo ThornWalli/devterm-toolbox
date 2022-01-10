@@ -1,6 +1,7 @@
 {
   "name": "@devterm-toolbox/web",
-  "version": "0.0.0",
+  "productName": "DevTerm-ToolBox",
+  "version": "1.0.0-beta.10",
   "private": true,
   "description": "DevTerm-Toolbox Web Version",
   "license": "MIT",

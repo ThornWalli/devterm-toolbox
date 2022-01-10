@@ -5,9 +5,9 @@
         <div :class="{'has-selected': selectedAction}">
           <div v-for="(item, index) in previewItems" :id="`anchor-action-${item.id}`" :key="index" :class="{'selected' : selectedAction && selectedAction.id === item.id}">
             <component
+              v-bind="item.props"
               :is="item.component"
               :key="JSON.stringify(item.options)"
-              v-bind="item.props"
               :options="item.options"
               :colors="colors"
             />
@@ -131,8 +131,10 @@ export default {
       if (this.actions.length) {
         this.loading = true;
         window.clearTimeout(this.renderTimeout);
-        this.renderTimeout = window.setTimeout(() => {
-          this.previewItems = executeActions(this.actions);
+        this.renderTimeout = window.setTimeout(async () => {
+          this.previewItems = await executeActions(this.actions);
+
+          console.log(this.actions, this.previewItems, this.previewItems.find(item => !item));
           this.$nextTick(() => {
             this.loading = false;
           });

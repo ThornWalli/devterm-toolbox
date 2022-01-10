@@ -9,7 +9,7 @@ export default class Client extends EventEmitter {
 
   async connect (port = 3000, host = 'localhost', secure = false) {
     const protocol = secure ? 'wss' : 'ws';
-    this.io = this.ready();
+    this.io = await this.ready();
     const socket = this.io(`${protocol}://${host}:${port}`, {
       // reconnectionDelayMax: 10000,
       autoConnect: false,
@@ -27,15 +27,15 @@ export default class Client extends EventEmitter {
       });
       socket.on('connect', () => {
         this.connected = socket.connected;
+        this.emit('connect');
         resolve(socket);
       });
       socket.on('disconnect', () => {
-        this.emit('disconnect');
         this.disconnect();
+        this.emit('disconnect');
       });
       socket.connect();
     });
-    this.emit('connect');
   }
 
   async ready () {
@@ -66,7 +66,7 @@ export default class Client extends EventEmitter {
   }
 
   disconnect () {
-    this.socket.destroy();
+    this.socket?.destroy();
     this.socket = null;
     this.connected = false;
   }

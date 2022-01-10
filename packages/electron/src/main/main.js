@@ -1,53 +1,37 @@
-const Path = require('path');
+
 const { app, BrowserWindow } = require('electron');
 const Server = require('./classes/Server').default;
-const isDev = process.env.NODE_ENV === 'development';
+const { createTray } = require('./tray');
+const { createWindow } = require('./window');
+const { registerWindow: trayRegisterWindow } = require('./tray');
+const { default: ips, registerWindow: ipcRegisterWindow } = require('./ipc');
 
 const server = new Server();
+ips(server);
 
-const ipcControl = require('./ipc').default(server);
+const createMainWindow = () => {
+  return new Promise(resolve => {
+    const mainWindow = createWindow();
 
-function createWindow () {
-  const mainWindow = new BrowserWindow({
-    title: app.getName(),
-    width: 1280,
-    height: 480,
-    webPreferences: {
-      preload: Path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
-      webSecurity: false,
-      contextIsolation: true
-    }
+    mainWindow.on('show', () => {
+      trayRegisterWindow(mainWindow);
+      ipcRegisterWindow(mainWindow);
+      resolve(mainWindow);
+    });
   });
-
-  if (isDev) {
-    mainWindow.webContents.openDevTools();
-  }
-
-  if (isDev) {
-    const rendererPort = process.argv[2];
-    mainWindow.loadURL(`http://localhost:${rendererPort}`);
-  } else {
-    mainWindow.loadFile(Path.join(app.getAppPath(), 'renderer', 'index.html'));
-  }
-
-  mainWindow.on('closed', () => {
-    server && server.stop();
-  });
-
-  mainWindow.on('show', () => {
-    ipcControl.registerWindowEvents(mainWindow);
-  });
-}
+};
 
 app.whenReady().then(() => {
-  createWindow();
+  createMainWindow();
+  createTray(server, {
+    createMainWindow
+  });
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      createMainWindow();
     }
   });
 });

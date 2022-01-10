@@ -22,6 +22,12 @@
     ],
     "@semantic-release/npm",
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "npm version ${nextRelease.version} --workspace=@devterm-toolbox/electron && npm version ${nextRelease.version} --workspace=@devterm-toolbox/frontend && npm version ${nextRelease.version} --workspace=@devterm-toolbox/web"
+      }
+    ],
+    [
       "@semantic-release/git",
       {
         "assets": [
@@ -29,7 +35,10 @@
           "CHANGELOG_PROJECT.md",
           "package.json",
           "package-lock.json",
-          "npm-shrinkwrap.json"
+          "npm-shrinkwrap.json",
+          "packages/electron/package.json",
+          "packages/frontend/package.json",
+          "packages/web/package.json"
         ]
       }
     ],

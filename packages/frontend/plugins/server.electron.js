@@ -1,9 +1,10 @@
 
 import Vue from 'vue';
-import { getServerOptions, startServer, stopServer } from '../utils/electron';
+import { getServerOptions, startServer, stopServer, serverSupported } from '../utils/electron';
 
 class ServerControl {
   constructor () {
+    this.disabled = false;
     this.options = {
       active: false,
       hosts: [],
@@ -12,8 +13,12 @@ class ServerControl {
     };
   }
 
-  async start (port) {
-    const result = await startServer(port);
+  async init () {
+    this.disabled = !(await serverSupported());
+  }
+
+  async start (port, ssl) {
+    const result = await startServer(port, ssl);
     if (result instanceof Error) {
       throw result;
     } else {

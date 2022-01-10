@@ -4,9 +4,27 @@ Electron App for printing with DevTerm thermal printer via `/tmp/DEVTERM_PRINTER
 
 ## Usage
 
-**Important:** On the DevTerm and further systems the appropriate libraries for `node-canvas` must be installed.
+## Electron App usage on DevTerm
 
-https://github.com/Automattic/node-canvas#compiling 
+### TrayIcon not visible?
+
+Install `xfce4-statusnotifier-plugin`.
+
+```
+sudo apt-get install xfce4-statusnotifier-plugin
+```
+
+### Generate Certificates for SSL Server
+
+To control the DevTerm from [https://devterm.lammpee.de](https://devterm.lammpee.de). 
+The DevTerm server must be operated as SSL for `https` usage.
+
+Use this repository [generate-ip-cert](https://github.com/antelle/generate-ip-cert) to generate the appropriate credentials.  
+
+## Development
+
+
+> **Important:** On the DevTerm and further systems the appropriate libraries for `node-canvas` must be installed.  https://github.com/Automattic/node-canvas#compiling 
 
 
 ```bash

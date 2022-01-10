@@ -1,13 +1,14 @@
 <template>
   <base-input-label class="input-file-select" :text="label" :delimiter="$attrs.delimiter || undefined">
     <input
+      v-bind="$attrs"
       ref="input"
       type="file"
       :accept="accept"
-      v-bind="$attrs"
+      :title="displayValue"
       @change="onChange"
     >
-    <span class="input">Select File</span>
+    <span class="input">{{ displayValue }}</span>
   </base-input-label>
 </template>
 
@@ -30,13 +31,28 @@ export default {
       default: 'TextField'
     },
     value: {
-      type: window.File,
+      type: String,
       default: null
+    }
+  },
+  data () {
+    return { currentValue: this.value };
+  },
+  computed: {
+    displayValue () {
+      const currentValue = this.currentValue?.name || this.value;
+      if (this.currentValue) {
+        return `Change File (${currentValue})`;
+      } else {
+        return 'Select File';
+      }
     }
   },
   methods: {
     onChange (e) {
       const files = (e.dataTransfer || e.target).files;
+      this.currentValue = files[0];
+      console.log(files[0]);
       this.$emit('input', files[0]);
       this.$refs.input.value = null;
     }
@@ -54,10 +70,13 @@ export default {
     width: 100%;
     height: 1em;
     padding: calc(5 / 12 * 1em);
+    overflow: hidden;
     font-family: monospace;
     font-size: calc(12 / 16 * 1em);
     color: currentColor;
     text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     border: dotted var(--color-primary) calc(1 / 12 * 1em);
 
     &[type="number"] {

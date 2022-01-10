@@ -13,6 +13,7 @@
       <component v-bind="item.props" :is="item.component" v-for="(item, index) in footerItems" :key="index" v-on="item.on" />
     </app-menu>
     <dialog-error v-for="(error,index) in $errorList.errors" v-bind="error" :key="index" init-open />
+    <dialog-prompt v-for="(prompt,index) in $dialog.prompts" v-bind="prompt" :key="index" init-open />
     <dialog-remote v-if="ready" ref="dialogRemote" />
     <dialog-server v-if="ready" ref="dialogServer" />
     <dialog-options v-if="ready" ref="dialogOptions" />
@@ -31,7 +32,8 @@ import {
   templateSave,
   templateLoad,
 
-  listenFullscreenChange
+  listenFullscreenChange,
+  listenDialogOpen
 
 } from '../utils/electron';
 
@@ -113,7 +115,8 @@ export default {
     DialogError: () => import('./dialogs/Error.vue'),
     DialogRemote: () => import('./dialogs/Remote.vue'),
     DialogServer: () => import('./dialogs/Server.vue'),
-    DialogOptions: () => import('./dialogs/Options.vue')
+    DialogOptions: () => import('./dialogs/Options.vue'),
+    DialogPrompt: () => import('./dialogs/Prompt.vue')
   },
 
   data () {
@@ -232,7 +235,7 @@ export default {
           on: {
             click: this.showServerDialog
           },
-          props: { class: { connection: true, connected: this.$server.options.active }, text: `${this.$server.options.active ? `Server Port: ${this.$server.options.port}` : 'Server Offline'}` }
+          props: { class: { connection: true, connected: this.$server.options.active }, text: `${this.$server.options.active ? `Server (*:${this.$server.options.port}${this.$server.options.secure ? '/SSL' : ''})` : 'Server Offline'}` }
         },
         {
           component: AppMenuDivider
@@ -242,7 +245,7 @@ export default {
           on: {
             click: this.showRemoteDialog
           },
-          props: { class: { connection: true, connected: this.clientConnected }, text: `${this.clientConnected ? `Online (${this.$client.host}:${this.$client.port})` : 'Offline'}` }
+          props: { class: { connection: true, connected: this.clientConnected }, text: `${this.clientConnected ? `Online (${this.$client.host}:${this.$client.port}${this.$client.secure ? '/SSL' : ''})` : 'Offline'}` }
         },
         {
           component: AppMenuDivider
@@ -256,7 +259,7 @@ export default {
     },
 
     hasServer () {
-      return '$server' in this;
+      return !this.$server.disabled;
     },
 
     version () {
@@ -280,29 +283,61 @@ export default {
   async  mounted () {
     await loadFonts();
     await this.$config.init();
+    await this.$server.init();
+
     this.hasServer && await this.$server.refresh();
     await this.$config.load();
 
-    if (this.$config.get('startType')) {
-      try {
-        const port = this.$config.get('port');
-        const host = this.$config.get('host');
-        if (this.$server && this.$config.get('startType') === 'local' && !this.$server.options.active) {
-          await this.$server.start(port);
+    const profile = this.$config.get('profiles').find(({ name }) => name === this.$config.get('profile'));
+
+    if (profile) {
+      const { port, host, ssl, secure } = profile;
+
+      if (this.$config.get('startType') && port) {
+        try {
+          if (this.$server && this.$config.get('startType') === 'local' && !this.$server.options.active) {
+            await this.$server.start(port, ssl);
+          }
+          if (host) {
+            await this.$client.connect(port, host, secure);
+          }
+        } catch (error) {
         }
-        if (port) {
-          await this.$client.connect(port, host);
-        }
-      } catch (error) {
       }
     }
     this.ready = true;
-
-    listenFullscreenChange(value => {
-      this.fullscreen = value;
-    });
+    this.registerListeners();
   },
   methods: {
+
+    registerListeners () {
+      listenFullscreenChange(value => {
+        this.fullscreen = value;
+      });
+      listenDialogOpen((type, value) => {
+        switch (type) {
+          case 'open':
+            switch (value) {
+              case 'options':
+                this.showOptionsDialog();
+                break;
+              case 'remote':
+                this.showRemoteDialog();
+                break;
+              case 'server':
+                this.showServerDialog();
+                break;
+
+              default:
+                break;
+            }
+            break;
+
+          default:
+            break;
+        }
+      });
+    },
 
     onClickMinimizeWindow () {
       return minimizeWindow();
@@ -342,20 +377,26 @@ export default {
     },
 
     async onApplyViewStart ({ type, remember }) {
-      this.$config.set('startType', (remember && type) || '');
-      this.$client.once('connect', async () => {
-        this.$config.set('host', this.$client.host);
-        this.$config.set('port', this.$client.port);
-        await this.$config.save();
-      });
+      this.$config.set('startType', type);
+      // this.$client.once('connect', async () => {
+
+      //   this.$config.set('host', this.$client.host);
+      //   this.$config.set('port', this.$client.port);
+      //   await this.$config.save();
+      // });
+      let options = {};
       switch (type) {
         case 'local':
-          await this.showServerDialog();
+          options = await this.showServerDialog();
           break;
         case 'remote':
-          await this.showRemoteDialog();
+          options = await this.showRemoteDialog();
           break;
       }
+
+      const { profile } = options;
+      this.$config.set('profile', profile);
+      await this.$config.save();
     },
     showServerDialog () {
       return this.$refs.dialogServer.show();

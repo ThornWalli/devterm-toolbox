@@ -1,5 +1,55 @@
 # Project Changelog
 
+# [1.0.0-beta.10](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-01-09)
+
+
+### Bug Fixes
+
+* **app:** add prompt dialog; improve server control ([151e9dd](https://github.com/ThornWalli/devterm-toolbox/commit/151e9dd41e01e75e670a5b920c72a5459320be85))
+
+# [1.0.0-beta.9](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-01-09)
+
+
+### Bug Fixes
+
+* **app:** improve server and remote dialog, add ssl server ([7cdb2e5](https://github.com/ThornWalli/devterm-toolbox/commit/7cdb2e5f896fd49367857a413626b2921c0f9fcb))
+
+# [1.0.0-beta.8](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-01-08)
+
+
+### Bug Fixes
+
+* **app:** fix fullscreen ([f32cdde](https://github.com/ThornWalli/devterm-toolbox/commit/f32cdde4c0d73d804bbb7f460fe73bbf31bb0d1d))
+
+# [1.0.0-beta.7](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2022-01-08)
+
+
+### Bug Fixes
+
+* **update:** improve server integration ([4c41027](https://github.com/ThornWalli/devterm-toolbox/commit/4c41027cefe91b0272b700e9485048cebe2841f8))
+
+# [1.0.0-beta.6](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-01-08)
+
+
+### Bug Fixes
+
+* **deps:** remove electron-icon-maker ([bb0fdcb](https://github.com/ThornWalli/devterm-toolbox/commit/bb0fdcb3e1aca877591595272049a0367f50a6c0))
+
+# [1.0.0-beta.5](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-01-08)
+
+
+### Bug Fixes
+
+* **relesae:** version test ([77c9116](https://github.com/ThornWalli/devterm-toolbox/commit/77c9116a3b5471b5b62727348d62fe2334861876))
+
+# [1.0.0-beta.4](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-01-08)
+
+
+### Bug Fixes
+
+* **release:** publish test ([df79818](https://github.com/ThornWalli/devterm-toolbox/commit/df798188dfd80ec025609f334de1885aa6f57691))
+* **update:** add tray icon, improve electron main ([b83eb80](https://github.com/ThornWalli/devterm-toolbox/commit/b83eb80a3e34c9a7addba39411bcb63c2a27aadb))
+
 # [1.0.0-beta.3](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-01-07)
 
 

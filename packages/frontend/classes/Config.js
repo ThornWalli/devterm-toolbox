@@ -2,7 +2,10 @@ import {
   saveConfig, loadConfig,
   getVersion
 } from '../utils/electron.js';
-import { getDefaultConfig } from '../utils/config.js';
+import { getDefaultConfig, getDefaultProfile } from '../utils/config.js';
+
+export const DEFAULT_HOST = 'localhost';
+export const DEFAULT_PROFILE = 'Profile Default';
 
 export default class Config {
   constructor () {
@@ -34,6 +37,11 @@ export default class Config {
     return saveConfig(this.toJSON());
   }
 
+  reset () {
+    this.data = getDefaultConfig();
+    return this.save();
+  }
+
   async load () {
     let config;
     try {
@@ -41,6 +49,32 @@ export default class Config {
     } catch (error) {
       config = getDefaultConfig();
     }
+    console.log(config);
     return (this.data = Object.assign(getDefaultConfig(), config));
+  }
+
+  saveProfile (options) {
+    options.name = options.name || DEFAULT_PROFILE;
+    const profiles = this.get('profiles');
+
+    let profile = this.get('profiles').find(({ name }) => name === options.name);
+    if (profile) {
+      console.log('update profile', profile.name, profile);
+      profiles[profiles.indexOf(profile)] = { ...profile, ...options };
+    } else {
+      console.log('create profile', options.name, options);
+      profile = { ...getDefaultProfile(), ...options };
+      profiles.push(profile);
+    }
+    this.set('profiles', profiles);
+    return this.save();
+  }
+
+  deleteProfile (profileName) {
+    const profiles = this.get('profiles');
+    const profile = this.get('profiles').find(({ name }) => name === profileName);
+    profiles.slice(profiles.indexOf(profile), 1);
+    this.set('profiles', profiles);
+    return this.save();
   }
 };
