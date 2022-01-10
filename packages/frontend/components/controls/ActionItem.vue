@@ -90,12 +90,14 @@ export default {
       font-size: calc(12 / 16 * 1em);
       text-align: left;
       opacity: 0.6;
-      transition: opacity 0.2s, background 1s ease-out;
+
+      /* transition: opacity 0.2s, background 1s ease-out; */
 
       &:hover,
       &:focus {
         opacity: 1;
-        transition: opacity 0.2s, background 0.3s ease-in, color 0s 0.15s;
+
+        /* transition: opacity 0.2s, background 0.3s ease-in, color 0s 0.15s; */
       }
 
       & > span {

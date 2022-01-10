@@ -1,5 +1,5 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Set Align" class="action-dialog-set-align" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog v-bind="$attrs" title="Table" class="action-dialog-table" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-dropdown :label="label" :value="String(value)" :options="options" @input="$emit('input', Number($event))" />
     </template>
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.action-dialog-set-align {
+.action-dialog-table {
   /* empty */
 }
 </style>

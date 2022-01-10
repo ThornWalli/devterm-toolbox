@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="QR Code" class="action-dialog-qr-code" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="QR Code" class="action-dialog-qr-code" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-text-box v-model="model.text" label="Text" baseline-label />
       <hr>

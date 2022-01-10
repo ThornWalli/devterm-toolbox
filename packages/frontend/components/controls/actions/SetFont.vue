@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Set Font" class="action-dialog-set-font" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Set Font" class="action-dialog-set-font" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-dropdown :label="label" :options="options" :value="String(value)" @input="$emit('input', $event)" />
     </template>

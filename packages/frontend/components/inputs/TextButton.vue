@@ -38,11 +38,13 @@ export default {
   background: transparent;
   border: solid var(--color-primary) 1px;
   opacity: 0.8;
-  transition: background 0.8s, color 0.8s, opacity 0.8s;
+
+  /* transition: background 0.8s, color 0.8s, opacity 0.8s; */
 
   &:hover {
     opacity: 1;
-    transition: background 0.3s, color 0.3s, opacity 0.3s;
+
+    /* transition: background 0.3s, color 0.3s, opacity 0.3s; */
   }
 
   &.color-primary {

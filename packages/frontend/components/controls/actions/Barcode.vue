@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Barcode" class="action-dialog-barcode" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Barcode" class="action-dialog-barcode" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-text-box v-model="model.text" label="Text" baseline-label />
       <hr>

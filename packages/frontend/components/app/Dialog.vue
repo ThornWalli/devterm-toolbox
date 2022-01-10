@@ -156,7 +156,8 @@ export default {
       }
     }
 
-    & > div {
+    & > div,
+    & > form {
       & > .buttons {
         display: flex;
         margin: calc(8 / 16 * 1em) calc(-8 / 16 * 1em);
@@ -186,7 +187,8 @@ export default {
     /* width: 100%; */
     height: 100%;
 
-    & > div {
+    & > div,
+    & > form {
       width: var(--dialog-width);
       max-height: 100%;
       overflow: auto;

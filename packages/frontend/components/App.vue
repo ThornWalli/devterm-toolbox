@@ -376,14 +376,9 @@ export default {
       this.showOptionsDialog();
     },
 
-    async onApplyViewStart ({ type, remember }) {
+    async onApplyViewStart ({ type }) {
       this.$config.set('startType', type);
-      // this.$client.once('connect', async () => {
 
-      //   this.$config.set('host', this.$client.host);
-      //   this.$config.set('port', this.$client.port);
-      //   await this.$config.save();
-      // });
       let options = {};
       switch (type) {
         case 'local':
@@ -394,9 +389,11 @@ export default {
           break;
       }
 
-      const { profile } = options;
-      this.$config.set('profile', profile);
-      await this.$config.save();
+      const { profile } = options || {};
+      if (profile) {
+        this.$config.set('profile', profile);
+        await this.$config.save();
+      }
     },
     showServerDialog () {
       return this.$refs.dialogServer.show();

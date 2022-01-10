@@ -4,3 +4,5 @@ build
 
 .idea
 .history
+env/certs/*
+!env/certs/*.md
