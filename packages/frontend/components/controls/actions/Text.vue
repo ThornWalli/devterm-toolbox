@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Text" class="action-dialog-text" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Text" class="action-dialog-text" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-text-box
         class="input"

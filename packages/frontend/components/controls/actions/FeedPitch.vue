@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Feed Pitch" class="action-dialog-feed-pitch" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Feed Pitch" class="action-dialog-feed-pitch" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-dropdown
         v-model="model.type"

@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Set Word Gap" class="action-set-word-gap" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Set Word Gap" class="action-set-word-gap" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-text-field
         step="1"

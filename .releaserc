@@ -10,6 +10,7 @@
       "prerelease": true
     }
   ],
+  "extends": "semantic-release-monorepo",
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
@@ -21,12 +22,6 @@
       }
     ],
     "@semantic-release/npm",
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "npm version ${nextRelease.version} --workspace=@devterm-toolbox/electron && npm version ${nextRelease.version} --workspace=@devterm-toolbox/frontend && npm version ${nextRelease.version} --workspace=@devterm-toolbox/web"
-      }
-    ],
     [
       "@semantic-release/git",
       {

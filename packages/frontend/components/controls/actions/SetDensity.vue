@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Set Density" class="action-set-density" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Set Density" class="action-set-density" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-dropdown :label="label" :options="options" :value="value" @input="$emit('input', $event)" />
     </template>

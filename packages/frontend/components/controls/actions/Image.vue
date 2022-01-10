@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Image" class="action-dialog-image" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Image" class="action-dialog-image" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <div v-if="previewDataUrl" class="preview">
         <img :src="previewDataUrl">

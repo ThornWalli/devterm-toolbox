@@ -1,8 +1,5 @@
 <template>
-  <action-dialog title="Set Line Space" class="action-set-line-space" v-bind="$attrs" v-on="Object.assign({}, $listeners, {input:[]})">
-    <template #head>
-      <slot name="head" />
-    </template>
+  <action-dialog v-bind="$attrs" title="Set Line Space" class="action-set-line-space" v-on="Object.assign({}, $listeners, {input:[]})">
     <template #default>
       <input-text-field
         step="1"
