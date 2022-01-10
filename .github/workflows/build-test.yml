@@ -56,15 +56,18 @@ jobs:
             source /.profile
             nvm use
             
-            NODE_PATH=`which node`
-            NPM_PATH=`which npm`
-            sudo ln -s "$NODE_PATH" /usr/bin/node
-            sudo ln -s "$NPM_PATH" /usr/bin/npm
-            sudo chmod 755 /usr/bin/node
-            sudo chmod 755 /usr/bin/npm
-            sudo chmod 755 $NODE_PATH
-            sudo chmod 755 $NODE_PATH
-            npm ci --unsafe-perm=true --allow-root          
+            npm config set user 0
+            npm link
+            npm ci --unsafe-perm=true --allow-root  
+            
+#           NODE_PATH=`which node`
+#           NPM_PATH=`which npm`
+#           sudo ln -s "$NODE_PATH" /usr/bin/node
+#           sudo ln -s "$NPM_PATH" /usr/bin/npm
+#           sudo chmod 755 /usr/bin/node
+#           sudo chmod 755 /usr/bin/npm
+#           sudo chmod 755 $NODE_PATH
+#           sudo chmod 755 $NODE_PATH        
 
 #   mkdir ~/.npm-global
 #   npm config set prefix '~/.npm-global'
