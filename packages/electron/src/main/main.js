@@ -9,6 +9,12 @@ const { default: ips, registerWindow: ipcRegisterWindow } = require('./ipc');
 const server = new Server();
 ips(server);
 
+app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+  event.preventDefault();
+  // eslint-disable-next-line node/no-callback-literal
+  callback(true);
+});
+
 const createMainWindow = () => {
   return new Promise(resolve => {
     const mainWindow = createWindow();

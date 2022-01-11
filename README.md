@@ -21,6 +21,20 @@ The DevTerm server must be operated as SSL for `https` usage.
 
 Use this repository [generate-ip-cert](https://github.com/antelle/generate-ip-cert) to generate the appropriate credentials.  
 
+1. Generate Certificate for your network ip (e.g. `192.168.1.10`).
+2. Renaming generate files:
+  - e.g. `cert.pem` -> `devterm_192.168.1.10.crt`
+  - e.g. `key.pem` -> `devterm_192.168.1.10.key`
+3. Install Certificate
+   1. Copy `crt` file (e.g. `devterm_192.168.1.10.crt`)  
+      `sudo cp 192.168.1.10.cert /usr/share/ca-certificates/`
+   2. Set permissions:   
+      `sudo chown 644 /usr/share/ca-certificates/devterm_192.168.1.14.crt`
+   3. Execute `sudo update-ca-certificates` or `sudo dpkg-reconfigure ca-certificates`.
+4. Register the Certificate on other network clients. 
+
+
+
 ## Development
 
 
