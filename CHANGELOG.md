@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.13](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-01-11)
+
+
+### Bug Fixes
+
+* **app:** improve file select ([3c6a01f](https://github.com/ThornWalli/devterm-toolbox/commit/3c6a01f5067dfc04deda47f80aa73d647b3f2102))
+
 # [1.0.0-beta.12](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-01-11)
 
 
