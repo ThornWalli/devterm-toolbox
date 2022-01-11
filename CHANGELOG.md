@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.12](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-01-11)
+
+
+### Bug Fixes
+
+* **server:** fix serialport open ([702dee9](https://github.com/ThornWalli/devterm-toolbox/commit/702dee993dd1b9c8930c97444100d41ba74ead83))
+* **server:** self cert ([c544c0c](https://github.com/ThornWalli/devterm-toolbox/commit/c544c0ca46708200f901adbf2c3821e316149976))
+
 # [1.0.0-beta.11](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-01-10)
 
 
