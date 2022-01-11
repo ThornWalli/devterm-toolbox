@@ -48,7 +48,6 @@
   },
   "optionalDependencies": {
     "canvas": "^2.8.0",
-    "devterm": "^1.0.0-beta.7",
     "serialport": "^9.2.8"
   }
 }
