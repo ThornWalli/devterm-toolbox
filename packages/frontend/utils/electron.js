@@ -1,3 +1,4 @@
+import { selectFiles } from './dom';
 
 export const registerClient = (client) => {
   if (isElectron()) {
@@ -48,15 +49,13 @@ export const templateSave = (template) => {
   }
 };
 
-export const templateLoad = () => {
+export const templateLoad = async () => {
   if (isElectron()) {
     return window.electron.ipcRenderer.invoke('load');
   } else {
+    const files = await selectFiles('text', ['application/json']);
     return new Promise((resolve, reject) => {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.click();
-      input.addEventListener('change', ({ target }) => {
+      if (files.length) {
         const reader = new FileReader();
         reader.addEventListener('load', () => {
           try {
@@ -65,9 +64,10 @@ export const templateLoad = () => {
             reject(error);
           }
         });
-        reader.readAsText(target.files[0]);
-        input.remove();
-      });
+        reader.readAsText(files[0]);
+      } else {
+        resolve();
+      }
     });
   }
 };

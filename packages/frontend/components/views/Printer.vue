@@ -118,7 +118,7 @@ export default {
 
     this.subscriptions = [
       keyUpObserver.pipe(filter(({ key }) => key === 'PrintScreen'))
-        .subscribe((e) => this.print())
+        .subscribe(() => this.print())
     ];
   },
   destroyed () {

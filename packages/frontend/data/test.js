@@ -16,31 +16,31 @@ export const writeHeadline = (text) => {
 export default [
   { type: 'reset' },
   { type: 'setAlign', value: ALIGN.CENTER },
-  {
-    type: 'barcode',
-    value: {
-      text: 'Devterm',
-      options: {
-        format: '',
-        height: 100,
-        font: 'monospace',
-        textAlign: 'center',
-        textPosition: 'bottom',
-        textMargin: 2,
-        fontSize: 20,
-        margin: 10,
-        displayValue: true,
-        flat: false
-      },
-      imageOptions: {
-        rotate: false,
-        flipX: false,
-        flipY: false,
-        width: null
-      }
-    }
-  },
-  { type: 'feedPitch', value: { value: 2, type: 'font' } },
+  // {
+  //   type: 'barcode',
+  //   value: {
+  //     text: 'Devterm',
+  //     options: {
+  //       format: '',
+  //       height: 100,
+  //       font: 'monospace',
+  //       textAlign: 'center',
+  //       textPosition: 'bottom',
+  //       textMargin: 2,
+  //       fontSize: 20,
+  //       margin: 10,
+  //       displayValue: true,
+  //       flat: false
+  //     },
+  //     imageOptions: {
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: null
+  //     }
+  //   }
+  // },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
   {
     type: 'qrCode',
     value: {
@@ -59,20 +59,20 @@ export default [
       }
     }
   },
-  { type: 'feedPitch', value: { value: 2, type: 'font' } },
-  {
-    type: 'image',
-    value: {
-      file: devtermUri,
-      imageOptions: {
-        grayscale: true,
-        rotate: false,
-        flipX: false,
-        flipY: false,
-        width: 100
-      }
-    }
-  },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
+  // {
+  //   type: 'image',
+  //   value: {
+  //     file: devtermUri,
+  //     imageOptions: {
+  //       grayscale: true,
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: 100
+  //     }
+  //   }
+  // },
   // // { type: 'reset' },
   // // { type: 'cutLine' },
 

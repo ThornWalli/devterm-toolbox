@@ -1,22 +1,29 @@
 <template>
-  <base-input-label class="input-file-select" :text="label" :delimiter="$attrs.delimiter || undefined">
-    <input
+  <base-input-label tag="div" class="input-file-select" :text="label" :delimiter="$attrs.delimiter || undefined">
+    <button
       v-bind="$attrs"
-      ref="input"
-      type="file"
-      :accept="accept"
+      type="button"
+      class="select"
       :title="displayValue"
-      @change="onChange"
+      @click="onClickSelect"
     >
-    <span class="input">{{ displayValue }}</span>
+      {{ displayValue }}
+    </button>
+    <input-text-button v-if="currentValue" @click="onClickReset">
+      Reset
+    </input-text-button>
   </base-input-label>
 </template>
 
 <script>
+import { selectFiles } from '../../utils/dom';
 import BaseInputLabel from '../base/InputLabel.vue';
+import InputTextButton from './TextButton.vue';
+
 export default {
   components: {
-    BaseInputLabel
+    BaseInputLabel,
+    InputTextButton
   },
   inheritAttrs: false,
   props: {
@@ -42,19 +49,23 @@ export default {
     displayValue () {
       const currentValue = this.currentValue?.name || this.value;
       if (this.currentValue) {
-        return `Change File (${currentValue})`;
+        return `${currentValue}`;
       } else {
         return 'Select File';
       }
     }
   },
   methods: {
-    onChange (e) {
-      const files = (e.dataTransfer || e.target).files;
-      this.currentValue = files[0];
-      console.log(files[0]);
-      this.$emit('input', files[0]);
-      this.$refs.input.value = null;
+    async onClickSelect () {
+      const files = await selectFiles(this.accept);
+      if (files.length) {
+        this.currentValue = files[0];
+        this.$emit('input', files[0]);
+      }
+    },
+    onClickReset () {
+      this.currentValue = null;
+      this.$emit('input', null);
     }
   }
 
@@ -65,11 +76,12 @@ export default {
 .input-file-select {
   position: relative;
 
-  & .input {
+  & .select {
     display: block;
     width: 100%;
-    height: 1em;
-    padding: calc(5 / 12 * 1em);
+
+    /* height: 1em; */
+    padding: calc(4 / 12 * 1em);
     overflow: hidden;
     font-family: monospace;
     font-size: calc(12 / 16 * 1em);
@@ -77,7 +89,9 @@ export default {
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
+    background: #000;
     border: dotted var(--color-primary) calc(1 / 12 * 1em);
+    appearance: none;
 
     &[type="number"] {
       font-weight: bold;
@@ -91,17 +105,12 @@ export default {
       cursor: not-allowed;
       opacity: 0.6;
     }
+
+    & + * {
+      margin-left: calc(4 / 12 * 1em);
+    }
   }
 
   /* empty */
-}
-
-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
 }
 </style>

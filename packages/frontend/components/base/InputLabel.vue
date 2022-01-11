@@ -1,14 +1,18 @@
 <template>
-  <label class="base-input-label" :class="{'top-label': topLabel,'baseline-label': baselineLabel}">
+  <component :is="tag" class="base-input-label" :class="{'top-label': topLabel,'baseline-label': baselineLabel}">
     <span v-if="text" class="label">{{ text }}{{ delimiter }}</span>
     <slot />
-  </label>
+  </component>
 </template>
 
 <script>
 export default {
   inheritAttrs: false,
   props: {
+    tag: {
+      type: String,
+      default: 'label'
+    },
     delimiter: {
       type: String,
       default: ':'

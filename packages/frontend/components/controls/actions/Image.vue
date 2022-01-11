@@ -88,12 +88,16 @@ export default {
       this.$emit('input', e);
     },
     async onInputFileSelect (file) {
-      const url = await new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = e => resolve(e.target.result);
-        reader.readAsDataURL(file);
-      });
-      this.updateCanvas(url);
+      if (file) {
+        const url = await new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result);
+          reader.readAsDataURL(file);
+        });
+        this.updateCanvas(url);
+      } else {
+        this.previewDataUrl = null;
+      }
     },
 
     async updateCanvas (url) {

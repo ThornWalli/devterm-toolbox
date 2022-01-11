@@ -14,3 +14,17 @@ export const keyUpObserver = fromEvent(window, 'keyup').pipe(share({ resetOnErro
 //   .subscribe((e) => {
 //     console.log(e);
 //   });
+
+export const selectFiles = (accept) => {
+  return new Promise((resolve) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = (accept || []).join(',');
+    input.click();
+    input.addEventListener('change', (e) => {
+      const files = (e.dataTransfer || e.target).files;
+      input.remove();
+      resolve(files);
+    });
+  });
+};
