@@ -34,6 +34,12 @@ Use this repository [generate-ip-cert](https://github.com/antelle/generate-ip-ce
 4. Register the Certificate on other network clients. 
 
 
+### Android 12
+
+Create a `p12` file.
+
+openssl pkcs12 -export -in devterm_192.168.1.14.crt -inkey devterm_192.168.1.14.key -out devterm_192.168.1.14.p12
+
 
 ## Development
 

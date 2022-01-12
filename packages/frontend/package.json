@@ -11,6 +11,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "devterm": "^1.0.0-beta.8"
+    "devterm": "^1.0.0-beta.9"
   }
 }

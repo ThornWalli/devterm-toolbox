@@ -27,7 +27,9 @@ export default {
     }),
     beforePrinterCommand: async (action) => {
       const { text, options, imageOptions } = action.value;
-      const canvas = await getQRCode(text || 'empty', options || {});
+      const qrCodeOptions = { ...options };
+      qrCodeOptions.width = options.width || imageOptions.width;
+      const canvas = await getQRCode(text || 'empty', qrCodeOptions);
       action.value = await getBuffersFromCanvas(canvas, imageOptions);
       return action;
     }
