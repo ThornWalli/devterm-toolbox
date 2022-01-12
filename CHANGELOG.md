@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.15](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-01-12)
+
+
+### Bug Fixes
+
+* **frontend:** update devterm dep ([563b6a3](https://github.com/ThornWalli/devterm-toolbox/commit/563b6a344a34eec67a63a5c480ce82bba7fb49b5))
+
 # [1.0.0-beta.14](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-01-11)
 
 
