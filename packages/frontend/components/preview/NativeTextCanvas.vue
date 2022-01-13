@@ -4,7 +4,6 @@
 
 <script>
 import { ALIGN, MAX_DENSITY } from 'devterm/config';
-import { getDefaultTextOptions } from '../../utils/action';
 import { drawText } from '../../utils/canvas';
 import { FONT_MAP } from '../../utils/font';
 
@@ -17,10 +16,8 @@ export default {
       }
     },
     value: {
-      type: Object,
-      default () {
-        return getDefaultTextOptions();
-      }
+      type: String,
+      default: 'abcdef'
     },
     width: {
       type: Number,
@@ -70,9 +67,13 @@ export default {
       this.animationFrame = window.requestAnimationFrame(() => {
         const ctx = this.ctx;
 
-        const canvas = drawText(this.value.text, {
-          ...this.value.options,
+        const canvas = drawText(this.value, {
+          fontSize: this.font.fontSize,
+          align: this.align,
+          lineSpace: this.options.lineSpace,
+          wordGap: this.options.wordGap,
           margin: this.options.margin,
+          fontFamily: this.font.fontFamily,
           color: this.getColor(this.options.density / MAX_DENSITY)
         }, this.width);
 

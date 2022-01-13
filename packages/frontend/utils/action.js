@@ -7,6 +7,7 @@ import ActionSetLineSpace from '../components/controls/actions/SetLineSpace.vue'
 import ActionSetWordGap from '../components/controls/actions/SetWordGap.vue';
 import ActionSetDensity from '../components/controls/actions/SetDensity.vue';
 import ActionText from '../components/controls/actions/Text.vue';
+import ActionNativeText from '../components/controls/actions/NativeText.vue';
 import ActionImage from '../components/controls/actions/Image.vue';
 import ActionQrCode from '../components/controls/actions/QrCode.vue';
 import ActionFeedPitch from '../components/controls/actions/FeedPitch.vue';
@@ -29,6 +30,7 @@ export const getActionTypeOptions = () => {
     new DropDownOptionDescription({ title: 'QRCode', value: 'qrCode' }),
     new DropDownOptionDescription({ title: 'Barcode', value: 'barcode' }),
     new DropDownOptionDescription({ title: 'Text', value: 'text' }),
+    new DropDownOptionDescription({ title: 'NativeText', value: 'nativeText' }),
     new DropDownOptionDescription({ title: 'Cutline', value: 'cutLine' })
   ];
 }; console.log('DEFAULT_DENSITY', DEFAULT_DENSITY);
@@ -40,6 +42,7 @@ export const getComponentByType = (type) => {
     setFont: ActionSetFont,
     setDensity: ActionSetDensity,
     text: ActionText,
+    nativeText: ActionNativeText,
     image: ActionImage,
     qrCode: ActionQrCode,
     setLineSpace: ActionSetLineSpace,
@@ -75,6 +78,9 @@ export const createAction = (type) => {
       value = { value: 1, type: 'font' };
       break;
     case 'text':
+      value = getDefaultTextOptions();
+      break;
+    case 'nativeText':
       value = 'Text';
       break;
     case 'image':
@@ -186,6 +192,14 @@ export const executeAction = (action, options) => {
         props: { ...action }
       };
 
+    case 'nativeText':
+      return {
+        id: action.id,
+        component: () => import('../components/preview/NativeTextCanvas.vue'),
+        options: { ...options },
+        props: { ...action }
+      };
+
     case 'feedPitch':
       return {
         id: action.id,
@@ -195,6 +209,23 @@ export const executeAction = (action, options) => {
       };
   }
   return null;
+};
+
+export const getDefaultTextOptions = () => {
+  return {
+    text: 'Sample',
+    options: {
+      fontSize: 16,
+      align: 'left',
+      lineSpace: 0,
+      wordGap: 0,
+      margin: 0,
+      fontFamily: null,
+      color: '#000',
+      weight: 400,
+      italic: false
+    }
+  };
 };
 
 export const getDefaultImageOptions = () => {

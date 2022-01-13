@@ -4,14 +4,14 @@
     <div v-if="title" class="dialog-title">
       {{ title }}
     </div>
-    <form class="dialog-content" @submit="$emit('submit', $event)">
+    <component :is="form? 'form' : 'div'" class="dialog-content" @submit="$emit('submit', $event)">
       <div>
         <slot>Dialog Content</slot>
       </div>
       <div v-if="$slots.buttons" class="buttons">
         <slot name="buttons" />
       </div>
-    </form>
+    </component>
   </dialog>
 </template>
 
@@ -36,6 +36,10 @@ export default {
     title: {
       type: String,
       default: null
+    },
+    form: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

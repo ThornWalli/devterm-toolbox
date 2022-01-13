@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Set Line Space" class="action-set-line-space" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Set Line Space"
+    class="action-set-line-space"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-text-field
         step="1"
@@ -32,6 +39,12 @@ export default {
     return {
       label: 'Set Line-space'
     };
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
+    }
   }
 };
 </script>

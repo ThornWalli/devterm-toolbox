@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Set Word Gap" class="action-set-word-gap" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Set Word Gap"
+    class="action-set-word-gap"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-text-field
         step="1"
@@ -34,8 +41,13 @@ export default {
     return {
       label: 'Set Word-Gap'
     };
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
+    }
   }
-
 };
 </script>
 

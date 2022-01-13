@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Image" class="action-dialog-image" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Image"
+    class="action-dialog-image"
+    form
+    @submit="onSubmit"
+    v-on="Object.assign({}, $listeners, {input:[]})"
+  >
     <template #default>
       <div v-if="previewDataUrl" class="preview">
         <img :src="previewDataUrl">
@@ -61,6 +68,7 @@ export default {
   },
   data () {
     return {
+      updateTimeout: null,
       previewDataUrl: null,
       model: { ...this.value }
     };
@@ -121,7 +129,13 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
     }
+
   }
 };
 

@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Table" class="action-dialog-table" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Table"
+    class="action-dialog-table"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-dropdown :label="label" :value="String(value)" :options="options" @input="$emit('input', Number($event))" />
     </template>
@@ -35,6 +42,12 @@ export default {
       ].map(([title, value]) => new DropDownOptionDescription({ title, value: String(value) }))
 
     };
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
+    }
   }
 };
 </script>

@@ -29,20 +29,10 @@ export default {
       default: ''
     }
   },
-  data () {
-    return { inputTimeout: null };
-  },
 
   methods: {
     onInput (e) {
-      console.log('inputTimeout', this.inputTimeout);
-      // window.clearTimeout(this.inputTimeout);
-
-      console.log('test a', this.inputTimeout, e.target.value);
-      // this.inputTimeout = window.setTimeout(() => {
-      console.log('test b', e.target.value);
       this.$emit('input', e.target.value);
-      // }, 500);
     }
   }
 

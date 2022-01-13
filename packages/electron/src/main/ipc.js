@@ -2,6 +2,7 @@
 const fs = require('fs');
 const { resolve } = require('path');
 const { app, ipcMain, dialog, BrowserWindow } = require('electron');
+const fontManager = require('node-system-fonts');
 const { updateTrayIcon } = require('./tray');
 
 const registerWindow = window => {
@@ -91,6 +92,23 @@ const ipc = (server) => {
     app.exit();
   };
   ipcMain.handle('close', onClose);
+
+  const onGetFonts = async () => {
+    let fonts = await new Promise(resolve => {
+      fontManager.getAvailableFonts(resolve);
+    });
+    fonts = fonts.map(({ family, weight, italic, monospace }) => ({ family, weight, italic, monospace }));
+    return Object.values(fonts.reduce((result, font) => {
+      const definition = result[font.family] || { name: null, variants: [], monospace: false };
+      definition.name = font.family;
+      definition.monospace = font.monospace;
+      definition.variants.push({ weight: font.weight, italic: font.italic });
+      definition.variants.sort((a, b) => b.weight > a.weight);
+      result[font.family] = definition;
+      return result;
+    }, {})).sort((a, b) => a.name.localeCompare(b.name));
+  };
+  ipcMain.handle('getFonts', onGetFonts);
 
   // Save
   const onSave = (event, data) => {

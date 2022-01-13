@@ -41,6 +41,7 @@ export default {
 
   /* transition: background 0.8s, color 0.8s, opacity 0.8s; */
 
+  &:focus,
   &:hover {
     opacity: 1;
 
@@ -54,7 +55,6 @@ export default {
     &:active {
       color: var(--color-primary);
       background: var(--color-secondary);
-      transition: background 0.3s, color 0.3s;
     }
   }
 
@@ -66,7 +66,6 @@ export default {
     &:active {
       color: #000;
       background: red;
-      transition: background 0.3s, color 0.3s;
     }
   }
 

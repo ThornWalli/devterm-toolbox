@@ -41,6 +41,7 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "events": "^3.3.0",
+    "node-system-fonts": "^1.0.1",
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.0",
     "upath": "^2.0.1",

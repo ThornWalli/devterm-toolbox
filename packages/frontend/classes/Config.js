@@ -1,6 +1,7 @@
 import {
   saveConfig, loadConfig,
-  getVersion
+  getVersion,
+  getFonts
 } from '../utils/electron.js';
 import { getDefaultConfig, getDefaultProfile } from '../utils/config.js';
 
@@ -11,10 +12,12 @@ export default class Config {
   constructor () {
     this.data = getDefaultConfig();
     this.version = null;
+    this.fonts = [];
   }
 
   async init () {
     this.version = await getVersion();
+    this.fonts = await getFonts();
   }
 
   toJSON () {

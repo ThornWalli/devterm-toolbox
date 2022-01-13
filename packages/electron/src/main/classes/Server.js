@@ -138,8 +138,6 @@ const onSocketExecuteActions = (printer, disabled) => async (actions) => {
 
   if (disabled) {
     console.log('Printer not found, serivce is disabled!');
-
-    console.log(actions.find(action => action.type === 'image'));
   } else {
     await preparedActions.reduce((result, command) => result.then(() => command(printer)), Promise.resolve());
   }

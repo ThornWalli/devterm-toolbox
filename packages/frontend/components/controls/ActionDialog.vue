@@ -1,10 +1,17 @@
 <template>
-  <app-dialog ref="dialog" class="action-dialog" embed v-bind="$attrs" v-on="$listeners">
+  <app-dialog
+    v-bind="$attrs"
+    ref="dialog"
+    :form="form"
+    class="action-dialog"
+    embed
+    v-on="$listeners"
+  >
     <template #default>
       <slot />
     </template>
     <template #buttons>
-      <input-text-button color="primary" text="Close" @click="$emit('close')" />
+      <input-text-button :type="form ? 'submit' : 'button'" color="primary" text="Close" @click="$emit('close')" />
     </template>
   </app-dialog>
 </template>
@@ -19,7 +26,13 @@ export default {
     AppDialog
   },
   mixins: [MixinDialog],
-  inheritAttrs: false
+  inheritAttrs: false,
+  props: {
+    form: {
+      type: Boolean,
+      default: false
+    }
+  }
 };
 </script>
 

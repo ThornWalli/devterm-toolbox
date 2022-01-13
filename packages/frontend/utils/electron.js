@@ -119,6 +119,39 @@ export const getVersion = () => {
   }
 };
 
+export const getFonts = () => {
+  if (isElectron()) {
+    return window.electron.ipcRenderer.invoke('getFonts');
+  } else {
+    const generateDefaults = () => {
+      const variants = [];
+      const italics = [false, true];
+      const weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+      for (let x = 0; x < italics.length; x++) {
+        for (let y = 0; y < weights.length; y++) {
+          variants.push({ weight: weights[y], italic: italics[x] });
+        }
+      }
+      return variants;
+    };
+    const variants = generateDefaults();
+    return [
+      { family: 'Arial', monospace: false, variants },
+      { family: 'Verdana ', monospace: false, variants },
+      { family: 'Helvetica ', monospace: false, variants },
+      { family: 'Tahoma ', monospace: false, variants },
+      { family: 'Trebuchet MS ', monospace: false, variants },
+      { family: 'Times New Roman ', monospace: false, variants },
+      { family: 'Georgia ', monospace: false, variants },
+      { family: 'Garamond ', monospace: false, variants },
+      { family: 'Courier New ', monospace: true, variants },
+      { family: 'Brush Script MT ', monospace: false, variants },
+      { family: 'sans-serif', monospace: false, variants },
+      { family: 'monospace ', monospace: true, variants }
+    ];
+  }
+};
+
 export const startServer = (port, ssl) => {
   return window.electron.ipcRenderer.invoke('startServer', port, ssl);
 };

@@ -10,10 +10,13 @@ const ACTION_PRINTER_COMMANDS = {
   qrCode: (printer, value) => value.flat().reduce((result, buffer) => {
     return result.then(() => printer.write(buffer));
   }, Promise.resolve()),
-  text: (printer, value) => printer.writeLine(value),
   image: (printer, value) => value.flat().reduce((result, buffer) => {
     return result.then(() => printer.write(buffer));
   }, Promise.resolve()),
+  text: (printer, value) => value.flat().reduce((result, buffer) => {
+    return result.then(() => printer.write(buffer));
+  }, Promise.resolve()),
+  nativeText: (printer, value) => printer.writeLine(value),
   feedPitch: (printer, { type, value }) => {
     if (type === 'pixel') {
       return printer.feedPitchByPixel(value);

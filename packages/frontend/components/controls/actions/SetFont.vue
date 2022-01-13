@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Set Font" class="action-dialog-set-font" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Set Font"
+    class="action-dialog-set-font"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-dropdown :label="label" :options="options" :value="String(value)" @input="$emit('input', $event)" />
     </template>
@@ -29,6 +36,12 @@ export default {
       label: 'Select font',
       options: Object.keys(FONT).map((value) => new DropDownOptionDescription({ title: value, value: String(FONT[value]) }))
     };
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
+    }
   }
 };
 </script>
