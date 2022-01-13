@@ -56,7 +56,7 @@ jobs:
             npm config set user 0
             npm link
             npm set-script postinstall ""
-            npm i 
+#           npm i 
             
             
           #--unsafe-perm=true --allow-root  
