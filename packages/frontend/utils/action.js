@@ -146,7 +146,7 @@ export const executeAction = (action, options) => {
     case 'cutLine':
       return {
         id: action.id,
-        component: () => import('../components/preview/TextCanvas.vue'),
+        component: () => import('../components/preview/NativeTextCanvas.vue'),
         options: {
           ...options,
           // reset options

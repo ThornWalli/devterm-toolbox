@@ -118,7 +118,10 @@ export default {
     async render () {
       let canvas = await getCanvasFromUrl(this.model.file);
       canvas = prepareCanvasForPrint(canvas, this.model.imageOptions);
-      canvas = preparePreview(canvas, this.colors);
+      canvas = preparePreview(canvas, {
+        background: this.colors.printer.preview.background,
+        foreground: this.colors.printer.preview.foreground
+      });
       canvas = resizeCanvas(canvas, null, 100);
       this.previewDataUrl = toDataURL(canvas);
     },

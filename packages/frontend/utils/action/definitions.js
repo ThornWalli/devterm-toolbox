@@ -1,4 +1,4 @@
-import { ALIGN, FONT, IMAGE_MAX } from 'devterm/config';
+import { ALIGN, FONT, MAX_DOTS } from 'devterm/config';
 import { getQRCode, getBarcode } from 'devterm/utils/canvas';
 import { getCanvasFromUrl, getBuffersFromCanvas, drawText } from '../canvas';
 
@@ -51,7 +51,7 @@ export default {
     }),
     beforePrinterCommand: async (action) => {
       const { text, options } = action.value;
-      const canvas = await drawText(text || 'empty', options || {}, IMAGE_MAX);
+      const canvas = await drawText(text || 'empty', options || {}, MAX_DOTS);
       action.value = await getBuffersFromCanvas(canvas);
       return action;
     }

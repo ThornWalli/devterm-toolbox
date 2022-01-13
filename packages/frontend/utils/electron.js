@@ -119,9 +119,16 @@ export const getVersion = () => {
   }
 };
 
-export const getFonts = () => {
+export const getFonts = async () => {
+  const defaultFonts = [
+    { name: '5x7-ISO8859-1', variants: [] },
+    { name: '6x12-ISO8859-1', variants: [] },
+    { name: '7x14-ISO8859-1', variants: [] },
+    { name: 'Px437_CompaqThin_8x16', variants: [] }
+  ];
+
   if (isElectron()) {
-    return window.electron.ipcRenderer.invoke('getFonts');
+    return defaultFonts.concat(await window.electron.ipcRenderer.invoke('getFonts'));
   } else {
     const generateDefaults = () => {
       const variants = [];
@@ -136,6 +143,7 @@ export const getFonts = () => {
     };
     const variants = generateDefaults();
     return [
+      ...defaultFonts,
       { family: 'Arial', monospace: false, variants },
       { family: 'Verdana ', monospace: false, variants },
       { family: 'Helvetica ', monospace: false, variants },

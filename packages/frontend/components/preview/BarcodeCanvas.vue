@@ -70,8 +70,8 @@ export default {
         this.img.src = url;
       });
     },
-    getColor (opacity) {
-      return `rgb(${this.colors.primary.join(' ')} / ${opacity * 100}%)`;
+    getColor (opacity = 1) {
+      return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
     render () {
       this.error = null;
@@ -105,7 +105,11 @@ export default {
             this.error = error;
           }
 
-          preparePreview(ctx.canvas, this.colors);
+          preparePreview(ctx.canvas, {
+            background: this.colors.printer.preview.background,
+            foreground: this.colors.printer.preview.foreground
+          });
+          // foreground: this.getColor(0.6 + 0.4 * (this.options.density / MAX_DENSITY))
         });
       });
     }

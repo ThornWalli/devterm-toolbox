@@ -62,20 +62,20 @@ export default {
     this.render();
   },
   methods: {
-    getColor (opacity) {
+    getColor (opacity = 1) {
       return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
     render () {
       window.cancelAnimationFrame(this.animationFrame);
       this.animationFrame = window.requestAnimationFrame(() => {
         const ctx = this.ctx;
-
         const canvas = drawText(this.value.text, {
           ...this.value.options,
-          margin: this.options.margin,
-          color: this.getColor(this.options.density / MAX_DENSITY)
-        }, this.width);
-
+          margin: this.options.margin
+        }, this.width, {
+          background: `rgb(${this.colors.printer.preview.background.join(' ')})`,
+          foreground: this.getColor(0.6 + 0.4 * (this.options.density / MAX_DENSITY))
+        });
         this.$el.width = canvas.width;
         this.$el.height = canvas.height;
         ctx.drawImage(canvas, 0, 0);

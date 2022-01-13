@@ -62,6 +62,9 @@ export default {
   },
 
   methods: {
+    getColor (opacity = 1) {
+      return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
+    },
     changeImage (url) {
       return new Promise(resolve => {
         this.img = document.createElement('img');
@@ -102,7 +105,10 @@ export default {
                 break;
             }
             ctx.drawImage(preparedCanvas, x, 0);
-            preparePreview(ctx.canvas, this.colors);
+            preparePreview(ctx.canvas, {
+              background: this.colors.printer.preview.background,
+              foreground: this.colors.printer.preview.foreground
+            });
           } catch (error) {
             this.error = error;
           }

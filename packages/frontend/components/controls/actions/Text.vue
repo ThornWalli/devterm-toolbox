@@ -127,11 +127,14 @@ export default {
   },
   watch: {
     variant (variant) {
-      const {
-        weight,
-        italic
-      } = this.currentFont.variants[Number(variant)];
-      this.model.options = { ...this.model.options, weight, italic };
+      const currentVariant = this.currentFont.variants[Number(variant)];
+      if (currentVariant) {
+        const {
+          weight,
+          italic
+        } = this.currentFont.variants[Number(variant)];
+        this.model.options = { ...this.model.options, weight, italic };
+      }
     },
     model: {
       handler () {

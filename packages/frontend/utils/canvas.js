@@ -88,7 +88,8 @@ export const getBuffersFromCanvas = (canvas, imageOptions) => {
   canvas = prepareCanvasForPrint(canvas, imageOptions);
   return getImageWriteBuffersFromCanvas(canvas);
 };
-export const drawText = (text, options, width) => {
+export const drawText = (text, options, width, colors) => {
+  colors = { background: '#fff', foreground: '#000', ...colors };
   const {
     fontSize,
     align,
@@ -96,7 +97,6 @@ export const drawText = (text, options, width) => {
     wordGap,
     margin,
     fontFamily,
-    color,
     weight,
     italic
   } = {
@@ -120,7 +120,7 @@ export const drawText = (text, options, width) => {
       x += width;
       width_ -= margin_[1];
       break;
-    case ALIGN.LEFT:
+    case ALIGN.CENTER:
       x += width_ / 2;
       width_ -= margin_[1];
       break;
@@ -138,10 +138,13 @@ export const drawText = (text, options, width) => {
   const ctx = canvas.getContext('2d');
   ctx.canvas.style.letterSpacing = `${wordGap}px`;
   ctx.font = font;
-  ctx.fillStyle = color;
   const lineHeight = Math.max(lineSpace, fontSize) / fontSize;
   const rows = text.split('\n').map(text => prepareText(ctx, text, 0, 0, fontSize, width_)).flat();
   canvas.height = (rows.length * fontSize) * lineHeight + margin_[0] + margin_[2];
+
+  ctx.fillStyle = colors.background;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = colors.foreground;
   ctx.textBaseline = 'top';
   ctx.font = font;
   ctx.canvas.style.letterSpacing = `${wordGap}px`;

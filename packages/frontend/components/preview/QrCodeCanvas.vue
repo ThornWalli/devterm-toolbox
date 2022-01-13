@@ -70,8 +70,8 @@ export default {
         this.img.src = url;
       });
     },
-    getColor (opacity) {
-      return `rgb(${this.colors.primary.join(' ')} / ${opacity * 100}%)`;
+    getColor (opacity = 1) {
+      return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
     render () {
       this.error = null;
@@ -100,7 +100,10 @@ export default {
                 break;
             }
             ctx.drawImage(preparedCanvas, x, 0);
-            preparePreview(ctx.canvas, this.colors);
+            preparePreview(ctx.canvas, {
+              background: this.colors.printer.preview.background,
+              foreground: this.colors.printer.preview.foreground
+            });
           } catch (error) {
             this.error = error;
           }

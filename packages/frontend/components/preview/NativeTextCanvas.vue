@@ -73,9 +73,11 @@ export default {
           lineSpace: this.options.lineSpace,
           wordGap: this.options.wordGap,
           margin: this.options.margin,
-          fontFamily: this.font.fontFamily,
-          color: this.getColor(this.options.density / MAX_DENSITY)
-        }, this.width);
+          fontFamily: this.font.fontFamily
+        }, this.width, {
+          background: `rgb(${this.colors.printer.preview.background.join(' ')})`,
+          foreground: this.getColor(this.options.density / MAX_DENSITY)
+        });
 
         this.$el.width = canvas.width;
         this.$el.height = canvas.height;
