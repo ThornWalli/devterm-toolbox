@@ -8,38 +8,71 @@ export const writeHeadline = (text) => {
     { type: 'reset' },
     { type: 'feedPitch', value: { value: 2, type: 'font' } },
     { type: 'setDensity', value: 15 },
-    { type: 'text', value: text },
+    { type: 'nativeText', value: text },
     { type: 'reset' },
     { type: 'feedPitch', value: { value: 2, type: 'font' } }];
 };
 
 export default [
   { type: 'reset' },
+  { type: 'setDensity', value: 1 },
   // { type: 'setAlign', value: ALIGN.CENTER },
-  // {
-  //   type: 'barcode',
-  //   value: {
-  //     text: 'Devterm',
-  //     options: {
-  //       format: '',
-  //       height: 100,
-  //       font: 'monospace',
-  //       textAlign: 'center',
-  //       textPosition: 'bottom',
-  //       textMargin: 2,
-  //       fontSize: 20,
-  //       margin: 10,
-  //       displayValue: true,
-  //       flat: false
-  //     },
-  //     imageOptions: {
-  //       rotate: false,
-  //       flipX: false,
-  //       flipY: false,
-  //       width: null
-  //     }
-  //   }
-  // },
+  {
+    type: 'barcode',
+    value: {
+      text: 'Devterm',
+      options: {
+        format: '',
+        height: 100,
+        font: 'monospace',
+        textAlign: 'center',
+        textPosition: 'bottom',
+        textMargin: 2,
+        fontSize: 20,
+        margin: 10,
+        displayValue: true,
+        flat: false
+      },
+      imageOptions: {
+        rotate: false,
+        flipX: false,
+        flipY: false,
+        width: null
+      }
+    }
+  },
+  {
+    type: 'image',
+    value: {
+      file: devtermUri,
+      imageOptions: {
+        grayscale: true,
+        rotate: false,
+        flipX: false,
+        flipY: false,
+        width: 100
+      }
+    }
+  },
+  { type: 'feedPitch', value: { value: 10, type: 'pixel' } },
+  {
+    type: 'qrCode',
+    value: {
+      text: 'Devterm',
+      options: {
+        errorCorrectionLevel: 'M',
+        margin: 0,
+        scale: 4,
+        small: false
+      },
+      imageOptions: {
+        rotate: false,
+        flipX: false,
+        flipY: false,
+        width: null
+      }
+    }
+  },
 
   { type: 'setFont', value: FONT.SIZE_8_16_THIN_1 },
   {
@@ -47,8 +80,8 @@ export default [
     value: {
       text: 'Sample',
       options: {
-        fontSize: 16,
-        align: 'left',
+        fontSize: 90,
+        align: ALIGN.CENTER,
         lineSpace: 0,
         wordGap: 0,
         margin: 0,

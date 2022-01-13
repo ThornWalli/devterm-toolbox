@@ -49,28 +49,31 @@ export const getCanvasFromUrl = async (dataUrl) => {
   return canvas;
 };
 
-export const preparePreview = (canvas, colors) => {
+export const preparePreview = (canvas, colors, density = 1) => {
   canvas = resizeCanvas(canvas, MAX_DOTS);
   const ctx = canvas.getContext('2d');
 
   const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-  grayscale(imageData.data, [colors.printer.preview.foreground, colors.printer.preview.background]);
+  console.log(parseInt(density * 255));
+  grayscale(imageData.data, [colors.foreground, colors.background], density);
   ctx.putImageData(imageData, 0, 0);
   return canvas;
 };
 
-const grayscale = (data, colors) => {
+const grayscale = (data, colors, density) => {
+  const alpha = parseInt(density * 255);
   for (let i = 0; i < data.length; i += 4) {
     const brightness = ((data[i] + data[i + 1] + data[i + 2]) / 3) / 255;
     if (brightness < 0.6) {
       data[i] = colors[0][0];
       data[i + 1] = colors[0][1];
       data[i + 2] = colors[0][2];
+      data[i + 3] = alpha;
     } else {
       data[i] = colors[1][0];
       data[i + 1] = colors[1][1];
       data[i + 2] = colors[1][2];
+      data[i + 3] = alpha;
     }
   }
 };
