@@ -45,9 +45,6 @@ jobs:
             apt-get install -q -y git sudo curl wget libatomic1 python3.8 python
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
             set -u 
-            
-            
-
             touch .profile
             echo 'export NVM_DIR="$HOME/.nvm"' >> .profile
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
@@ -59,7 +56,9 @@ jobs:
             npm config set user 0
             npm link
             npm set-script postinstall ""
-            npm ci 
+            npm i 
+            
+            
           #--unsafe-perm=true --allow-root  
             
 #           NODE_PATH=`which node`
