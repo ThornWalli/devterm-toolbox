@@ -15,64 +15,96 @@ export const writeHeadline = (text) => {
 
 export default [
   { type: 'reset' },
-  { type: 'setAlign', value: ALIGN.CENTER },
+  // { type: 'setAlign', value: ALIGN.CENTER },
+  // {
+  //   type: 'barcode',
+  //   value: {
+  //     text: 'Devterm',
+  //     options: {
+  //       format: '',
+  //       height: 100,
+  //       font: 'monospace',
+  //       textAlign: 'center',
+  //       textPosition: 'bottom',
+  //       textMargin: 2,
+  //       fontSize: 20,
+  //       margin: 10,
+  //       displayValue: true,
+  //       flat: false
+  //     },
+  //     imageOptions: {
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: null
+  //     }
+  //   }
+  // },
+
+  { type: 'setFont', value: FONT.SIZE_8_16_THIN_1 },
   {
-    type: 'barcode',
+    type: 'text',
     value: {
-      text: 'Devterm',
+      text: 'Sample',
       options: {
-        format: '',
-        height: 100,
-        font: 'monospace',
-        textAlign: 'center',
-        textPosition: 'bottom',
-        textMargin: 2,
-        fontSize: 20,
-        margin: 10,
-        displayValue: true,
-        flat: false
-      },
-      imageOptions: {
-        rotate: false,
-        flipX: false,
-        flipY: false,
-        width: null
-      }
-    }
-  },
-  { type: 'feedPitch', value: { value: 2, type: 'font' } },
-  {
-    type: 'qrCode',
-    value: {
-      text: 'Devterm',
-      options: {
-        errorCorrectionLevel: 'M',
+        fontSize: 16,
+        align: 'left',
+        lineSpace: 0,
+        wordGap: 0,
         margin: 0,
-        scale: 4,
-        small: false
-      },
-      imageOptions: {
-        rotate: false,
-        flipX: false,
-        flipY: false,
-        width: null
+        fontFamily: 'Arial',
+        color: 0
       }
     }
   },
-  { type: 'feedPitch', value: { value: 2, type: 'font' } },
-  {
-    type: 'image',
-    value: {
-      file: devtermUri,
-      imageOptions: {
-        grayscale: true,
-        rotate: false,
-        flipX: false,
-        flipY: false,
-        width: 100
-      }
-    }
-  },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
+  // { type: 'setFont', value: FONT.SIZE_8_16_THIN_2 },
+  // { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci' },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
+  // { type: 'setFont', value: FONT.SIZE_5_7 },
+  // { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci' },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
+  // { type: 'setFont', value: FONT.SIZE_6_12 },
+  // { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci' },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
+  // { type: 'setFont', value: FONT.SIZE_7_14 },
+  // { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci' },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
+
+  { type: 'feedPitch', value: { value: 15, type: 'font' } }
+  // {
+  //   type: 'qrCode',
+  //   value: {
+  //     text: 'Devterm',
+  //     options: {
+  //       errorCorrectionLevel: 'M',
+  //       margin: 0,
+  //       scale: 4,
+  //       small: false
+  //     },
+  //     imageOptions: {
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: null
+  //     }
+  //   }
+  // },
+  // { type: 'feedPitch', value: { value: 10, type: 'font' } },
+  // { type: 'feedPitch', value: { value: 2, type: 'font' } },
+  // {
+  //   type: 'image',
+  //   value: {
+  //     file: devtermUri,
+  //     imageOptions: {
+  //       grayscale: true,
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: 100
+  //     }
+  //   }
+  // },
   // // { type: 'reset' },
   // // { type: 'cutLine' },
 
@@ -87,8 +119,8 @@ export default [
 
   // ...writeHeadline('Align:'),
 
-  { type: 'setAlign', value: ALIGN.LEFT },
-  { type: 'text', value: 'Left' }
+  // { type: 'setAlign', value: ALIGN.LEFT },
+  // { type: 'text', value: 'Left' }
   // { type: 'setAlign', value: ALIGN.CENTER },
   // { type: 'text', value: 'Center' },
   // { type: 'setAlign', value: ALIGN.RIGHT },

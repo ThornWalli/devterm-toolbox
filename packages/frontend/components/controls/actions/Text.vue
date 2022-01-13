@@ -1,44 +1,159 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Text" class="action-dialog-text" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Text"
+    class="action-dialog-text"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
-      <input-text-box
-        class="input"
-        placeholder="Enter Text"
-        :label="null"
-        :value="value"
-        rows="10"
-        @input="onInput"
-      />
-      <div class="footer">
-        <span>Rows: <span>{{ value.split('\n').length }}; Count: {{ value.length }}</span></span>
-      </div>
+      <app-tab-container class="tab-container">
+        <template #general="options">
+          <base-tab-container-content v-bind="options" title="General">
+            <input-text-box
+              v-model="model.text"
+              class="input"
+              placeholder="Enter Text"
+              :label="null"
+              rows="10"
+            />
+            <div class="footer">
+              <span>Rows: <span>{{ model.text.split('\n').length }}; Count: {{ model.text.length }}</span></span>
+            </div>
+          </base-tab-container-content>
+        </template>
+        <template #options="options">
+          <base-tab-container-content v-bind="options" title="Options">
+            <input-drop-down v-model="model.options.fontFamily" label="Family" :options="fontOptions" @input="onInputFontFamily" />
+            <input-drop-down v-model="variant" label="Variante" :options="variantOptions" @input="onInputVariante" />
+            <input-drop-down
+              v-model="model.options.align"
+              label="Align"
+              :options="alignOptions"
+              @input="model.options.align = Number($event)"
+            />
+            <input-text-field
+              step="1"
+              min="0"
+              type="number"
+              :value="model.options.fontSize"
+              label="Font Size"
+              @input="model.options.fontSize = $event || 0"
+            />
+            <input-text-field
+              step="1"
+              min="0"
+              type="number"
+              :value="model.options.wordGap"
+              label="Word Gap"
+              @input="model.options.wordGap = $event || 0"
+            />
+            <input-text-field
+              step="1"
+              min="0"
+              type="number"
+              :value="model.options.lineSpace"
+              label="Line Space"
+              @input="model.options.lineSpace = $event || 0"
+            />
+          </base-tab-container-content>
+        </template>
+      </app-tab-container>
     </template>
   </action-dialog>
 </template>
 
 <script>
+import { ALIGN } from 'devterm/config';
+import { DropDownOptionDescription } from '../../base/DropDown.vue';
 import ActionDialog from '../../controls/ActionDialog.vue';
+import AppTabContainer from '../../app/TabContainer.vue';
+import BaseTabContainerContent from '../../base/tabContainer/Content.vue';
 import InputTextBox from '../../inputs/TextBox.vue';
+import InputTextField from '../../inputs/TextField.vue';
+import InputDropDown from '../../inputs/DropDown.vue';
 import MixinDialog from '../../../mixins/Dialog.vue';
+import { getDefaultTextOptions } from '../../../utils/action';
 
 export default {
-  components: { ActionDialog, InputTextBox },
+  components: {
+    ActionDialog,
+    AppTabContainer,
+    BaseTabContainerContent,
+    InputTextBox,
+    InputTextField,
+    InputDropDown
+  },
   mixins: [MixinDialog],
   inheritAttrs: false,
   props: {
     value: {
-      type: String,
-      default: ''
+      type: Object,
+      default () {
+        return getDefaultTextOptions();
+      }
     }
   },
   data () {
+    const fonts = this.$config.fonts;
     return {
-      label: 'Select align'
+      variant: null,
+      fonts,
+      updateTimeout: null,
+      model: { ...this.value },
+      alignOptions: [
+        ['Left', ALIGN.LEFT],
+        ['Center', ALIGN.CENTER],
+        ['Right', ALIGN.RIGHT]
+      ].map(([title, value]) => new DropDownOptionDescription({ title, value: String(value) })),
+      fontOptions: [{ title: 'Select Font', value: '' }].concat(this.$config.fonts.map(font => new DropDownOptionDescription(font.name)))
     };
   },
+  computed: {
+    currentFont () {
+      return this.$config.fonts.find(font => font.name === this.model.options.fontFamily);
+    },
+    variantOptions () {
+      if (this.currentFont) {
+        return this.currentFont.variants.map(({ weight, italic }, index) => new DropDownOptionDescription({
+          title: String(weight),
+          group: italic ? 'Iatlic' : 'Normal',
+          value: index
+        }));
+      }
+      return [];
+    }
+  },
+  watch: {
+    variant (variant) {
+      const {
+        weight,
+        italic
+      } = this.currentFont.variants[Number(variant)];
+      this.model.options = { ...this.model.options, weight, italic };
+    },
+    model: {
+      handler () {
+        window.clearTimeout(this.updateTimeout);
+        this.updateTimeout = window.setTimeout(() => {
+          this.$emit('input', { ...this.model });
+        }, 500);
+      },
+      deep: true
+    }
+  },
   methods: {
+    onInputFontFamily () {
+      this.variant = 0;
+    },
+    onInputVariante () {},
     onInput (e) {
       this.$emit('input', e);
+    },
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
     }
   }
 };

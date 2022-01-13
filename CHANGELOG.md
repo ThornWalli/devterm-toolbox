@@ -1,5 +1,41 @@
 # Project Changelog
 
+# [1.0.0-beta.16](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-01-13)
+
+
+### Bug Fixes
+
+* **app:** add native-text action: update text action ([83e36ac](https://github.com/ThornWalli/devterm-toolbox/commit/83e36ac471aa82498e71c77a470af014c777cfa2))
+
+# [1.0.0-beta.15](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-01-12)
+
+
+### Bug Fixes
+
+* **frontend:** update devterm dep ([563b6a3](https://github.com/ThornWalli/devterm-toolbox/commit/563b6a344a34eec67a63a5c480ce82bba7fb49b5))
+
+# [1.0.0-beta.14](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-01-11)
+
+
+### Bug Fixes
+
+* **devterm:** update package ([0505002](https://github.com/ThornWalli/devterm-toolbox/commit/0505002d2d660fc455fe0e1146462832f330837c))
+
+# [1.0.0-beta.13](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-01-11)
+
+
+### Bug Fixes
+
+* **app:** improve file select ([3c6a01f](https://github.com/ThornWalli/devterm-toolbox/commit/3c6a01f5067dfc04deda47f80aa73d647b3f2102))
+
+# [1.0.0-beta.12](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-01-11)
+
+
+### Bug Fixes
+
+* **server:** fix serialport open ([702dee9](https://github.com/ThornWalli/devterm-toolbox/commit/702dee993dd1b9c8930c97444100d41ba74ead83))
+* **server:** self cert ([c544c0c](https://github.com/ThornWalli/devterm-toolbox/commit/c544c0ca46708200f901adbf2c3821e316149976))
+
 # [1.0.0-beta.11](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-01-10)
 
 

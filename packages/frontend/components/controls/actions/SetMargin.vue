@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Set Margin" class="action-set-margin" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Set Margin"
+    class="action-set-margin"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-text-field
         step="0.01"
@@ -34,6 +41,12 @@ export default {
     return {
       label: 'Set Margin'
     };
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
+    }
   }
 };
 </script>

@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Set Density" class="action-set-density" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Set Density"
+    class="action-set-density"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-dropdown :label="label" :options="options" :value="value" @input="$emit('input', $event)" />
     </template>
@@ -27,6 +34,12 @@ export default {
       label: 'Set Density',
       options: Array(15).fill('').map((v, index) => new DropDownOptionDescription(String(index + 1)))
     };
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
+    }
   }
 };
 </script>

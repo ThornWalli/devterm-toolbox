@@ -44,9 +44,9 @@
         </template>
         <template #ssl="options">
           <base-tab-container-content v-bind="options" title="SSL">
-            <input-file-select label="Key" :accept="['.key', '.pem']" :value="ssl.key" @input="ssl.key = $event.path" />
-            <input-file-select label="Cert" :accept="['.cert','.crt', '.pem']" :value="ssl.cert" @input="ssl.cert = $event.path" />
-            <input-file-select label="PFX" :accept="['.pfx']" :value="ssl.pfx" @input="ssl.pfx = $event.path" />
+            <input-file-select label="Key" :accept="['.key', '.pem']" :value="ssl.key" @input="ssl.key = $event ? $event.path : null" />
+            <input-file-select label="Cert" :accept="['.cert','.crt', '.pem']" :value="ssl.cert" @input="ssl.cert = $event ? $event.path : null" />
+            <input-file-select label="PFX" :accept="['.pfx']" :value="ssl.pfx" @input="ssl.pfx = $event ? $event.path : null" />
             <input-text-field v-model="ssl.passphrase" placeholder="Passphrase" label="Passphrase" />
           </base-tab-container-content>
         </template>

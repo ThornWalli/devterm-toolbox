@@ -1,3 +1,4 @@
+import { selectFiles } from './dom';
 
 export const registerClient = (client) => {
   if (isElectron()) {
@@ -48,15 +49,13 @@ export const templateSave = (template) => {
   }
 };
 
-export const templateLoad = () => {
+export const templateLoad = async () => {
   if (isElectron()) {
     return window.electron.ipcRenderer.invoke('load');
   } else {
+    const files = await selectFiles('text', ['application/json']);
     return new Promise((resolve, reject) => {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.click();
-      input.addEventListener('change', ({ target }) => {
+      if (files.length) {
         const reader = new FileReader();
         reader.addEventListener('load', () => {
           try {
@@ -65,9 +64,10 @@ export const templateLoad = () => {
             reject(error);
           }
         });
-        reader.readAsText(target.files[0]);
-        input.remove();
-      });
+        reader.readAsText(files[0]);
+      } else {
+        resolve();
+      }
     });
   }
 };
@@ -116,6 +116,39 @@ export const getVersion = () => {
   } else {
     // eslint-disable-next-line no-undef
     return __VERSION__;
+  }
+};
+
+export const getFonts = () => {
+  if (isElectron()) {
+    return window.electron.ipcRenderer.invoke('getFonts');
+  } else {
+    const generateDefaults = () => {
+      const variants = [];
+      const italics = [false, true];
+      const weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+      for (let x = 0; x < italics.length; x++) {
+        for (let y = 0; y < weights.length; y++) {
+          variants.push({ weight: weights[y], italic: italics[x] });
+        }
+      }
+      return variants;
+    };
+    const variants = generateDefaults();
+    return [
+      { family: 'Arial', monospace: false, variants },
+      { family: 'Verdana ', monospace: false, variants },
+      { family: 'Helvetica ', monospace: false, variants },
+      { family: 'Tahoma ', monospace: false, variants },
+      { family: 'Trebuchet MS ', monospace: false, variants },
+      { family: 'Times New Roman ', monospace: false, variants },
+      { family: 'Georgia ', monospace: false, variants },
+      { family: 'Garamond ', monospace: false, variants },
+      { family: 'Courier New ', monospace: true, variants },
+      { family: 'Brush Script MT ', monospace: false, variants },
+      { family: 'sans-serif', monospace: false, variants },
+      { family: 'monospace ', monospace: true, variants }
+    ];
   }
 };
 

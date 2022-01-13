@@ -1,6 +1,6 @@
-import { ALIGN, FONT } from 'devterm/config';
+import { ALIGN, FONT, IMAGE_MAX } from 'devterm/config';
 import { getQRCode, getBarcode } from 'devterm/utils/canvas';
-import { getCanvasFromUrl, getBuffersFromCanvas } from '../canvas';
+import { getCanvasFromUrl, getBuffersFromCanvas, drawText } from '../canvas';
 
 export default {
   cutLine: {
@@ -27,7 +27,9 @@ export default {
     }),
     beforePrinterCommand: async (action) => {
       const { text, options, imageOptions } = action.value;
-      const canvas = await getQRCode(text || 'empty', options || {});
+      const qrCodeOptions = { ...options };
+      qrCodeOptions.width = options.width || imageOptions.width;
+      const canvas = await getQRCode(text || 'empty', qrCodeOptions);
       action.value = await getBuffersFromCanvas(canvas, imageOptions);
       return action;
     }
@@ -45,6 +47,18 @@ export default {
   text: {
     display: value => ({
       title: 'Text',
+      value: `${value.text.slice(0, 16)}…`
+    }),
+    beforePrinterCommand: async (action) => {
+      const { text, options } = action.value;
+      const canvas = await drawText(text || 'empty', options || {}, IMAGE_MAX);
+      action.value = await getBuffersFromCanvas(canvas);
+      return action;
+    }
+  },
+  nativeText: {
+    display: value => ({
+      title: 'Native Text',
       value: `${value.slice(0, 16)}…`
     })
   },

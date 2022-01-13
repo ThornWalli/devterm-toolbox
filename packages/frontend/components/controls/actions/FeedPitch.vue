@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="Feed Pitch" class="action-dialog-feed-pitch" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="Feed Pitch"
+    class="action-dialog-feed-pitch"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-dropdown
         v-model="model.type"
@@ -58,6 +65,12 @@ export default {
         this.$emit('input', this.model);
       },
       deep: true
+    }
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
     }
   }
 };

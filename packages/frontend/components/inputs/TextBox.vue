@@ -29,15 +29,9 @@ export default {
       default: ''
     }
   },
-  data () {
-    return { inputTimeout: null };
-  },
   methods: {
     onInput (e) {
-      window.clearTimeout(this.inputTimeout);
-      this.inputTimeout = window.setTimeout(() => {
-        this.$emit('input', e.target.value);
-      }, 300);
+      this.$emit('input', e.target.value);
     }
   }
 

@@ -87,7 +87,7 @@ class Server extends Events {
       this.port = port || this.port;
       this.server.listen(port, async () => {
         try {
-          !this.disabled && await this.printer.connect();
+          if (!this.disabled && !this.printer.connected) { await this.printer.connect(); }
           this.active = true;
           console.log(`listening on \`*:${port}\`${Object.entries(this.ssl).filter(([, v]) => Boolean(v)).length && ' (ssl)'}`);
           this.emit('start', this);
@@ -138,8 +138,6 @@ const onSocketExecuteActions = (printer, disabled) => async (actions) => {
 
   if (disabled) {
     console.log('Printer not found, serivce is disabled!');
-
-    console.log(actions.find(action => action.type === 'image'));
   } else {
     await preparedActions.reduce((result, command) => result.then(() => command(printer)), Promise.resolve());
   }

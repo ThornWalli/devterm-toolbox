@@ -28,15 +28,6 @@
 
 <script>
 
-/**
- * TabContainer
- * - Tab ausprägung kann über einen Slot bearbeitet werden (slot: tab)
- * - Pflege der Inhalte per Template Tag
- *   - Tab Titel wird per Content Container definiert
- * - Ein-/Ausblenden der Content Container (transition in-out with key)
- * - automatische anpassung der Höhe beim Content wechsel
- */
-
 const IGNORED_SLOTS = ['tab'];
 
 export default {

@@ -282,6 +282,7 @@ export default {
 
   async  mounted () {
     await loadFonts();
+
     await this.$config.init();
     await this.$server.init();
 

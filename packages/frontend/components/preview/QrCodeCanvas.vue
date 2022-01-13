@@ -79,7 +79,8 @@ export default {
         const ctx = this.$refs.canvas.getContext('2d');
         window.requestAnimationFrame(async () => {
           try {
-            const preparedCanvas = prepareCanvasForPrint(await getQRCode(this.value.text || 'empty', this.value.options || {}), this.value.imageOptions);
+            const qrCodeWidth = this.value.options?.width || this.value.imageOptions?.width;
+            const preparedCanvas = prepareCanvasForPrint(await getQRCode(this.value.text || 'empty', { ...(this.value.options || {}), width: qrCodeWidth }), this.value.imageOptions);
 
             ctx.canvas.width = this.width;
             ctx.canvas.height = preparedCanvas.height;

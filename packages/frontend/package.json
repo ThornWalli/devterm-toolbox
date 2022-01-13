@@ -1,6 +1,6 @@
 {
   "name": "@devterm-toolbox/frontend",
-  "version": "1.0.0-beta.11",
+  "version": "1.0.0-beta.16",
   "private": true,
   "description": "Frontend Stuff",
   "license": "MIT",
@@ -11,6 +11,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "devterm": "^1.0.0-beta.6"
+    "buffer": "^6.0.3",
+    "devterm": "^1.0.0-beta.12"
   }
 }

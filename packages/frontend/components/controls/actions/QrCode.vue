@@ -1,5 +1,12 @@
 <template>
-  <action-dialog v-bind="$attrs" title="QR Code" class="action-dialog-qr-code" v-on="Object.assign({}, $listeners, {input:[]})">
+  <action-dialog
+    v-bind="$attrs"
+    title="QR Code"
+    class="action-dialog-qr-code"
+    form
+    v-on="Object.assign({}, $listeners, {input:[]})"
+    @submit="onSubmit"
+  >
     <template #default>
       <input-text-box v-model="model.text" label="Text" baseline-label />
       <hr>
@@ -106,6 +113,12 @@ export default {
         }, 500);
       },
       deep: true
+    }
+  },
+  methods: {
+    onSubmit (e) {
+      e.preventDefault();
+      this.close();
     }
   }
 };
