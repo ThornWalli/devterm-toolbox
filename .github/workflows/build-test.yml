@@ -51,12 +51,12 @@ jobs:
             source .profile
           run: |
             source /.profile
-            nvm use
+            sudo nvm use
             export HUSKY=0
-            npm config set user 0
-            npm set-script postinstall ""
-            npm link
-            npm ci
+            sudo npm config set user 0
+            sudo npm set-script postinstall ""
+            sudo npm link
+            sudo npm ci --unsafe-perm=true --allow-root
             
             
           #--unsafe-perm=true --allow-root  
