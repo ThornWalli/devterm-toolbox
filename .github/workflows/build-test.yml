@@ -59,7 +59,8 @@ jobs:
             npm config set user 0
             npm link
             npm set-script postinstall ""
-            npm ci --unsafe-perm=true --allow-root  
+            npm ci 
+          #--unsafe-perm=true --allow-root  
             
 #           NODE_PATH=`which node`
 #           NPM_PATH=`which npm`
