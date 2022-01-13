@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.16](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-01-13)
+
+
+### Bug Fixes
+
+* **app:** add native-text action: update text action ([83e36ac](https://github.com/ThornWalli/devterm-toolbox/commit/83e36ac471aa82498e71c77a470af014c777cfa2))
+
 # [1.0.0-beta.15](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-01-12)
 
 
