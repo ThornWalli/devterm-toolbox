@@ -51,7 +51,6 @@ jobs:
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
             source .profile
           run: |
-            su root
             source /.profile
             
             nvm use
@@ -59,6 +58,7 @@ jobs:
             npm -g config set user root
             npm config set user root
             npm set-script postinstall ""
+            sudo chmod 755 /usr/bin/node
             npm ci --unsafe-perm=true --allow-root
             
             
