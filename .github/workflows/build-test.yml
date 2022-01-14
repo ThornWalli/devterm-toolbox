@@ -51,7 +51,7 @@ jobs:
             source .profile
           run: |
             sudo -s
-            source /.profile
+#           source /.profile
 #           sudo nvm use
 #           export HUSKY=0
 #           sudo npm config set user 0
