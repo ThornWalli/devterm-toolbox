@@ -51,9 +51,6 @@ jobs:
             node -v or node –version
             npm -v or npm –version
             
-            sudo mkdir /tmp/.node-gyp
-            sudo chown -R 755 /tmp/.node-gyp
-            
             
 #           sudo mkdir /root/.npm
 #           sudo chown -R 755 /root/.npm
@@ -68,9 +65,6 @@ jobs:
             sudo mkdir ~/.npm
             sudo chown -R $(whoami) ~/.npm
             
-            sudo mkdir /tmp/.node-gyp/16.13.2
-            sudo chown -R 755 /tmp/.node-gyp/16.13.2
-            
 
 
 
@@ -80,6 +74,12 @@ jobs:
           
             npm i serialport electron-builder
             electron-builder install-app-deps && npm run rebuild --unsafe-perm
+
+#       sudo mkdir /tmp/.node-gyp/16.13.2
+#       sudo chown -R 755 /tmp/.node-gyp/16.13.2
+
+#       sudo mkdir /tmp/.node-gyp
+#       sudo chown -R 755 /tmp/.node-gyp
 #           npm -g config set unsafe-perm true
 #           npm config set unsafe-perm true
 #           npm -g config set user root
