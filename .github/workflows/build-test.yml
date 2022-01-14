@@ -58,6 +58,12 @@ jobs:
 #           echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
 #           source .profile
           run: |
+            npm config set unsafe-perm true
+            npm -g config set user root
+            npm config set user root
+            npm set-script postinstall ""
+            sudo chmod 755 /usr/bin/node
+            sudo chmod 755 /root/.npm
             npm i serialport electron-builder
             electron-builder install-app-deps && npm run rebuild
 #           npm config set unsafe-perm true
@@ -65,6 +71,8 @@ jobs:
 #           npm config set user root
 #           npm set-script postinstall ""
 #           sudo chmod 755 /usr/bin/node
+#           sudo chmod 755 /root/.npm
+
 #           sudo mkdir /tmp/.node-gyp
 #           sudo chown -R $(whoami) /tmp/.node-gyp
 #           npm ci --unsafe-perm
