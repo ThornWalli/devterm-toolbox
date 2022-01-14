@@ -54,10 +54,6 @@ jobs:
             sudo mkdir /tmp/.node-gyp
             sudo chown -R 755 /tmp/.node-gyp
             
-            npm -g config set unsafe-perm true
-            npm config set unsafe-perm true
-            npm -g config set user root
-            npm config set user root
             
 #           sudo mkdir /root/.npm
 #           sudo chown -R 755 /root/.npm
@@ -79,6 +75,10 @@ jobs:
           
             npm i serialport electron-builder
             electron-builder install-app-deps && npm run rebuild
+#           npm -g config set unsafe-perm true
+#           npm config set unsafe-perm true
+#           npm -g config set user root
+#           npm config set user root
 #           npm config set unsafe-perm true
 #           npm -g config set user root
 #           npm config set user root
