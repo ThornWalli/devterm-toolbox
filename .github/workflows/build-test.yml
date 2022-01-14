@@ -61,7 +61,6 @@ jobs:
             npm config set unsafe-perm true
             npm -g config set user root
             npm config set user root
-            npm set-script postinstall ""
             sudo chmod 755 /usr/bin/node
             sudo chmod 755 /root/.npm
             npm i serialport electron-builder
