@@ -44,22 +44,28 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget libatomic1 python3.8 python
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-            set -u 
-            touch .profile
-            echo 'export NVM_DIR="$HOME/.nvm"' >> .profile
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
-            source .profile
-          run: |
-            source /.profile
+            curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash –
+            sudo apt-get install nodejs
             
-            nvm use
+            node -v or node –version
+            npm -v or npm –version
+            
+#           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+#           set -u 
+#           touch .profile
+#           echo 'export NVM_DIR="$HOME/.nvm"' >> .profile
+#           echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
+#           source .profile
+          run: |
             npm config set unsafe-perm true
             npm -g config set user root
             npm config set user root
             npm set-script postinstall ""
             sudo chmod 755 /usr/bin/node
             npm ci --unsafe-perm=true --allow-root
+#           source /.profile
+            
+#           nvm use
             
             
 #           sudo su - 
