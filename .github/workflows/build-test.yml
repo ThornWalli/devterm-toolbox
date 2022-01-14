@@ -58,7 +58,8 @@ jobs:
 #           echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
 #           source .profile
           run: |
-            npm serialport
+            npm i serialport electron-builder
+            electron-builder install-app-deps && npm run rebuild
 #           npm config set unsafe-perm true
 #           npm -g config set user root
 #           npm config set user root
