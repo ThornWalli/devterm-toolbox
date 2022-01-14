@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-18.04
     name: Build on ubuntu-18.04 armv7
     steps:
-      - uses: actions/checkout@v2.1.0
+      #- uses: actions/checkout@v2.1.0
           
       - uses: uraimo/run-on-arch-action@v2.1.1
         name: Run commands
@@ -58,14 +58,15 @@ jobs:
 #           echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
 #           source .profile
           run: |
-            npm config set unsafe-perm true
-            npm -g config set user root
-            npm config set user root
-            npm set-script postinstall ""
-            sudo chmod 755 /usr/bin/node
-            sudo mkdir /tmp/.node-gyp
-            sudo chmod 755 /tmp/.node-gyp
-            npm ci --unsafe-perm
+            npm serialport
+#           npm config set unsafe-perm true
+#           npm -g config set user root
+#           npm config set user root
+#           npm set-script postinstall ""
+#           sudo chmod 755 /usr/bin/node
+#           sudo mkdir /tmp/.node-gyp
+#           sudo chown -R $(whoami) /tmp/.node-gyp
+#           npm ci --unsafe-perm
 #           source /.profile =true --allow-root
             
 #           nvm use
