@@ -11,9 +11,7 @@ jobs:
     name: Build on ubuntu-18.04 armv7
     steps:
       - uses: actions/checkout@v2.1.0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.13.0
+          
       - uses: uraimo/run-on-arch-action@v2.1.1
         name: Run commands
         id: runcmd
@@ -58,7 +56,8 @@ jobs:
             
             nvm use
             
-            npm config set user 0
+            npm -g config set user root
+            npm config set user root
             npm set-script postinstall ""
             npm ci --unsafe-perm=true --allow-root
             
