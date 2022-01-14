@@ -71,10 +71,9 @@ jobs:
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
-            source ~/.profile
           
             npm i serialport electron-builder
-            electron-builder install-app-deps && npm run rebuild
+            electron-builder install-app-deps && npm run rebuild --unsafe-perm
 #           npm -g config set unsafe-perm true
 #           npm config set unsafe-perm true
 #           npm -g config set user root
