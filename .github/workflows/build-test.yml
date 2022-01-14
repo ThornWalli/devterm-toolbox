@@ -74,7 +74,6 @@ jobs:
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
-            sudo chown -R [owner]:[owner] /home/runner/work/devterm-toolbox/devterm-toolbox/node_modules/
             npm i electron --unsafe-perm=true --allow-root
 #           npm ci
 #             npm i serialport electron-rebuild
