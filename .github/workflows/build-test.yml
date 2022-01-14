@@ -66,8 +66,9 @@ jobs:
             sudo mkdir ~/.npm
             sudo chown -R $(whoami) ~/.npm
             sudo mkdir -p /root/.cache/electron/
-            sudo chmod -R 777 /root/.cache/electron/
+            sudo chown -R $(whoami) /root/.cache/
             
+            sudo chown -R $(whoami) /home/runner/work/devterm-toolbox/devterm-toolbox/node_modules
 
 
             mkdir ~/.npm-cache
