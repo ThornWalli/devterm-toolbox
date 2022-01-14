@@ -53,14 +53,14 @@ jobs:
             
             sudo mkdir /tmp/.node-gyp
             sudo chown -R 755 /tmp/.node-gyp
-            sudo mkdir /root/.npm
-            sudo chown -R 755 /root/.npm
             
             npm -g config set unsafe-perm true
             npm config set unsafe-perm true
             npm -g config set user root
             npm config set user root
             
+#           sudo mkdir /root/.npm
+#           sudo chown -R 755 /root/.npm
 #           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 #           set -u 
 #           touch .profile
