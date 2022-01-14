@@ -73,8 +73,8 @@ jobs:
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
           
-            npm i serialport electron-builder
-            electron-builder install-app-deps && npm run rebuild --unsafe-perm
+            npm i serialport electron-rebuild
+            node node_modules/.bin/electron-rebuild -f -w serialport
 
 #       sudo mkdir /tmp/.node-gyp/16.13.2
 #       sudo chown -R 755 /tmp/.node-gyp/16.13.2
