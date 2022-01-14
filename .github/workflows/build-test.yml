@@ -42,7 +42,7 @@ jobs:
 
           install: |
             apt-get update -q -y
-            apt-get install -q -y git sudo su-exec curl wget libatomic1 python3.8 python
+            apt-get install -q -y git sudo curl wget libatomic1 python3.8 python
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
             set -u 
             touch .profile
@@ -50,7 +50,7 @@ jobs:
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
             source .profile
           run: |
-            sudo su
+            sudo su - 
 #           sudo -s
 #           source /.profile
 #           sudo nvm use
