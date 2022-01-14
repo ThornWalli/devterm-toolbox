@@ -51,10 +51,10 @@ jobs:
             source .profile
           run: |
             sudo -s source /.profile
-            nvm use
-            npm config set user 0
-            npm set-script postinstall ""
-            npm ci --unsafe-perm=true --allow-root
+            sudo -s nvm use
+            sudo -s npm config set user 0
+            sudo -s npm set-script postinstall ""
+            sudo -s npm ci --unsafe-perm=true --allow-root
 #           sudo su - 
     #           sudo -s
 #           sudo nvm use
