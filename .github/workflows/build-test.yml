@@ -67,6 +67,12 @@ jobs:
           
             sudo mkdir ~/.npm
             sudo chown -R $(whoami) ~/.npm
+            
+            sudo mkdir /tmp/.node-gyp/16.13.2
+            sudo chown -R 755 /tmp/.node-gyp/16.13.2
+            
+
+
 
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
