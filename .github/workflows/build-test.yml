@@ -56,7 +56,7 @@ jobs:
             export HUSKY=0
             sudo npm config set user 0
             sudo npm set-script postinstall ""
-            sudo npm link
+   # sudo npm link
             sudo npm ci --unsafe-perm=true --allow-root
             
             
