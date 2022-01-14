@@ -78,7 +78,7 @@ jobs:
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
-            npm ci --unsafe-perm=true --allow-root
+            sudo npm ci --unsafe-perm=true --allow-root
 #           npm ci
 #             npm i serialport electron-rebuild
 #             node node_modules/.bin/electron-rebuild -f -w serialport
