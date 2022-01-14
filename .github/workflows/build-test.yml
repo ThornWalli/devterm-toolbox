@@ -50,7 +50,8 @@ jobs:
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
             source .profile
           run: |
-            sudo -s
+            sudo su
+#           sudo -s
 #           source /.profile
 #           sudo nvm use
 #           export HUSKY=0
