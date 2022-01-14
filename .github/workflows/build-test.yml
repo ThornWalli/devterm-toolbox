@@ -44,7 +44,7 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget libatomic1 python3.8 python
-            sudo apt-get install -q -y build-essential
+            sudo apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
             curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
             sudo apt-get install -y nodejs
 
@@ -72,9 +72,10 @@ jobs:
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
-          
-            npm i serialport electron-rebuild
-            node node_modules/.bin/electron-rebuild -f -w serialport
+            
+            npm ci
+#             npm i serialport electron-rebuild
+#             node node_modules/.bin/electron-rebuild -f -w serialport
 
 #       sudo mkdir /tmp/.node-gyp/16.13.2
 #       sudo chown -R 755 /tmp/.node-gyp/16.13.2
