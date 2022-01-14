@@ -65,7 +65,7 @@ jobs:
 #           source .profile
           run: |
           
-            sudo mkkir ~/.npm
+            sudo mkdir ~/.npm
             sudo chown -R $(whoami) ~/.npm
 
             mkdir ~/.npm-global
