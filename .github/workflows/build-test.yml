@@ -44,6 +44,7 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget libatomic1 python3.8 python
+            sudo apt-get install -q -y build-essential
             curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
             sudo apt-get install -y nodejs
 
