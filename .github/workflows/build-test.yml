@@ -63,7 +63,7 @@ jobs:
             npm config set user root
             npm set-script postinstall ""
             sudo chmod 755 /usr/bin/node
-            sudo mdir /tmp/.node-gyp
+            sudo mkdir /tmp/.node-gyp
             sudo chmod 755 /tmp/.node-gyp
             npm ci --unsafe-perm
 #           source /.profile =true --allow-root
