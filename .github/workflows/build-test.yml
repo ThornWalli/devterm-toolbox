@@ -65,7 +65,7 @@ jobs:
           
             sudo mkdir ~/.npm
             sudo chown -R $(whoami) ~/.npm
-            sudo mkdir /root/.cache/electron/
+            sudo mkdir -p /root/.cache/electron/
             sudo chown -R $(whoami) /root/.cache/electron/
             
 
