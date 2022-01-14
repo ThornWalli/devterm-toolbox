@@ -51,11 +51,11 @@ jobs:
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
             source .profile
           run: |
-            
+            su root
             source /.profile
             
             nvm use
-            
+            npm config set unsafe-perm true
             npm -g config set user root
             npm config set user root
             npm set-script postinstall ""
