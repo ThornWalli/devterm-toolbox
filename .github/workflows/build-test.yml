@@ -61,8 +61,10 @@ jobs:
             npm config set unsafe-perm true
             npm -g config set user root
             npm config set user root
-            sudo chmod 755 /usr/bin/node
-            sudo chmod 755 /root/.npm
+            sudo mkdir /tmp/.node-gyp
+            sudo chown -R $(whoami) /tmp/.node-gyp
+            sudo mkdir /root/.npm
+            sudo chown -R $(whoami) /root/.npm
             npm i serialport electron-builder
             electron-builder install-app-deps && npm run rebuild
 #           npm config set unsafe-perm true
