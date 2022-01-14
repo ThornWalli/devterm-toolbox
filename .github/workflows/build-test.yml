@@ -51,6 +51,16 @@ jobs:
             node -v or node –version
             npm -v or npm –version
             
+            sudo mkdir /tmp/.node-gyp
+            sudo chown -R 755 /tmp/.node-gyp
+            sudo mkdir /root/.npm
+            sudo chown -R 755 /root/.npm
+            
+            npm -g config set unsafe-perm true
+            npm config set unsafe-perm true
+            npm -g config set user root
+            npm config set user root
+            
 #           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 #           set -u 
 #           touch .profile
@@ -58,13 +68,6 @@ jobs:
 #           echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
 #           source .profile
           run: |
-            sudo mkdir /tmp/.node-gyp
-            sudo chown -R $(whoami) /tmp/.node-gyp
-            sudo mkdir /root/.npm
-            sudo chown -R $(whoami) /root/.npm
-            npm config set unsafe-perm true
-            npm -g config set user root
-            npm config set user root
             npm i serialport electron-builder
             electron-builder install-app-deps && npm run rebuild
 #           npm config set unsafe-perm true
