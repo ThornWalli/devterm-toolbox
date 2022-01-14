@@ -70,7 +70,9 @@ jobs:
             
 
 
-
+            mkdir ~/.npm-cache
+            npm config set cache '~/.npm-cache'
+            
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
