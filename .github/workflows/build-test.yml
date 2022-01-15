@@ -62,8 +62,9 @@ jobs:
             echo $HOME
             
             
-            sudo mkdir -p $HOME/.cache/electron/
-            sudo chown -R $(whoami) $HOME/.cache/
+            mkdir $HOME/.npm-cache
+            sudo chown -R $(whoami) $HOME/.npm-cache
+            npm config set cache $HOME/.npm-cache
             
             npm i electron devterm
 #           npm ci
