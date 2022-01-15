@@ -66,6 +66,12 @@ jobs:
             sudo mkdir -p /root/.cache/electron/
             sudo chown -R $(whoami) /root/.cache/
             
+            
+            sudo mkdir -p /root/.node-gyp/
+            sudo chown -R $(whoami) /root/.node-gyp/
+            
+            ~/.node-gyp
+            
             sudo mkdir ./node_modules
             sudo chown -R $(whoami) ./node_modules
             
