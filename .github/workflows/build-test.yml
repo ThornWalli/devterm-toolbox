@@ -93,7 +93,7 @@ jobs:
             sudo chown -R $(whoami) /root/.cache/
             
             sudo chown -R $(whoami) ./node_modules
-            npm run electron-rebuild --workspace=@devterm-toolbox/electron
+            sudo npm run electron-rebuild --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
 #           npm run build:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
