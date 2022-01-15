@@ -91,8 +91,9 @@ jobs:
             sudo chown -R $(whoami) ./node_modules
             sudo chown -R $(whoami) /root/.node-gyp/
             sudo chown -R $(whoami) /root/.cache/
-            npm run electron-rebuild --workspace=@devterm-toolbox/electron
-            npm run build:devterm
+            ls
+#           npm run electron-rebuild --workspace=@devterm-toolbox/electron
+#           npm run build:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
 # "electron-build": "electron-builder install-app-deps",
