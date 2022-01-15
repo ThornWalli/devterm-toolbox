@@ -35,7 +35,9 @@ export default {
   transition: background 0.3s, opacity 0.3s;
 
   & i {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: calc(12 / 16 * 1em);
   }
 

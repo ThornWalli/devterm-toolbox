@@ -8,83 +8,81 @@
     @submit="onSubmit"
   >
     <template #default>
-      <input-text-box v-model="model.text" label="Text" baseline-label />
-      <hr>
-      <input-drop-down v-model="model.options.format" :options="formatOptions" label="Format" />
-      <div class="cols">
-        <div>
-          <input-drop-down
-            v-model="model.options.font"
-            :options="fontOptions"
-            label="Font"
-          />
-        </div>
-        <div>
-          <input-drop-down
-            v-model="model.options.textAlign"
-            :options="textAlignOptions"
-            label="Text Align"
-          />
-        </div>
-        <div>
-          <input-drop-down
-            v-model="model.options.textPosition"
-            :options="textPositionOptions"
-            label="Text Position"
-          />
-        </div>
+      <app-tab-container class="tab-container">
+        <template #general="options">
+          <base-tab-container-content v-bind="options" title="General">
+            <input-text-box v-model="model.text" label="Text" baseline-label />
+            <hr>
+            <input-drop-down v-model="model.options.format" :options="formatOptions" label="Format" />
+            <div class="cols">
+              <div>
+                <input-drop-down
+                  v-model="model.options.font"
+                  :options="fontOptions"
+                  label="Font"
+                />
+              </div>
+              <div>
+                <input-drop-down
+                  v-model="model.options.textAlign"
+                  :options="textAlignOptions"
+                  label="Text Align"
+                />
+              </div>
+              <div>
+                <input-drop-down
+                  v-model="model.options.textPosition"
+                  :options="textPositionOptions"
+                  label="Text Position"
+                />
+              </div>
 
-        <div>
-          <input-text-field
-            :value="model.options.textMargin"
-            type="number"
-            min="0"
-            step="1"
-            label="Text Margin"
-            @input="model.options.textMargin = Number($event || 0)"
-          />
-        </div>
-        <div>
-          <input-text-field
-            type="number"
-            min="1"
-            step="1"
-            label="Font Size"
-            :value="model.options.fontSize"
-            @input="model.options.fontSize = Number($event || 1)"
-          />
-        </div>
-        <div>
-          <input-text-field
-            type="number"
-            min="0"
-            step="1"
-            label="Margin"
-            :value="model.options.margin"
-            @input="model.options.margin = Number($event || 0)"
-          />
-        </div>
-        <div>
-          <input-check-box v-model="model.options.displayValue" label="Display Value" />
-        </div>
-        <div>
-          <input-check-box v-model="model.options.flat" label="Flat" />
-        </div>
-      </div>
-      <hr>
-      <div class="cols">
-        <div><input-check-box v-model="model.imageOptions.rotate" label="Rotate" /></div>
-        <div><input-check-box v-model="model.imageOptions.flipX" label="Flip X" /></div>
-        <div><input-check-box v-model="model.imageOptions.flipY" label="Flip Y" /></div>
-      </div>
-      <input-text-field
-        v-model="model.imageOptions.width"
-        type="number"
-        min="1"
-        step="1"
-        label="width"
-        placeholder="Size from Image (max. 384px)"
-      />
+              <div>
+                <input-text-field
+                  :value="model.options.textMargin"
+                  type="number"
+                  min="0"
+                  step="1"
+                  label="Text Margin"
+                  @input="model.options.textMargin = Number($event || 0)"
+                />
+              </div>
+              <div>
+                <input-text-field
+                  type="number"
+                  min="1"
+                  step="1"
+                  label="Font Size"
+                  :value="model.options.fontSize"
+                  @input="model.options.fontSize = Number($event || 1)"
+                />
+              </div>
+              <div>
+                <input-text-field
+                  type="number"
+                  min="0"
+                  step="1"
+                  label="Margin"
+                  :value="model.options.margin"
+                  @input="model.options.margin = Number($event || 0)"
+                />
+              </div>
+              <div>
+                <input-check-box v-model="model.options.displayValue" label="Display Value" />
+              </div>
+              <div>
+                <input-check-box v-model="model.options.flat" label="Flat" />
+              </div>
+            </div>
+          </base-tab-container-content>
+        </template>
+
+        <template #imageOptions="options">
+          <base-tab-container-content v-bind="options" title="Image Options">
+            <controls-image-options v-model="model.imageOptions" />
+          </base-tab-container-content>
+        </template>
+      </app-tab-container>
     </template>
   </action-dialog>
 </template>
@@ -93,18 +91,30 @@
 import { FONT_MAP } from '../../../utils/font';
 import { getDefaultBarcodeOptions } from '../../../utils/action';
 import ActionDialog from '../../controls/ActionDialog.vue';
+import AppTabContainer from '../../app/TabContainer.vue';
+import BaseTabContainerContent from '../../base/tabContainer/Content.vue';
 
 import InputCheckBox from '../../inputs/CheckBox.vue';
 import InputDropDown from '../../inputs/DropDown.vue';
 import InputTextField from '../../inputs/TextField.vue';
 import InputTextBox from '../../inputs/TextBox.vue';
 
+import ControlsImageOptions from '../ImageOptions.vue';
+
 import { DropDownOptionDescription } from '../../base/DropDown.vue';
 import MixinDialog from '../../../mixins/Dialog.vue';
 
 export default {
-  // eslint-disable-next-line vue/no-unused-components
-  components: { ActionDialog, InputCheckBox, InputDropDown, InputTextField, InputTextBox },
+  components: {
+    ActionDialog,
+    AppTabContainer,
+    BaseTabContainerContent,
+    InputCheckBox,
+    InputDropDown,
+    InputTextField,
+    InputTextBox,
+    ControlsImageOptions
+  },
   mixins: [MixinDialog],
   inheritAttrs: false,
   props: {

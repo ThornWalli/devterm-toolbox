@@ -8,59 +8,62 @@
     @submit="onSubmit"
   >
     <template #default>
-      <input-text-box v-model="model.text" label="Text" baseline-label />
-      <hr>
-      <input-drop-down v-model="model.options.errorCorrectionLevel" :options="errorCorrectionLevelOptions" label="Correc. Lev." />
+      <app-tab-container class="tab-container">
+        <template #general="options">
+          <base-tab-container-content v-bind="options" title="General">
+            <input-text-box v-model="model.text" label="Text" baseline-label />
+            <hr>
+            <input-drop-down v-model="model.options.errorCorrectionLevel" :options="errorCorrectionLevelOptions" label="Correc. Lev." />
 
-      <div class="cols">
-        <div>
-          <input-text-field
-            :value="model.options.margin"
-            type="number"
-            label="Margin"
-            step="1"
-            min="0"
-            @input="model.options.margin = $event || 0"
-          />
-        </div>
-        <div>
-          <input-text-field
-            :value="model.options.scale"
-            type="number"
-            label="Scale"
-            step="1"
-            min="0"
-            @input="model.options.scale = $event || 0"
-          />
-        </div>
-      </div>
+            <div class="cols">
+              <div>
+                <input-text-field
+                  :value="model.options.margin"
+                  type="number"
+                  label="Margin"
+                  step="1"
+                  min="0"
+                  @input="model.options.margin = $event || 0"
+                />
+              </div>
+              <div>
+                <input-text-field
+                  :value="model.options.scale"
+                  type="number"
+                  label="Scale"
+                  step="1"
+                  min="0"
+                  @input="model.options.scale = $event || 0"
+                />
+              </div>
+            </div>
+            <div class="cols">
+              <div><input-check-box v-model="model.options.small" label="Small" /></div>
+            </div>
+          </base-tab-container-content>
+        </template>
 
-      <hr>
-      <div class="cols">
-        <div><input-check-box v-model="model.options.small" label="Small" /></div>
-        <div><input-check-box v-model="model.imageOptions.rotate" label="Rotate" /></div>
-        <div><input-check-box v-model="model.imageOptions.flipX" label="Flip X" /></div>
-        <div><input-check-box v-model="model.imageOptions.flipY" label="Flip Y" /></div>
-      </div>
-      <input-text-field
-        v-model="model.imageOptions.width"
-        type="number"
-        min="1"
-        step="1"
-        label="width"
-        placeholder="Size from Image (max. 384px)"
-      />
+        <template #imageOptions="options">
+          <base-tab-container-content v-bind="options" title="Image Options">
+            <controls-image-options v-model="model.imageOptions" />
+          </base-tab-container-content>
+        </template>
+      </app-tab-container>
     </template>
   </action-dialog>
 </template>
 
 <script>
 import ActionDialog from '../../controls/ActionDialog.vue';
+import AppTabContainer from '../../app/TabContainer.vue';
+import BaseTabContainerContent from '../../base/tabContainer/Content.vue';
 
 import InputCheckBox from '../../inputs/CheckBox.vue';
 import InputDropDown from '../../inputs/DropDown.vue';
 import InputTextField from '../../inputs/TextField.vue';
 import InputTextBox from '../../inputs/TextBox.vue';
+
+import ControlsImageOptions from '../ImageOptions.vue';
 
 import { DropDownOptionDescription } from '../../base/DropDown.vue';
 import { getDefaultQRCodeOptions } from '../../../utils/action';
@@ -68,7 +71,16 @@ import { getDefaultQRCodeOptions } from '../../../utils/action';
 import MixinDialog from '../../../mixins/Dialog.vue';
 
 export default {
-  components: { ActionDialog, InputCheckBox, InputDropDown, InputTextField, InputTextBox },
+  components: {
+    ActionDialog,
+    AppTabContainer,
+    BaseTabContainerContent,
+    InputCheckBox,
+    InputDropDown,
+    InputTextField,
+    InputTextBox,
+    ControlsImageOptions
+  },
   mixins: [MixinDialog],
   inheritAttrs: false,
   props: {

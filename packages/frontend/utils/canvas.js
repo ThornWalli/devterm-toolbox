@@ -1,8 +1,6 @@
-import { Buffer } from 'buffer';
 import { prepareCanvasForPrint } from 'devterm/utils/canvas';
 import {
-  MAX_DOTS
-  , ALIGN
+  MAX_DOTS, ALIGN
 } from 'devterm/config';
 
 import {
@@ -49,13 +47,13 @@ export const getCanvasFromUrl = async (dataUrl) => {
   return canvas;
 };
 
-export const preparePreview = (canvas, colors, density = 1) => {
+export const preparePreview = (canvas, colors, density = 1, withGrayscale = true) => {
   canvas = resizeCanvas(canvas, MAX_DOTS);
   const ctx = canvas.getContext('2d');
 
   const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-  console.log(parseInt(density * 255));
-  grayscale(imageData.data, [colors.foreground, colors.background], density);
+
+  withGrayscale && grayscale(imageData.data, [colors.foreground, colors.background], density);
   ctx.putImageData(imageData, 0, 0);
   return canvas;
 };
@@ -78,21 +76,13 @@ const grayscale = (data, colors, density) => {
   }
 };
 
-export const uint8ArrayToBuffer = function (array) {
-  const buf = Buffer.alloc(array.byteLength);
-  const view = new Uint8Array(array);
-  for (let i = 0; i < buf.length; ++i) {
-    buf[i] = view[i];
-  }
-  return buf;
-};
-
 export const getBuffersFromCanvas = (canvas, imageOptions) => {
   canvas = prepareCanvasForPrint(canvas, imageOptions);
   return getImageWriteBuffersFromCanvas(canvas);
 };
+
 export const drawText = (text, options, width, colors) => {
-  colors = { background: '#fff', foreground: '#000', ...colors };
+  colors = { background: [255, 255, 255], foreground: [0, 0, 0], ...colors };
   const {
     fontSize,
     align,
@@ -115,6 +105,7 @@ export const drawText = (text, options, width, colors) => {
     ...options
   };
   const margin_ = [0, width * margin, 0, 0];
+  console.log(margin_);
   let x = 0;
   let width_ = width;
 
@@ -125,7 +116,6 @@ export const drawText = (text, options, width, colors) => {
       break;
     case ALIGN.CENTER:
       x += width_ / 2;
-      width_ -= margin_[1];
       break;
     default:
       x += margin_[1];
@@ -145,9 +135,9 @@ export const drawText = (text, options, width, colors) => {
   const rows = text.split('\n').map(text => prepareText(ctx, text, 0, 0, fontSize, width_)).flat();
   canvas.height = (rows.length * fontSize) * lineHeight + margin_[0] + margin_[2];
 
-  ctx.fillStyle = colors.background;
+  ctx.fillStyle = `rgb(${colors.background.join(' ')})`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = colors.foreground;
+  ctx.fillStyle = `rgb(${colors.foreground.join(' ')})`;
   ctx.textBaseline = 'top';
   ctx.font = font;
   ctx.canvas.style.letterSpacing = `${wordGap}px`;

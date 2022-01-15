@@ -28,9 +28,13 @@
               @select="onSelectAction(action.id)"
               @dragstart="onDragStart"
             >
-              <template #head>
+              <template #default>
                 <div class="action-controls">
                   <span class="index">{{ index + 1 }}</span>
+                  <input-icon-button @click="onClickActionVisible(index)">
+                    <svg-icon-visible v-if="action.visible" />
+                    <svg-icon-invisible v-else />
+                  </input-icon-button>
                   <input-icon-button @click="onClickActionUp(index)">
                     <svg-icon-arrow-up />
                   </input-icon-button>
@@ -75,6 +79,8 @@ import { getActionTypeOptions, createAction, getComponentByType } from '../utils
 import SvgIconArrowUp from '../assets/svg/icons/arrow-up.svg';
 import SvgIconArrowDown from '../assets/svg/icons/arrow-down.svg';
 import SvgIconTrash from '../assets/svg/icons/trash.svg';
+import SvgIconVisible from '../assets/svg/icons/visible.svg';
+import SvgIconInvisible from '../assets/svg/icons/invisible.svg';
 import InputIconButton from './inputs/IconButton.vue';
 import InputDropDown from './inputs/DropDown.vue';
 import ActionItem from './controls/ActionItem.vue';
@@ -84,6 +90,8 @@ export default {
     SvgIconArrowUp,
     SvgIconArrowDown,
     SvgIconTrash,
+    SvgIconVisible,
+    SvgIconInvisible,
     InputIconButton,
     InputDropDown,
     ActionItem
@@ -223,6 +231,16 @@ export default {
       this.updateModel(actions);
     },
 
+    onClickActionVisible (index) {
+      const action = this.model[index];
+      const actions = this.model;
+      actions[index] = {
+        ...actions[index],
+        visible: !action.visible
+      };
+      this.updateModel(actions);
+    },
+
     onDragStart (e) {
       window.setTimeout(() => {
         this.dragId = e.target.dataset.id;
@@ -260,6 +278,8 @@ export default {
   height: 100%;
   padding: 0 calc(8 / 16 * 1em);
   user-select: none;
+
+  --offset: calc(2 / 16 * 1em);
 
   & .list {
     height: calc(100% - (24px + 24px));

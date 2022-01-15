@@ -12,21 +12,8 @@
         <img :src="previewDataUrl">
       </div>
       <input-file-select label="File" @input="onInputFileSelect" />
-
-      <div class="cols">
-        <div><input-check-box v-model="model.imageOptions.grayscale" label="Grayscale" /></div>
-        <div><input-check-box v-model="model.imageOptions.rotate" label="Rotate" /></div>
-        <div><input-check-box v-model="model.imageOptions.flipX" label="Flip X" /></div>
-        <div><input-check-box v-model="model.imageOptions.flipY" label="Flip Y" /></div>
-      </div>
-      <input-text-field
-        v-model="model.imageOptions.width"
-        type="number"
-        min="1"
-        step="1"
-        label="width"
-        placeholder="Size from Image (max. 384px)"
-      />
+      <hr>
+      <controls-image-options v-model="model.imageOptions" />
     </template>
   </action-dialog>
 </template>
@@ -38,15 +25,16 @@ import { getCanvasFromUrl, preparePreview, resizeCanvas, toDataURL } from '../..
 
 import ActionDialog from '../../controls/ActionDialog.vue';
 
-import InputCheckBox from '../../inputs/CheckBox.vue';
-import InputTextField from '../../inputs/TextField.vue';
 import InputFileSelect from '../../inputs/FileSelect.vue';
+
+import ControlsImageOptions from '../ImageOptions.vue';
+
 import { getDefaultImageOptions } from '../../../utils/action';
 
 import MixinDialog from '../../../mixins/Dialog.vue';
 
 export default {
-  components: { ActionDialog, InputCheckBox, InputTextField, InputFileSelect },
+  components: { ActionDialog, InputFileSelect, ControlsImageOptions },
   mixins: [MixinDialog],
   inheritAttrs: false,
   props: {

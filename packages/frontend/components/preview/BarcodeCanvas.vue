@@ -1,6 +1,6 @@
 <template>
   <div>
-    <preview-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
+    <preview-native-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
     <canvas v-else ref="canvas" />
   </div>
 </template>
@@ -11,10 +11,10 @@ import { ALIGN, MAX_DENSITY } from 'devterm/config';
 import { preparePreview } from '../../utils/canvas';
 import { getDefaultBarcodeOptions } from '../../utils/action';
 
-import PreviewTextCanvas from '../preview/TextCanvas.vue';
+import PreviewNativeTextCanvas from '../preview/NativeTextCanvas.vue';
 
 export default {
-  components: { PreviewTextCanvas },
+  components: { PreviewNativeTextCanvas },
   props: {
     colors: {
       type: Object,
@@ -81,7 +81,7 @@ export default {
           try {
             const barcodeCanvas = await getBarcode(this.value.text || 'empty', this.value.options || {});
 
-            const preparedCanvas = prepareCanvasForPrint(barcodeCanvas, this.value.imageOptions);
+            const preparedCanvas = prepareCanvasForPrint(barcodeCanvas, { ...this.value.imageOptions });
 
             ctx.canvas.width = this.width;
             ctx.canvas.height = preparedCanvas.height;
@@ -106,7 +106,6 @@ export default {
           } catch (error) {
             this.error = error;
           }
-
           preparePreview(ctx.canvas, {
             background: this.colors.printer.preview.background,
             foreground: this.colors.printer.preview.foreground

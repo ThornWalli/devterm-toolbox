@@ -1,6 +1,6 @@
 <template>
   <div>
-    <preview-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
+    <preview-native-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
     <canvas v-else ref="canvas" />
   </div>
 </template>
@@ -10,10 +10,10 @@ import { createCanvas, prepareCanvasForPrint } from 'devterm/utils/canvas';
 import { ALIGN, MAX_DENSITY } from 'devterm/config';
 import { preparePreview } from '../../utils/canvas';
 
-import PreviewTextCanvas from '../preview/TextCanvas.vue';
+import PreviewNativeTextCanvas from '../preview/NativeTextCanvas.vue';
 
 export default {
-  components: { PreviewTextCanvas },
+  components: { PreviewNativeTextCanvas },
   props: {
     colors: {
       type: Object,
