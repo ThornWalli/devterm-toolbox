@@ -77,8 +77,11 @@ jobs:
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
+            
+            sudo mkdir ~/build
+            sudo chown -R $(whoami) ~/build
 
-            npm i --quiet electron devterm@beta
+            npm ci
             
           #  --unsafe-perm=true --allow-root
 #           sudo mkdir ~/.npm
