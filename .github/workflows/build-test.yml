@@ -70,7 +70,9 @@ jobs:
             
             sudo mkdir ./node_modules
             sudo chown -R $(whoami) ./node_modules
-
+            
+            sudo mkdir -p /root/.config
+            sudo chown -R $(whoami) /root/.config
 
             mkdir ~/.npm-cache
             npm config set cache '~/.npm-cache'
