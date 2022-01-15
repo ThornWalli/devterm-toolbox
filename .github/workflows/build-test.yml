@@ -89,11 +89,11 @@ jobs:
             
             npm run electron-build --workspace=@devterm-toolbox/electron
             sudo chown -R $(whoami) ./node_modules
-            sudo rm -rf /root/.node-gyp/
             sudo chown -R $(whoami) /root/.cache/
             
             sudo chown -R $(whoami) ./node_modules
-            sudo npm run electron-rebuild --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
+            sudo rm -rf node_modules/@serialport/bindings/build
+            npm run electron-rebuild --workspace=@devterm-toolbox/electron
 #           npm run build:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
