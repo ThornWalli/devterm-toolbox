@@ -67,6 +67,11 @@ jobs:
             mkdir ~/.npm-cache
             sudo chown -R $(whoami) ~/.npm-cache
             npm config set cache ~/.npm-cache
+
+            mkdir ~/.npm-global
+            sudo chown -R $(whoami) ~/.npm-global
+            npm config set prefix ~/.npm-global
+            export PATH=~/.npm-global/bin:$PATH
             
             npm i electron devterm@beta --quiet
 #           npm ci
