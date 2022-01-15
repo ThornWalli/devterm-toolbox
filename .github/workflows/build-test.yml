@@ -46,7 +46,7 @@ jobs:
             apt-get install -q -y git sudo curl wget
             apt-get install -q -y libatomic1 python3.8 python build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
             curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-            sudo apt-get install -y nodejs
+            apt-get install -y nodejs
 
             
             node -v or node –version
