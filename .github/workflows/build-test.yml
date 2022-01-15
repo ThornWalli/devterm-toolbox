@@ -93,6 +93,7 @@ jobs:
             
             sudo chown -R $(whoami) ./node_modules
             sudo rm -rf node_modules/@serialport/bindings/build
+            sudo chmod -R 755 ./node_modules/@serialport/bindings
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
 #           npm run build:devterm
             
