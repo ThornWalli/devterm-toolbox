@@ -69,8 +69,8 @@ jobs:
             sudo chown -R $(whoami) /root/.cache/
             
             sudo mkdir ./node_modules
+            sudo mkdir -p ./node_modules/@serialport/bindings/build
             sudo chown -R $(whoami) ./node_modules
-            
             sudo mkdir -p /root/.config
             sudo chown -R $(whoami) /root/.config
 
