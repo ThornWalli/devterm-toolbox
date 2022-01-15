@@ -82,8 +82,6 @@ jobs:
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
             
-            sudo mkdir ~/build
-            sudo chown -R $(whoami) ~/build
 
             npm ci --quiet --no-progress
             
@@ -92,9 +90,13 @@ jobs:
             sudo chown -R $(whoami) /root/.cache/
             
             sudo chown -R $(whoami) ./node_modules
-            sudo rm -rf node_modules/@serialport/bindings/build
             sudo chown -R $(whoami) ./node_modules/@serialport
-            sudo npm run electron-rebuild --workspace=@devterm-toolbox/electron
+            
+            sudo rm -rf node_modules/@serialport/bindings/build
+            sudo mkdir ./node_modules/@serialport/build
+            sudo chown -R $(whoami) ./node_modules/@serialport/build
+            
+            npm run electron-rebuild --workspace=@devterm-toolbox/electron
 #           npm run build:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
