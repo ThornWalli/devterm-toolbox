@@ -44,23 +44,15 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget libatomic1 python3.8 python
-            sudo apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+            apt-get install -q -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
             curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-            sudo apt-get install -y nodejs
+            apt-get install -y nodejs
 
             
             node -v or node –version
             npm -v or npm –version
             
-            
-#           sudo mkdir /root/.npm
-#           sudo chown -R 755 /root/.npm
-#           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-#           set -u 
-#           touch .profile
-#           echo 'export NVM_DIR="$HOME/.nvm"' >> .profile
-#           echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> .profile
-#           source .profile
+
           run: |
           
             sudo mkdir ~/.npm
