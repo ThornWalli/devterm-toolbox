@@ -60,7 +60,9 @@ jobs:
             echo 'Run:'
             echo $(whoami)
             echo $HOME
-            
+         
+            sudo mkdir $HOME/.npm
+            sudo chown -R $(whoami) $HOME/.npm
             sudo mkdir -p ~/.cache/electron/
             sudo chown -R $(whoami) ~/.cache/
             
