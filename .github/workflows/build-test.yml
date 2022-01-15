@@ -86,6 +86,11 @@ jobs:
             sudo chown -R $(whoami) ~/build
 
             npm ci
+            npm run electron-build --workspace=@devterm-toolbox/electron
+            
+# "electron-rebuild": "electron-rebuild -f -w serialport",
+# "electron-build": "electron-builder install-app-deps",
+            
 #           electron-builder install-app-deps &&  npm run rebuild unsafe-perm=true --allow-root
             
           #  --unsafe-perm=true --allow-root
