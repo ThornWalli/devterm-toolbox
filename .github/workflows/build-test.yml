@@ -44,7 +44,7 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -q -y git sudo curl wget
-            sudo apt-get install -q -y libatomic1 python3.8 python build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+            apt-get install -q -y libatomic1 python3.8 python build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
             curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
             sudo apt-get install -y nodejs
 
@@ -77,6 +77,8 @@ jobs:
             mkdir ~/.npm-global
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
+
+            npm i  --quiet --unsafe-perm=true --allow-root electron devterm@beta
 #           sudo mkdir ~/.npm
 #           sudo chown -R $(whoami) ~/.npm
 #           sudo mkdir -p /root/.cache/electron/
@@ -96,8 +98,6 @@ jobs:
 #           sudo chown -R $(whoami) $HOME/node_modules
 #           sudo mkdir -p $HOME/.config
 #           sudo chown -R $(whoami) $HOME/.config
-
-            npm i  --quiet --unsafe-perm=true --allow-root electron devterm@beta
 #           npm ci
           
           
