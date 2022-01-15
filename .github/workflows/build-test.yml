@@ -75,12 +75,15 @@ jobs:
             sudo chown -R $(whoami) /root/.config
 
             mkdir ~/.npm-cache
-            npm config set cache '~/.npm-cache'
+            sudo chown -R $(whoami) ~/.npm-cache
+            npm config set cache ~/.npm-cache
             
             mkdir ~/.npm-global
-            npm config set prefix '~/.npm-global'
+            npm config set prefix~/.npm-global
             export PATH=~/.npm-global/bin:$PATH
             sudo npm ci --unsafe-perm=true --allow-root
+            ls
+
 #           npm ci
 #             npm i serialport electron-rebuild
 #             node node_modules/.bin/electron-rebuild -f -w serialport
