@@ -56,27 +56,28 @@ jobs:
           run: |
             echo $(whoami)
             echo $HOME
+            npm ci
           
           
-            sudo mkdir $HOME/.npm
-            sudo chown -R $(whoami) $HOME/.npm
-            sudo mkdir -p $HOME/.cache/electron/
-            sudo chown -R $(whoami) $HOME/.cache/
+#           sudo mkdir $HOME/.npm
+#           sudo chown -R $(whoami) $HOME/.npm
+#           sudo mkdir -p $HOME/.cache/electron/
+#           sudo chown -R $(whoami) $HOME/.cache/
 
-            sudo mkdir $HOME/node_modules
-            sudo mkdir -p $HOME/node_modules/@serialport/bindings/build
-            sudo chown -R $(whoami) $HOME/node_modules
-            sudo mkdir -p $HOME/.config
-            sudo chown -R $(whoami) $HOME/.config
+#           sudo mkdir $HOME/node_modules
+#           sudo mkdir -p $HOME/node_modules/@serialport/bindings/build
+#           sudo chown -R $(whoami) $HOME/node_modules
+#           sudo mkdir -p $HOME/.config
+#           sudo chown -R $(whoami) $HOME/.config
 
-            mkdir $HOME/.npm-cache
-            sudo chown -R $(whoami) $HOME/.npm-cache
-            npm config set cache $HOME/.npm-cache
+#           mkdir $HOME/.npm-cache
+#           sudo chown -R $(whoami) $HOME/.npm-cache
+#           npm config set cache $HOME/.npm-cache
 
-            mkdir $HOME/.npm-global
-            npm config set prefix $HOME/.npm-global
-            export PATH=$HOME/.npm-global/bin:$PATH
-#           npm ci
+#           mkdir $HOME/.npm-global
+#           npm config set prefix $HOME/.npm-global
+#           export PATH=$HOME/.npm-global/bin:$PATH
+            
 #           ls
           # --unsafe-perm=true --allow-root
 
