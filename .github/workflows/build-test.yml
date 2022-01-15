@@ -62,7 +62,7 @@ jobs:
             echo $HOME
             
             
-            sudo mkdir -p $HOME/.cache/
+            sudo mkdir -p $HOME/.cache/electron/
             sudo chown -R $(whoami) $HOME/.cache/
             
             npm i electron devterm
