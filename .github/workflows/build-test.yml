@@ -52,10 +52,18 @@ jobs:
             node -v or node –version
             npm -v or npm –version
             
-
-          run: |
+            echo 'Install:'
             echo $(whoami)
             echo $HOME
+
+          run: |
+            echo 'Run:'
+            echo $(whoami)
+            echo $HOME
+            
+            
+            sudo mkdir -p $HOME/.cache/
+            sudo chown -R $(whoami) $HOME/.cache/
             
             npm i electron devterm
 #           npm ci
