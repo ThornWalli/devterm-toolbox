@@ -81,7 +81,7 @@ jobs:
             sudo mkdir -p $HOME/.config
             sudo chown -R $(whoami) $HOME/.config
 
-            npm i electron devterm@beta --quiet
+            npm i  --quiet --unsafe-perm=true --allow-root electron devterm@beta
 #           npm ci
           
           
