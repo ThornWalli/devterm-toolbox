@@ -78,7 +78,9 @@ jobs:
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
 
-            npm i  --quiet --unsafe-perm=true --allow-root electron devterm@beta
+            npm i --quiet electron devterm@beta
+            
+          #  --unsafe-perm=true --allow-root
 #           sudo mkdir ~/.npm
 #           sudo chown -R $(whoami) ~/.npm
 #           sudo mkdir -p /root/.cache/electron/
