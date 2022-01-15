@@ -70,8 +70,6 @@ jobs:
             sudo mkdir -p /root/.node-gyp/
             sudo chown -R $(whoami) /root/.node-gyp/
             
-            ~/.node-gyp
-            
             sudo mkdir ./node_modules
             sudo chown -R $(whoami) ./node_modules
             
@@ -88,6 +86,7 @@ jobs:
             sudo chown -R $(whoami) ~/build
 
             npm ci
+#           electron-builder install-app-deps &&  npm run rebuild unsafe-perm=true --allow-root
             
           #  --unsafe-perm=true --allow-root
 #           sudo mkdir ~/.npm
