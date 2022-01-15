@@ -85,7 +85,7 @@ jobs:
             sudo mkdir ~/build
             sudo chown -R $(whoami) ~/build
 
-            npm ci
+            npm ci --quiet --no-progress
             npm run electron-build --workspace=@devterm-toolbox/electron
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
