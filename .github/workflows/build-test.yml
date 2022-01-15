@@ -61,10 +61,10 @@ jobs:
             echo $(whoami)
             echo $HOME
          
-            sudo mkdir $HOME/.npm
-            sudo chown -R $(whoami) $HOME/.npm
-            sudo mkdir -p ~/.cache/electron/
-            sudo chown -R $(whoami) ~/.cache/
+            sudo mkdir ~/.npm
+            sudo chown -R $(whoami) ~/.npm
+            sudo mkdir -p /root/.cache/electron/
+            sudo chown -R $(whoami) /root/.cache/
             
             mkdir ~/.npm-cache
             sudo chown -R $(whoami) ~/.npm-cache
