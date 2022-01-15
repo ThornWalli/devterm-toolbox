@@ -64,8 +64,11 @@ jobs:
             sudo mkdir -p ~/.cache/electron/
             sudo chown -R $(whoami) ~/.cache/
             
+            mkdir ~/.npm-cache
+            sudo chown -R $(whoami) ~/.npm-cache
+            npm config set cache ~/.npm-cache
             
-            npm i electron devterm@beta
+            npm i electron devterm@beta --quiet
 #           npm ci
           
           
@@ -80,9 +83,6 @@ jobs:
 #           sudo mkdir -p $HOME/.config
 #           sudo chown -R $(whoami) $HOME/.config
 
-#           mkdir $HOME/.npm-cache
-#           sudo chown -R $(whoami) $HOME/.npm-cache
-#           npm config set cache $HOME/.npm-cache
 
 #           mkdir $HOME/.npm-global
 #           npm config set prefix $HOME/.npm-global
