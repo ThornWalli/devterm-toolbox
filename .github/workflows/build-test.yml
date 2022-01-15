@@ -91,8 +91,9 @@ jobs:
             sudo chown -R $(whoami) ./node_modules
             sudo chown -R $(whoami) /root/.node-gyp/
             sudo chown -R $(whoami) /root/.cache/
-            ls
-#           npm run electron-rebuild --workspace=@devterm-toolbox/electron
+            
+            sudo npm install -g --unsafe-perm node-gyp
+            npm run electron-rebuild --workspace=@devterm-toolbox/electron
 #           npm run build:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
