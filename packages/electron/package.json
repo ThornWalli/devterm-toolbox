@@ -12,7 +12,6 @@
   },
   "main": "src/main/main.js",
   "scripts": {
-    "postinstall": "electron-builder install-app-deps &&  npm run rebuild unsafe-perm=true --allow-root",
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build-vue.js && electron-builder -c config/electron-builder.js",
     "build:mac": "node scripts/build-vue.js && electron-builder -c config/electron-builder.js --mac",
