@@ -89,10 +89,10 @@ jobs:
             
             npm run electron-build --workspace=@devterm-toolbox/electron
             sudo chown -R $(whoami) ./node_modules
-            sudo chown -R $(whoami) /root/.node-gyp/
+            sudo rm -rf /root/.node-gyp/
             sudo chown -R $(whoami) /root/.cache/
             
-            sudo npm install -g --unsafe-perm node-gyp
+            sudo chown -R $(whoami) ./node_modules
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
 #           npm run build:devterm
             
