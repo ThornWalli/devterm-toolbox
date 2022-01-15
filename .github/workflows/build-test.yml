@@ -87,10 +87,8 @@ jobs:
 
             npm ci --quiet --no-progress
             
-            sudo mkdir ./node_modules
-            sudo chown -R $(whoami) ./node_modules
-            
             npm run electron-build --workspace=@devterm-toolbox/electron
+            npm run electron-rebuild --workspace=@devterm-toolbox/electron
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
 # "electron-build": "electron-builder install-app-deps",
