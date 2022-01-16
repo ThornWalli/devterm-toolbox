@@ -88,13 +88,13 @@ jobs:
             sudo rm -rf /root/.cache
             sudo mkdir -p /root/.cache
             sudo chown -R $(whoami) /root/.cache
-            sudo chmod -R 777 /root/.cache
             sudo rm -rf /root/.config
             sudo mkdir -p /root/.config
             sudo chown -R $(whoami) /root/.config
+            sudo chown -R $(whoami) ./node_modules
             
             npm run build:vue --workspace=@devterm-toolbox/electron
-            sudo npm run build:electron:devterm --workspace=@devterm-toolbox/electron  --unsafe-perm=true --allow-root
+            npm run build:electron:devterm --workspace=@devterm-toolbox/electron  --unsafe-perm=true --allow-root
 #           npm run build:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
 #           npm run electron-build --workspace=@devterm-toolbox/electron
 
