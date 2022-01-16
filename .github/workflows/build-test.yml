@@ -87,7 +87,7 @@ jobs:
             
             npm run electron-build --workspace=@devterm-toolbox/electron
             sudo chown -R $(whoami) ./node_modules
-            sudo chown -R $(whoami) /root/.cache/
+            
             
             sudo chown -R $(whoami) ./node_modules
             
@@ -104,8 +104,9 @@ jobs:
             
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
 
+            sudo chown -R $(whoami) /root/.cache/
             sudo chmod -R 777 /root/.cache/electron
-            npm run build:electron:devterm
+            sudo npm run build:devterm --workspace=@devterm-toolbox/electron
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
 # "electron-build": "electron-builder install-app-deps",
