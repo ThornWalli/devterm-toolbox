@@ -103,11 +103,13 @@ jobs:
             
             
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
+            sudo chown -R $USER:$(id -gn $USER) /root/.config
 
-            sudo chown -R $(whoami) /root/.cache/
-            sudo chmod -R 777 /root/.cache/electron
             sudo npm run build:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
             
+
+#          sudo chown -R $(whoami) /root/.cache/
+#          sudo chmod -R 777 /root/.cache/electron
 # "electron-rebuild": "electron-rebuild -f -w serialport",
 # "electron-build": "electron-builder install-app-deps",
             
