@@ -86,10 +86,10 @@ jobs:
             npm ci --quiet --no-progress
 
             sudo rm -rf /root/.cache
-            sudo mkdir -p /root/.cache/electron/
-            sudo chown -R $(whoami) /root/.cache/
-            sudo chown -R $(whoami) /root/.cache/electron/
-            sudo chown -R $(whoami) ./node_modules
+            sudo mkdir -p /root/.cache
+            sudo chown -R $(whoami) /root/.cache
+            sudo chmod -R 777 /root/.cache
+            
             npm run build:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
 #           npm run electron-build --workspace=@devterm-toolbox/electron
 
