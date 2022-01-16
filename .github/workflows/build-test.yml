@@ -90,7 +90,9 @@ jobs:
             sudo chown -R $(whoami) /root/.cache
             sudo chmod -R 777 /root/.cache
             
-            npm run build:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
+            npm run build:vue --workspace=@devterm-toolbox/electron
+            npm run build:electron:devterm --workspace=@devterm-toolbox/electron
+#           npm run build:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
 #           npm run electron-build --workspace=@devterm-toolbox/electron
 
 #            sudo chown -R $(whoami) ./node_modules
