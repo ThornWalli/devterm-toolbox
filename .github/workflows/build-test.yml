@@ -85,16 +85,19 @@ jobs:
 
             npm ci --quiet --no-progress
 
-            sudo rm -rf ~/.cache
-            sudo mkdir -p ~/.cache
-            sudo chmod -R 777 ~/.cache
-            sudo rm -rf ~/.config
             sudo mkdir -p ~/.config
+            sudo chmod -R 777 ~/.cache
             sudo chmod -R 777 ~/.config
             sudo chmod -R 777 ./node_modules
             
             npm run build:vue --workspace=@devterm-toolbox/electron
             npm run build:electron:devterm --workspace=@devterm-toolbox/electron
+            
+            
+#           sudo rm -rf ~/.cache
+#           sudo mkdir -p ~/.cache
+#           sudo rm -rf ~/.config
+            
 #           npm run build:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
 #           npm run electron-build --workspace=@devterm-toolbox/electron
 
