@@ -87,11 +87,11 @@ jobs:
 
             sudo rm -rf /root/.cache
             sudo mkdir -p /root/.cache
-            sudo chown -R $(whoami) /root/.cache
+            sudo chmod -R 777 /root/.cache
             sudo rm -rf /root/.config
             sudo mkdir -p /root/.config
-            sudo chown -R $(whoami) /root/.config
-            sudo chown -R $(whoami) ./node_modules
+            sudo chmod -R 777 /root/.config
+            sudo chmod -R 777 ./node_modules
             
             npm run build:vue --workspace=@devterm-toolbox/electron
             npm run build:electron:devterm --workspace=@devterm-toolbox/electron
