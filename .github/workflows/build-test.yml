@@ -104,10 +104,10 @@ jobs:
             
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
             sudo rm -rf /root/.cache
-            sudo mkdir -p /root/.cache/electron/
-            sudo chown -R $(whoami) /root/.cache/
+            sudo mkdir -p /root/.cache
+            sudo chmod -R 777 /root/.cache/
 
-            sudo npm run build:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
+            npm run build:devterm --workspace=@devterm-toolbox/electron
             
 
 #          sudo chown -R $(whoami) /root/.cache/
