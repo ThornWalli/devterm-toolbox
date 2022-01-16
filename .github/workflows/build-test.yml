@@ -85,12 +85,12 @@ jobs:
 
             npm ci --quiet --no-progress
 
-            sudo rm -rf /root/.cache
-            sudo mkdir -p /root/.cache
-            sudo chmod -R 777 /root/.cache
-            sudo rm -rf /root/.config
-            sudo mkdir -p /root/.config
-            sudo chmod -R 777 /root/.config
+            sudo rm -rf ~/.cache
+            sudo mkdir -p ~/.cache
+            sudo chmod -R 777 ~/.cache
+            sudo rm -rf ~/.config
+            sudo mkdir -p ~/.config
+            sudo chmod -R 777 ~/.config
             sudo chmod -R 777 ./node_modules
             
             npm run build:vue --workspace=@devterm-toolbox/electron
