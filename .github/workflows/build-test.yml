@@ -103,6 +103,8 @@ jobs:
             
             
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
+
+            sudo chmod -R 777 /root/.cache/electron
             npm run build:electron:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
