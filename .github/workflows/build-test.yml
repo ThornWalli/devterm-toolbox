@@ -91,15 +91,19 @@ jobs:
             
             sudo chown -R $(whoami) ./node_modules
             
-            sudo rm -rf ./node_modules/@serialport/bindings/build            
-            sudo chmod -R 777 ./node_modules/@serialport
+            sudo rm -rf ./node_modules/@serialport/bindings/build         
             sudo chmod -R 777 ./node_modules/@serialport/bindings
             
             sudo rm -rf ./node_modules/canvas/build
             sudo chmod -R 777 ./node_modules/canvas
             
+            sudo rm -rf ./node_modules/node-system-fonts/build
+            sudo chmod -R 777 ./node_modules/node-system-fonts
+            
+            
+            
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
-#           npm run build:devterm
+            npm run build:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
 # "electron-build": "electron-builder install-app-deps",
