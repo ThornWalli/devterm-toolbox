@@ -88,6 +88,7 @@ jobs:
             sudo rm -rf /root/.cache
             sudo mkdir -p /root/.cache/electron/
             sudo chown -R $(whoami) /root/.cache/
+            sudo chown -R $(whoami) /root/.cache/electron/
             npm run build:devterm --workspace=@devterm-toolbox/electron
 #           npm run electron-build --workspace=@devterm-toolbox/electron
 
