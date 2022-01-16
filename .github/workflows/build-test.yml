@@ -84,30 +84,29 @@ jobs:
             
 
             npm ci --quiet --no-progress
-            
-            npm run electron-build --workspace=@devterm-toolbox/electron
-            sudo chown -R $(whoami) ./node_modules
-            
-            
-            sudo chown -R $(whoami) ./node_modules
-            
-            sudo rm -rf ./node_modules/@serialport/bindings/build         
-            sudo chmod -R 777 ./node_modules/@serialport/bindings
-            
-            sudo rm -rf ./node_modules/canvas/build
-            sudo chmod -R 777 ./node_modules/canvas
-            
-            sudo rm -rf ./node_modules/node-system-fonts/build
-            sudo chmod -R 777 ./node_modules/node-system-fonts
-            
-            
-            
-            npm run electron-rebuild --workspace=@devterm-toolbox/electron
-            sudo rm -rf /root/.cache
-            sudo mkdir -p /root/.cache
-            sudo chmod -R 777 /root/.cache/
-
             npm run build:devterm --workspace=@devterm-toolbox/electron
+#           npm run electron-build --workspace=@devterm-toolbox/electron
+
+#            sudo chown -R $(whoami) ./node_modules
+            
+            
+#            sudo chown -R $(whoami) ./node_modules
+            
+#            sudo rm -rf ./node_modules/@serialport/bindings/build         
+#            sudo chmod -R 777 ./node_modules/@serialport/bindings
+            
+#            sudo rm -rf ./node_modules/canvas/build
+#            sudo chmod -R 777 ./node_modules/canvas
+            
+#            sudo rm -rf ./node_modules/node-system-fonts/build
+#            sudo chmod -R 777 ./node_modules/node-system-fonts
+            
+            
+            
+#            npm run electron-rebuild --workspace=@devterm-toolbox/electron
+#            sudo rm -rf /root/.cache
+#            sudo mkdir -p /root/.cache
+#            sudo chmod -R 777 /root/.cache
             
 
 #          sudo chown -R $(whoami) /root/.cache/
@@ -117,7 +116,7 @@ jobs:
             
 #           electron-builder install-app-deps &&  npm run rebuild unsafe-perm=true --allow-root
             
-          #  --unsafe-perm=true --allow-root
+#  --unsafe-perm=true --allow-root
 #           sudo mkdir ~/.npm
 #           sudo chown -R $(whoami) ~/.npm
 #           sudo mkdir -p /root/.cache/electron/
@@ -188,7 +187,7 @@ jobs:
             
             
 #           sudo su - 
-    #           sudo -s
+#           sudo -s
 #           sudo nvm use
 #           export HUSKY=0
             
