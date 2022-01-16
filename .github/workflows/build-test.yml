@@ -90,7 +90,7 @@ jobs:
             sudo chmod -R 777 ./node_modules
             
             npm run build:vue --workspace=@devterm-toolbox/electron
-            npm run build:electron:devterm --workspace=@devterm-toolbox/electron
+            sudo npm run build:electron:devterm --workspace=@devterm-toolbox/electron
             
             
 #           sudo rm -rf ~/.cache
