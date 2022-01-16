@@ -103,7 +103,7 @@ jobs:
             
             
             npm run electron-rebuild --workspace=@devterm-toolbox/electron
-            npm run build:devterm
+            npm run build:electron:devterm
             
 # "electron-rebuild": "electron-rebuild -f -w serialport",
 # "electron-build": "electron-builder install-app-deps",
