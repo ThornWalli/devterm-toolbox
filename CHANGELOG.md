@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.17](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-01-17)
+
+
+### Bug Fixes
+
+* **app:** improve canvas preview and action controls ([1b028a0](https://github.com/ThornWalli/devterm-toolbox/commit/1b028a0832989897738900bac73bde44ab908b6e))
+* **preview:** improve preview ([25d8825](https://github.com/ThornWalli/devterm-toolbox/commit/25d882532e592aaef05c30a026a8d0a776ebe65c))
+
 # [1.0.0-beta.16](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-01-13)
 
 
