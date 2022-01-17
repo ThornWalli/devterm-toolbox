@@ -88,6 +88,7 @@ jobs:
             sudo chmod -R 777 ~/.cache
             sudo chown -R $(whoami) /root/.config
             sudo chmod -R 777 ./node_modules
+            sudo chmod -R 777 ~/.npm-cache
             sudo rm -rf /root/.cache
             
             
