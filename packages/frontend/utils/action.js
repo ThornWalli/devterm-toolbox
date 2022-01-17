@@ -1,5 +1,7 @@
 
 import { DEFAULT_DENSITY, ALIGN, FONT, getDefaultConfig, MAX_PIXELS_FONT } from 'devterm/config';
+import { getDefaultPrepareOptions } from 'devterm/utils/canvas';
+
 import ActionSetAlign from '../components/controls/actions/SetAlign.vue';
 import ActionSetFont from '../components/controls/actions/SetFont.vue';
 import ActionSetMargin from '../components/controls/actions/SetMargin.vue';
@@ -68,6 +70,9 @@ export const createAction = (type) => {
     case 'setMargin':
       value = 0;
       break;
+    case 'setDensity':
+      value = 1;
+      break;
     case 'setFont':
       value = FONT.SIZE_8_16_THIN_1;
       break;
@@ -100,7 +105,7 @@ export const createAction = (type) => {
 
 export const executeActions = (actions) => {
   const options = getDefaultConfig();
-  return actions.map(action => executeAction(action, options)).filter(Boolean);
+  return actions.filter(action => action.visible).map(action => executeAction(action, options)).filter(Boolean);
 };
 
 const getCutLine = (font) => {
@@ -146,7 +151,7 @@ export const executeAction = (action, options) => {
     case 'cutLine':
       return {
         id: action.id,
-        component: () => import('../components/preview/TextCanvas.vue'),
+        component: () => import('../components/preview/NativeTextCanvas.vue'),
         options: {
           ...options,
           // reset options
@@ -224,20 +229,15 @@ export const getDefaultTextOptions = () => {
       color: '#000',
       weight: 400,
       italic: false
-    }
+    },
+    imageOptions: getDefaultPrepareOptions()
   };
 };
 
 export const getDefaultImageOptions = () => {
   return {
     file: null,
-    imageOptions: {
-      grayscale: false,
-      rotate: false,
-      flipX: false,
-      flipY: false,
-      width: null
-    }
+    imageOptions: getDefaultPrepareOptions()
   };
 };
 export const getDefaultQRCodeOptions = () => {
@@ -249,12 +249,7 @@ export const getDefaultQRCodeOptions = () => {
       scale: 4,
       small: false
     },
-    imageOptions: {
-      rotate: false,
-      flipX: false,
-      flipY: false,
-      width: null
-    }
+    imageOptions: getDefaultPrepareOptions()
   };
 };
 
@@ -273,11 +268,6 @@ export const getDefaultBarcodeOptions = () => {
       displayValue: true,
       flat: false
     },
-    imageOptions: {
-      rotate: false,
-      flipX: false,
-      flipY: false,
-      width: null
-    }
+    imageOptions: getDefaultPrepareOptions()
   };
 };

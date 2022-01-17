@@ -13,9 +13,11 @@ const ACTION_PRINTER_COMMANDS = {
   image: (printer, value) => value.flat().reduce((result, buffer) => {
     return result.then(() => printer.write(buffer));
   }, Promise.resolve()),
-  text: (printer, value) => value.flat().reduce((result, buffer) => {
-    return result.then(() => printer.write(buffer));
-  }, Promise.resolve()),
+  text: (printer, value) => {
+    return value.flat().reduce((result, buffer) => {
+      return result.then(() => printer.write(buffer));
+    }, Promise.resolve());
+  },
   nativeText: (printer, value) => printer.writeLine(value),
   feedPitch: (printer, { type, value }) => {
     if (type === 'pixel') {

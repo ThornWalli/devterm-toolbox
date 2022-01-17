@@ -6,6 +6,7 @@ export default class ActionDescription {
     this.id = uuidv4();
     this.type = type;
     this.value = value;
+    this.visible = true;
     // this.timestamp = timestamp || Date.now();
   }
 
@@ -13,7 +14,8 @@ export default class ActionDescription {
     return {
       id: this.id,
       type: this.type,
-      value: this.value
+      value: this.value,
+      visible: true
     };
   }
 }

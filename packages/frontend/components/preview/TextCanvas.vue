@@ -3,9 +3,10 @@
 </template>
 
 <script>
+import { prepareCanvasForPrint } from 'devterm/utils/canvas';
 import { ALIGN, MAX_DENSITY } from 'devterm/config';
 import { getDefaultTextOptions } from '../../utils/action';
-import { drawText } from '../../utils/canvas';
+import { drawText, preparePreview } from '../../utils/canvas';
 import { FONT_MAP } from '../../utils/font';
 
 export default {
@@ -62,23 +63,29 @@ export default {
     this.render();
   },
   methods: {
-    getColor (opacity) {
+    getColor (opacity = 1) {
       return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
     render () {
       window.cancelAnimationFrame(this.animationFrame);
       this.animationFrame = window.requestAnimationFrame(() => {
         const ctx = this.ctx;
-
-        const canvas = drawText(this.value.text, {
+        const textCanvas = drawText(this.value.text, {
           ...this.value.options,
-          margin: this.options.margin,
-          color: this.getColor(this.options.density / MAX_DENSITY)
-        }, this.width);
+          margin: this.options.margin
+        }, this.width, {
+          background: this.colors.printer.preview.background,
+          foreground: this.colors.printer.preview.foreground
+        });
+        let preparedCanvas = prepareCanvasForPrint(textCanvas, { ...this.value.imageOptions });
+        preparedCanvas = preparePreview(preparedCanvas, {
+          background: this.colors.printer.preview.background,
+          foreground: this.colors.printer.preview.foreground
+        }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
-        this.$el.width = canvas.width;
-        this.$el.height = canvas.height;
-        ctx.drawImage(canvas, 0, 0);
+        ctx.canvas.width = preparedCanvas.width;
+        ctx.canvas.height = preparedCanvas.height;
+        ctx.drawImage(preparedCanvas, 0, 0);
       });
     }
   }

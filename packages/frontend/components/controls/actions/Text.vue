@@ -59,6 +59,11 @@
             />
           </base-tab-container-content>
         </template>
+        <template #imageOptions="options">
+          <base-tab-container-content v-bind="options" title="Image Options">
+            <controls-image-options v-model="model.imageOptions" />
+          </base-tab-container-content>
+        </template>
       </app-tab-container>
     </template>
   </action-dialog>
@@ -70,9 +75,13 @@ import { DropDownOptionDescription } from '../../base/DropDown.vue';
 import ActionDialog from '../../controls/ActionDialog.vue';
 import AppTabContainer from '../../app/TabContainer.vue';
 import BaseTabContainerContent from '../../base/tabContainer/Content.vue';
+
 import InputTextBox from '../../inputs/TextBox.vue';
 import InputTextField from '../../inputs/TextField.vue';
 import InputDropDown from '../../inputs/DropDown.vue';
+
+import ControlsImageOptions from '../ImageOptions.vue';
+
 import MixinDialog from '../../../mixins/Dialog.vue';
 import { getDefaultTextOptions } from '../../../utils/action';
 
@@ -83,7 +92,8 @@ export default {
     BaseTabContainerContent,
     InputTextBox,
     InputTextField,
-    InputDropDown
+    InputDropDown,
+    ControlsImageOptions
   },
   mixins: [MixinDialog],
   inheritAttrs: false,
@@ -127,11 +137,14 @@ export default {
   },
   watch: {
     variant (variant) {
-      const {
-        weight,
-        italic
-      } = this.currentFont.variants[Number(variant)];
-      this.model.options = { ...this.model.options, weight, italic };
+      const currentVariant = this.currentFont.variants[Number(variant)];
+      if (currentVariant) {
+        const {
+          weight,
+          italic
+        } = this.currentFont.variants[Number(variant)];
+        this.model.options = { ...this.model.options, weight, italic };
+      }
     },
     model: {
       handler () {

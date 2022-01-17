@@ -1,20 +1,20 @@
 <template>
   <div>
-    <preview-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
+    <preview-native-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
     <canvas v-else ref="canvas" />
   </div>
 </template>
 
 <script>
 import { getBarcode, prepareCanvasForPrint } from 'devterm/utils/canvas';
-import { ALIGN } from 'devterm/config';
+import { ALIGN, MAX_DENSITY } from 'devterm/config';
 import { preparePreview } from '../../utils/canvas';
 import { getDefaultBarcodeOptions } from '../../utils/action';
 
-import PreviewTextCanvas from '../preview/TextCanvas.vue';
+import PreviewNativeTextCanvas from '../preview/NativeTextCanvas.vue';
 
 export default {
-  components: { PreviewTextCanvas },
+  components: { PreviewNativeTextCanvas },
   props: {
     colors: {
       type: Object,
@@ -70,8 +70,8 @@ export default {
         this.img.src = url;
       });
     },
-    getColor (opacity) {
-      return `rgb(${this.colors.primary.join(' ')} / ${opacity * 100}%)`;
+    getColor (opacity = 1) {
+      return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
     render () {
       this.error = null;
@@ -81,10 +81,12 @@ export default {
           try {
             const barcodeCanvas = await getBarcode(this.value.text || 'empty', this.value.options || {});
 
-            const preparedCanvas = prepareCanvasForPrint(barcodeCanvas, this.value.imageOptions);
+            const preparedCanvas = prepareCanvasForPrint(barcodeCanvas, { ...this.value.imageOptions });
 
             ctx.canvas.width = this.width;
             ctx.canvas.height = preparedCanvas.height;
+            ctx.fillStyle = `rgb(${this.colors.printer.preview.background.join(' ')})`;
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
             const width = this.width;
             const margin = parseInt(this.options.margin * width);
@@ -104,8 +106,10 @@ export default {
           } catch (error) {
             this.error = error;
           }
-
-          preparePreview(ctx.canvas, this.colors);
+          preparePreview(ctx.canvas, {
+            background: this.colors.printer.preview.background,
+            foreground: this.colors.printer.preview.foreground
+          }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
         });
       });
     }

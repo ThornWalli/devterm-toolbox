@@ -15,7 +15,7 @@
       </div>
       <input-text-field v-model="profileName" label="Profile Name" />
       <hr>
-      <base-tab-container class="tab-container">
+      <app-tab-container class="tab-container">
         <template #general="options">
           <base-tab-container-content v-bind="options" title="General">
             <div class="cols">
@@ -50,7 +50,7 @@
             <input-text-field v-model="ssl.passphrase" placeholder="Passphrase" label="Passphrase" />
           </base-tab-container-content>
         </template>
-      </base-tab-container>
+      </app-tab-container>
     </template>
     <template #buttons>
       <input-text-button v-if="!active" type="submit" color="primary" text="Start" />
@@ -65,7 +65,7 @@ import { DEFAULT_PROFILE } from '../../classes/Config';
 import { DropDownOptionDescription } from '../base/DropDown.vue';
 import AppDialog from '../app/Dialog.vue';
 import BaseInputLabel from '../base/InputLabel.vue';
-import BaseTabContainer from '../base/TabContainer.vue';
+import AppTabContainer from '../app/TabContainer.vue';
 import BaseTabContainerContent from '../base/tabContainer/Content.vue';
 import InputTextButton from '../inputs/TextButton.vue';
 import InputTextField from '../inputs/TextField.vue';
@@ -78,7 +78,7 @@ export default {
   components: {
     AppDialog,
     BaseInputLabel,
-    BaseTabContainer,
+    AppTabContainer,
     BaseTabContainerContent,
     InputTextButton,
     InputTextField,

@@ -1,19 +1,19 @@
 <template>
   <div>
-    <preview-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
+    <preview-native-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
     <canvas v-else ref="canvas" />
   </div>
 </template>
 
 <script>
 import { createCanvas, prepareCanvasForPrint } from 'devterm/utils/canvas';
-import { ALIGN } from 'devterm/config';
+import { ALIGN, MAX_DENSITY } from 'devterm/config';
 import { preparePreview } from '../../utils/canvas';
 
-import PreviewTextCanvas from '../preview/TextCanvas.vue';
+import PreviewNativeTextCanvas from '../preview/NativeTextCanvas.vue';
 
 export default {
-  components: { PreviewTextCanvas },
+  components: { PreviewNativeTextCanvas },
   props: {
     colors: {
       type: Object,
@@ -62,6 +62,9 @@ export default {
   },
 
   methods: {
+    getColor (opacity = 1) {
+      return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
+    },
     changeImage (url) {
       return new Promise(resolve => {
         this.img = document.createElement('img');
@@ -86,6 +89,8 @@ export default {
 
             ctx.canvas.width = this.width;
             ctx.canvas.height = preparedCanvas.height;
+            ctx.fillStyle = `rgb(${this.colors.printer.preview.background.join(' ')})`;
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
             const width = this.width;
             const margin = parseInt(this.options.margin * width);
@@ -102,7 +107,10 @@ export default {
                 break;
             }
             ctx.drawImage(preparedCanvas, x, 0);
-            preparePreview(ctx.canvas, this.colors);
+            preparePreview(ctx.canvas, {
+              background: this.colors.printer.preview.background,
+              foreground: this.colors.printer.preview.foreground
+            }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
           } catch (error) {
             this.error = error;
           }

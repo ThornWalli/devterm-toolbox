@@ -7,7 +7,7 @@
             <component
               v-bind="item.props"
               :is="item.component"
-              :key="JSON.stringify(item.options)"
+              :key="JSON.stringify(item.id)"
               :options="item.options"
               :colors="colors"
             />
