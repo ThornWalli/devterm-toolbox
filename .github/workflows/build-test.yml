@@ -86,8 +86,10 @@ jobs:
             npm ci --quiet --no-progress
 
             sudo chmod -R 777 ~/.cache
-            sudo chmod -R 777 ~/.config
+            sudo chown -R $(whoami) /root/.config
             sudo chmod -R 777 ./node_modules
+            sudo chmod -R 777 ./node_modules/app-builder-bin/linux/arm/app-builder
+            
             
             npm run build:vue --workspace=@devterm-toolbox/electron
             sudo npm run build:electron:devterm --workspace=@devterm-toolbox/electron --unsafe-perm=true --allow-root
