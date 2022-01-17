@@ -88,7 +88,7 @@ jobs:
             sudo chmod -R 777 ~/.cache
             sudo chown -R $(whoami) /root/.config
             sudo chmod -R 777 ./node_modules
-            sudo chmod -R 777 ./node_modules/app-builder-bin/linux/arm/app-builder
+            sudo chmod -R 777 /root/.cache/electron/electron-v15.3.4-linux-armv7l.zip
             
             
             npm run build:vue --workspace=@devterm-toolbox/electron
