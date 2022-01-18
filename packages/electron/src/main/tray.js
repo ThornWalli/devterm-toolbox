@@ -2,6 +2,8 @@
 const { Tray, Menu, nativeTheme } = require('electron');
 const { join } = require('upath');
 
+const isMac = process.platform === 'darwin';
+
 let mainWindow;
 const registerWindow = window => {
   window.on('close', () => (mainWindow = null));
@@ -95,7 +97,7 @@ const updateTrayIcon = (options = {}) => {
 };
 const getTrayIcon = (options = {}) => {
   options = setTrayOptions(options);
-  let path, type;
+  let type;
   if (options.server && options.remote) {
     type = 'online';
   } else if (options.server && !options.remote) {
@@ -106,12 +108,15 @@ const getTrayIcon = (options = {}) => {
     type = 'offline';
   }
 
-  if (nativeTheme.shouldUseDarkColors) {
-    path = `${type}-dark/icons/png/16x16.png`;
-  } else {
-    path = `${type}-light/icons/png/16x16.png`;
+  let color = 'default';
+  if (isMac) {
+    if (nativeTheme.shouldUseDarkColors) {
+      color = 'dark';
+    } else {
+      color = 'light';
+    }
   }
-  return join(__dirname, `assets/icon-${path}`);
+  return join(__dirname, `assets/icon-${type}-${color}/icons/png/16x16.png`);
 };
 
 module.exports = {

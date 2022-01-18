@@ -19,9 +19,9 @@ const createMainWindow = () => {
   return new Promise(resolve => {
     const mainWindow = createWindow();
 
+    trayRegisterWindow(mainWindow);
+    ipcRegisterWindow(mainWindow);
     mainWindow.on('show', () => {
-      trayRegisterWindow(mainWindow);
-      ipcRegisterWindow(mainWindow);
       resolve(mainWindow);
     });
   });

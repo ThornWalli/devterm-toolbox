@@ -275,7 +275,8 @@ export default {
       return {
         '--color-primary': `rgb(${this.colors.primary.join(',')})`,
         '--color-secondary': `rgb(${this.colors.secondary.join(',')})`,
-        ...Object.fromEntries(Array(10).fill('').map((v, i) => [`--color-primary-${(i + 1) * 10}`, `rgb(${this.colors.primary.join(' ')} / ${(i + 1) * 10}%)`]))
+        ...Object.fromEntries(Array(10).fill('').map((v, i) => [`--color-primary-${(i + 1) * 10}`, `rgb(${this.colors.primary.join(' ')} / ${(i + 1) * 10}%)`])),
+        ...Object.fromEntries(Array(10).fill('').map((v, i) => [`--color-secondary-${(i + 1) * 10}`, `rgb(${this.colors.secondary.join(' ')} / ${(i + 1) * 10}%)`]))
       };
     }
   },

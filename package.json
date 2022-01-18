@@ -18,6 +18,7 @@
     "build:electron:linux": "npm run build:linux --workspace=@devterm-toolbox/electron",
     "build:electron:devterm": "npm run build:devterm --workspace=@devterm-toolbox/electron",
     "rebuild": "npm run rebuild --workspace=@devterm-toolbox/electron",
+    "generate:icons": "npm run generate:icons --workspace=@devterm-toolbox/electron",
     "dev:web": "npm run dev --workspace=@devterm-toolbox/web",
     "build:web": "npm run build --workspace=@devterm-toolbox/web",
     "preview:web": "npm run build --workspace=@devterm-toolbox/web && npm run preview --workspace=@devterm-toolbox/web",

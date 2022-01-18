@@ -1,22 +1,23 @@
 <template>
   <app-view class="view-printer" :style="style">
     <div :key="JSON.stringify(colors)" class="printer-preview">
-      <div>
+      <div class="scroll">
         <div :class="{'has-selected': selectedAction}">
-          <div v-for="(item, index) in previewItems" :id="`anchor-action-${item.id}`" :key="index" :class="{'selected' : selectedAction && selectedAction.id === item.id}">
+          <div v-for="item in previewItems" :id="`anchor-action-${item.id}`" :key="item.id" :class="{'selected' : selectedAction && selectedAction.id === item.id}">
             <component
               v-bind="item.props"
               :is="item.component"
-              :key="JSON.stringify(item.id)"
               :options="item.options"
               :colors="colors"
             />
           </div>
         </div>
       </div>
-      <input-text-button color="primary" class="print-button" @click="onClickPrint">
-        Print
-      </input-text-button>
+      <div class="buttons">
+        <input-text-button color="primary" class="print-button" @click="onClickPrint">
+          Print
+        </input-text-button>
+      </div>
       <transition name="fade">
         <div v-if="loading" class="layer-loading">
           Loading
@@ -187,22 +188,48 @@ export default {
     width: 50%;
     height: 100%;
 
-    & > div {
-      flex: 1;
+    & .buttons {
 
-      /* height: 100%; */
+    }
+
+    &::before {
+      --padding: calc((58/50) * 384px - 384px);
+      --width: 384px;
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(50% - ((var(--width) + var(--padding)) / 2));
+      display: block;
+      width: calc(var(--width) + var(--padding));
+      content: "";
+      background: var(--color-printer-preview-background);
+    }
+
+    & > .buttons {
+      position: relative;
+      display: flex;
+      width: 100%;
+      background: var(--color-printer-preview-foreground);
+
+      & > * {
+        flex: 1;
+      }
+    }
+
+    & > .scroll {
+      flex: 1;
       overflow: auto;
 
       & > div {
+        position: relative;
         width: 384px;
-        padding: 0 calc(((58/50) * 384px - 384px) / 2);
+        padding: 0 calc(var(--padding) / 2);
         margin: 48px auto;
         color: var(--color-printer-preview-foreground);
         background: var(--color-printer-preview-background);
-
-        /* border: dashed var(--color-primary-40); */
+        border: dotted var(--color-secondary-30);
         border-width: 1px;
-        box-shadow: 0 0 1em rgb(0 0 0 / 20%);
 
         &.has-selected {
           & > div {
