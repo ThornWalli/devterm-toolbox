@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.18](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-01-18)
+
+
+### Bug Fixes
+
+* **devterm:** improve devterm build ([442ca27](https://github.com/ThornWalli/devterm-toolbox/commit/442ca274f8f2d96a17f0c64fea74e1730aed5496))
+
 # [1.0.0-beta.17](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-01-17)
 
 
