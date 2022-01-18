@@ -188,10 +188,6 @@ export default {
     width: 50%;
     height: 100%;
 
-    & .buttons {
-
-    }
-
     &::before {
       --padding: calc((58/50) * 384px - 384px);
       --width: 384px;
