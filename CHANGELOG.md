@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.19](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-01-18)
+
+
+### Bug Fixes
+
+* **app:** remove empty selector ([65a45f7](https://github.com/ThornWalli/devterm-toolbox/commit/65a45f700c0a2a1fc12875940c8c0e9bc9a3fe25))
+* **update:** improve trayIcon: improve printer preview ([8d86a2a](https://github.com/ThornWalli/devterm-toolbox/commit/8d86a2ae5ba84e5c7bd340e6990b80fb351ea92b))
+
 # [1.0.0-beta.18](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-01-18)
 
 
