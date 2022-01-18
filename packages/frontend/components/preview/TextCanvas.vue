@@ -83,9 +83,24 @@ export default {
           foreground: this.colors.printer.preview.foreground
         }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
-        ctx.canvas.width = preparedCanvas.width;
+        ctx.canvas.width = this.width;
         ctx.canvas.height = preparedCanvas.height;
-        ctx.drawImage(preparedCanvas, 0, 0);
+
+        const width = this.width;
+        const margin = parseInt(this.options.margin * width);
+        let x = 0;
+        switch (this.options.align) {
+          case ALIGN.RIGHT:
+            x += this.width - preparedCanvas.width;
+            break;
+          case ALIGN.CENTER:
+            x += (this.width - preparedCanvas.width) / 2;
+            break;
+          default:
+            x += margin;
+            break;
+        }
+        ctx.drawImage(preparedCanvas, x, 0);
       });
     }
   }

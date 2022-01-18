@@ -10,12 +10,16 @@ module.exports = {
     shortcutName: 'DevTerm-ToolBox'
   },
   mac: {
-    icon: 'build/icons/mac/icon.icns'
+    icon: 'icons/mac/icon.icns'
   },
   linux: {
-    icon: 'build/icons/png/512x512.png',
+    category: 'Office',
+    // eslint-disable-next-line no-template-curly-in-string
+    artifactName: 'devterm-toolbox-${version}-${platform}-${arch}.${ext}',
+    executableName: 'devterm-toolbox',
+    icon: 'icons/mac/icon.icns',
     target: [
-      'snap'
+      'deb'
     ]
   },
   files: [

@@ -20,11 +20,6 @@ const createTray = (server, { createMainWindow }) => {
   // tray.setPressedImage(getTrayIcon()));
   const contextMenu = Menu.buildFromTemplate(getMenuItems());
 
-  if (process.platform === 'win32') {
-    tray.on('click', tray.popUpContextMenu);
-  }
-
-  tray.setToolTip('This is my application.');
   // Call this again for Linux because we modified the context menu
   tray.setContextMenu(contextMenu);
 
@@ -110,9 +105,8 @@ const getTrayIcon = (options = {}) => {
   } else {
     type = 'offline';
   }
-  if (process.platform === 'win32') {
-    path = `${type}-light/icons/win/icon.ico`;
-  } else if (nativeTheme.shouldUseDarkColors) {
+
+  if (nativeTheme.shouldUseDarkColors) {
     path = `${type}-dark/icons/png/16x16.png`;
   } else {
     path = `${type}-light/icons/png/16x16.png`;
