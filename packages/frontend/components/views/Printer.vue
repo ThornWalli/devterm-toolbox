@@ -1,7 +1,7 @@
 <template>
   <app-view class="view-printer" :style="style">
     <div :key="JSON.stringify(colors)" class="printer-preview">
-      <div class="scroll">
+      <div class="scroll" :class="{loading}">
         <div :class="{'has-selected': selectedAction}">
           <div v-for="item in previewItems" :id="`anchor-action-${item.id}`" :key="item.id" :class="{'selected' : selectedAction && selectedAction.id === item.id}">
             <component
@@ -104,9 +104,12 @@ export default {
     actions () {
       this.render();
       this.$emit('input', this.actions);
+    },
+    selectedAction (value) {
+      if (value) {
+        this.scrollToAction(value);
+      }
     }
-    // selectedAction (selectedAction) {
-    // }
   },
   mounted () {
     this.render();
@@ -138,12 +141,7 @@ export default {
           this.$nextTick(() => {
             this.loading = false;
             if (this.selectedAction) {
-              this.$nextTick(() => {
-                window.requestAnimationFrame(() => {
-                  const anchorEl = document.querySelector(`#anchor-action-${this.selectedAction.id}`);
-                  anchorEl && anchorEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
-                });
-              });
+              this.scrollToAction(this.selectedAction);
             }
           });
         }, 500);
@@ -154,6 +152,15 @@ export default {
 
     print () {
       return this.$client.executeActions(this.actions);
+    },
+
+    scrollToAction (action) {
+      this.$nextTick(() => {
+        window.requestAnimationFrame(() => {
+          const anchorEl = document.querySelector(`#anchor-action-${action.id}`);
+          anchorEl && anchorEl.scrollIntoView({ block: 'center' });
+        });
+      });
     },
 
     onClickPrint () {
@@ -225,6 +232,10 @@ export default {
       top: calc(8 / 16 * 1em);
       flex: 1;
       overflow: auto;
+      transition: opacity 0.2s;
+      &.loading {
+        opacity: 0;
+      }
 
       & > div {
         position: relative;
