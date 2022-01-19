@@ -8,6 +8,11 @@
       <p v-else>
         Your session does not support server, only available in remote.
       </p>
+      <p v-if="https">
+        <strong style="text-decoration: underline;">Note the protocol of this page.</strong> <br>
+        Only if a SSL certificate of the target DevTerm is installed, https can be used.<br>
+        Use the http variant instead: <a href="http://devterm.lammpee.de<">http://devterm.lammpee.de</a>
+      </p>
       <p>
         Click on "Use Remote" and enter the connection data <br>to connect to the DevTerm.
       </p>
@@ -28,6 +33,11 @@ export default {
   components: {
     AppView,
     InputTextButton
+  },
+  data () {
+    return {
+      https: window.location.protocol.startsWith('https')
+    };
   },
   methods: {
     onClickLocal () {
@@ -54,6 +64,10 @@ export default {
   & p {
     font-size: calc(12 / 16 * 1em);
     line-height: calc(20 / 12);
+  }
+
+  & a {
+    color: currentColor;
   }
 
   & div {
