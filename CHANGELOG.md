@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.26](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.25...v1.0.0-beta.26) (2022-01-19)
+
+
+### Bug Fixes
+
+* **app:** improve frontend ([124f0ed](https://github.com/ThornWalli/devterm-toolbox/commit/124f0ed6dfe7f0af476873986c6814b4c5ec7de9))
+
 # [1.0.0-beta.25](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.24...v1.0.0-beta.25) (2022-01-19)
 
 
