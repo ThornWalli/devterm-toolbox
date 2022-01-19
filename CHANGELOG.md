@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.24](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.23...v1.0.0-beta.24) (2022-01-19)
+
+
+### Bug Fixes
+
+* **app:** add duplicate and add action bei action item ([7327301](https://github.com/ThornWalli/devterm-toolbox/commit/73273010e1c711a93a36b1aeb0639a0699179d61))
+
 # [1.0.0-beta.23](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.22...v1.0.0-beta.23) (2022-01-19)
 
 
