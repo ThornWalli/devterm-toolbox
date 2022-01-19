@@ -68,7 +68,6 @@ export default {
 <style lang="postcss" scoped>
 .controls-action-item {
   display: flex;
-  align-items: center;
 
   & .title {
     display: block;
@@ -93,6 +92,11 @@ export default {
         opacity: 0.6;
       }
     }
+  }
+
+  & .title + div {
+    display: flex;
+    align-items: center;
   }
 
   &.property {

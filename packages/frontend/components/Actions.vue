@@ -31,18 +31,24 @@
               <template #default>
                 <div class="action-controls">
                   <span class="index">{{ index + 1 }}</span>
-                  <input-icon-button @click="onClickActionVisible(index)">
-                    <svg-icon-visible v-if="action.visible" />
-                    <svg-icon-invisible v-else />
-                  </input-icon-button>
                   <input-icon-button @click="onClickActionUp(index)">
                     <svg-icon-arrow-up />
                   </input-icon-button>
                   <input-icon-button @click="onClickActionDown(index)">
                     <svg-icon-arrow-down />
                   </input-icon-button>
+                  <input-icon-button @click="onClickActionAdd(index)">
+                    <svg-icon-add />
+                  </input-icon-button>
+                  <input-icon-button @click="onClickActionDuplicate(index)">
+                    <svg-icon-duplicate />
+                  </input-icon-button>
+                  <input-icon-button @click="onClickActionVisible(index)">
+                    <svg-icon-visible v-if="action.visible" />
+                    <svg-icon-invisible v-else />
+                  </input-icon-button>
                   <input-icon-button @click="onClickActionDelete(index)">
-                    <svg-icon-trash />
+                    <svg-icon-remove />
                   </input-icon-button>
                 </div>
               </template>
@@ -55,7 +61,7 @@
       </div>
     </div>
     <div class="add-action">
-      <input-text-button color="primary" @click="showActionSelectDialog">
+      <input-text-button color="primary" @click="onClickActionAdd()">
         Add Action
       </input-text-button>
     </div>
@@ -75,14 +81,17 @@
 
 <script>
 import { fromEvent } from 'rxjs';
+import ActionDescription from '../classes/ActionDescription';
 import ACTION_DEFINITIONS from '../utils/action/definitions';
 import ACTION_DIALOGS from '../utils/action/dialogs';
 import { getActionTypeOptions, createAction, getComponentByType } from '../utils/action';
 
 import SvgIconArrowUp from '../assets/svg/icons/arrow-up.svg';
 import SvgIconArrowDown from '../assets/svg/icons/arrow-down.svg';
-import SvgIconTrash from '../assets/svg/icons/trash.svg';
+import SvgIconRemove from '../assets/svg/icons/remove.svg';
+import SvgIconDuplicate from '../assets/svg/icons/duplicate.svg';
 import SvgIconVisible from '../assets/svg/icons/visible.svg';
+import SvgIconAdd from '../assets/svg/icons/add.svg';
 import SvgIconInvisible from '../assets/svg/icons/invisible.svg';
 import InputIconButton from './inputs/IconButton.vue';
 import InputTextButton from './inputs/TextButton.vue';
@@ -94,7 +103,9 @@ export default {
   components: {
     SvgIconArrowUp,
     SvgIconArrowDown,
-    SvgIconTrash,
+    SvgIconRemove,
+    SvgIconDuplicate,
+    SvgIconAdd,
     SvgIconVisible,
     SvgIconInvisible,
     InputIconButton,
@@ -127,7 +138,8 @@ export default {
       isDrag: false,
       dragId: null,
       dragTargetId: null,
-      model: [...this.value]
+      model: [...this.value],
+      addIndex: null
     };
   },
   computed: {
@@ -174,14 +186,19 @@ export default {
     onSelectAddAction (selectedAction) {
       if (selectedAction) {
         const action = createAction(selectedAction);
-        this.updateModel([].concat(this.model, action));
+        if (this.addIndex) {
+          this.updateModel([].concat(this.model.slice(0, this.addIndex + 1), action, this.model.slice(this.addIndex + 1)));
+        } else {
+          this.updateModel([].concat(this.model, action));
+        }
+
         this.$nextTick(() => {
           this.selectedActionId = null;
           const anchorEl = this.$refs.list.querySelector(`#anchor-action-item-${action.id}`);
           anchorEl && anchorEl.scrollIntoView({ block: 'center' });
           !!ACTION_DIALOGS[action.type] && window.setTimeout(() => {
             this.selectedActionId = action.id;
-          }, 600);
+          }, 100);
         });
       }
     },
@@ -217,6 +234,11 @@ export default {
         // timestamp: Date.now()
       };
       this.updateModel(actions);
+    },
+
+    onClickActionAdd (index) {
+      this.addIndex = index;
+      this.showActionSelectDialog();
     },
 
     onClickActionDelete (index) {
@@ -272,6 +294,11 @@ export default {
     },
     allowDrop (e) {
       e.preventDefault();
+    },
+
+    onClickActionDuplicate (index) {
+      const action = new ActionDescription(JSON.parse(JSON.stringify(this.model[index])));
+      this.updateModel([].concat(this.model.slice(0, index + 1), action, this.model.slice(index + 1)));
     }
   }
 };
@@ -321,15 +348,22 @@ export default {
 
 .action-controls {
   display: flex;
-  align-items: center;
+
+  /* align-items: center; */
   justify-content: flex-end;
+  height: 100%;
 
   & > * {
-    padding: 0 calc(4 / 16 * 1em);
+    height: 100%;
+    padding: 0 calc(8 / 16 * 1em);
   }
 
   & .index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: calc(13 / 16 * 1em);
+    font-style: italic;
     opacity: 0.6;
   }
 }

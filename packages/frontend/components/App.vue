@@ -500,11 +500,12 @@ export default {
 
 <style lang="postcss">
 ::-webkit-scrollbar {
-  width: calc(10 / 16 * 1em);
+  width: calc(16 / 16 * 1em);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-primary);
+  border: solid  var(--color-secondary) calc(2 / 16 * 1em);
   outline: none;
 }
 

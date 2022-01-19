@@ -150,6 +150,10 @@ export default {
   }
 
   & .dialog-content {
+    width: var(--dialog-width);
+    max-height: 100%;
+    overflow: auto;
+
     & > .buttons {
       display: flex;
       margin: calc(-8 / 16 * 1em);

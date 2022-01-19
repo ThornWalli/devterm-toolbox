@@ -201,6 +201,7 @@ export default {
     flex-direction: column;
     width: 50%;
     height: 100%;
+    overflow: hidden;
 
     &::before {
       --padding: calc((58/50) * 384px - 384px);
@@ -229,8 +230,9 @@ export default {
 
     & > .scroll {
       position: relative;
-      top: calc(8 / 16 * 1em);
       flex: 1;
+      margin: calc(2 / 16 * 1em);
+      margin-top: calc(8 / 16 * 1em);
       overflow: auto;
       transition: opacity 0.2s;
 
