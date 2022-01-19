@@ -1,5 +1,14 @@
 # Project Changelog
 
+# [1.0.0-beta.22](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.21...v1.0.0-beta.22) (2022-01-19)
+
+
+### Bug Fixes
+
+* **app:** fix dialog style ([cb744b3](https://github.com/ThornWalli/devterm-toolbox/commit/cb744b3aaf97f90aef20e336b56bdcb71a532a3a))
+* **app:** fix style problem ([b8fc75c](https://github.com/ThornWalli/devterm-toolbox/commit/b8fc75c1966651a7ab6086372cca98e8fd441b7e))
+* **preview:** improve action scroll ([f8fea8c](https://github.com/ThornWalli/devterm-toolbox/commit/f8fea8c6e25db9d77b77630a4b53cf44740873c5))
+
 # [1.0.0-beta.21](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-01-19)
 
 
