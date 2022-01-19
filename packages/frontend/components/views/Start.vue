@@ -11,7 +11,7 @@
       <p v-if="https">
         <strong style="text-decoration: underline;">Note the protocol of this page.</strong> <br>
         Only if a SSL certificate of the target DevTerm is installed, https can be used.<br>
-        Use the http variant instead: <a href="http://devterm.lammpee.de<">http://devterm.lammpee.de</a>
+        Use the http variant instead: <a href="http://devterm.lammpee.de">http://devterm.lammpee.de</a>
       </p>
       <p>
         Click on "Use Remote" and enter the connection data <br>to connect to the DevTerm.

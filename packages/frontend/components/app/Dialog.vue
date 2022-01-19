@@ -150,7 +150,6 @@ export default {
   }
 
   & .dialog-content {
-    width: var(--dialog-width);
     max-height: 100%;
     overflow: auto;
 
