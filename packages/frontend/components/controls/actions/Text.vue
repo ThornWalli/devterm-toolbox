@@ -108,7 +108,7 @@ export default {
   data () {
     const fonts = this.$config.fonts;
     return {
-      variant: null,
+      variant: '0',
       fonts,
       updateTimeout: null,
       model: { ...this.value },
@@ -129,7 +129,7 @@ export default {
         return this.currentFont.variants.map(({ weight, italic }, index) => new DropDownOptionDescription({
           title: String(weight),
           group: italic ? 'Iatlic' : 'Normal',
-          value: index
+          value: String(index)
         }));
       }
       return [];
@@ -138,6 +138,7 @@ export default {
   watch: {
     variant (variant) {
       const currentVariant = this.currentFont.variants[Number(variant)];
+      console.log(currentVariant);
       if (currentVariant) {
         const {
           weight,
@@ -158,7 +159,7 @@ export default {
   },
   methods: {
     onInputFontFamily () {
-      this.variant = 0;
+      this.variant = '0';
     },
     onInputVariante () {},
     onInput (e) {

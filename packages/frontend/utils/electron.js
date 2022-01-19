@@ -133,7 +133,7 @@ export const getFonts = async () => {
     const generateDefaults = () => {
       const variants = [];
       const italics = [false, true];
-      const weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+      const weights = [400, 500, 600, 700, 800, 900];
       for (let x = 0; x < italics.length; x++) {
         for (let y = 0; y < weights.length; y++) {
           variants.push({ weight: weights[y], italic: italics[x] });
@@ -144,18 +144,18 @@ export const getFonts = async () => {
     const variants = generateDefaults();
     return [
       ...defaultFonts,
-      { family: 'Arial', monospace: false, variants },
-      { family: 'Verdana ', monospace: false, variants },
-      { family: 'Helvetica ', monospace: false, variants },
-      { family: 'Tahoma ', monospace: false, variants },
-      { family: 'Trebuchet MS ', monospace: false, variants },
-      { family: 'Times New Roman ', monospace: false, variants },
-      { family: 'Georgia ', monospace: false, variants },
-      { family: 'Garamond ', monospace: false, variants },
-      { family: 'Courier New ', monospace: true, variants },
-      { family: 'Brush Script MT ', monospace: false, variants },
-      { family: 'sans-serif', monospace: false, variants },
-      { family: 'monospace ', monospace: true, variants }
+      { name: 'Arial', monospace: false, variants },
+      { name: 'Verdana ', monospace: false, variants },
+      { name: 'Helvetica ', monospace: false, variants },
+      { name: 'Tahoma ', monospace: false, variants },
+      { name: 'Trebuchet MS ', monospace: false, variants },
+      { name: 'Times New Roman ', monospace: false, variants },
+      { name: 'Georgia ', monospace: false, variants },
+      { name: 'Garamond ', monospace: false, variants },
+      { name: 'Courier New ', monospace: true, variants },
+      { name: 'Brush Script MT ', monospace: false, variants },
+      { name: 'sans-serif', monospace: false, variants },
+      { name: 'monospace ', monospace: true, variants }
     ];
   }
 };
