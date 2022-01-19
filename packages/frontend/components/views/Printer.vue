@@ -233,6 +233,7 @@ export default {
       flex: 1;
       overflow: auto;
       transition: opacity 0.2s;
+
       &.loading {
         opacity: 0;
       }
