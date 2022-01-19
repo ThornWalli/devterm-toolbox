@@ -9,8 +9,12 @@ class ErrorList {
   add (message, title) {
     if (typeof message === 'object') {
       console.error(message);
-      message.type && (title = message.type);
-      message = message.message;
+      if (message.message) {
+        message.type && (title = message.type);
+        message = message.message;
+      } else {
+        message = JSON.stringify(message);
+      }
     }
     const error = { title, message };
     const callback = () => {

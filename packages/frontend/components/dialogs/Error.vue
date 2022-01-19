@@ -55,6 +55,7 @@ export default {
   & p {
     margin: 0;
     font-size: calc(12 / 16 * 1em);
+    word-break: break-word;
   }
 }
 </style>

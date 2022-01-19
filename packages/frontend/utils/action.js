@@ -17,25 +17,31 @@ import { DropDownOptionDescription } from '../components/base/DropDown.vue';
 
 import ActionDescription from '../classes/ActionDescription';
 
+export const getActionTypes = () => {
+  return [
+    { title: 'Margin', value: 'setMargin', group: 'Layout' },
+    { title: 'Font', value: 'setFont', group: 'Layout' },
+    { title: 'Align', value: 'setAlign', group: 'Layout' },
+    { title: 'LineSpace', value: 'setLineSpace', group: 'Layout' },
+    { title: 'WordGap', value: 'setWordGap', group: 'Layout' },
+    { title: 'Image', value: 'image', group: 'Content' },
+    { title: 'QRCode', value: 'qrCode', group: 'Content' },
+    { title: 'Barcode', value: 'barcode', group: 'Content' },
+    { title: 'Text', value: 'text', group: 'Content' },
+    { title: 'NativeText', value: 'nativeText', group: 'Content' },
+    { title: 'Reset', value: 'reset', group: 'General' },
+    { title: 'Feed Pitch', value: 'feedPitch', group: 'General' },
+    { title: 'Cutline', value: 'cutLine', group: 'General' },
+    { title: 'Density', value: 'setDensity', group: 'General' }
+  ];
+};
+
 export const getActionTypeOptions = () => {
   return [
     new DropDownOptionDescription({ title: 'Add new Action…', value: '' }),
-    new DropDownOptionDescription({ title: 'Set Margin', value: 'setMargin' }),
-    new DropDownOptionDescription({ title: 'Set Font', value: 'setFont' }),
-    new DropDownOptionDescription({ title: 'Set Align', value: 'setAlign' }),
-    new DropDownOptionDescription({ title: 'Set Density', value: 'setDensity' }),
-    new DropDownOptionDescription({ title: 'Set LineSpace', value: 'setLineSpace' }),
-    new DropDownOptionDescription({ title: 'Set WordGap', value: 'setWordGap' }),
-    new DropDownOptionDescription({ title: 'Feed Pitch', value: 'feedPitch' }),
-    new DropDownOptionDescription({ title: 'Reset', value: 'reset' }),
-    new DropDownOptionDescription({ title: 'Image', value: 'image' }),
-    new DropDownOptionDescription({ title: 'QRCode', value: 'qrCode' }),
-    new DropDownOptionDescription({ title: 'Barcode', value: 'barcode' }),
-    new DropDownOptionDescription({ title: 'Text', value: 'text' }),
-    new DropDownOptionDescription({ title: 'NativeText', value: 'nativeText' }),
-    new DropDownOptionDescription({ title: 'Cutline', value: 'cutLine' })
+    ...getActionTypes().map(actionType => new DropDownOptionDescription(actionType))
   ];
-}; console.log('DEFAULT_DENSITY', DEFAULT_DENSITY);
+};
 
 export const getComponentByType = (type) => {
   return {

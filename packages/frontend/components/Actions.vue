@@ -55,7 +55,9 @@
       </div>
     </div>
     <div class="add-action">
-      <input-drop-down v-model="createAction" :options="actionTypeOptions" :label="null" />
+      <input-text-button color="primary" @click="showActionSelectDialog">
+        Add Action
+      </input-text-button>
     </div>
     <component
       :is="dialogComponent"
@@ -67,6 +69,7 @@
       @ready="onReadyDialog"
       @close="onCloseDialog"
     />
+    <dialog-action-select ref="dialogActionSelect" @select="onSelectAddAction" />
   </div>
 </template>
 
@@ -82,8 +85,10 @@ import SvgIconTrash from '../assets/svg/icons/trash.svg';
 import SvgIconVisible from '../assets/svg/icons/visible.svg';
 import SvgIconInvisible from '../assets/svg/icons/invisible.svg';
 import InputIconButton from './inputs/IconButton.vue';
-import InputDropDown from './inputs/DropDown.vue';
+import InputTextButton from './inputs/TextButton.vue';
 import ActionItem from './controls/ActionItem.vue';
+
+import DialogActionSelect from './dialogs/ActionSelect.vue';
 
 export default {
   components: {
@@ -93,8 +98,9 @@ export default {
     SvgIconVisible,
     SvgIconInvisible,
     InputIconButton,
-    InputDropDown,
-    ActionItem
+    InputTextButton,
+    ActionItem,
+    DialogActionSelect
   },
   props: {
     value: {
@@ -116,7 +122,6 @@ export default {
       ACTION_DIALOGS,
       getComponentByType,
       selectedActionId: null,
-      createAction: null,
       actionTypeOptions: getActionTypeOptions(),
       itemStates: {},
       isDrag: false,
@@ -151,22 +156,6 @@ export default {
       action && (itemStates[action.id] = true);
       this.itemStates = itemStates;
       this.$emit('selectAction', action);
-    },
-
-    createAction (selectedAction) {
-      if (selectedAction) {
-        const action = createAction(selectedAction);
-        this.updateModel([].concat(this.model, action));
-        this.$nextTick(() => {
-          this.createAction = '';
-          this.selectedActionId = null;
-          const anchorEl = this.$refs.list.querySelector(`#anchor-action-item-${action.id}`);
-          anchorEl && anchorEl.scrollIntoView({ block: 'center' });
-          !!ACTION_DIALOGS[action.type] && window.setTimeout(() => {
-            this.selectedActionId = action.id;
-          }, 600);
-        });
-      }
     }
   },
   mounted () {
@@ -181,6 +170,24 @@ export default {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   },
   methods: {
+
+    onSelectAddAction (selectedAction) {
+      if (selectedAction) {
+        const action = createAction(selectedAction);
+        this.updateModel([].concat(this.model, action));
+        this.$nextTick(() => {
+          this.selectedActionId = null;
+          const anchorEl = this.$refs.list.querySelector(`#anchor-action-item-${action.id}`);
+          anchorEl && anchorEl.scrollIntoView({ block: 'center' });
+          !!ACTION_DIALOGS[action.type] && window.setTimeout(() => {
+            this.selectedActionId = action.id;
+          }, 600);
+        });
+      }
+    },
+    showActionSelectDialog () {
+      return this.$refs.dialogActionSelect.show();
+    },
     onReadyDialog () {
       this.$nextTick(() => {
         this.$refs.dialog.show();

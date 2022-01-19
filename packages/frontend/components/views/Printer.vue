@@ -193,7 +193,7 @@ export default {
       --width: 384px;
 
       position: absolute;
-      top: 0;
+      top: calc(8 / 16 * 1em);
       bottom: 0;
       left: calc(50% - ((var(--width) + var(--padding)) / 2));
       display: block;
@@ -214,6 +214,8 @@ export default {
     }
 
     & > .scroll {
+      position: relative;
+      top: calc(8 / 16 * 1em);
       flex: 1;
       overflow: auto;
 
