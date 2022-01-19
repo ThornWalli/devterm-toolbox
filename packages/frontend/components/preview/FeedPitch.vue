@@ -29,6 +29,9 @@ export default {
       }
       return value;
     }
+  },
+  mounted () {
+    this.$emit('ready');
   }
 };
 // let { value, type } = action.value;

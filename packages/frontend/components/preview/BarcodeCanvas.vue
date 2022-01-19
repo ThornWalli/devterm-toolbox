@@ -70,9 +70,6 @@ export default {
         this.img.src = url;
       });
     },
-    getColor (opacity = 1) {
-      return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
-    },
     render () {
       this.error = null;
       this.$nextTick(() => {
@@ -82,6 +79,10 @@ export default {
             const barcodeCanvas = await getBarcode(this.value.text || 'empty', this.value.options || {});
 
             const preparedCanvas = prepareCanvasForPrint(barcodeCanvas, { ...this.value.imageOptions });
+            preparePreview(preparedCanvas, {
+              background: this.colors.printer.preview.background,
+              foreground: this.colors.printer.preview.foreground
+            }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
             ctx.canvas.width = this.width;
             ctx.canvas.height = preparedCanvas.height;
@@ -106,10 +107,8 @@ export default {
           } catch (error) {
             this.error = error;
           }
-          preparePreview(ctx.canvas, {
-            background: this.colors.printer.preview.background,
-            foreground: this.colors.printer.preview.foreground
-          }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
+
+          this.$emit('ready');
         });
       });
     }

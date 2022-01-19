@@ -81,7 +81,7 @@ export default {
         preparedCanvas = preparePreview(preparedCanvas, {
           background: this.colors.printer.preview.background,
           foreground: this.colors.printer.preview.foreground
-        }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
+        }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY), false);
 
         ctx.canvas.width = this.width;
         ctx.canvas.height = preparedCanvas.height;
@@ -101,6 +101,7 @@ export default {
             break;
         }
         ctx.drawImage(preparedCanvas, x, 0);
+        this.$emit('ready');
       });
     }
   }

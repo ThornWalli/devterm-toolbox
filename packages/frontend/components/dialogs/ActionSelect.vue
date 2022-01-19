@@ -4,7 +4,7 @@
     ref="dialog"
     :escape-close="true"
     title="Actions"
-    class="dialog-actions"
+    class="dialog-action-select"
     v-on="$listeners"
   >
     <template #default>
@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.dialog-actions {
+.dialog-action-select {
   --dialog-width: calc(480 / 16 * 1em);
 
   & ul {

@@ -7,8 +7,10 @@
             <component
               v-bind="item.props"
               :is="item.component"
+              :key="item.id"
               :options="item.options"
               :colors="colors"
+              @ready="item.resolve()"
             />
           </div>
         </div>
@@ -102,17 +104,9 @@ export default {
     actions () {
       this.render();
       this.$emit('input', this.actions);
-    },
-    selectedAction (selectedAction) {
-      if (selectedAction) {
-        const anchorEl = document.querySelector(`#anchor-action-${selectedAction.id}`);
-        this.$nextTick(() => {
-          window.requestAnimationFrame(() => {
-            anchorEl && anchorEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
-          });
-        });
-      }
     }
+    // selectedAction (selectedAction) {
+    // }
   },
   mounted () {
     this.render();
@@ -133,11 +127,24 @@ export default {
         this.loading = true;
         window.clearTimeout(this.renderTimeout);
         this.renderTimeout = window.setTimeout(async () => {
-          this.previewItems = await executeActions(this.actions);
-
-          console.log(this.actions, this.previewItems, this.previewItems.find(item => !item));
+          const ready = [];
+          this.previewItems = await executeActions(this.actions).map(action => {
+            ready.push(new Promise(resolve => {
+              action.resolve = () => resolve();
+            }));
+            return action;
+          });
+          await Promise.all(ready);
           this.$nextTick(() => {
             this.loading = false;
+            if (this.selectedAction) {
+              this.$nextTick(() => {
+                window.requestAnimationFrame(() => {
+                  const anchorEl = document.querySelector(`#anchor-action-${this.selectedAction.id}`);
+                  anchorEl && anchorEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                });
+              });
+            }
           });
         }, 500);
       } else {
@@ -172,7 +179,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 50%;
     height: 100%;
     pointer-events: none;
   }

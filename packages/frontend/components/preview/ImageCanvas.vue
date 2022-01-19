@@ -86,6 +86,10 @@ export default {
             imageContext.drawImage(this.img, 0, 0);
 
             const preparedCanvas = prepareCanvasForPrint(imageCanvas, this.value.imageOptions);
+            preparePreview(preparedCanvas, {
+              background: this.colors.printer.preview.background,
+              foreground: this.colors.printer.preview.foreground
+            }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
             ctx.canvas.width = this.width;
             ctx.canvas.height = preparedCanvas.height;
@@ -107,13 +111,10 @@ export default {
                 break;
             }
             ctx.drawImage(preparedCanvas, x, 0);
-            preparePreview(ctx.canvas, {
-              background: this.colors.printer.preview.background,
-              foreground: this.colors.printer.preview.foreground
-            }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
           } catch (error) {
             this.error = error;
           }
+          this.$emit('ready');
         });
       });
     }

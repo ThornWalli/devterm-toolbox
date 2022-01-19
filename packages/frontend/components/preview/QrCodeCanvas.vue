@@ -82,6 +82,11 @@ export default {
             const qrCodeWidth = this.value.options?.width || this.value.imageOptions?.width;
             const preparedCanvas = prepareCanvasForPrint(await getQRCode(this.value.text || 'empty', { ...(this.value.options || {}), width: qrCodeWidth }), this.value.imageOptions);
 
+            preparePreview(preparedCanvas, {
+              background: this.colors.printer.preview.background,
+              foreground: this.colors.printer.preview.foreground
+            }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
+
             ctx.canvas.width = this.width;
             ctx.canvas.height = preparedCanvas.height;
             ctx.fillStyle = `rgb(${this.colors.printer.preview.background.join(' ')})`;
@@ -102,13 +107,10 @@ export default {
                 break;
             }
             ctx.drawImage(preparedCanvas, x, 0);
-            preparePreview(ctx.canvas, {
-              background: this.colors.printer.preview.background,
-              foreground: this.colors.printer.preview.foreground
-            }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
           } catch (error) {
             this.error = error;
           }
+          this.$emit('ready');
         });
       });
     }

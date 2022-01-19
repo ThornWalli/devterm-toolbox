@@ -78,14 +78,15 @@ export default {
           background: this.colors.printer.preview.background,
           foreground: this.colors.printer.preview.foreground
         });
+        preparePreview(canvas, {
+          background: this.colors.printer.preview.background,
+          foreground: this.colors.printer.preview.foreground
+        }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
         this.$el.width = canvas.width;
         this.$el.height = canvas.height;
         ctx.drawImage(canvas, 0, 0);
-        preparePreview(ctx.canvas, {
-          background: this.colors.printer.preview.background,
-          foreground: this.colors.printer.preview.foreground
-        }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY), false);
+        this.$emit('ready');
       });
     }
   }
