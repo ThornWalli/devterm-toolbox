@@ -18,6 +18,8 @@ const createWindow = (server) => {
 
   if (isDev) {
     mainWindow.webContents.openDevTools();
+  } else {
+    mainWindow.removeMenu();
   }
 
   if (isDev) {

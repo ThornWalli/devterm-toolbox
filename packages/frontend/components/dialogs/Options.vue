@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.dialog-options {
+.app-dialog.dialog-options {
   --dialog-width: calc(480 / 16 * 1em);
 }
 </style>

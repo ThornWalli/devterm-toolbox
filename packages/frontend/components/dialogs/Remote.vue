@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.dialog-remote {
+.app-dialog.dialog-remote {
   --dialog-width: calc(480 / 16 * 1em);
 
   & .profile-select {

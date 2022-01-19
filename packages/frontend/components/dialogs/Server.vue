@@ -184,7 +184,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.dialog-server {
+.app-dialog.dialog-server {
   --dialog-width: calc(480 / 16 * 1em);
 
   & >>> .base-input-label {

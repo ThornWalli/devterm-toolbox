@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.dialog-prompt {
+.app-dialog.dialog-prompt {
   --dialog-width: 40%;
 
   min-width: 300px;
