@@ -114,7 +114,6 @@ export default {
     flex-direction: column;
 
     &.embed {
-
       & > span {
         position: absolute;
         top: 0;
