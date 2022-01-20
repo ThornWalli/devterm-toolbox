@@ -59,19 +59,18 @@ export const preparePreview = (canvas, colors, density = 1, withGrayscale = true
 };
 
 const grayscale = (data, colors, density) => {
-  const alpha = parseInt(density * 255);
   for (let i = 0; i < data.length; i += 4) {
     const brightness = ((data[i] + data[i + 1] + data[i + 2]) / 3) / 255;
     if (brightness < 0.6) {
       data[i] = colors[0][0];
       data[i + 1] = colors[0][1];
       data[i + 2] = colors[0][2];
-      data[i + 3] = alpha;
+      data[i + 3] = parseInt(data[i + 3] * density);
     } else {
       data[i] = colors[1][0];
       data[i + 1] = colors[1][1];
       data[i + 2] = colors[1][2];
-      data[i + 3] = alpha;
+      data[i + 3] = parseInt(data[i + 3] * density);
     }
   }
 };

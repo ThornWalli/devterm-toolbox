@@ -12,6 +12,6 @@
   "scripts": {},
   "dependencies": {
     "buffer": "^6.0.3",
-    "devterm": "^1.0.0-beta.12"
+    "devterm": "^1.0.0-beta.14"
   }
 }

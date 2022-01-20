@@ -36,6 +36,7 @@ class Server extends Events {
     };
     this.sockets = new Map();
     this.printer = createPrinter();
+
     this.printer.debug = true;
   }
 

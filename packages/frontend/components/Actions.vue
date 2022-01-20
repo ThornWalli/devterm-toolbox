@@ -186,8 +186,9 @@ export default {
     onSelectAddAction (selectedAction) {
       if (selectedAction) {
         const action = createAction(selectedAction);
-        if (this.addIndex) {
+        if (this.addIndex !== null) {
           this.updateModel([].concat(this.model.slice(0, this.addIndex + 1), action, this.model.slice(this.addIndex + 1)));
+          this.addIndex = null;
         } else {
           this.updateModel([].concat(this.model, action));
         }

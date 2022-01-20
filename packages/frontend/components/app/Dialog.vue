@@ -110,13 +110,10 @@ export default {
   }
 
   &[open] {
-    &:not(.embed) {
-      display: block;
-    }
+    display: flex;
+    flex-direction: column;
 
     &.embed {
-      display: flex;
-      flex-direction: column;
 
       & > span {
         position: absolute;
