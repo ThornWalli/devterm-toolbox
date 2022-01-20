@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.27](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.26...v1.0.0-beta.27) (2022-01-20)
+
+
+### Bug Fixes
+
+* **app:** fix lint errors ([241735c](https://github.com/ThornWalli/devterm-toolbox/commit/241735ccdc54a9dc1d02af269a29a995f25d8f5f))
+* **update:** update node-devterm & improve frontend ([267d604](https://github.com/ThornWalli/devterm-toolbox/commit/267d60406fcd67ae24098e5a46d8686b0252f1a3))
+
 # [1.0.0-beta.26](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.25...v1.0.0-beta.26) (2022-01-19)
 
 
