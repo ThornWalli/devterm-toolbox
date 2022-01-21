@@ -139,7 +139,7 @@ export default {
       dragId: null,
       dragTargetId: null,
       model: [...this.value],
-      addIndex: null
+      addIndex: undefined
     };
   },
   computed: {
@@ -186,13 +186,12 @@ export default {
     onSelectAddAction (selectedAction) {
       if (selectedAction) {
         const action = createAction(selectedAction);
-        if (this.addIndex !== null) {
+        if (Number.isInteger(this.addIndex)) {
           this.updateModel([].concat(this.model.slice(0, this.addIndex + 1), action, this.model.slice(this.addIndex + 1)));
-          this.addIndex = null;
         } else {
           this.updateModel([].concat(this.model, action));
         }
-
+        this.addIndex = undefined;
         this.$nextTick(() => {
           this.selectedActionId = null;
           const anchorEl = this.$refs.list.querySelector(`#anchor-action-item-${action.id}`);
@@ -365,7 +364,7 @@ export default {
     justify-content: center;
     font-size: calc(13 / 16 * 1em);
     font-style: italic;
-    opacity: 0.6;
+    opacity: 0.4;
   }
 }
 </style>

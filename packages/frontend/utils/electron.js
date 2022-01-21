@@ -154,8 +154,11 @@ export const getFonts = async () => {
       { name: 'Garamond ', monospace: false, variants },
       { name: 'Courier New ', monospace: true, variants },
       { name: 'Brush Script MT ', monospace: false, variants },
-      { name: 'sans-serif', monospace: false, variants },
-      { name: 'monospace ', monospace: true, variants }
+      { name: 'Sans-Serif', monospace: false },
+      { name: 'Serif', monospace: false },
+      { name: 'monospace', monospace: true },
+      { name: 'Fantasy', monospace: false },
+      { name: 'Cursive', monospace: false }
     ];
   }
 };

@@ -50,11 +50,11 @@ export default {
     color: var(--color-secondary);
     background: var(--color-primary);
 
-    &:active {
+    /* &:active {
       color: var(--color-primary);
       background: var(--color-secondary);
       transition: background 0.3s;
-    }
+    } */
   }
 
   & >>> svg {
