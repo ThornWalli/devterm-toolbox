@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.29](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.28...v1.0.0-beta.29) (2022-01-21)
+
+
+### Bug Fixes
+
+* **app:** improve text action font selection ([236f66b](https://github.com/ThornWalli/devterm-toolbox/commit/236f66be004fe3084c3ec7f5413324e15fccb208))
+
 # [1.0.0-beta.28](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.27...v1.0.0-beta.28) (2022-01-21)
 
 
