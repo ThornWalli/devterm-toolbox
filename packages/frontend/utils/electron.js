@@ -120,45 +120,45 @@ export const getVersion = () => {
 };
 
 export const getFonts = async () => {
+  const generateDefaults = () => {
+    const variants = [];
+    const italics = [false, true];
+    const weights = [400, 500, 600, 700, 800, 900];
+    for (let x = 0; x < italics.length; x++) {
+      for (let y = 0; y < weights.length; y++) {
+        variants.push({ weight: weights[y], italic: italics[x] });
+      }
+    }
+    return variants;
+  };
+  const variants = generateDefaults();
   const defaultFonts = [
-    { name: '5x7-ISO8859-1', variants: [] },
-    { name: '6x12-ISO8859-1', variants: [] },
-    { name: '7x14-ISO8859-1', variants: [] },
-    { name: 'Px437_CompaqThin_8x16', variants: [] }
+    { group: 'DevTerm', value: '"5x7-ISO8859-1"', name: '5x7-ISO8859-1', variants: [] },
+    { group: 'DevTerm', value: '"6x12-ISO8859-1"', name: '6x12-ISO8859-1', variants: [] },
+    { group: 'DevTerm', value: '"7x14-ISO8859-1"', name: '7x14-ISO8859-1', variants: [] },
+    { group: 'DevTerm', value: '"Px437_CompaqThin_8x16"', name: 'Px437_CompaqThin_8x16', variants: [] },
+    { group: 'Web', value: 'sans-serif', name: 'Sans-serif', monospace: false, variants },
+    { group: 'Web', value: 'serif', name: 'Serif', monospace: false, variants },
+    { group: 'Web', value: 'monospace', name: 'Monospace', monospace: true, variants },
+    { group: 'Web', value: 'fantasy', name: 'Fantasy', monospace: false, variants },
+    { group: 'Web', value: 'cursive', name: 'Cursive', monospace: false, variants }
   ];
 
   if (isElectron()) {
     return defaultFonts.concat(await window.electron.ipcRenderer.invoke('getFonts'));
   } else {
-    const generateDefaults = () => {
-      const variants = [];
-      const italics = [false, true];
-      const weights = [400, 500, 600, 700, 800, 900];
-      for (let x = 0; x < italics.length; x++) {
-        for (let y = 0; y < weights.length; y++) {
-          variants.push({ weight: weights[y], italic: italics[x] });
-        }
-      }
-      return variants;
-    };
-    const variants = generateDefaults();
     return [
       ...defaultFonts,
-      { name: 'Arial', monospace: false, variants },
-      { name: 'Verdana ', monospace: false, variants },
-      { name: 'Helvetica ', monospace: false, variants },
-      { name: 'Tahoma ', monospace: false, variants },
-      { name: 'Trebuchet MS ', monospace: false, variants },
-      { name: 'Times New Roman ', monospace: false, variants },
-      { name: 'Georgia ', monospace: false, variants },
-      { name: 'Garamond ', monospace: false, variants },
-      { name: 'Courier New ', monospace: true, variants },
-      { name: 'Brush Script MT ', monospace: false, variants },
-      { name: 'Sans-Serif', monospace: false },
-      { name: 'Serif', monospace: false },
-      { name: 'monospace', monospace: true },
-      { name: 'Fantasy', monospace: false },
-      { name: 'Cursive', monospace: false }
+      { group: 'System', value: '"Arial"', name: 'Arial', monospace: false, variants },
+      { group: 'System', value: '"Verdana"', name: 'Verdana', monospace: false, variants },
+      { group: 'System', value: '"Helvetica"', name: 'Helvetica', monospace: false, variants },
+      { group: 'System', value: '"Tahoma"', name: 'Tahoma', monospace: false, variants },
+      { group: 'System', value: '"Trebuchet MS"', name: 'Trebuchet MS', monospace: false, variants },
+      { group: 'System', value: '"Times New Roman"', name: 'Times New Roman', monospace: false, variants },
+      { group: 'System', value: '"Georgia"', name: 'Georgia', monospace: false, variants },
+      { group: 'System', value: '"Garamond"', name: 'Garamond', monospace: false, variants },
+      { group: 'System', value: '"Courier New"', name: 'Courier New', monospace: true, variants },
+      { group: 'System', value: '"Brush Script MT"', name: 'Brush Script MT', monospace: false, variants }
     ];
   }
 };

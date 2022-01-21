@@ -122,7 +122,8 @@ export const drawText = (text, options, width, colors) => {
       break;
   }
 
-  const font = `${italic ? 'italic ' : ''}${weight} ${fontSize}px "${fontFamily}"`;
+  const font = `${italic ? 'italic ' : ''}${weight} ${fontSize}px ${fontFamily}`;
+  console.log(font);
   const canvas = document.createElement('canvas');
   canvas.style.display = 'none';
   canvas.width = width;

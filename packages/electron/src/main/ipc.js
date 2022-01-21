@@ -99,8 +99,10 @@ const ipc = (server) => {
     });
     fonts = fonts.map(({ family, weight, italic, monospace }) => ({ family, weight, italic, monospace }));
     return Object.values(fonts.reduce((result, font) => {
-      const definition = result[font.family] || { name: null, variants: [], monospace: false };
+      const definition = result[font.family] || { name: null, value: null, variants: [], monospace: false };
+      definition.value = `"${font.family}"`;
       definition.name = font.family;
+      definition.group = 'System';
       definition.monospace = font.monospace;
       definition.variants.push({ weight: font.weight, italic: font.italic });
       definition.variants.sort((a, b) => b.weight > a.weight);

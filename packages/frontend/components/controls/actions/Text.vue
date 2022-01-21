@@ -117,12 +117,12 @@ export default {
         ['Center', ALIGN.CENTER],
         ['Right', ALIGN.RIGHT]
       ].map(([title, value]) => new DropDownOptionDescription({ title, value: String(value) })),
-      fontOptions: [{ title: 'Select Font', value: '' }].concat(this.$config.fonts.map(font => new DropDownOptionDescription(font.name)))
+      fontOptions: [{ title: 'Select Font', value: '' }].concat(this.$config.fonts.map(font => new DropDownOptionDescription({ title: font.name, group: font.group, value: font.value })))
     };
   },
   computed: {
     currentFont () {
-      return this.$config.fonts.find(font => font.name === this.model.options.fontFamily);
+      return this.$config.fonts.find(font => font.value === this.model.options.fontFamily);
     },
     variantOptions () {
       if (this.currentFont) {
