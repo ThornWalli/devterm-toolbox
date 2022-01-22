@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.30](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.29...v1.0.0-beta.30) (2022-01-22)
+
+
+### Bug Fixes
+
+* **app:** improve ([d04395f](https://github.com/ThornWalli/devterm-toolbox/commit/d04395f12d0032d71f1a872dffeb7bcf7e3a2387))
+
 # [1.0.0-beta.29](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.28...v1.0.0-beta.29) (2022-01-21)
 
 
