@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="cols">
-      <div><input-check-box v-model="model.grayscale" label="Grarscale" /></div>
+      <div><input-check-box v-model="model.grayscale" label="Grayscale" /></div>
       <div><input-check-box v-model="model.rotate" label="Rotate" /></div>
       <div><input-check-box v-model="model.flipX" label="Flip X" /></div>
       <div><input-check-box v-model="model.flipY" label="Flip Y" /></div>

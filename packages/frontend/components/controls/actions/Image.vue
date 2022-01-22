@@ -141,8 +141,10 @@ export default {
   & .preview {
     display: flex;
     justify-content: center;
-    margin: calc(8 / 16 * 1em) 0;
+    padding: calc(4 / 16 * 1em);
+    margin: calc(0 / 16 * 1em) 0;
     margin-bottom: calc(16 / 16 * 1em);
+    background: var(--color-primary-20);
   }
 
   & .input {

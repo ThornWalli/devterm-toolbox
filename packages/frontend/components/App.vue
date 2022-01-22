@@ -252,6 +252,9 @@ export default {
         },
         {
           component: AppMenuText,
+          on: {
+            click: () => { window.open('https://github.com/ThornWalli/devterm-toolbox/releases'); }
+          },
           props: { class: 'info-version', text: this.version }
         }
 
