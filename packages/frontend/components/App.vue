@@ -17,7 +17,9 @@
     <dialog-remote v-if="ready" ref="dialogRemote" />
     <dialog-server v-if="ready" ref="dialogServer" />
     <dialog-options v-if="ready" ref="dialogOptions" />
-    <div class="scanlines" />
+    <div class="display-look">
+      <div class="scanlines" />
+    </div>
   </div>
 </template>
 <script>
@@ -555,20 +557,19 @@ hr {
 }
 </style>
 
-<style lang="postcss">
-:root {
+<style lang="postcss" scoped>
+.app {
   --scan-width: 2px;
   --scan-crt: true;
   --scan-fps: 60;
   --scan-color: rgb(0 0 0 / 15%);
-  --scan-opacity: 0.75;
+  --scan-opacity: 1;
 }
 
 .scanlines {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10000;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -585,7 +586,6 @@ hr {
   &::before {
     position: absolute;
     bottom: 100%;
-    z-index: calc(var(--z-index) + 1);
     width: 100%;
     height: calc(var(--scan-width) * 1);
     background: var(--scan-color);
@@ -598,15 +598,56 @@ hr {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: var(--z-index);
     background:
       linear-gradient(
         to bottom,
         transparent 50%,
         var(--scan-color) 51%
       );
-    background-size: 100% calc(var(--scan-width) * 2);
+    background-size: 100% calc(2 * var(--scan-width));
     animation: scanlines 1s steps(var(--scan-fps)) infinite;
+  }
+}
+
+.display-look {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    pointer-events: none;
+    content: " ";
+    background: linear-gradient(transparent 50%, rgb(0 0 0 / 25%) 50%), linear-gradient(90deg, rgb(255 0 0 / 6%), rgb(0 255 0 / 2%), rgb(0 0 255 / 6%));
+    background-size: 100% 2px, 3px 100%;
+    opacity: 0.6;
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    content: "";
+    background-image:
+      radial-gradient(
+        rgb(255 255 255 / 15%),
+        rgb(0 0 0 / 20%) 180%
+      );
+    opacity: 0.2;
+    transition: opacity 0.2s ease-in;
   }
 }
 
