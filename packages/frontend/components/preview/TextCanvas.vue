@@ -73,15 +73,12 @@ export default {
         const textCanvas = drawText(this.value.text, {
           ...this.value.options,
           margin: this.options.margin
-        }, this.width, {
-          background: this.colors.printer.preview.background,
-          foreground: this.colors.printer.preview.foreground
-        });
+        }, (this.value.imageOptions || {}).rotate ? (this.value.imageOptions || {}).width : this.width);
         let preparedCanvas = prepareCanvasForPrint(textCanvas, { ...this.value.imageOptions });
         preparedCanvas = preparePreview(preparedCanvas, {
           background: this.colors.printer.preview.background,
           foreground: this.colors.printer.preview.foreground
-        }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY), false);
+        }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
         ctx.canvas.width = this.width;
         ctx.canvas.height = preparedCanvas.height;

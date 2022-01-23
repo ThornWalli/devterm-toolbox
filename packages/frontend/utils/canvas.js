@@ -13,7 +13,6 @@ export const toDataURL = (targetCanvas) => {
   canvas.height = targetCanvas.height;
   const ctx = canvas.getContext('2d');
   ctx.drawImage(targetCanvas, 0, 0);
-  console.log('update Canvas', canvas);
   return canvas.toDataURL('image/png', 100);
 };
 
@@ -104,7 +103,7 @@ export const drawText = (text, options, width, colors) => {
     ...options
   };
   const margin_ = [0, width * margin, 0, 0];
-  console.log(margin_);
+
   let x = 0;
   let width_ = width;
 
@@ -123,17 +122,37 @@ export const drawText = (text, options, width, colors) => {
   }
 
   const font = `${italic ? 'italic ' : ''}${weight} ${fontSize}px ${fontFamily}`;
-  console.log(font);
+
   const canvas = document.createElement('canvas');
   canvas.style.display = 'none';
-  canvas.width = width;
+
   document.body.append(canvas);
   const ctx = canvas.getContext('2d');
   ctx.canvas.style.letterSpacing = `${wordGap}px`;
   ctx.font = font;
+
   const lineHeight = Math.max(lineSpace, fontSize) / fontSize;
   const rows = text.split('\n').map(text => prepareText(ctx, text, 0, 0, fontSize, width_)).flat();
-  canvas.height = (rows.length * fontSize) * lineHeight + margin_[0] + margin_[2];
+
+  const height = (rows.length * fontSize) * lineHeight + margin_[0] + margin_[2]; ;
+  if (!width) {
+    width = parseInt(ctx.measureText(text.split('\n')[0]).width);
+
+    x = 0; switch (align) {
+      case ALIGN.RIGHT:
+        x += width;
+        break;
+      case ALIGN.CENTER:
+        x += width / 2;
+        break;
+      default:
+        // x += width[1];
+        break;
+    }
+  }
+  canvas.width = width;
+  ctx.font = font;
+  canvas.height = height;
 
   ctx.fillStyle = `rgb(${colors.background.join(' ')})`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);

@@ -558,57 +558,6 @@ hr {
 </style>
 
 <style lang="postcss" scoped>
-.app {
-  --scan-width: 2px;
-  --scan-crt: true;
-  --scan-fps: 60;
-  --scan-color: rgb(0 0 0 / 15%);
-  --scan-opacity: 1;
-}
-
-.scanlines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-
-  &::before,
-  &::after {
-    position: absolute;
-    display: block;
-    pointer-events: none;
-    content: "";
-  }
-
-  &::before {
-    position: absolute;
-    bottom: 100%;
-    width: 100%;
-    height: calc(var(--scan-width) * 1);
-    background: var(--scan-color);
-    opacity: var(--scan-opacity);
-    animation: scanline 6s linear infinite;
-  }
-
-  &::after {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background:
-      linear-gradient(
-        to bottom,
-        transparent 50%,
-        var(--scan-color) 51%
-      );
-    background-size: 100% calc(2 * var(--scan-width));
-    animation: scanlines 1s steps(var(--scan-fps)) infinite;
-  }
-}
-
 .display-look {
   position: fixed;
   top: 0;
@@ -648,18 +597,6 @@ hr {
       );
     opacity: 0.2;
     transition: opacity 0.2s ease-in;
-  }
-}
-
-@keyframes scanline {
-  0% {
-    transform: translate3d(0, 200000%, 0);
-  }
-}
-
-@keyframes scanlines {
-  0% {
-    background-position: 0 50%;
   }
 }
 </style>

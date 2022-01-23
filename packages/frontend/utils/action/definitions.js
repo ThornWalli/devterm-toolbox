@@ -51,7 +51,7 @@ export default {
     }),
     beforePrinterCommand: async (action) => {
       const { text, options, imageOptions } = action.value;
-      const canvas = await drawText(text || 'empty', options || {}, MAX_DOTS);
+      const canvas = await drawText(text || 'empty', options || {}, (imageOptions || {}).rotate ? imageOptions.width : MAX_DOTS);
       action.value = await getBuffersFromCanvas(canvas, imageOptions);
       return action;
     }
