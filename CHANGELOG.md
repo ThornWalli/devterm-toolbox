@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.32](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.31...v1.0.0-beta.32) (2022-01-23)
+
+
+### Bug Fixes
+
+* **inputs:** improve input styles ([310dc96](https://github.com/ThornWalli/devterm-toolbox/commit/310dc9667f844052ebc61ee0c148d9d965e6e90b))
+
 # [1.0.0-beta.31](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.30...v1.0.0-beta.31) (2022-01-23)
 
 
