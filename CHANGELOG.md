@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.31](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.30...v1.0.0-beta.31) (2022-01-23)
+
+
+### Bug Fixes
+
+* **scanlines:** add scanlines ([3f7b3a0](https://github.com/ThornWalli/devterm-toolbox/commit/3f7b3a0ada5a32317e438d8d76c72a7ddc57af99))
+* **text:** improve rotated text ([0458395](https://github.com/ThornWalli/devterm-toolbox/commit/0458395ac6bd092a2e80c5d16458978133e10143))
+
 # [1.0.0-beta.30](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.29...v1.0.0-beta.30) (2022-01-22)
 
 
