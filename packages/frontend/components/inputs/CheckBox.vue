@@ -55,6 +55,7 @@ export default {
     }
   }
 
+  &:hover input:not([disabled]) + span,
   & input:checked + span {
     &::before {
       opacity: 1;

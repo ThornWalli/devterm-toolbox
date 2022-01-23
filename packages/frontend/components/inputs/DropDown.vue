@@ -40,6 +40,17 @@ export default {
       cursor: not-allowed;
       opacity: 0.6;
     }
+
+    &:focus,
+    &:hover {
+      color: var(--color-secondary);
+      background: var(--color-primary);
+    }
+
+    & option {
+      color: var(--color-primary);
+      background: var(--color-secondary);
+    }
   }
 }
 </style>

@@ -70,5 +70,17 @@ input {
     cursor: not-allowed;
     opacity: 0.6;
   }
+
+  &:not(&[disabled]) {
+    &:focus,
+    &:hover {
+      color: var(--color-secondary);
+      background: var(--color-primary);
+
+      &::placeholder {
+        color: var(--color-secondary-50);
+      }
+    }
+  }
 }
 </style>
