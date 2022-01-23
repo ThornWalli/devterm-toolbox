@@ -12,6 +12,7 @@
         <slot name="buttons" />
       </div>
     </component>
+    <div class="display-look" />
   </dialog>
 </template>
 
@@ -126,8 +127,8 @@ export default {
     }
   }
 
-  & > div,
-  & > form {
+  & .dialog-title,
+  & .dialog-content {
     position: relative;
     box-sizing: border-box;
     padding: calc(8 / 16 * 1em);
@@ -190,8 +191,8 @@ export default {
     /* width: 100%; */
     height: 100%;
 
-    & > div,
-    & > form {
+    & > .dialog-title,
+    & > .dialog-content {
       width: var(--dialog-width);
       max-height: 100%;
       overflow: auto;
@@ -238,5 +239,30 @@ export default {
 .component-fade-leave-to
 /* .component-fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+</style>
+
+<style lang="postcss" scoped>
+.display-look {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    pointer-events: none;
+    content: " ";
+    background: linear-gradient(transparent 50%, rgb(0 0 0 / 25%) 50%), linear-gradient(90deg, rgb(255 0 0 / 6%), rgb(0 255 0 / 2%), rgb(0 0 255 / 6%));
+    background-size: 100% 2px, 3px 100%;
+    opacity: 0.6;
+  }
 }
 </style>

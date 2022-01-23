@@ -138,7 +138,6 @@ export default {
   watch: {
     variant (variant) {
       const currentVariant = this.currentFont.variants[Number(variant)];
-      console.log(currentVariant);
       if (currentVariant) {
         const {
           weight,

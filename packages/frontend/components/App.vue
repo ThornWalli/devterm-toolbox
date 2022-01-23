@@ -17,6 +17,9 @@
     <dialog-remote v-if="ready" ref="dialogRemote" />
     <dialog-server v-if="ready" ref="dialogServer" />
     <dialog-options v-if="ready" ref="dialogOptions" />
+    <div class="display-look">
+      <div class="scanlines" />
+    </div>
   </div>
 </template>
 <script>
@@ -551,5 +554,49 @@ hr {
 
 .flip-list-move {
   transition: transform 0.6s;
+}
+</style>
+
+<style lang="postcss" scoped>
+.display-look {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    pointer-events: none;
+    content: " ";
+    background: linear-gradient(transparent 50%, rgb(0 0 0 / 25%) 50%), linear-gradient(90deg, rgb(255 0 0 / 6%), rgb(0 255 0 / 2%), rgb(0 0 255 / 6%));
+    background-size: 100% 2px, 3px 100%;
+    opacity: 0.6;
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    content: "";
+    background-image:
+      radial-gradient(
+        rgb(255 255 255 / 15%),
+        rgb(0 0 0 / 20%) 180%
+      );
+    opacity: 0.2;
+    transition: opacity 0.2s ease-in;
+  }
 }
 </style>
