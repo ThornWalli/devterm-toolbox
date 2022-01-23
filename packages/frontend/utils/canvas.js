@@ -136,17 +136,14 @@ export const drawText = (text, options, width, colors) => {
 
   const height = (rows.length * fontSize) * lineHeight + margin_[0] + margin_[2]; ;
   if (!width) {
-    width = parseInt(ctx.measureText(text.split('\n')[0]).width);
-
-    x = 0; switch (align) {
+    width = parseInt(text.split('\n').reduce((result, v) => { return Math.max(ctx.measureText(v).width, result); }, 0));
+    x = 0;
+    switch (align) {
       case ALIGN.RIGHT:
         x += width;
         break;
       case ALIGN.CENTER:
         x += width / 2;
-        break;
-      default:
-        // x += width[1];
         break;
     }
   }
