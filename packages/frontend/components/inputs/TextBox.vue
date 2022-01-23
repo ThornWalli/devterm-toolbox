@@ -58,6 +58,14 @@ textarea {
   outline: none;
   appearance: none;
 
+  &:not(&[disabled]) {
+    &:focus,
+    &:hover {
+      color: var(--color-secondary);
+      background: var(--color-primary);
+    }
+  }
+
   &::-webkit-resizer {
     display: block;
     width: calc(8 / 12 * 1em);
