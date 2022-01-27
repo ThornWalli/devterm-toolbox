@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.35](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.34...v1.0.0-beta.35) (2022-01-27)
+
+
+### Bug Fixes
+
+* **main:** fix missing printer command ([1da028c](https://github.com/ThornWalli/devterm-toolbox/commit/1da028cb6c2b2050e7968c40abf54aa84e5655f9))
+
 # [1.0.0-beta.34](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.33...v1.0.0-beta.34) (2022-01-27)
 
 
