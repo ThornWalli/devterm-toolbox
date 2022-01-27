@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.34](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.33...v1.0.0-beta.34) (2022-01-27)
+
+
+### Bug Fixes
+
+* **app:** add grid ([4393550](https://github.com/ThornWalli/devterm-toolbox/commit/4393550842fde3471385a5e42eb0bd5e9a7107fa))
+
 # [1.0.0-beta.33](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.32...v1.0.0-beta.33) (2022-01-23)
 
 
