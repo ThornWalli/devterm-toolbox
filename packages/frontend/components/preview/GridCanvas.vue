@@ -6,10 +6,12 @@
 </template>
 
 <script>
-import { ALIGN, MAX_DENSITY } from 'devterm/config';
+import {
+  ALIGN, MAX_DENSITY
+} from 'devterm/config';
+import { getDefaultGridOptions } from '../../utils/action';
 import definitions from '../../utils/action/definitions';
 import { preparePreview } from '../../utils/canvas';
-import { getDefaultBarcodeOptions } from '../../utils/action';
 
 import PreviewNativeText from './NativeText.vue';
 
@@ -25,7 +27,7 @@ export default {
     value: {
       type: Object,
       default () {
-        return getDefaultBarcodeOptions();
+        return getDefaultGridOptions();
       }
     },
     width: {
@@ -48,28 +50,15 @@ export default {
 
   watch: {
     async value () {
-      if (this.value.file) {
-        await this.changeImage(this.value.file);
-      }
-      this.render();
+      await this.render();
     }
   },
+
   async mounted () {
-    this.value.file && await this.changeImage(this.value.file);
-    this.render();
+    await this.render();
   },
 
   methods: {
-    changeImage (url) {
-      return new Promise(resolve => {
-        this.img = document.createElement('img');
-        this.img.onload = () => {
-          this.$refs.canvas.height = this.img.naturalHeight;
-          resolve();
-        };
-        this.img.src = url;
-      });
-    },
     render () {
       this.error = null;
       this.$nextTick(() => {
@@ -105,6 +94,7 @@ export default {
             ctx.drawImage(canvas, x, 0);
           } catch (error) {
             this.error = error;
+            throw error;
           }
 
           this.$emit('ready');
@@ -115,8 +105,51 @@ export default {
 };
 
 export const render = async (value) => {
-  return (await definitions.barcode.beforePrinterCommand({ value }, false)).value;
+  return (await definitions.grid.beforePrinterCommand({ value }, false)).value;
 };
+
+// export const render = async (rows, options) => {
+//   const {
+//     columnGutter, rowGutter
+//   } = { columnGutter: 10, rowGutter: 10, ...options };
+
+//   const rowGutterCount = (rows.length - 1);
+
+//   const resolvedRows = await Promise.all(rows.map(async (column) => {
+//     const gutterCount = (column.length - 1);
+//     return await Promise.all(column.map(action => {
+//       let columnWidth = parseInt(MAX_DOTS / column.length);
+//       if (gutterCount > 0) {
+//         columnWidth -= (columnGutter / gutterCount) * gutterCount;
+//       }
+//       const { value } = action;
+//       (value.imageOptions = value.imageOptions || {}).width = columnWidth;
+//       return definitions[String(action.type)].beforePrinterCommand({ ...action }, false);
+//     }));
+//   }));
+
+//   const height = resolvedRows.reduce((result, values) => {
+//     result += values.reduce((result, { value }) => {
+//       return Math.max(value.height, result);
+//     }, 0);
+//     return result;
+//   }, rowGutterCount * rowGutter);
+//   const canvas = createCanvas(MAX_DOTS, height);
+//   const ctx = canvas.getContext('2d');
+
+//   let y = 0;
+//   resolvedRows.forEach((column, row) => {
+//     const maxY = 0;
+//     console.log('y', y);
+//     y += column.reduce((result, { value }, x) => {
+//       ctx.drawImage(value, value.width * x + (x * columnGutter), y + (row * rowGutter));
+//       return Math.max(value.height, result);
+//     }, 0);
+//     y = Math.max(maxY, y);
+//   });
+
+//   return canvas;
+// };
 
 </script>
 

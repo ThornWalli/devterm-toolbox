@@ -48,13 +48,13 @@ input {
   box-sizing: border-box;
   display: block;
   width: 100%;
-  padding: calc(5 / 12 * 1em);
+  padding: em(5px, 12);
   font-family: monospace;
-  font-size: calc(12 / 16 * 1em);
-  color: currentColor;
+  font-size: em(12px, 16);
+  color: currentcolor;
   resize: none;
   background: transparent;
-  border: solid var(--color-primary) calc(1 / 12 * 1em);
+  border: solid var(--color-primary) em(1px, 12);
   outline: none;
   appearance: none;
 

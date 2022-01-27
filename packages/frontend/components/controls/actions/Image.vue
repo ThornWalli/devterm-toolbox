@@ -141,9 +141,9 @@ export default {
   & .preview {
     display: flex;
     justify-content: center;
-    padding: calc(4 / 16 * 1em);
-    margin: calc(0 / 16 * 1em) 0;
-    margin-bottom: calc(16 / 16 * 1em);
+    padding: em(4px);
+    margin: em(0) 0;
+    margin-bottom: em(16px);
     background: var(--color-primary-20);
   }
 
@@ -153,13 +153,13 @@ export default {
 
   & .cols {
     column-count: 2;
-    margin: calc(8 / 16 * 1em) 0;
+    margin: em(8px) 0;
   }
 
   & .footer {
-    padding-top: calc(8 / 16 * 1em);
-    margin-top: calc(8 / 16 * 1em);
-    font-size: calc(12 / 16 * 1em);
+    padding-top: em(8px, 12);
+    margin-top: em(8px, 12);
+    font-size: em(12px);
     border-top: solid var(--color-primary-50) 1px;
 
     & > span {

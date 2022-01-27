@@ -19,6 +19,9 @@
         </ul>
       </fieldset>
     </template>
+    <template #buttons>
+      <input-text-button type="button" color="primary" text="Close" @click="close('close')" />
+    </template>
   </app-dialog>
 </template>
 
@@ -35,9 +38,16 @@ export default {
   mixins: [MixinDialog],
   inheritAttrs: false,
 
+  props: {
+    native: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   computed: {
     groupedActions () {
-      return getActionTypes().reduce((result, action) => {
+      return getActionTypes().filter(action => (this.native && action.native) || !action.native).reduce((result, action) => {
         (result[action.group] || (result[action.group] = [])).push(action);
         return result;
       }, {});
@@ -55,19 +65,19 @@ export default {
 
 <style lang="postcss" scoped>
 .app-dialog.dialog-action-select {
-  --dialog-width: calc(480 / 16 * 1em);
+  --dialog-width: 80%;
 
   & ul {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    margin: calc(0 / 16 * 1em) 0;
+    margin: em(0) 0;
 
     & li {
       box-sizing: border-box;
       display: flex;
       width: 50%;
-      padding: calc(4 / 16 * 1em);
+      padding: em(4px);
 
       & > * {
         flex: 1;
@@ -76,16 +86,16 @@ export default {
   }
 
   & fieldset {
-    padding: calc(0 / 16 * 1em) calc(0 / 16 * 1em);
-    margin: calc(8 / 16 * 1em) 0;
+    padding: em(0) em(0);
+    margin: em(8px) 0;
 
-    /* margin: calc(24 / 16 * 1em) 0; */
+    /* margin: em(24px, 16) 0; */
     border: solid  var(--color-primary);
     border-width: 1px 0 0;
 
     & legend {
-      padding: 0 calc(8 / 16 * 1em);
-      font-size: calc(14 / 16 * 1em);
+      padding: 0 em(8px);
+      font-size: em(14px);
       line-height: calc(20 / 14);
     }
   }

@@ -2,8 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default class ActionDescription {
   constructor (options) {
-    const { type, value } = options || {};
-    this.id = uuidv4();
+    console.log(options);
+    const { id, type, value } = options || {};
+    this.id = id || uuidv4();
     this.type = type;
     this.value = value;
     this.visible = true;

@@ -4,7 +4,6 @@
     ref="dialog"
     :form="form"
     class="action-dialog"
-    embed
     v-on="$listeners"
   >
     <template #default>

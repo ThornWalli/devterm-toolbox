@@ -32,13 +32,13 @@ export default {
 
 <style lang="postcss" scoped>
 .input-check-box {
-  --offset: calc(2 / 16 * 1em);
+  --offset: em(2px);
 
   & span {
     position: relative;
     display: block;
-    width: calc(16 / 16 * 1em);
-    height: calc(16 / 16 * 1em);
+    width: em(16px);
+    height: em(16px);
     cursor: pointer;
     border: solid var(--color-primary) 1px;
 

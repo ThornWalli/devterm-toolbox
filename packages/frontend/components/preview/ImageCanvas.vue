@@ -1,19 +1,19 @@
 <template>
   <div>
-    <preview-native-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
+    <preview-native-text v-if="error" :value="error.message" :colors="colors" :options="options" />
     <canvas v-else ref="canvas" />
   </div>
 </template>
 
 <script>
-import { createCanvas, prepareCanvasForPrint } from 'devterm/utils/canvas';
 import { ALIGN, MAX_DENSITY } from 'devterm/config';
+import definitions from '../../utils/action/definitions';
 import { preparePreview } from '../../utils/canvas';
 
-import PreviewNativeTextCanvas from '../preview/NativeTextCanvas.vue';
+import PreviewNativeText from './NativeText.vue';
 
 export default {
-  components: { PreviewNativeTextCanvas },
+  components: { PreviewNativeText },
   props: {
     colors: {
       type: Object,
@@ -50,49 +50,33 @@ export default {
 
   watch: {
     async value () {
-      if (this.value.file) {
-        await this.changeImage(this.value.file);
-      }
-      this.render();
+      await this.render();
     }
   },
   async mounted () {
-    this.value.file && await this.changeImage(this.value.file);
-    this.render();
+    await this.render();
   },
 
   methods: {
     getColor (opacity = 1) {
       return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
-    changeImage (url) {
-      return new Promise(resolve => {
-        this.img = document.createElement('img');
-        this.img.onload = () => {
-          this.$el.height = this.img.naturalHeight;
-          resolve();
-        };
-        this.img.src = url;
-      });
-    },
     render () {
       this.error = null;
       this.$nextTick(() => {
-        const ctx = this.$refs.canvas.getContext('2d');
-        window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(async () => {
           try {
-            const imageCanvas = createCanvas(this.img.naturalWidth, this.img.naturalHeight);
-            const imageContext = imageCanvas.getContext('2d');
-            imageContext.drawImage(this.img, 0, 0);
+            let canvas = await render(this.value);
 
-            const preparedCanvas = prepareCanvasForPrint(imageCanvas, this.value.imageOptions);
-            preparePreview(preparedCanvas, {
+            const ctx = this.$refs.canvas.getContext('2d');
+
+            canvas = preparePreview(canvas, {
               background: this.colors.printer.preview.background,
               foreground: this.colors.printer.preview.foreground
             }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
             ctx.canvas.width = this.width;
-            ctx.canvas.height = preparedCanvas.height;
+            ctx.canvas.height = canvas.height;
             ctx.fillStyle = `rgb(${this.colors.printer.preview.background.join(' ')})`;
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
@@ -101,16 +85,16 @@ export default {
             let x = 0;
             switch (this.options.align) {
               case ALIGN.RIGHT:
-                x += this.width - preparedCanvas.width;
+                x += this.width - canvas.width;
                 break;
               case ALIGN.CENTER:
-                x += (this.width - preparedCanvas.width) / 2;
+                x += (this.width - canvas.width) / 2;
                 break;
               default:
                 x += margin;
                 break;
             }
-            ctx.drawImage(preparedCanvas, x, 0);
+            ctx.drawImage(canvas, x, 0);
           } catch (error) {
             this.error = error;
           }
@@ -121,12 +105,14 @@ export default {
   }
 };
 
+export const render = async (value) => {
+  return (await definitions.image.beforePrinterCommand({ value }, false)).value;
+};
+
 </script>
 
 <style lang="postcss" scoped>
 canvas {
   display: block;
-
-  /* background: white; */
 }
 </style>

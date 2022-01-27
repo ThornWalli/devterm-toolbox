@@ -50,11 +50,11 @@ export default {
 <style lang="postcss" scoped>
 .app-dialog.dialog-error {
   --color-primary: red;
-  --dialog-width: calc(480 / 16 * 1em);
+  --dialog-width: em(480px);
 
   & p {
     margin: 0;
-    font-size: calc(12 / 16 * 1em);
+    font-size: em(12px, 16);
     word-break: break-word;
   }
 }

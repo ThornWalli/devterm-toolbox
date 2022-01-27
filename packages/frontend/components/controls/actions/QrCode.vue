@@ -148,9 +148,9 @@ export default {
   }
 
   & .footer {
-    padding-top: calc(8 / 16 * 1em);
-    margin-top: calc(8 / 16 * 1em);
-    font-size: calc(12 / 16 * 1em);
+    padding-top: em(8px, 12);
+    margin-top: em(8px, 12);
+    font-size: em(12px, 16);
     border-top: solid var(--color-primary-50) 1px;
 
     & > span {

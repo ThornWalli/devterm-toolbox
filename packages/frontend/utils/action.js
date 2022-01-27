@@ -2,37 +2,27 @@
 import { DEFAULT_DENSITY, ALIGN, FONT, getDefaultConfig, MAX_PIXELS_FONT } from 'devterm/config';
 import { getDefaultPrepareOptions } from 'devterm/utils/canvas';
 
-import ActionSetAlign from '../components/controls/actions/SetAlign.vue';
-import ActionSetFont from '../components/controls/actions/SetFont.vue';
-import ActionSetMargin from '../components/controls/actions/SetMargin.vue';
-import ActionSetLineSpace from '../components/controls/actions/SetLineSpace.vue';
-import ActionSetWordGap from '../components/controls/actions/SetWordGap.vue';
-import ActionSetDensity from '../components/controls/actions/SetDensity.vue';
-import ActionText from '../components/controls/actions/Text.vue';
-import ActionNativeText from '../components/controls/actions/NativeText.vue';
-import ActionImage from '../components/controls/actions/Image.vue';
-import ActionQrCode from '../components/controls/actions/QrCode.vue';
-import ActionFeedPitch from '../components/controls/actions/FeedPitch.vue';
 import { DropDownOptionDescription } from '../components/base/DropDown.vue';
 
 import ActionDescription from '../classes/ActionDescription';
 
 export const getActionTypes = () => {
   return [
-    { title: 'Margin', value: 'setMargin', group: 'Layout' },
-    { title: 'Font', value: 'setFont', group: 'Layout' },
-    { title: 'Align', value: 'setAlign', group: 'Layout' },
-    { title: 'LineSpace', value: 'setLineSpace', group: 'Layout' },
-    { title: 'WordGap', value: 'setWordGap', group: 'Layout' },
-    { title: 'Image', value: 'image', group: 'Content' },
-    { title: 'QRCode', value: 'qrCode', group: 'Content' },
-    { title: 'Barcode', value: 'barcode', group: 'Content' },
-    { title: 'Text', value: 'text', group: 'Content' },
-    { title: 'NativeText', value: 'nativeText', group: 'Content' },
-    { title: 'Reset', value: 'reset', group: 'General' },
-    { title: 'Feed Pitch', value: 'feedPitch', group: 'General' },
-    { title: 'Cutline', value: 'cutLine', group: 'General' },
-    { title: 'Density', value: 'setDensity', group: 'General' }
+    { native: true, title: 'Align (native)', value: 'setAlign', group: 'Layout' },
+    { native: true, title: 'Margin (native)', value: 'setMargin', group: 'Layout' },
+    { native: true, title: 'Font (native)', value: 'setFont', group: 'Layout' },
+    { native: true, title: 'LineSpace (native)', value: 'setLineSpace', group: 'Layout' },
+    { native: true, title: 'WordGap (native)', value: 'setWordGap', group: 'Layout' },
+    { native: false, title: 'Grid', value: 'grid', group: 'Layout' },
+    { native: false, title: 'Image', value: 'image', group: 'Content' },
+    { native: false, title: 'QRCode', value: 'qrCode', group: 'Content' },
+    { native: false, title: 'Barcode', value: 'barcode', group: 'Content' },
+    { native: false, title: 'Text', value: 'text', group: 'Content' },
+    { native: true, title: 'Text (native)', value: 'nativeText', group: 'Content' },
+    { native: true, title: 'Reset (native)', value: 'reset', group: 'General' },
+    { native: true, title: 'Feed Pitch (native)', value: 'feedPitch', group: 'General' },
+    { native: true, title: 'Cutline (native)', value: 'cutLine', group: 'General' },
+    { native: true, title: 'Density (native)', value: 'setDensity', group: 'General' }
   ];
 };
 
@@ -41,22 +31,6 @@ export const getActionTypeOptions = () => {
     new DropDownOptionDescription({ title: 'Add new Action…', value: '' }),
     ...getActionTypes().map(actionType => new DropDownOptionDescription(actionType))
   ];
-};
-
-export const getComponentByType = (type) => {
-  return {
-    setMargin: ActionSetMargin,
-    setAlign: ActionSetAlign,
-    setFont: ActionSetFont,
-    setDensity: ActionSetDensity,
-    text: ActionText,
-    nativeText: ActionNativeText,
-    image: ActionImage,
-    qrCode: ActionQrCode,
-    setLineSpace: ActionSetLineSpace,
-    setWordGap: ActionSetWordGap,
-    feedPitch: ActionFeedPitch
-  }[type];
 };
 
 /**
@@ -93,6 +67,9 @@ export const createAction = (type) => {
       break;
     case 'nativeText':
       value = 'Text';
+      break;
+    case 'grid':
+      value = getDefaultGridOptions();
       break;
     case 'image':
       value = getDefaultImageOptions();
@@ -157,7 +134,7 @@ export const executeAction = (action, options) => {
     case 'cutLine':
       return {
         id: action.id,
-        component: () => import('../components/preview/NativeTextCanvas.vue'),
+        component: () => import('../components/preview/NativeText.vue'),
         options: {
           ...options,
           // reset options
@@ -169,6 +146,14 @@ export const executeAction = (action, options) => {
         props: {
           value: getCutLine(options.font)
         }
+      };
+
+    case 'grid':
+      return {
+        id: action.id,
+        component: () => import('../components/preview/GridCanvas.vue'),
+        options: { ...options },
+        props: { ...action }
       };
 
     case 'barcode':
@@ -206,7 +191,7 @@ export const executeAction = (action, options) => {
     case 'nativeText':
       return {
         id: action.id,
-        component: () => import('../components/preview/NativeTextCanvas.vue'),
+        component: () => import('../components/preview/NativeText.vue'),
         options: { ...options },
         props: { ...action }
       };
@@ -220,6 +205,18 @@ export const executeAction = (action, options) => {
       };
   }
   return null;
+};
+
+export const getDefaultGridOptions = () => {
+  return {
+    widths: [1],
+    data: [[]],
+    options: {
+      columnGutter: 0,
+      rowGutter: 0
+    },
+    imageOptions: getDefaultPrepareOptions()
+  };
 };
 
 export const getDefaultTextOptions = () => {

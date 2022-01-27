@@ -17,7 +17,7 @@ export default {
 
 ul {
   display: flex;
-  padding: 0 calc(8 / 16 * 1em);
+  padding: 0 em(8px);
   margin: 0;
   list-style: none;
 }

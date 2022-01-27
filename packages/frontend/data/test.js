@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { ALIGN, FONT, MAX_DENSITY } from 'devterm/config';
+import ActionDescription from '../classes/ActionDescription';
 import devtermUri from './uris/devterm';
 
 export const writeHeadline = (text) => {
@@ -15,81 +16,496 @@ export const writeHeadline = (text) => {
 
 export default [
   { type: 'reset' },
-  { type: 'setDensity', value: 1 },
-  // { type: 'setAlign', value: ALIGN.CENTER },
   {
-    type: 'barcode',
+    id: '6319ab91-5740-49c0-8265-1d05d97014a3',
+    type: 'grid',
     value: {
-      text: 'Devterm',
+      widths: [
+        1,
+        1
+      ],
+      data: [
+        [
+          {
+            id: '7d4b8881-37d3-4b80-98e2-dbef273fd320',
+            type: 'text',
+            value: {
+              text: 'Item 1.\nItem 2.\nItem 3.\nItem 4.',
+              options: {
+                fontSize: '24',
+                align: 'left',
+                lineSpace: '30',
+                wordGap: 0,
+                margin: 0,
+                fontFamily: null,
+                color: '#000',
+                weight: 400,
+                italic: false
+              },
+              imageOptions: {
+                width: 192,
+                rotate: false,
+                flipX: false,
+                flipY: false,
+                invert: false,
+                grayscale: false
+              }
+            },
+            visible: true
+          }
+        ],
+        [
+          {
+            id: 'cafb2f8d-add1-4c34-9c1e-6f19c63732ac',
+            type: 'text',
+            value: {
+              text: '0,00\n0,00\n0,00\n0,00',
+              options: {
+                fontSize: '24',
+                align: 2,
+                lineSpace: '30',
+                wordGap: 0,
+                margin: 0,
+                fontFamily: null,
+                color: '#000',
+                weight: 400,
+                italic: false
+              },
+              imageOptions: {
+                width: 192,
+                rotate: false,
+                flipX: false,
+                flipY: false,
+                invert: false,
+                grayscale: false
+              }
+            },
+            visible: true
+          }
+        ]
+      ],
       options: {
-        format: '',
-        height: 100,
-        font: 'monospace',
-        textAlign: 'center',
-        textPosition: 'bottom',
-        textMargin: 2,
-        fontSize: 20,
-        margin: 10,
-        displayValue: true,
-        flat: false
+        columnGutter: 0,
+        rowGutter: 0
       },
       imageOptions: {
+        width: null,
         rotate: false,
         flipX: false,
         flipY: false,
-        width: null
+        invert: false,
+        grayscale: false
       }
-    }
+    },
+    visible: true
   },
-  {
-    type: 'image',
-    value: {
-      file: devtermUri,
-      imageOptions: {
-        grayscale: true,
-        rotate: false,
-        flipX: false,
-        flipY: false,
-        width: 100
-      }
-    }
-  },
-  { type: 'feedPitch', value: { value: 10, type: 'pixel' } },
-  {
-    type: 'qrCode',
-    value: {
-      text: 'Devterm',
-      options: {
-        errorCorrectionLevel: 'M',
-        margin: 0,
-        scale: 4,
-        small: false
-      },
-      imageOptions: {
-        rotate: false,
-        flipX: false,
-        flipY: false,
-        width: null
-      }
-    }
-  },
+  // {
+  //   type: 'image',
+  //   value: {
+  //     file: devtermUri,
+  //     imageOptions: {
+  //       grayscale: true,
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: 100
+  //     }
+  //   }
+  // },
+  // {
+  //   type: 'grid',
+  //   value: {
+  //     widths: [
+  //       1,
+  //       1
+  //     ],
+  //     data: [
+  //       [
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Column A',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         },
+  //         {
+  //           type: 'text',
+  //           value: {
+  //             text: 'Sample',
+  //             options: {
+  //               fontSize: 20,
+  //               lineSpace: 20,
+  //               align: ALIGN.Left,
+  //               wordGap: 0,
+  //               margin: 0,
+  //               fontFamily: 'Arial',
+  //               color: 0
+  //             }
+  //           }
+  //         },
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Column A',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         }
+  //       ],
+  //       [
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Column B',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         },
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Column B',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         }
+  //       ]
+  //     ]
+  //   }
+  // },
+  // {
+  //   type: 'grid',
+  //   value: {
+  //     options: {
+  //       columnGutter: 12,
+  //       rowGutter: 12
+  //     },
+  //     widths: [
+  //       1, 1
+  //     ],
+  //     data: [
+  //       [
+  //         new ActionDescription({
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Column A',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         }),
+  //         new ActionDescription({
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Column A',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         })
+  //       ],
+  //       [
+  //         new ActionDescription({
+  //           type: 'grid',
+  //           value: {
+  //             options: {
+  //               columnGutter: 12,
+  //               rowGutter: 12
+  //             },
+  //             widths: [1],
+  //             data: [
+  //               [{
+  //                 type: 'text',
+  //                 value: {
+  //                   text: 'Lammpee',
+  //                   options: {
+  //                     fontSize: 48,
+  //                     lineSpace: 20,
+  //                     align: ALIGN.Left,
+  //                     wordGap: 0,
+  //                     margin: 0,
+  //                     fontFamily: 'Arial',
+  //                     color: 0
+  //                   },
+  //                   imageOptions: {
+  //                     rotate: true
+  //                   }
+  //                 }
+  //               }]],
+  //             imageOptions: {
+  //               invert: false,
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         })
+  //       ]
+  //     ]
+  //   }
+  // },
+  // {
+  //   type: 'grid',
+  //   value: {
+  //     data: [
+  //       [
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Devterm',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         }
+  //       ],
+  //       [
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Devterm',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         },
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Devterm',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         }
+  //       ],
+  //       [
+  //         {
+  //           type: 'text',
+  //           value: {
+  //             text: 'Sample',
+  //             options: {
+  //               fontSize: 90,
+  //               align: ALIGN.CENTER,
+  //               lineSpace: 0,
+  //               wordGap: 0,
+  //               margin: 0,
+  //               fontFamily: 'Arial',
+  //               color: 0
+  //             }
+  //           }
+  //         },
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Devterm',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         },
+  //         {
+  //           type: 'qrCode',
+  //           value: {
+  //             text: 'Devterm',
+  //             options: {
+  //               errorCorrectionLevel: 'M',
+  //               margin: 0,
+  //               scale: 4,
+  //               small: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: null
+  //             }
+  //           }
+  //         }, {
+  //           type: 'barcode',
+  //           value: {
+  //             text: 'Devterm',
+  //             options: {
+  //               format: '',
+  //               height: 100,
+  //               font: 'monospace',
+  //               textAlign: 'center',
+  //               textPosition: 'bottom',
+  //               textMargin: 2,
+  //               fontSize: 20,
+  //               margin: 10,
+  //               displayValue: true,
+  //               flat: false
+  //             },
+  //             imageOptions: {
+  //               rotate: false,
+  //               flipX: false,
+  //               flipY: false,
+  //               width: 200
+  //             }
+  //           }
+  //         }]
+  //     ]
+  //   }
+  // },
+  // { type: 'setDensity', value: 1 },
+  // // { type: 'setAlign', value: ALIGN.CENTER },
+  // {
+  //   type: 'barcode',
+  //   value: {
+  //     text: 'Devterm',
+  //     options: {
+  //       format: '',
+  //       height: 100,
+  //       font: 'monospace',
+  //       textAlign: 'center',
+  //       textPosition: 'bottom',
+  //       textMargin: 2,
+  //       fontSize: 20,
+  //       margin: 10,
+  //       displayValue: true,
+  //       flat: false
+  //     },
+  //     imageOptions: {
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: null
+  //     }
+  //   }
+  // },
+  // { type: 'feedPitch', value: { value: 10, type: 'pixel' } },
+  // {
+  //   type: 'qrCode',
+  //   value: {
+  //     text: 'Devterm',
+  //     options: {
+  //       errorCorrectionLevel: 'M',
+  //       margin: 0,
+  //       scale: 4,
+  //       small: false
+  //     },
+  //     imageOptions: {
+  //       rotate: false,
+  //       flipX: false,
+  //       flipY: false,
+  //       width: null
+  //     }
+  //   }
+  // },
 
-  { type: 'setFont', value: FONT.SIZE_8_16_THIN_1 },
-  {
-    type: 'text',
-    value: {
-      text: 'Sample',
-      options: {
-        fontSize: 90,
-        align: ALIGN.CENTER,
-        lineSpace: 0,
-        wordGap: 0,
-        margin: 0,
-        fontFamily: 'Arial',
-        color: 0
-      }
-    }
-  },
+  // // { type: 'setFont', value: FONT.SIZE_8_16_THIN_1 },
+  // {
+  //   type: 'text',
+  //   value: {
+  //     text: 'Sample',
+  //     options: {
+  //       fontSize: 90,
+  //       align: ALIGN.CENTER,
+  //       lineSpace: 0,
+  //       wordGap: 0,
+  //       margin: 0,
+  //       fontFamily: 'Arial',
+  //       color: 0
+  //     }
+  //   }
+  // },
   // { type: 'feedPitch', value: { value: 2, type: 'font' } },
   // { type: 'setFont', value: FONT.SIZE_8_16_THIN_2 },
   // { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipsci Lorem ipsum dolor sit amet, consetetur sadipsci' },

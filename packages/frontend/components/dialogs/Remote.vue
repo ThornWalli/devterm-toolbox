@@ -130,11 +130,11 @@ export default {
 
 <style lang="postcss" scoped>
 .app-dialog.dialog-remote {
-  --dialog-width: calc(480 / 16 * 1em);
+  --dialog-width: em(480px);
 
   & .profile-select {
     display: flex;
-    margin-bottom: calc(8 / 16 * 1em);
+    margin-bottom: em(8px);
 
     & > * {
       flex: 1;
@@ -147,7 +147,7 @@ export default {
 
   & .profile-name {
     display: flex;
-    margin-top: calc(8 / 16 * 1em);
+    margin-top: em(8px);
 
     & > :first-child {
       flex: 1;
@@ -155,9 +155,9 @@ export default {
   }
 
   & span {
-    font-size: calc(12 / 16 * 1em);
+    font-size: em(12px);
     color: red;
-    letter-spacing: 1px;
+    letter-spacing: em(1, 12);
   }
 
   &.connected {

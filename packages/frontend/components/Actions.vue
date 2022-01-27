@@ -69,13 +69,14 @@
       :is="dialogComponent"
       v-if="selectedAction"
       ref="dialog"
+      :embed="embed"
       :colors="colors"
       :value="selectedAction.value"
       @input="updateAction(selectedAction, $event)"
       @ready="onReadyDialog"
       @close="onCloseDialog"
     />
-    <dialog-action-select ref="dialogActionSelect" @select="onSelectAddAction" />
+    <dialog-action-select ref="dialogActionSelect" :native="nativeActions" :embed="embed" @select="onSelectAddAction" />
   </div>
 </template>
 
@@ -84,7 +85,7 @@ import { fromEvent } from 'rxjs';
 import ActionDescription from '../classes/ActionDescription';
 import ACTION_DEFINITIONS from '../utils/action/definitions';
 import ACTION_DIALOGS from '../utils/action/dialogs';
-import { getActionTypeOptions, createAction, getComponentByType } from '../utils/action';
+import { getActionTypeOptions, createAction } from '../utils/action';
 
 import SvgIconArrowUp from '../assets/svg/icons/arrow-up.svg';
 import SvgIconArrowDown from '../assets/svg/icons/arrow-down.svg';
@@ -114,6 +115,14 @@ export default {
     DialogActionSelect
   },
   props: {
+    embed: {
+      type: Boolean,
+      default: false
+    },
+    nativeActions: {
+      type: Boolean,
+      default: true
+    },
     value: {
       type: Array,
       default () {
@@ -131,7 +140,6 @@ export default {
     return {
       ACTION_DEFINITIONS,
       ACTION_DIALOGS,
-      getComponentByType,
       selectedActionId: null,
       actionTypeOptions: getActionTypeOptions(),
       itemStates: {},
@@ -297,7 +305,7 @@ export default {
     },
 
     onClickActionDuplicate (index) {
-      const action = new ActionDescription(JSON.parse(JSON.stringify(this.model[index])));
+      const action = new ActionDescription({ ...JSON.parse(JSON.stringify(this.model[index])), id: null });
       this.updateModel([].concat(this.model.slice(0, index + 1), action, this.model.slice(index + 1)));
     }
   }
@@ -310,10 +318,10 @@ export default {
   flex: 1;
   flex-direction: column;
   height: 100%;
-  padding: 0 calc(8 / 16 * 1em);
+  padding: 0 em(8px);
   user-select: none;
 
-  --offset: calc(2 / 16 * 1em);
+  --offset: em(2px);
 
   & .list {
     height: calc(100% - (24px + 24px));
@@ -322,9 +330,9 @@ export default {
 
   & .add-action {
     flex: 0;
-    height: calc(32 / 16 * 1em);
-    margin: calc(16 / 16 * 1em) 0;
-    margin-bottom: calc(8 / 16 * 1em);
+    height: em(32px);
+    margin: em(16px) 0;
+    margin-bottom: em(8px);
 
     & > * {
       width: 100%;
@@ -335,7 +343,7 @@ export default {
     box-sizing: border-box;
     height: 100%;
     padding: 0;
-    padding: calc(4 / 16 * 1em) 0;
+    padding: em(4px) 0;
     margin: 0;
     overflow: auto;
     list-style: none;
@@ -355,14 +363,14 @@ export default {
 
   & > * {
     height: 100%;
-    padding: 0 calc(8 / 16 * 1em);
+    padding: 0 em(8px);
   }
 
   & .index {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(13 / 16 * 1em);
+    font-size: em(13px);
     font-style: italic;
     opacity: 0.4;
   }

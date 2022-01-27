@@ -62,22 +62,22 @@ export default {
   text-align: center;
 
   & p {
-    font-size: calc(12 / 16 * 1em);
+    font-size: em(12px);
     line-height: calc(20 / 12);
   }
 
   & a {
-    color: currentColor;
+    color: currentcolor;
   }
 
   & div {
-    margin: calc(20 / 16 * 1em);
+    margin: em(20px);
     text-align: center;
   }
 
   & .buttons {
     & > * + * {
-      margin-left: calc(16 / 16 * 1em);
+      margin-left: em(16px);
     }
   }
 }

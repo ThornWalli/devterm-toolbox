@@ -1,4 +1,4 @@
-import { prepareCanvasForPrint } from 'devterm/utils/canvas';
+
 import {
   MAX_DOTS, ALIGN
 } from 'devterm/config';
@@ -74,12 +74,12 @@ const grayscale = (data, colors, density) => {
   }
 };
 
-export const getBuffersFromCanvas = (canvas, imageOptions) => {
-  canvas = prepareCanvasForPrint(canvas, imageOptions);
+export const getBuffersFromCanvas = (canvas) => {
   return getImageWriteBuffersFromCanvas(canvas);
 };
 
 export const drawText = (text, options, width, colors) => {
+  console.log('drawText', text, options, width, colors);
   colors = { background: [255, 255, 255], foreground: [0, 0, 0], ...colors };
   const {
     fontSize,

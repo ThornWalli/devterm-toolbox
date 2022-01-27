@@ -29,7 +29,7 @@ export default {
 
 <style lang="postcss" scoped>
 .input-icon-button {
-  color: currentColor;
+  color: currentcolor;
   cursor: pointer;
   opacity: 0.8;
   transition: background 0.3s, opacity 0.3s;
@@ -38,7 +38,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(12 / 16 * 1em);
+    width: em(12px);
   }
 
   &:hover {
@@ -58,7 +58,7 @@ export default {
   }
 
   & >>> svg {
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   &:focus {

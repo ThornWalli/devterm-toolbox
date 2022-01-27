@@ -1,20 +1,20 @@
 <template>
   <div>
-    <preview-native-text-canvas v-if="error" :value="error.message" :colors="colors" :options="options" />
+    <preview-native-text v-if="error" :value="error.message" :colors="colors" :options="options" />
     <canvas v-else ref="canvas" />
   </div>
 </template>
 
 <script>
-import { getQRCode, prepareCanvasForPrint } from 'devterm/utils/canvas';
 import { ALIGN, MAX_DENSITY } from 'devterm/config';
+import definitions from '../../utils/action/definitions';
 import { preparePreview } from '../../utils/canvas';
 import { getDefaultQRCodeOptions } from '../../utils/action';
 
-import PreviewNativeTextCanvas from '../preview/NativeTextCanvas.vue';
+import PreviewNativeText from './NativeText.vue';
 
 export default {
-  components: { PreviewNativeTextCanvas },
+  components: { PreviewNativeText },
   props: {
     colors: {
       type: Object,
@@ -48,28 +48,14 @@ export default {
 
   watch: {
     async value () {
-      if (this.value.file) {
-        await this.changeImage(this.value.file);
-      }
-      this.render();
+      await this.render();
     }
   },
   async mounted () {
-    this.value.file && await this.changeImage(this.value.file);
-    this.render();
+    await this.render();
   },
 
   methods: {
-    changeImage (url) {
-      return new Promise(resolve => {
-        this.img = document.createElement('img');
-        this.img.onload = () => {
-          this.$el.height = this.img.naturalHeight;
-          resolve();
-        };
-        this.img.src = url;
-      });
-    },
     getColor (opacity = 1) {
       return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
@@ -79,16 +65,15 @@ export default {
         const ctx = this.$refs.canvas.getContext('2d');
         window.requestAnimationFrame(async () => {
           try {
-            const qrCodeWidth = this.value.options?.width || this.value.imageOptions?.width;
-            const preparedCanvas = prepareCanvasForPrint(await getQRCode(this.value.text || 'empty', { ...(this.value.options || {}), width: qrCodeWidth }), this.value.imageOptions);
+            const canvas = await render(this.value);
 
-            preparePreview(preparedCanvas, {
+            preparePreview(canvas, {
               background: this.colors.printer.preview.background,
               foreground: this.colors.printer.preview.foreground
             }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
             ctx.canvas.width = this.width;
-            ctx.canvas.height = preparedCanvas.height;
+            ctx.canvas.height = canvas.height;
             ctx.fillStyle = `rgb(${this.colors.printer.preview.background.join(' ')})`;
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
@@ -97,24 +82,29 @@ export default {
             let x = 0;
             switch (this.options.align) {
               case ALIGN.RIGHT:
-                x += this.width - preparedCanvas.width;
+                x += this.width - canvas.width;
                 break;
               case ALIGN.CENTER:
-                x += (this.width - preparedCanvas.width) / 2;
+                x += (this.width - canvas.width) / 2;
                 break;
               default:
                 x += margin;
                 break;
             }
-            ctx.drawImage(preparedCanvas, x, 0);
+            ctx.drawImage(canvas, x, 0);
           } catch (error) {
             this.error = error;
+            throw error;
           }
           this.$emit('ready');
         });
       });
     }
   }
+};
+
+export const render = async (value) => {
+  return (await definitions.qrCode.beforePrinterCommand({ value }, false)).value;
 };
 
 </script>

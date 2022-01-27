@@ -90,7 +90,7 @@ export default {
 
 <style lang="postcss" scoped>
 .view-info {
-  padding: 0 2em;
+  padding: 0 em(32px);
 
   & table {
     width: 100%;
@@ -101,7 +101,7 @@ export default {
     }
 
     & td {
-      padding: calc(4 / 16 * 1em) 0;
+      padding: em(4px) 0;
 
       &:nth-child(1) {
         /* width: 120px; */
@@ -114,24 +114,24 @@ export default {
   }
 
   & h2 {
-    margin: calc(24 / 24 * 1em) 0;
-    margin-top: calc(16 / 24 * 1em);
-    font-size: calc(24 / 16 * 1em);
+    margin: em(24px, 24) 0;
+    margin-top: em(16px, 24);
+    font-size: em(24px);
   }
 
   & h3 {
-    margin: calc(32 / 16 * 1em) 0;
+    margin: em(32px) 0;
   }
 
   & fieldset {
     margin: 0;
 
-    /* margin: calc(24 / 16 * 1em) 0; */
+    /* margin: em(24px, 16) 0; */
     border: solid  var(--color-primary) 1px;
 
     & legend {
-      padding: 0 calc(8 / 16 * 1em);
-      font-size: calc(14 / 16 * 1em);
+      padding: 0 em(8px);
+      font-size: em(14px);
       line-height: calc(20 / 14);
       color: var(--color-secondary);
       background: var(--color-primary);
@@ -139,11 +139,11 @@ export default {
   }
 
   & .cols {
-    --offset: calc(16 / 16 * 1em);
+    --offset: em(16px);
 
     display: flex;
     flex-wrap: wrap;
-    margin: calc(8 / 16 * 1em) calc(var(--offset) * -1);
+    margin: em(8px) calc(var(--offset) * -1);
 
     & > * {
       box-sizing: border-box;
@@ -154,12 +154,12 @@ export default {
 
   & ul {
     padding: 0;
-    margin: calc(16 / 16 * 1em) 0;
+    margin: em(16px) 0;
     list-style: none;
 
     & li {
       & + li {
-        margin-top: calc(8 / 16 * 1em);
+        margin-top: em(8px);
       }
 
       & span {

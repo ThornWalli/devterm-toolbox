@@ -81,16 +81,16 @@ export default {
     width: 100%;
 
     /* height: 1em; */
-    padding: calc(4 / 12 * 1em);
+    padding: em(4px, 12);
     overflow: hidden;
     font-family: monospace;
-    font-size: calc(12 / 16 * 1em);
-    color: currentColor;
+    font-size: em(12px);
+    color: currentcolor;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     background: #000;
-    border: dotted var(--color-primary) calc(1 / 12 * 1em);
+    border: dotted var(--color-primary) em(1px, 12);
     appearance: none;
 
     &[type="number"] {
@@ -107,7 +107,7 @@ export default {
     }
 
     & + * {
-      margin-left: calc(4 / 12 * 1em);
+      margin-left: em(4px, 12);
     }
   }
 

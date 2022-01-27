@@ -14,12 +14,12 @@ export default {
   display: flex;
   align-self: center;
   justify-content: center;
-  width: calc(1 / 16 * 1em);
+  width: em(1px);
 
   & i {
     display: block;
     width: 100%;
-    height: calc(12 / 16 * 1em);
+    height: em(12px);
     background: var(--color-primary);
   }
 }

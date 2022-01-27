@@ -19,6 +19,9 @@
 <script>
 import { filter } from 'rxjs/operators';
 import { keyUpObserver } from '../../utils/dom';
+
+const openedDialogs = [];
+
 export default {
   inheritAttrs: true,
   props: {
@@ -53,7 +56,9 @@ export default {
     open (value) {
       if (value) {
         this.subscriptions = [keyUpObserver.pipe(filter(({ key }) => key === 'Escape' && this.escapeClose)).subscribe((e) => {
-          this.close();
+          if (openedDialogs[openedDialogs.length - 1] === this) {
+            this.close();
+          }
         })];
       } else {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
@@ -76,6 +81,7 @@ export default {
     show () {
       return new Promise(resolve => {
         this.open = true;
+        openedDialogs.push(this);
         this.$nextTick(() => {
           if (this.embed) {
             this.$el.show();
@@ -89,6 +95,9 @@ export default {
     },
     close (value) {
       this.open = false;
+
+      openedDialogs.splice(openedDialogs.indexOf(this), 1);
+
       this.$el.close(value);
       this.$emit('close', value);
     }
@@ -131,15 +140,15 @@ export default {
   & .dialog-content {
     position: relative;
     box-sizing: border-box;
-    padding: calc(8 / 16 * 1em);
-    padding-top: calc(8 / 16 * 1em);
+    padding: em(8px);
+    padding-top: em(8px);
     color: var(--color-primary);
     background: var(--color-secondary);
     border: solid var(--color-primary) 1px;
   }
 
   & .dialog-title {
-    font-size: calc(12 / 16 * 1em);
+    font-size: em(12px);
     line-height: 1;
     color: var(--color-secondary);
     text-align: center;
@@ -153,7 +162,7 @@ export default {
     & > .buttons {
       display: flex;
       margin: calc(-8 / 16 * 1em);
-      margin-top: calc(8 / 16 * 1em);
+      margin-top: em(8px);
 
       & > * {
         flex: 1;
@@ -164,11 +173,11 @@ export default {
     & > form {
       & > .buttons {
         display: flex;
-        margin: calc(8 / 16 * 1em) calc(-8 / 16 * 1em);
+        margin: em(8px) calc(-8 / 16 * 1em);
 
         & > * {
           flex: 1;
-          margin: 0 calc(8 / 12 * 1em);
+          margin: 0 em(8px, 12);
         }
       }
     }
@@ -215,10 +224,10 @@ export default {
     & > div {
       box-sizing: border-box;
       width: 50%;
-      padding: calc(4 / 16 * 1em);
+      padding: em(4px);
     }
 
-    margin: calc(8 / 16 * 1em) calc(-4 / 16 * 1em);
+    margin: em(8px) em(-4px);
 
     &:first-child {
       margin-top: 0;

@@ -49,9 +49,9 @@ textarea {
   height: 100%;
   padding: 0;
   font-family: monospace;
-  font-size: calc(12 / 16 * 1em);
+  font-size: em(12px);
   line-height: calc(20 / 12);
-  color: currentColor;
+  color: currentcolor;
   resize: vertical;
   background: transparent;
   border: none;
@@ -68,11 +68,11 @@ textarea {
 
   &::-webkit-resizer {
     display: block;
-    width: calc(8 / 12 * 1em);
-    height: calc(8 / 12 * 1em);
+    width: em(8px, 12);
+    height: em(8px, 12);
     background: transparent;
     border: solid var(--color-primary);
-    border-width: 0 calc(1 / 12 * 1em) calc(1 / 12 * 1em) 0;
+    border-width: 0 em(1px, 12) em(1px, 12) 0;
     outline: none;
     box-shadow: none;
   }

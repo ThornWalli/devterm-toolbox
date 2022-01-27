@@ -26,10 +26,10 @@ export default {
 .input-drop-down {
   & >>> select {
     width: 100%;
-    padding: calc(4 / 12 * 1em) calc(5 / 12 * 1em);
+    padding: em(4px, 12) em(5px, 12);
     font-family: monospace;
-    font-size: calc(12 / 16 * 1em);
-    color: currentColor;
+    font-size: em(12px);
+    color: currentcolor;
     background: none;
     border: solid var(--color-primary) 1px;
     border-radius: 0;

@@ -470,16 +470,16 @@ export default {
   }
 
   & > .header {
-    border-bottom: solid var(--color-primary) calc(2 / 16 * 1em);
+    border-bottom: solid var(--color-primary) em(2px, 16);
   }
 
   & > .footer {
-    border-top: solid var(--color-primary) calc(2 / 16 * 1em);
+    border-top: solid var(--color-primary) em(2px, 16);
   }
 
   & > .header,
   & > .footer {
-    height: calc(22 / 16 * 1em);
+    height: em(22px, 16);
   }
 
   & > .app-content {
@@ -506,12 +506,12 @@ export default {
 
 <style lang="postcss">
 ::-webkit-scrollbar {
-  width: calc(16 / 16 * 1em);
+  width: em(16px);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-primary);
-  border: solid  var(--color-secondary) calc(2 / 16 * 1em);
+  border: solid  var(--color-secondary) em(2px);
   outline: none;
 }
 
@@ -537,7 +537,7 @@ strong {
 }
 
 hr {
-  margin: calc(8 / 16 * 1em) 0;
+  margin: em(8px, 16) 0;
   border-color: var(--color-primary);
   border-width: 1px 0 0;
 }

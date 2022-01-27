@@ -1,6 +1,7 @@
 import { ALIGN, FONT, MAX_DOTS } from 'devterm/config';
-import { getQRCode, getBarcode } from 'devterm/utils/canvas';
+import { getQRCode, getBarcode, prepareCanvasForPrint, createCanvas } from 'devterm/utils/canvas';
 import { getCanvasFromUrl, getBuffersFromCanvas, drawText } from '../canvas';
+import definitions from '../../utils/action/definitions';
 
 export default {
   cutLine: {
@@ -8,15 +9,76 @@ export default {
       title: 'Cut Line'
     })
   },
+  grid: {
+    display: (value) => ({
+      title: 'Grid',
+      value: value.text
+    }),
+    beforePrinterCommand: async (action, buffer = true) => {
+      const { widths, data, options, imageOptions } = action.value;
+
+      const maxWidth = imageOptions?.width || MAX_DOTS;
+
+      const {
+        columnGutter, rowGutter
+      } = { columnGutter: 12, rowGutter: 12, ...options };
+
+      let offset = widths.filter(v => v < 1).reduce((result, v) => { return result + (1 - v); }, 0);
+      offset /= widths.filter(v => v === 1).length;
+
+      const resolvedColumns = await Promise.all(data.map(async (column, index) => {
+        const gutterCount = (data.length - 1);
+        return await Promise.all(column.map(action => {
+          let columnWidth = parseInt(maxWidth / data.length) * widths[index];
+          if (widths[index] === 1) {
+            columnWidth += parseInt(maxWidth / data.length) * offset;
+          }
+          if (gutterCount > 0) {
+            columnWidth = (columnWidth - ((columnGutter * gutterCount) / data.length));
+            // columnWidth -= Math.ceil((columnGutter * gutterCount) / (data.length));
+          }
+          const { value } = action;
+          console.log('columnWidth', columnWidth, value.imageOptions);
+          (value.imageOptions = value.imageOptions || {}).width = columnWidth;
+          return definitions[String(action.type)].beforePrinterCommand({ ...action }, false);
+        }));
+      }));
+
+      const height = resolvedColumns.reduce((result, column) => {
+        const gutterCount = (column.length - 1);
+        return Math.max(column.reduce((result, { value }) => {
+          return result + value.height;
+        }, gutterCount * rowGutter), result);
+      }, 1);
+
+      let canvas = createCanvas(maxWidth, height);
+      const ctx = canvas.getContext('2d');
+      let x = 0;
+      resolvedColumns.forEach((column, columnIndex) => {
+        let y = 0;
+        const columnX = column.reduce((result, { value }, rowIndex) => {
+          ctx.drawImage(value, x, y);
+          y += value.height + (rowIndex < column.length ? rowGutter : 0);
+          return Math.max(value.width, result);
+        }, 0);
+        x += columnX + (columnIndex < resolvedColumns.length ? columnGutter : 0);
+      });
+
+      canvas = prepareCanvasForPrint(canvas, imageOptions);
+      action.value = buffer ? await getBuffersFromCanvas(canvas) : canvas;
+      return action;
+    }
+  },
   barcode: {
     display: (value) => ({
       title: 'Barcode',
       value: value.text
     }),
-    beforePrinterCommand: async (action) => {
+    beforePrinterCommand: async (action, buffer = true) => {
       const { text, options, imageOptions } = action.value;
-      const canvas = await getBarcode(text || 'empty', options || {});
-      action.value = await getBuffersFromCanvas(canvas, imageOptions);
+      let canvas = await getBarcode(text || 'empty', options || {});
+      canvas = prepareCanvasForPrint(canvas, imageOptions);
+      action.value = buffer ? await getBuffersFromCanvas(canvas) : canvas;
       return action;
     }
   },
@@ -25,12 +87,13 @@ export default {
       title: 'QR Code',
       value: value.text
     }),
-    beforePrinterCommand: async (action) => {
+    beforePrinterCommand: async (action, buffer = true) => {
       const { text, options, imageOptions } = action.value;
       const qrCodeOptions = { ...options };
       qrCodeOptions.width = options.width || imageOptions.width;
-      const canvas = await getQRCode(text || 'empty', qrCodeOptions);
-      action.value = await getBuffersFromCanvas(canvas, imageOptions);
+      let canvas = await getQRCode(text || 'empty', qrCodeOptions);
+      canvas = prepareCanvasForPrint(canvas, imageOptions);
+      action.value = buffer ? await getBuffersFromCanvas(canvas) : canvas;
       return action;
     }
   },
@@ -38,9 +101,11 @@ export default {
     display: () => ({
       title: 'Image'
     }),
-    beforePrinterCommand: async (action) => {
+    beforePrinterCommand: async (action, buffer = true) => {
       const { file, imageOptions } = action.value;
-      action.value = await getBuffersFromCanvas(await getCanvasFromUrl(file), imageOptions);
+      let canvas = await getCanvasFromUrl(file);
+      canvas = prepareCanvasForPrint(canvas, imageOptions);
+      action.value = buffer ? await getBuffersFromCanvas(canvas) : canvas;
       return action;
     }
   },
@@ -49,10 +114,11 @@ export default {
       title: 'Text',
       value: `${value.text.slice(0, 16)}…`
     }),
-    beforePrinterCommand: async (action) => {
+    beforePrinterCommand: async (action, buffer = true) => {
       const { text, options, imageOptions } = action.value;
-      const canvas = await drawText(text || 'empty', options || {}, (imageOptions || {}).rotate ? imageOptions.width : MAX_DOTS);
-      action.value = await getBuffersFromCanvas(canvas, imageOptions);
+      let canvas = await drawText(text || 'empty', options || {}, imageOptions?.rotate ? null : (imageOptions?.width || MAX_DOTS));
+      canvas = prepareCanvasForPrint(canvas, imageOptions);
+      action.value = buffer ? await getBuffersFromCanvas(canvas) : canvas;
       return action;
     }
   },

@@ -18,7 +18,7 @@ export default {
 .base-generic-button {
   padding: 0;
   font-size: 1rem;
-  color: currentColor;
+  color: currentcolor;
   cursor: pointer;
   background: none;
   border: none;

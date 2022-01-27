@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import { prepareCanvasForPrint } from 'devterm/utils/canvas';
 import { ALIGN, MAX_DENSITY } from 'devterm/config';
+import definitions from '../../utils/action/definitions';
 import { getDefaultTextOptions } from '../../utils/action';
-import { drawText, preparePreview } from '../../utils/canvas';
+import { preparePreview } from '../../utils/canvas';
 import { FONT_MAP } from '../../utils/font';
 
 export default {
@@ -68,40 +68,42 @@ export default {
     },
     render () {
       window.cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = window.requestAnimationFrame(() => {
+      this.animationFrame = window.requestAnimationFrame(async () => {
         const ctx = this.ctx;
-        const textCanvas = drawText(this.value.text, {
-          ...this.value.options,
-          margin: this.options.margin
-        }, (this.value.imageOptions || {}).rotate ? (this.value.imageOptions || {}).width : this.width);
-        let preparedCanvas = prepareCanvasForPrint(textCanvas, { ...this.value.imageOptions });
-        preparedCanvas = preparePreview(preparedCanvas, {
+
+        let canvas = await render(this.value);
+
+        canvas = preparePreview(canvas, {
           background: this.colors.printer.preview.background,
           foreground: this.colors.printer.preview.foreground
         }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
         ctx.canvas.width = this.width;
-        ctx.canvas.height = preparedCanvas.height;
+        ctx.canvas.height = canvas.height;
 
         const width = this.width;
         const margin = parseInt(this.options.margin * width);
         let x = 0;
         switch (this.options.align) {
           case ALIGN.RIGHT:
-            x += this.width - preparedCanvas.width;
+            x += this.width - canvas.width;
             break;
           case ALIGN.CENTER:
-            x += (this.width - preparedCanvas.width) / 2;
+            x += (this.width - canvas.width) / 2;
             break;
           default:
             x += margin;
             break;
         }
-        ctx.drawImage(preparedCanvas, x, 0);
+        ctx.drawImage(canvas, x, 0);
         this.$emit('ready');
       });
     }
   }
+};
+
+export const render = async (value) => {
+  return (await definitions.text.beforePrinterCommand({ value }, false)).value;
 };
 
 </script>

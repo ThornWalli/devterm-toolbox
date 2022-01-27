@@ -28,6 +28,7 @@
     </div>
     <actions
       v-model="actions"
+      embed
       class="printer-actions"
       :colors="colors"
       @selectAction="selectedAction = $event"
@@ -192,7 +193,7 @@ export default {
   }
 
   & .print-button {
-    margin: calc(8 / 12 * 1em);
+    margin: em(8px, 12);
   }
 
   & .printer-preview {
@@ -208,7 +209,7 @@ export default {
       --width: 384px;
 
       position: absolute;
-      top: calc(8 / 16 * 1em);
+      top: em(8px);
       bottom: 0;
       left: calc(50% - ((var(--width) + var(--padding)) / 2));
       display: block;
@@ -231,8 +232,8 @@ export default {
     & > .scroll {
       position: relative;
       flex: 1;
-      margin: calc(2 / 16 * 1em);
-      margin-top: calc(8 / 16 * 1em);
+      margin: em(2px);
+      margin-top: em(8px);
       overflow: auto;
       transition: opacity 0.2s;
 

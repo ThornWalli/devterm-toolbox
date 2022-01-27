@@ -72,8 +72,8 @@ export default {
   & .title {
     display: block;
     flex: 1;
-    padding: calc(8 / 12 * 1em) calc(4 / 12 * 1em);
-    font-size: calc(12 / 16 * 1em);
+    padding: em(8px, 12) em(4px, 12);
+    font-size: em(12px);
     text-align: left;
     opacity: 0.6;
 
@@ -103,7 +103,7 @@ export default {
     & > .head {
       & .title {
         &::before {
-          margin-right: calc(4 / 12 * 1em);
+          margin-right: em(4px, 12);
           content: "»";
         }
 
