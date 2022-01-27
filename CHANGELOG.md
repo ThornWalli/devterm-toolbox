@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.33](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.32...v1.0.0-beta.33) (2022-01-23)
+
+
+### Bug Fixes
+
+* **canvas:** improve canvas ([eddfa23](https://github.com/ThornWalli/devterm-toolbox/commit/eddfa23d484ff9beb14c1a370b83d02a1adb98fb))
+
 # [1.0.0-beta.32](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.31...v1.0.0-beta.32) (2022-01-23)
 
 
