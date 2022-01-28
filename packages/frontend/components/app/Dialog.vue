@@ -140,15 +140,15 @@ export default {
   & .dialog-content {
     position: relative;
     box-sizing: border-box;
-    padding: em(8px);
-    padding-top: em(8px);
+    padding: em(8);
+    padding-top: em(8);
     color: var(--color-primary);
     background: var(--color-secondary);
     border: solid var(--color-primary) 1px;
   }
 
   & .dialog-title {
-    font-size: em(12px);
+    font-size: em(12);
     line-height: 1;
     color: var(--color-secondary);
     text-align: center;
@@ -162,7 +162,7 @@ export default {
     & > .buttons {
       display: flex;
       margin: calc(-8 / 16 * 1em);
-      margin-top: em(8px);
+      margin-top: em(8);
 
       & > * {
         flex: 1;
@@ -173,11 +173,11 @@ export default {
     & > form {
       & > .buttons {
         display: flex;
-        margin: em(8px) calc(-8 / 16 * 1em);
+        margin: em(8) calc(-8 / 16 * 1em);
 
         & > * {
           flex: 1;
-          margin: 0 em(8px, 12);
+          margin: 0 em(8, 12);
         }
       }
     }
@@ -224,10 +224,10 @@ export default {
     & > div {
       box-sizing: border-box;
       width: 50%;
-      padding: em(4px);
+      padding: em(4);
     }
 
-    margin: em(8px) em(-4px);
+    margin: em(8) em(-4px);
 
     &:first-child {
       margin-top: 0;

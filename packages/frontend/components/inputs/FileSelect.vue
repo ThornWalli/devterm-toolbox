@@ -81,16 +81,16 @@ export default {
     width: 100%;
 
     /* height: 1em; */
-    padding: em(4px, 12);
+    padding: em(4, 12);
     overflow: hidden;
     font-family: monospace;
-    font-size: em(12px);
+    font-size: em(12);
     color: currentcolor;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     background: #000;
-    border: dotted var(--color-primary) em(1px, 12);
+    border: dotted var(--color-primary) em(1, 12);
     appearance: none;
 
     &[type="number"] {
@@ -107,7 +107,7 @@ export default {
     }
 
     & + * {
-      margin-left: em(4px, 12);
+      margin-left: em(4, 12);
     }
   }
 

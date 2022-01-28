@@ -318,21 +318,21 @@ export default {
   flex: 1;
   flex-direction: column;
   height: 100%;
-  padding: 0 em(8px);
+  padding: 0 em(8);
   user-select: none;
 
-  --offset: em(2px);
+  --offset: em(2);
 
   & .list {
-    height: calc(100% - (24px + 24px));
+    height: calc(100% - (em(48)));
     overflow: auto;
   }
 
   & .add-action {
     flex: 0;
-    height: em(32px);
-    margin: em(16px) 0;
-    margin-bottom: em(8px);
+    height: em(32);
+    margin: em(16) 0;
+    margin-bottom: em(8);
 
     & > * {
       width: 100%;
@@ -343,7 +343,7 @@ export default {
     box-sizing: border-box;
     height: 100%;
     padding: 0;
-    padding: em(4px) 0;
+    padding: em(4) 0;
     margin: 0;
     overflow: auto;
     list-style: none;
@@ -361,14 +361,14 @@ export default {
 
   & > * {
     height: 100%;
-    padding: 0 em(8px);
+    padding: 0 em(8);
   }
 
   & .index {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: em(13px);
+    font-size: em(13);
     font-style: italic;
     opacity: 0.4;
   }

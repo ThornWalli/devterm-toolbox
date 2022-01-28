@@ -47,10 +47,10 @@ export default {
 
   & > * {
     display: block;
-    height: em(22px, 12);
-    padding: 0 em(8px, 12);
+    height: em(22, 12);
+    padding: 0 em(8, 12);
     font-family: monospace;
-    font-size: em(12px);
+    font-size: em(12);
     line-height: 1;
     cursor: pointer;
 

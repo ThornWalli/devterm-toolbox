@@ -279,6 +279,7 @@ export default {
     },
     style () {
       return {
+        '--zoom': `${this.$config.data.zoom}`,
         '--color-primary': `rgb(${this.colors.primary.join(',')})`,
         '--color-secondary': `rgb(${this.colors.secondary.join(',')})`,
         ...Object.fromEntries(Array(10).fill('').map((v, i) => [`--color-primary-${(i + 1) * 10}`, `rgb(${this.colors.primary.join(' ')} / ${(i + 1) * 10}%)`])),
@@ -449,6 +450,8 @@ export default {
 }
 
 .app {
+  --zoom: 1;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -459,27 +462,36 @@ export default {
   width: 100%;
   height: 100%;
   font-family: monospace;
+  font-size: max(calc(1em * var(--zoom)), em(12));
   color: var(--color-primary);
   user-select: none;
   background: var(--color-secondary);
   opacity: 0;
   transition: opacity 0.6s ease-in;
 
+  @nest body:not(.electron) & {
+    font-size: vw(calc(12 * var(--zoom)), 768, 10px);
+
+    @media (min-width: 1024px) {
+      font-size: calc(1em * var(--zoom));
+    }
+  }
+
   &.ready {
     opacity: 1;
   }
 
   & > .header {
-    border-bottom: solid var(--color-primary) em(2px, 16);
+    border-bottom: solid var(--color-primary) em(2, 16);
   }
 
   & > .footer {
-    border-top: solid var(--color-primary) em(2px, 16);
+    border-top: solid var(--color-primary) em(2, 16);
   }
 
   & > .header,
   & > .footer {
-    height: em(22px, 16);
+    height: em(22, 16);
   }
 
   & > .app-content {
@@ -506,12 +518,12 @@ export default {
 
 <style lang="postcss">
 ::-webkit-scrollbar {
-  width: em(16px);
+  width: em(16);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-primary);
-  border: solid  var(--color-secondary) em(2px);
+  border: solid  var(--color-secondary) em(2);
   outline: none;
 }
 
@@ -526,6 +538,12 @@ body {
   height: 100%;
 }
 
+/* html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+} */
+
 body {
   margin: 0;
   font-size: 16px;
@@ -537,7 +555,7 @@ strong {
 }
 
 hr {
-  margin: em(8px, 16) 0;
+  margin: em(8, 16) 0;
   border-color: var(--color-primary);
   border-width: 1px 0 0;
 }

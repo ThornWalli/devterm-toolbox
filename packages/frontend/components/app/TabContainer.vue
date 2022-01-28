@@ -29,7 +29,7 @@ export default {
 
         & span {
           display: block;
-          padding: em(8px, 12);
+          padding: em(8, 12);
           font-size: 12px;
           text-align: center;
 
@@ -43,7 +43,7 @@ export default {
   }
 
   & >>> .tabs + div {
-    margin-top: em(8px);
+    margin-top: em(8);
   }
 
   & >>> .content {

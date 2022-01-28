@@ -40,6 +40,7 @@ const config = defineConfig({
   root: join(__dirname, '..'),
   publicDir: 'public',
   server: {
+    host: '0.0.0.0',
     port: 8050,
     open: true,
     https

@@ -193,10 +193,12 @@ export default {
   }
 
   & .print-button {
-    margin: em(8px, 12);
+    margin: em(8, 12);
   }
 
   & .printer-preview {
+    --width: em(384);
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -206,10 +208,9 @@ export default {
 
     &::before {
       --padding: calc((58/50) * 384px - 384px);
-      --width: 384px;
 
       position: absolute;
-      top: em(8px);
+      top: em(8);
       bottom: 0;
       left: calc(50% - ((var(--width) + var(--padding)) / 2));
       display: block;
@@ -229,11 +230,15 @@ export default {
       }
     }
 
+    & >>> canvas {
+      width: 100%;
+    }
+
     & > .scroll {
       position: relative;
       flex: 1;
-      margin: em(2px);
-      margin-top: em(8px);
+      margin: em(2);
+      margin-top: em(8);
       overflow: auto;
       transition: opacity 0.2s;
 
@@ -243,13 +248,13 @@ export default {
 
       & > div {
         position: relative;
-        width: 384px;
+        width: var(--width);
         padding: 0 calc(var(--padding) / 2);
-        margin: 48px auto;
+        margin: em(48) auto;
         color: var(--color-printer-preview-foreground);
         background: var(--color-printer-preview-background);
         border: dotted var(--color-secondary-30);
-        border-width: 1px;
+        border-width: em(1);
 
         &.has-selected {
           & > div {

@@ -179,9 +179,9 @@ export default {
   flex-direction: column;
 
   & .footer {
-    padding-top: em(8px, 12);
-    margin-top: em(8px, 12);
-    font-size: em(12px, 16);
+    padding-top: em(8, 12);
+    margin-top: em(8, 12);
+    font-size: em(12, 16);
     opacity: 0.6;
   }
 }

@@ -9,14 +9,25 @@ module.exports = {
   ]
 };
 
-function rem (px, base = 16) {
-  return `${parseFloat(px) / base}rem`;
+function rem (value, base = 16) {
+  value = resolveValue(value);
+  return `${parseInt(value) / base}rem`;
 }
 
-function em (px, base = 16) {
-  return `${parseFloat(px) / base}em`;
+function em (value, base = 16) {
+  value = resolveValue(value);
+  return `calc(${value} / ${base} * 1em)`;
 }
 
-function vw (px, viewport = 375) {
-  return `${parseFloat(px) / viewport * 100}vw`;
+function vw (value, viewport = 375, min = '1rem') {
+  value = resolveValue(value);
+  return `max(${value / viewport * 100}vw, ${min})`;
 }
+
+const resolveValue = (value) => {
+  if (value.endsWith('value')) {
+    return parseInt(value);
+  } else {
+    return String(value).replace('calc', '').replace('px', '');
+  }
+};

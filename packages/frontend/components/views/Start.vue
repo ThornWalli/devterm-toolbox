@@ -62,7 +62,7 @@ export default {
   text-align: center;
 
   & p {
-    font-size: em(12px);
+    font-size: em(12);
     line-height: calc(20 / 12);
   }
 
@@ -71,13 +71,13 @@ export default {
   }
 
   & div {
-    margin: em(20px);
+    margin: em(20);
     text-align: center;
   }
 
   & .buttons {
     & > * + * {
-      margin-left: em(16px);
+      margin-left: em(16);
     }
   }
 }

@@ -185,14 +185,14 @@ export default {
 
 <style lang="postcss" scoped>
 .app-dialog.dialog-server {
-  --dialog-width: em(480px);
+  --dialog-width: em(480);
 
   & >>> .base-input-label {
     display: flex;
   }
 
   & span {
-    font-size: em(12px);
+    font-size: em(12);
     letter-spacing: 1px;
   }
 
@@ -206,7 +206,7 @@ export default {
 
   & .profile-select {
     display: flex;
-    margin-bottom: em(8px);
+    margin-bottom: em(8);
 
     & > * {
       flex: 1;
@@ -229,7 +229,7 @@ export default {
 
           & span {
             display: block;
-            padding: em(8px, 12);
+            padding: em(8, 12);
             font-size: 12px;
             text-align: center;
 
@@ -243,7 +243,7 @@ export default {
     }
 
     & >>> .tabs + div {
-      margin-top: em(8px);
+      margin-top: em(8);
     }
   }
 }

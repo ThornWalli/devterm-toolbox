@@ -58,12 +58,12 @@ export default {
   min-width: 300px;
 
   /* --color-primary: red;
-  --dialog-width: em(480px, 16); */
+  --dialog-width: em(480, 16); */
 
   & p {
-    padding: em(8px, 12) 0;
+    padding: em(8, 12) 0;
     margin: 0;
-    font-size: em(12px);
+    font-size: em(12);
     text-align: center;
   }
 }

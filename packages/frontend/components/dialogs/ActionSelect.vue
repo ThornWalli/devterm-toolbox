@@ -77,7 +77,7 @@ export default {
       box-sizing: border-box;
       display: flex;
       width: 50%;
-      padding: em(4px);
+      padding: em(4);
 
       & > * {
         flex: 1;
@@ -87,15 +87,15 @@ export default {
 
   & fieldset {
     padding: em(0) em(0);
-    margin: em(8px) 0;
+    margin: em(8) 0;
 
-    /* margin: em(24px, 16) 0; */
+    /* margin: em(24, 16) 0; */
     border: solid  var(--color-primary);
     border-width: 1px 0 0;
 
     & legend {
-      padding: 0 em(8px);
-      font-size: em(14px);
+      padding: 0 em(8);
+      font-size: em(14);
       line-height: calc(20 / 14);
     }
   }

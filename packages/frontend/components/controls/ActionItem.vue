@@ -72,8 +72,8 @@ export default {
   & .title {
     display: block;
     flex: 1;
-    padding: em(8px, 12) em(4px, 12);
-    font-size: em(12px);
+    padding: em(8, 12) em(4, 12);
+    font-size: em(12);
     text-align: left;
     opacity: 0.6;
 
@@ -103,7 +103,7 @@ export default {
     & > button {
       & .title {
         &::before {
-          margin-right: em(4px, 12);
+          margin-right: em(4, 12);
           content: "»";
         }
 

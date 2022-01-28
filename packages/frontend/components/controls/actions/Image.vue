@@ -141,9 +141,9 @@ export default {
   & .preview {
     display: flex;
     justify-content: center;
-    padding: em(4px);
+    padding: em(4);
     margin: em(0) 0;
-    margin-bottom: em(16px);
+    margin-bottom: em(16);
     background: var(--color-primary-20);
   }
 
@@ -153,13 +153,13 @@ export default {
 
   & .cols {
     column-count: 2;
-    margin: em(8px) 0;
+    margin: em(8) 0;
   }
 
   & .footer {
-    padding-top: em(8px, 12);
-    margin-top: em(8px, 12);
-    font-size: em(12px);
+    padding-top: em(8, 12);
+    margin-top: em(8, 12);
+    font-size: em(12);
     border-top: solid var(--color-primary-50) 1px;
 
     & > span {

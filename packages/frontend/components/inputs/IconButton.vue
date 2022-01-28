@@ -38,7 +38,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: em(12px);
+    width: em(12);
   }
 
   &:hover {

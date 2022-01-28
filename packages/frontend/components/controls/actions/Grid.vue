@@ -168,9 +168,9 @@ export default {
 
   & >>> dialog {
     position: fixed !important;
-    top: em(24px) !important;
+    top: em(24) !important;
     right: 0 !important;
-    bottom: em(24px) !important;
+    bottom: em(24) !important;
     left: auto !important;
     width: 50% !important;
     height: auto !important;
@@ -179,7 +179,7 @@ export default {
 
   & >>> .actions {
     padding: 0;
-    margin: 0 em(-4);
+    margin: 0;
     margin-top: em(16);
   }
 

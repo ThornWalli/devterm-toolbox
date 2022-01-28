@@ -3,6 +3,7 @@ export const MAX_IMAGE_WIDTH = 512;
 export const getDefaultConfig = () => {
   return {
     theme: 'amber',
+    zoom: 1,
     startType: null,
     ssl: {
       key: null,

@@ -21,7 +21,7 @@ export default {
   display: flex;
   align-self: center;
   justify-content: center;
-  padding: 0 em(8px, 12);
-  font-size: em(12px);
+  padding: 0 em(8, 12);
+  font-size: em(12);
 }
 </style>

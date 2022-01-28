@@ -49,7 +49,7 @@ textarea {
   height: 100%;
   padding: 0;
   font-family: monospace;
-  font-size: em(12px);
+  font-size: em(12);
   line-height: calc(20 / 12);
   color: currentcolor;
   resize: vertical;
@@ -68,11 +68,11 @@ textarea {
 
   &::-webkit-resizer {
     display: block;
-    width: em(8px, 12);
-    height: em(8px, 12);
+    width: em(8, 12);
+    height: em(8, 12);
     background: transparent;
     border: solid var(--color-primary);
-    border-width: 0 em(1px, 12) em(1px, 12) 0;
+    border-width: 0 em(1, 12) em(1, 12) 0;
     outline: none;
     box-shadow: none;
   }

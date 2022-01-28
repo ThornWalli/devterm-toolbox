@@ -30,9 +30,9 @@ export default {
 
 <style lang="postcss" scoped>
 .input-text-button {
-  padding: em(4px, 12) em(8, 12);
+  padding: em(4, 12) em(8, 12);
   font-family: monospace;
-  font-size: em(12px);
+  font-size: em(12);
   color: var(--color-primary);
   cursor: pointer;
   background: transparent;

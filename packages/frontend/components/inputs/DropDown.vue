@@ -26,9 +26,9 @@ export default {
 .input-drop-down {
   & >>> select {
     width: 100%;
-    padding: em(4px, 12) em(5px, 12);
+    padding: em(4, 12) em(5, 12);
     font-family: monospace;
-    font-size: em(12px);
+    font-size: em(12);
     color: currentcolor;
     background: none;
     border: solid var(--color-primary) 1px;
@@ -47,9 +47,11 @@ export default {
       background: var(--color-primary);
     }
 
-    & option {
-      color: var(--color-primary);
-      background: var(--color-secondary);
+    &[multiple] {
+      & option {
+        color: var(--color-primary);
+        background: var(--color-secondary);
+      }
     }
   }
 }

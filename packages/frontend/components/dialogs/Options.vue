@@ -10,6 +10,11 @@
   >
     <template #default>
       <input-drop-down v-model="model.theme" label="Theme" :options="themeOptions" />
+      <div class="zoom">
+        <input-text-field :value="`${Math.round(model.zoom * 100)}%`" readonly label="Zoom" />
+        <input-text-button color="secondary" text="-" @click="model = {...model, zoom: Math.max(model.zoom - .1, .1)}" />
+        <input-text-button color="secondary" text="+" @click="model = {...model, zoom: Math.min(model.zoom + .1, 2)}" />
+      </div>
       <hr>
       <input-drop-down v-model="model.startType" label="Start type" :options="startTypeOptions" />
       <input-text-field v-model="model.host" label="Host" placeholder="Enter host…" />
@@ -87,6 +92,19 @@ export default {
 
 <style lang="postcss" scoped>
 .app-dialog.dialog-options {
-  --dialog-width: em(480px);
+  --dialog-width: em(480);
+
+  & .zoom {
+    display: flex;
+    margin-top: em(8);
+
+    & > :first-child {
+      flex: 1;
+
+      & >>> input {
+        text-align: center;
+      }
+    }
+  }
 }
 </style>

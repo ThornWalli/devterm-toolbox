@@ -90,7 +90,7 @@ export default {
 
 <style lang="postcss" scoped>
 .view-info {
-  padding: 0 em(32px);
+  padding: 0 em(32);
 
   & table {
     width: 100%;
@@ -101,7 +101,7 @@ export default {
     }
 
     & td {
-      padding: em(4px) 0;
+      padding: em(4) 0;
 
       &:nth-child(1) {
         /* width: 120px; */
@@ -114,24 +114,24 @@ export default {
   }
 
   & h2 {
-    margin: em(24px, 24) 0;
-    margin-top: em(16px, 24);
-    font-size: em(24px);
+    margin: em(24, 24) 0;
+    margin-top: em(16, 24);
+    font-size: em(24);
   }
 
   & h3 {
-    margin: em(32px) 0;
+    margin: em(32) 0;
   }
 
   & fieldset {
     margin: 0;
 
-    /* margin: em(24px, 16) 0; */
+    /* margin: em(24, 16) 0; */
     border: solid  var(--color-primary) 1px;
 
     & legend {
-      padding: 0 em(8px);
-      font-size: em(14px);
+      padding: 0 em(8);
+      font-size: em(14);
       line-height: calc(20 / 14);
       color: var(--color-secondary);
       background: var(--color-primary);
@@ -139,11 +139,11 @@ export default {
   }
 
   & .cols {
-    --offset: em(16px);
+    --offset: em(16);
 
     display: flex;
     flex-wrap: wrap;
-    margin: em(8px) calc(var(--offset) * -1);
+    margin: em(8) calc(var(--offset) * -1);
 
     & > * {
       box-sizing: border-box;
@@ -154,12 +154,12 @@ export default {
 
   & ul {
     padding: 0;
-    margin: em(16px) 0;
+    margin: em(16) 0;
     list-style: none;
 
     & li {
       & + li {
-        margin-top: em(8px);
+        margin-top: em(8);
       }
 
       & span {
