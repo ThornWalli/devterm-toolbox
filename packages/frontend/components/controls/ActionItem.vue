@@ -100,7 +100,7 @@ export default {
   }
 
   &.property {
-    & > .head {
+    & > button {
       & .title {
         &::before {
           margin-right: em(4px, 12);
@@ -114,27 +114,28 @@ export default {
   }
 
   &.can-select {
-    & > .head {
-      & .title {
-        cursor: pointer;
+    & .title {
+      cursor: pointer;
+    }
 
-        &:hover,
-        &:focus {
-          color: var(--color-secondary);
-          background: var(--color-primary);
-          opacity: 1;
-        }
+    &:hover,
+    &:focus {
+      color: var(--color-secondary);
+      background: var(--color-primary);
+
+      & .title {
+        opacity: 1;
       }
     }
   }
 
   &.focus {
-    & > .head {
-      color: var(--color-secondary);
-      background: var(--color-primary);
-    }
+    color: var(--color-secondary);
+    background: var(--color-primary);
 
-    opacity: 1;
+    & .title {
+      opacity: 1;
+    }
   }
 }
 </style>

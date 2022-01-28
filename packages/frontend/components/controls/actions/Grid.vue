@@ -50,7 +50,7 @@
               type="number"
               @input="model.widths[column] = Number($event); updateModel()"
             />
-            <actions :key="column" :native-actions="false" :value="currentColumn" @input="model.data[column] = $event; updateModel()" />
+            <actions :key="column" embed :native-actions="false" :value="currentColumn" @input="model.data[column] = $event; updateModel()" />
           </base-tab-container-content>
         </template>
 
@@ -168,6 +168,13 @@ export default {
 
   & >>> dialog {
     position: fixed !important;
+    top: em(24px) !important;
+    right: 0 !important;
+    bottom: em(24px) !important;
+    left: auto !important;
+    width: 50% !important;
+    height: auto !important;
+    margin: 0;
   }
 
   & >>> .actions {

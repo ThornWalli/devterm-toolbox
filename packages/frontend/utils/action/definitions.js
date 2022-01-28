@@ -1,5 +1,5 @@
 import { ALIGN, FONT, MAX_DOTS } from 'devterm/config';
-import { getQRCode, getBarcode, prepareCanvasForPrint, createCanvas } from 'devterm/utils/canvas';
+import { getQRCode, getBarcode, prepareCanvasForPrint } from 'devterm/utils/canvas';
 import { getCanvasFromUrl, getBuffersFromCanvas, drawText } from '../canvas';
 import definitions from '../../utils/action/definitions';
 
@@ -28,14 +28,13 @@ export default {
 
       const resolvedColumns = await Promise.all(data.map(async (column, index) => {
         const gutterCount = (data.length - 1);
-        return await Promise.all(column.map(action => {
+        return await Promise.all(column.filter(({ visible }) => visible).map(action => {
           let columnWidth = parseInt(maxWidth / data.length) * widths[index];
           if (widths[index] === 1) {
             columnWidth += parseInt(maxWidth / data.length) * offset;
           }
           if (gutterCount > 0) {
             columnWidth = (columnWidth - ((columnGutter * gutterCount) / data.length));
-            // columnWidth -= Math.ceil((columnGutter * gutterCount) / (data.length));
           }
           const { value } = action;
           console.log('columnWidth', columnWidth, value.imageOptions);
@@ -46,17 +45,18 @@ export default {
 
       const height = resolvedColumns.reduce((result, column) => {
         const gutterCount = (column.length - 1);
-        return Math.max(column.reduce((result, { value }) => {
+        return Math.max(column.filter(({ visible }) => visible).reduce((result, { value }) => {
           return result + value.height;
         }, gutterCount * rowGutter), result);
       }, 1);
 
-      let canvas = createCanvas(maxWidth, height);
+      let canvas = new OffscreenCanvas(maxWidth, height);
       const ctx = canvas.getContext('2d');
       let x = 0;
+
       resolvedColumns.forEach((column, columnIndex) => {
         let y = 0;
-        const columnX = column.reduce((result, { value }, rowIndex) => {
+        const columnX = column.filter(({ visible }) => visible).reduce((result, { value }, rowIndex) => {
           ctx.drawImage(value, x, y);
           y += value.height + (rowIndex < column.length ? rowGutter : 0);
           return Math.max(value.width, result);

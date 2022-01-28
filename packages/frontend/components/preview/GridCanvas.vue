@@ -108,49 +108,6 @@ export const render = async (value) => {
   return (await definitions.grid.beforePrinterCommand({ value }, false)).value;
 };
 
-// export const render = async (rows, options) => {
-//   const {
-//     columnGutter, rowGutter
-//   } = { columnGutter: 10, rowGutter: 10, ...options };
-
-//   const rowGutterCount = (rows.length - 1);
-
-//   const resolvedRows = await Promise.all(rows.map(async (column) => {
-//     const gutterCount = (column.length - 1);
-//     return await Promise.all(column.map(action => {
-//       let columnWidth = parseInt(MAX_DOTS / column.length);
-//       if (gutterCount > 0) {
-//         columnWidth -= (columnGutter / gutterCount) * gutterCount;
-//       }
-//       const { value } = action;
-//       (value.imageOptions = value.imageOptions || {}).width = columnWidth;
-//       return definitions[String(action.type)].beforePrinterCommand({ ...action }, false);
-//     }));
-//   }));
-
-//   const height = resolvedRows.reduce((result, values) => {
-//     result += values.reduce((result, { value }) => {
-//       return Math.max(value.height, result);
-//     }, 0);
-//     return result;
-//   }, rowGutterCount * rowGutter);
-//   const canvas = createCanvas(MAX_DOTS, height);
-//   const ctx = canvas.getContext('2d');
-
-//   let y = 0;
-//   resolvedRows.forEach((column, row) => {
-//     const maxY = 0;
-//     console.log('y', y);
-//     y += column.reduce((result, { value }, x) => {
-//       ctx.drawImage(value, value.width * x + (x * columnGutter), y + (row * rowGutter));
-//       return Math.max(value.height, result);
-//     }, 0);
-//     y = Math.max(maxY, y);
-//   });
-
-//   return canvas;
-// };
-
 </script>
 
 <style lang="postcss" scoped>

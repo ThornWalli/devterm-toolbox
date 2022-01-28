@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 export default class ActionDescription {
   constructor (options) {
     console.log(options);
-    const { id, type, value } = options || {};
+    const { id, type, value, visible } = options || {};
     this.id = id || uuidv4();
     this.type = type;
     this.value = value;
-    this.visible = true;
+    this.visible = visible === undefined ? true : visible;
     // this.timestamp = timestamp || Date.now();
   }
 
@@ -16,7 +16,7 @@ export default class ActionDescription {
       id: this.id,
       type: this.type,
       value: this.value,
-      visible: true
+      visible: this.visible
     };
   }
 }
