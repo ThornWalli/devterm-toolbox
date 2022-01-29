@@ -13,6 +13,7 @@ export const getActionTypes = () => {
     { native: true, title: 'Font (native)', value: 'setFont', group: 'Layout' },
     { native: true, title: 'LineSpace (native)', value: 'setLineSpace', group: 'Layout' },
     { native: true, title: 'WordGap (native)', value: 'setWordGap', group: 'Layout' },
+    { native: false, title: 'Spacer', value: 'spacer', group: 'Layout' },
     { native: false, title: 'Grid', value: 'grid', group: 'Layout' },
     { native: false, title: 'Image', value: 'image', group: 'Content' },
     { native: false, title: 'QRCode', value: 'qrCode', group: 'Content' },
@@ -80,6 +81,9 @@ export const createAction = (type) => {
     case 'barcode':
       value = getDefaultBarcodeOptions();
       break;
+    case 'spacer':
+      value = getDefaultSpacerOptions();
+      break;
     default:
       break;
   }
@@ -146,6 +150,14 @@ export const executeAction = (action, options) => {
         props: {
           value: getCutLine(options.font)
         }
+      };
+
+    case 'spacer':
+      return {
+        id: action.id,
+        component: () => import('../components/preview/SpacerCanvas.vue'),
+        options: { ...options },
+        props: { ...action }
       };
 
     case 'grid':
@@ -228,7 +240,7 @@ export const getDefaultTextOptions = () => {
       lineSpace: 0,
       wordGap: 0,
       margin: 0,
-      fontFamily: null,
+      fontFamily: 'sans-serif',
       color: '#000',
       weight: 400,
       italic: false
@@ -272,5 +284,10 @@ export const getDefaultBarcodeOptions = () => {
       flat: false
     },
     imageOptions: getDefaultPrepareOptions()
+  };
+};
+export const getDefaultSpacerOptions = () => {
+  return {
+    value: 0
   };
 };

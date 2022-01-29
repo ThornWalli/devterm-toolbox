@@ -27,6 +27,15 @@ export default [
       data: [
         [
           {
+            id: '7d4b8881-37d3-4b80-98e2-dbef273fd321',
+            type: 'spacer',
+            value: {
+              value: 200
+
+            },
+            visible: true
+          },
+          {
             id: '7d4b8881-37d3-4b80-98e2-dbef273fd320',
             type: 'text',
             value: {

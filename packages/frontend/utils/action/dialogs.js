@@ -2,6 +2,7 @@ export default {
   barcode: () => import('@devterm-toolbox/frontend/components/controls/actions/Barcode.vue'),
   qrCode: () => import('@devterm-toolbox/frontend/components/controls/actions/QrCode.vue'),
   grid: () => import('@devterm-toolbox/frontend/components/controls/actions/Grid.vue'),
+  spacer: () => import('@devterm-toolbox/frontend/components/controls/actions/Spacer.vue'),
   text: () => import('@devterm-toolbox/frontend/components/controls/actions/Text.vue'),
   nativeText: () => import('@devterm-toolbox/frontend/components/controls/actions/NativeText.vue'),
   image: () => import('@devterm-toolbox/frontend/components/controls/actions/Image.vue'),

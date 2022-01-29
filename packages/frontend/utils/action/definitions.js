@@ -1,5 +1,7 @@
 import { ALIGN, FONT, MAX_DOTS } from 'devterm/config';
 import { getQRCode, getBarcode, prepareCanvasForPrint } from 'devterm/utils/canvas';
+import ActionDescription from '../../classes/ActionDescription';
+import { getDefaultTextOptions } from '../../utils/action';
 import { getCanvasFromUrl, getBuffersFromCanvas, drawText } from '../canvas';
 import definitions from '../../utils/action/definitions';
 
@@ -12,11 +14,10 @@ export default {
   grid: {
     display: (value) => ({
       title: 'Grid',
-      value: value.text
+      value: `Columns: ${value.data.length}`
     }),
     beforePrinterCommand: async (action, buffer = true) => {
       const { widths, data, options, imageOptions } = action.value;
-
       const maxWidth = imageOptions?.width || MAX_DOTS;
 
       const {
@@ -28,7 +29,7 @@ export default {
 
       const resolvedColumns = await Promise.all(data.map(async (column, index) => {
         const gutterCount = (data.length - 1);
-        return await Promise.all(column.filter(({ visible }) => visible).map(action => {
+        return await Promise.all(column.filter(({ visible }) => visible).map(async action => {
           let columnWidth = parseInt(maxWidth / data.length) * widths[index];
           if (widths[index] === 1) {
             columnWidth += parseInt(maxWidth / data.length) * offset;
@@ -39,7 +40,18 @@ export default {
           const { value } = action;
           console.log('columnWidth', columnWidth, value.imageOptions);
           (value.imageOptions = value.imageOptions || {}).width = columnWidth;
-          return definitions[String(action.type)].beforePrinterCommand({ ...action }, false);
+          try {
+            return await definitions[String(action.type)].beforePrinterCommand({ ...action }, false);
+          } catch (error) {
+            return definitions.text.beforePrinterCommand(new ActionDescription({
+              visible: true,
+              value: {
+                ...getDefaultTextOptions(),
+                text: error.message,
+                imageOptions: value.imageOptions
+              }
+            }), false);
+          }
         }));
       }));
 
@@ -57,6 +69,7 @@ export default {
       resolvedColumns.forEach((column, columnIndex) => {
         let y = 0;
         const columnX = column.filter(({ visible }) => visible).reduce((result, { value }, rowIndex) => {
+          console.log(value, value.width, value.height);
           ctx.drawImage(value, x, y);
           y += value.height + (rowIndex < column.length ? rowGutter : 0);
           return Math.max(value.width, result);
@@ -72,7 +85,7 @@ export default {
   barcode: {
     display: (value) => ({
       title: 'Barcode',
-      value: value.text
+      value: `${value.text.slice(0, 16)}…`
     }),
     beforePrinterCommand: async (action, buffer = true) => {
       const { text, options, imageOptions } = action.value;
@@ -85,7 +98,7 @@ export default {
   qrCode: {
     display: (value) => ({
       title: 'QR Code',
-      value: value.text
+      value: `${value.text.slice(0, 16)}…`
     }),
     beforePrinterCommand: async (action, buffer = true) => {
       const { text, options, imageOptions } = action.value;
@@ -104,6 +117,18 @@ export default {
     beforePrinterCommand: async (action, buffer = true) => {
       const { file, imageOptions } = action.value;
       let canvas = await getCanvasFromUrl(file);
+      canvas = prepareCanvasForPrint(canvas, imageOptions);
+      action.value = buffer ? await getBuffersFromCanvas(canvas) : canvas;
+      return action;
+    }
+  },
+  spacer: {
+    display: () => ({
+      title: 'Spacer'
+    }),
+    beforePrinterCommand: async (action, buffer = true) => {
+      const { value, imageOptions } = action.value;
+      let canvas = new OffscreenCanvas(imageOptions?.width || MAX_DOTS, value);
       canvas = prepareCanvasForPrint(canvas, imageOptions);
       action.value = buffer ? await getBuffersFromCanvas(canvas) : canvas;
       return action;

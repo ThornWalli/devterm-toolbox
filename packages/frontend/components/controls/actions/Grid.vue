@@ -50,7 +50,14 @@
               type="number"
               @input="model.widths[column] = Number($event); updateModel()"
             />
-            <actions :key="column" embed :native-actions="false" :value="currentColumn" @input="model.data[column] = $event; updateModel()" />
+            <actions
+              :key="column"
+              :colors="colors"
+              embed
+              :native-actions="false"
+              :value="currentColumn"
+              @input="model.data[column] = $event; updateModel()"
+            />
           </base-tab-container-content>
         </template>
 

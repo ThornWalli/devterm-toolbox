@@ -35,8 +35,9 @@ export const resizeCanvas = (canvas, width, height) => {
 
 export const getCanvasFromUrl = async (dataUrl) => {
   const img = new window.Image();
-  await new Promise(resolve => {
+  await new Promise((resolve, reject) => {
     img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('image not found'));
     img.src = dataUrl;
     img.crossOrigin = 'anonymous';
   });
