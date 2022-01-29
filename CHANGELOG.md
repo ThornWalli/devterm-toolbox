@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.37](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.36...v1.0.0-beta.37) (2022-01-28)
+
+
+### Bug Fixes
+
+* **app:** improve ui ([07f86cc](https://github.com/ThornWalli/devterm-toolbox/commit/07f86cc51e37f1fd1e9a9a7455ba0abab5e8545c))
+
 # [1.0.0-beta.36](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.35...v1.0.0-beta.36) (2022-01-28)
 
 
