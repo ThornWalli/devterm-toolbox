@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.38](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.37...v1.0.0-beta.38) (2022-01-29)
+
+
+### Bug Fixes
+
+* **app:** imrpove; add spacer action ([c564900](https://github.com/ThornWalli/devterm-toolbox/commit/c564900790dc504694e766457f181180e36cd712))
+
 # [1.0.0-beta.37](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.36...v1.0.0-beta.37) (2022-01-28)
 
 
