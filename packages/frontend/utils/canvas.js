@@ -3,11 +3,10 @@ import {
   MAX_DOTS, ALIGN
 } from 'devterm/config';
 
-import { CanvasTextWrapper } from 'canvas-text-wrapper';
-
 import {
   getImageWriteBuffersFromCanvas
 } from 'devterm/utils/printer';
+import CanvasTextWrapper from '../externals/CanvasTextWrapper';
 import { FONT_ALIGN, getDefaultFontOptions } from './action';
 
 export const toDataURL = (targetCanvas) => {
@@ -102,9 +101,6 @@ export const drawText = (text, options, width, colors) => {
 
   text = String(text);
 
-  // const canvas = new OffscreenCanvas(width, 0);
-  // const ctx = canvas.getContext('2d');
-
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.style.display = 'none';
@@ -131,12 +127,11 @@ export const drawText = (text, options, width, colors) => {
     justifyLines: justify,
     renderHDPI: true,
     textDecoration: underline ? 'underline' : 'none'
-
   };
 
   // prerender detect rows
   const rows = CanvasTextWrapper(canvas, text, textWrapperOptions);
-
+  canvas.imageSmoothingEnabled = false;
   canvas.height = rows.length * fontSize * lineHeight;
   CanvasTextWrapper(canvas, text, textWrapperOptions);
 
