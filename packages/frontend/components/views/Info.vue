@@ -91,6 +91,7 @@ export default {
 <style lang="postcss" scoped>
 .view-info {
   padding: 0 em(32);
+  font-family: var(--font-secondary);
 
   & table {
     width: 100%;

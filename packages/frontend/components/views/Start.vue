@@ -59,6 +59,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-secondary);
   text-align: center;
 
   & p {

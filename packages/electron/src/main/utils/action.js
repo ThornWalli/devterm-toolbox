@@ -4,6 +4,9 @@
  */
 const ACTION_PRINTER_COMMANDS = {
   cutLine: (printer) => printer.addCutLine(),
+  table: (printer, value) => value.flat().reduce((result, buffer) => {
+    return result.then(() => printer.write(buffer));
+  }, Promise.resolve()),
   grid: (printer, value) => value.flat().reduce((result, buffer) => {
     return result.then(() => printer.write(buffer));
   }, Promise.resolve()),

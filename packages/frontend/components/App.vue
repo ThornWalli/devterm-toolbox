@@ -547,11 +547,11 @@ body {
   height: 100%;
 }
 
-/* html {
+html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
-} */
+}
 
 body {
   margin: 0;
