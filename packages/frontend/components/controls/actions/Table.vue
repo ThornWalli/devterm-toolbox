@@ -4,15 +4,15 @@
     title="Table"
     class="action-dialog-table"
     form
-    :style="{'--columns': model.columns.length}"
+    :style="{'--columns': model.columns.length, '--cell-width':cellWidth}"
     v-on="Object.assign({}, $listeners, {input:[]})"
     @submit="onSubmit"
   >
     <template #default>
-      <app-tab-container class="tab-container">
+      <app-tab-container class="tab-container" @selectedTab="onSelectedTab">
         <template #general="options">
           <base-tab-container-content v-bind="options" title="General">
-            <div class="table-wrapper">
+            <div ref="tableWrapper" class="table-wrapper">
               <table>
                 <tbody>
                   <tr v-for="(row,y) in model.data" :key="y">
@@ -32,11 +32,13 @@
               <input-text-button @click="onClickAddRow">
                 Add Row
               </input-text-button>
-              <input-text-button @click="onClickReset">
-                Reset
-              </input-text-button>
+            </div>
+            <div class="buttons">
               <input-text-button @click="onClickImportCsv">
                 Import CSV
+              </input-text-button>
+              <input-text-button @click="onClickReset">
+                Reset
               </input-text-button>
             </div>
           </base-tab-container-content>
@@ -192,6 +194,7 @@ export default {
     return {
       model,
       column: null,
+      cellWidth: 0,
       label: 'Select align',
       options: [
         ['Left', FONT_ALIGN.LEFT],
@@ -213,11 +216,21 @@ export default {
     model: {
       handler () {
         this.$emit('input', this.model);
+        this.refreshCellWidth();
       },
       deep: true
     }
   },
   methods: {
+    refreshCellWidth () {
+      console.log('refreshCellWidth');
+      this.$refs.tableWrapper && (this.cellWidth = this.$refs.tableWrapper.offsetWidth / Math.min(this.model.columns.length, 3));
+    },
+    onSelectedTab (value) {
+      if (value.name === 'general') {
+        this.refreshCellWidth();
+      }
+    },
     updateColumns (count) {
       this.model.columns = this.model.columns.slice(0, count);
       this.model.columns.push(...this.createColumns(count - this.model.columns.length));
@@ -249,7 +262,8 @@ export default {
               complete: result => resolve(result)
             });
           });
-          this.model.data = data;
+          this.model.data = data || [[]];
+          this.updateColumns(this.model.data[0].length);
         }
       } catch (error) {
         this.$errorList.add(error);
@@ -302,9 +316,11 @@ export default {
       &:last-child {
         position: sticky;
         right: 0;
-        padding-left: em(8);
-        background: var(--color-secondary);
-        border: solid black 1px;
+        width: em(48px);
+
+        /* background: var(--color-secondary); */
+
+        /* border: solid black 1px; */
       }
 
       &:not(.controls) {
@@ -320,7 +336,7 @@ export default {
 
   & .value {
     & >>> input {
-      min-width: em(118, 12);
+      min-width: calc(em(var(--cell-width), 12));
       background: var(--color-primary-20);
       border-color: transparent;
     }

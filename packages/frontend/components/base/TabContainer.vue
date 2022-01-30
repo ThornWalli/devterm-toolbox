@@ -52,7 +52,6 @@ export default {
     };
   },
   computed: {
-
     currentTab () {
       return this.selectedTab || this.tabs[0];
     },
@@ -93,6 +92,7 @@ export default {
     onTransitionEnd (e) {
       if (e.propertyName === 'height') {
         this.dimension = null;
+        this.$emit('selectedTab', this.selectedTab);
       }
     },
     enter () {

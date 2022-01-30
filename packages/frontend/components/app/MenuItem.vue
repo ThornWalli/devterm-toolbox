@@ -49,7 +49,7 @@ export default {
     display: block;
     height: em(22, 12);
     padding: 0 em(8, 12);
-    font-family: monospace;
+    font-family: var(--font-primary);
     font-size: em(12);
     line-height: 1;
     cursor: pointer;

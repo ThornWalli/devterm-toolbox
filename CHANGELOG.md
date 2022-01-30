@@ -1,5 +1,19 @@
 # Project Changelog
 
+# [1.0.0-beta.41](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.40...v1.0.0-beta.41) (2022-01-30)
+
+
+### Bug Fixes
+
+* **app:** improve table; update font ([6067c62](https://github.com/ThornWalli/devterm-toolbox/commit/6067c62ccf1a25e8cc9d0169e99da74378e0dc5e))
+
+# [1.0.0-beta.40](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.39...v1.0.0-beta.40) (2022-01-30)
+
+
+### Bug Fixes
+
+* **app:** improve table ([e94825b](https://github.com/ThornWalli/devterm-toolbox/commit/e94825bafa87d8fb202a44c459f4f03a694e0d78))
+
 # [1.0.0-beta.39](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.38...v1.0.0-beta.39) (2022-01-30)
 
 

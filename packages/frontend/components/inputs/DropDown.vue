@@ -27,7 +27,7 @@ export default {
   & >>> select {
     width: 100%;
     padding: em(4, 12) em(5, 12);
-    font-family: monospace;
+    font-family: var(--font-primary);
     font-size: em(12);
     color: currentcolor;
     background: none;

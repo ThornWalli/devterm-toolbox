@@ -1,5 +1,5 @@
 <template>
-  <base-tab-container v-bind="$attrs" class="app-tab-container" transition-name="fade">
+  <base-tab-container v-bind="$attrs" class="app-tab-container" transition-name="fade" v-on="$listeners">
     <template v-for="(scopedSlot, name) in $scopedSlots" #[name]="options">
       <slot v-bind="{ ...options, ...(scopedSlot()[0].componentOptions || {}).propsData }" :name="name" />
     </template>
