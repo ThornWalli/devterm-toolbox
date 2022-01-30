@@ -1,8 +1,13 @@
 <template>
-  <dialog v-if="open" class="app-dialog" :class="{embed}">
+  <dialog v-if="open" class="app-dialog" :class="{embed, fullscreen}">
     <span @click="close()" />
     <div v-if="title" class="dialog-title">
-      {{ title }}
+      <span>
+        {{ title }}
+      </span>
+      <input-text-button class="fullscreen-button" color="primary" @click="fullscreen = !fullscreen">
+        {{ !fullscreen ? 'Maximize' : 'Minimize' }}
+      </input-text-button>
     </div>
     <component :is="form? 'form' : 'div'" class="dialog-content" @submit="$emit('submit', $event)">
       <div>
@@ -19,10 +24,12 @@
 <script>
 import { filter } from 'rxjs/operators';
 import { keyUpObserver } from '../../utils/dom';
+import InputTextButton from '../inputs/TextButton.vue';
 
 const openedDialogs = [];
 
 export default {
+  components: { InputTextButton },
   inheritAttrs: true,
   props: {
     embed: {
@@ -48,6 +55,7 @@ export default {
   },
   data () {
     return {
+      fullscreen: false,
       open: false,
       subscriptions: []
     };
@@ -95,9 +103,7 @@ export default {
     },
     close (value) {
       this.open = false;
-
       openedDialogs.splice(openedDialogs.indexOf(this), 1);
-
       this.$el.close(value);
       this.$emit('close', value);
     }
@@ -117,6 +123,13 @@ export default {
 
   &::backdrop {
     background: rgb(0 0 0 / 50%);
+  }
+
+  & .fullscreen-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
   }
 
   &[open] {
@@ -148,8 +161,11 @@ export default {
   }
 
   & .dialog-title {
-    font-size: em(12);
-    line-height: 1;
+    & span {
+      font-size: em(12);
+      line-height: 1;
+    }
+
     color: var(--color-secondary);
     text-align: center;
     background: var(--color-primary);
@@ -187,9 +203,19 @@ export default {
     width: var(--dialog-width);
   }
 
+  &.fullscreen {
+    position: fixed !important;
+    width: 100% !important;
+
+    & > .dialog-title,
+    & > .dialog-content {
+      --dialog-width: 100% !important;
+    }
+  }
+
   &.embed {
     position: absolute;
-    top: 0;
+    top: em(8);
     right: 0;
     left: auto;
     z-index: 10;
@@ -198,11 +224,14 @@ export default {
     width: 50%;
 
     /* width: 100%; */
-    height: 100%;
+    height: calc(100% - em(16));
 
     & > .dialog-title,
     & > .dialog-content {
       width: var(--dialog-width);
+    }
+
+    & > .dialog-content {
       max-height: 100%;
       overflow: auto;
     }

@@ -133,10 +133,10 @@ export default {
   },
   computed: {
     currentColumn () {
-      return this.value.data[this.column].map(v => new ActionDescription(v));
+      return this.model.data[this.column].map(v => new ActionDescription(v));
     },
     columnOptions () {
-      return this.value.data.map((v, index) => new DropDownOptionDescription({ title: `${index + 1}`, value: String(index) }));
+      return this.model.data.map((v, index) => new DropDownOptionDescription({ title: `${index + 1}`, value: String(index) }));
     }
   },
   methods: {

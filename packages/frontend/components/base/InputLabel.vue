@@ -60,7 +60,7 @@ export default {
   }
 
   & + .base-input-label {
-    margin-top: calc(8 / 12 * 1em);
+    margin-top: calc(8 / 16 * 1em);
   }
 }
 </style>

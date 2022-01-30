@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { ALIGN } from 'devterm/config';
+
 import { DropDownOptionDescription } from '../../base/DropDown.vue';
 import ActionDialog from '../../controls/ActionDialog.vue';
 import AppTabContainer from '../../app/TabContainer.vue';
@@ -83,7 +83,7 @@ import InputDropDown from '../../inputs/DropDown.vue';
 import ControlsImageOptions from '../ImageOptions.vue';
 
 import MixinDialog from '../../../mixins/Dialog.vue';
-import { getDefaultTextOptions } from '../../../utils/action';
+import { FONT_ALIGN, getDefaultTextOptions } from '../../../utils/action';
 
 export default {
   components: {
@@ -113,9 +113,9 @@ export default {
       updateTimeout: null,
       model: { ...this.value },
       alignOptions: [
-        ['Left', ALIGN.LEFT],
-        ['Center', ALIGN.CENTER],
-        ['Right', ALIGN.RIGHT]
+        ['Left', FONT_ALIGN.LEFT],
+        ['Center', FONT_ALIGN.CENTER],
+        ['Right', FONT_ALIGN.RIGHT]
       ].map(([title, value]) => new DropDownOptionDescription({ title, value: String(value) })),
       fontOptions: [{ title: 'Select Font', value: '' }].concat(this.$config.fonts.map(font => new DropDownOptionDescription({ title: font.name, group: font.group, value: font.value })))
     };

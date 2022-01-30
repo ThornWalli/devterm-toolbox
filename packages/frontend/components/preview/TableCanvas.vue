@@ -4,8 +4,9 @@
 
 <script>
 import { ALIGN, MAX_DENSITY } from 'devterm/config';
-import { drawTextNative, preparePreview } from '../../utils/canvas';
-import { FONT_MAP } from '../../utils/font';
+import definitions from '../../utils/action/definitions';
+import { getDefaultTextOptions } from '../../utils/action';
+import { preparePreview } from '../../utils/canvas';
 
 export default {
   props: {
@@ -16,8 +17,10 @@ export default {
       }
     },
     value: {
-      type: String,
-      default: 'abcdef'
+      type: Object,
+      default () {
+        return getDefaultTextOptions();
+      }
     },
     width: {
       type: Number,
@@ -36,18 +39,6 @@ export default {
     };
   },
 
-  computed: {
-    align () {
-      return {
-        [ALIGN.LEFT]: 'left',
-        [ALIGN.CENTER]: 'center',
-        [ALIGN.RIGHT]: 'right'
-      }[this.options.align];
-    },
-    font () {
-      return FONT_MAP[Number(this.options.font)];
-    }
-  },
   watch: {
     value () {
       this.render();
@@ -59,33 +50,39 @@ export default {
     this.render();
   },
   methods: {
-    getColor (opacity) {
+    getColor (opacity = 1) {
       return `rgb(${this.colors.printer.preview.foreground.join(' ')} / ${opacity * 100}%)`;
     },
     render () {
       window.cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = window.requestAnimationFrame(() => {
+      this.animationFrame = window.requestAnimationFrame(async () => {
         const ctx = this.ctx;
 
-        const canvas = drawTextNative(this.value, {
-          fontSize: this.font.fontSize,
-          align: this.align,
-          lineSpace: this.options.lineSpace,
-          wordGap: this.options.wordGap,
-          margin: this.options.margin,
-          fontFamily: this.font.fontFamily
-        }, this.width, {
-          background: this.colors.printer.preview.background,
-          foreground: this.colors.printer.preview.foreground
-        });
-        preparePreview(canvas, {
+        let canvas = (await definitions.table.beforePrinterCommand({ value: this.value }, false)).value;
+
+        canvas = preparePreview(canvas, {
           background: this.colors.printer.preview.background,
           foreground: this.colors.printer.preview.foreground
         }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
-        this.$el.width = canvas.width;
-        this.$el.height = canvas.height;
-        ctx.drawImage(canvas, 0, 0);
+        ctx.canvas.width = this.width;
+        ctx.canvas.height = canvas.height;
+
+        const width = this.width;
+        const margin = parseInt(this.options.margin * width);
+        let x = 0;
+        switch (this.options.align) {
+          case ALIGN.RIGHT:
+            x += this.width - canvas.width;
+            break;
+          case ALIGN.CENTER:
+            x += (this.width - canvas.width) / 2;
+            break;
+          default:
+            x += margin;
+            break;
+        }
+        ctx.drawImage(canvas, x, 0);
         this.$emit('ready');
       });
     }

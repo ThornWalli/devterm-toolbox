@@ -4,6 +4,7 @@ export default {
   grid: () => import('@devterm-toolbox/frontend/components/controls/actions/Grid.vue'),
   spacer: () => import('@devterm-toolbox/frontend/components/controls/actions/Spacer.vue'),
   text: () => import('@devterm-toolbox/frontend/components/controls/actions/Text.vue'),
+  table: () => import('@devterm-toolbox/frontend/components/controls/actions/Table.vue'),
   nativeText: () => import('@devterm-toolbox/frontend/components/controls/actions/NativeText.vue'),
   image: () => import('@devterm-toolbox/frontend/components/controls/actions/Image.vue'),
   feedPitch: () => import('@devterm-toolbox/frontend/components/controls/actions/FeedPitch.vue'),

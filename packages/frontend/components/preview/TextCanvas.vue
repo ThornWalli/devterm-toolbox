@@ -7,7 +7,6 @@ import { ALIGN, MAX_DENSITY } from 'devterm/config';
 import definitions from '../../utils/action/definitions';
 import { getDefaultTextOptions } from '../../utils/action';
 import { preparePreview } from '../../utils/canvas';
-import { FONT_MAP } from '../../utils/font';
 
 export default {
   props: {
@@ -40,18 +39,6 @@ export default {
     };
   },
 
-  computed: {
-    align () {
-      return {
-        [ALIGN.LEFT]: 'left',
-        [ALIGN.CENTER]: 'center',
-        [ALIGN.RIGHT]: 'right'
-      }[this.options.align];
-    },
-    font () {
-      return FONT_MAP[Number(this.options.font)];
-    }
-  },
   watch: {
     value () {
       this.render();

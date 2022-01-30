@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { ALIGN, FONT, MAX_DENSITY } from 'devterm/config';
+import { FONT_ALIGN, getDefaultFontOptions, getDefaultTableColumnOptions } from '../utils/action';
 import ActionDescription from '../classes/ActionDescription';
 import devtermUri from './uris/devterm';
 
@@ -16,6 +17,152 @@ export const writeHeadline = (text) => {
 
 export default [
   { type: 'reset' },
+
+  {
+    id: '4374d709-ab96-4d35-84b9-b4f08f29e6de',
+    type: 'table',
+    value: {
+      data: [
+        [
+          'test test test test test test test test test test test test test ',
+          2,
+          3
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      options: {
+        columnGutter: 0,
+        rowGutter: 0
+      },
+      headActive: false,
+      footActive: false,
+      columns: [
+        {
+          width: 1,
+          bodyOptions: {
+            fontSize: 16,
+            align: FONT_ALIGN.LEFT,
+            lineSpace: 0,
+            wordGap: 0,
+            margin: 0,
+            fontFamily: '"Arial"',
+            color: '#000',
+            weight: 400,
+            italic: false,
+            underline: true
+          },
+          headOptions: getDefaultFontOptions(),
+          footOptions: getDefaultFontOptions()
+        },
+        {
+          width: 1,
+          bodyOptions: {
+            fontSize: 16,
+            align: FONT_ALIGN.CENTER,
+            lineSpace: 0,
+            wordGap: 0,
+            margin: 0,
+            fontFamily: '"Arial"',
+            color: '#000',
+            weight: 400,
+            italic: false
+          },
+          headOptions: getDefaultFontOptions(),
+          footOptions: getDefaultFontOptions()
+        },
+        {
+          width: 1,
+          bodyOptions: {
+            fontSize: 16,
+            align: FONT_ALIGN.RIGHT,
+            lineSpace: 0,
+            wordGap: 0,
+            margin: 0,
+            fontFamily: '"Arial"',
+            color: '#000',
+            weight: 400,
+            italic: false
+          },
+          headOptions: getDefaultFontOptions(),
+          footOptions: getDefaultFontOptions()
+        },
+        {
+          width: 1,
+          bodyOptions: {
+            fontSize: 16,
+            align: FONT_ALIGN.LEFT,
+            lineSpace: 0,
+            wordGap: 0,
+            margin: 0,
+            fontFamily: '"Arial"',
+            color: '#000',
+            weight: 400,
+            italic: false,
+            underline: true
+          },
+          headOptions: getDefaultFontOptions(),
+          footOptions: getDefaultFontOptions()
+        },
+        {
+          width: 1,
+          bodyOptions: {
+            fontSize: 16,
+            align: FONT_ALIGN.CENTER,
+            lineSpace: 0,
+            wordGap: 0,
+            margin: 0,
+            fontFamily: '"Arial"',
+            color: '#000',
+            weight: 400,
+            italic: false
+          },
+          headOptions: getDefaultFontOptions(),
+          footOptions: getDefaultFontOptions()
+        },
+        {
+          width: 1,
+          bodyOptions: {
+            fontSize: 16,
+            align: FONT_ALIGN.RIGHT,
+            lineSpace: 0,
+            wordGap: 0,
+            margin: 0,
+            fontFamily: '"Arial"',
+            color: '#000',
+            weight: 400,
+            italic: false
+          },
+          headOptions: getDefaultFontOptions(),
+          footOptions: getDefaultFontOptions()
+        }
+      ]
+    },
+    visible: true
+  },
   {
     id: '6319ab91-5740-49c0-8265-1d05d97014a3',
     type: 'grid',
@@ -71,7 +218,7 @@ export default [
               text: '0,00\n0,00\n0,00\n0,00',
               options: {
                 fontSize: '24',
-                align: 2,
+                align: FONT_ALIGN.LEFT,
                 lineSpace: '30',
                 wordGap: 0,
                 margin: 0,

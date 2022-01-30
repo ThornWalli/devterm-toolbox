@@ -53,7 +53,7 @@ export const templateLoad = async () => {
   if (isElectron()) {
     return window.electron.ipcRenderer.invoke('load');
   } else {
-    const files = await selectFiles('text', ['application/json']);
+    const files = await selectFiles(['application/json']);
     return new Promise((resolve, reject) => {
       if (files.length) {
         const reader = new FileReader();

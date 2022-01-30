@@ -10,8 +10,8 @@
     <template #default>
       <input-text-field
         :value="model.value"
-        step="1"
-        min="0"
+        :step="1"
+        :min="1"
         type="number"
         label="Value"
         @input="model.value = Math.abs(parseInt($event || 0))"

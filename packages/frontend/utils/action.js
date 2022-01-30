@@ -19,6 +19,7 @@ export const getActionTypes = () => {
     { native: false, title: 'QRCode', value: 'qrCode', group: 'Content' },
     { native: false, title: 'Barcode', value: 'barcode', group: 'Content' },
     { native: false, title: 'Text', value: 'text', group: 'Content' },
+    { native: false, title: 'Table', value: 'table', group: 'Content' },
     { native: true, title: 'Text (native)', value: 'nativeText', group: 'Content' },
     { native: true, title: 'Reset (native)', value: 'reset', group: 'General' },
     { native: true, title: 'Feed Pitch (native)', value: 'feedPitch', group: 'General' },
@@ -65,6 +66,9 @@ export const createAction = (type) => {
       break;
     case 'text':
       value = getDefaultTextOptions();
+      break;
+    case 'table':
+      value = getDefaultTableOptions();
       break;
     case 'nativeText':
       value = 'Text';
@@ -200,6 +204,14 @@ export const executeAction = (action, options) => {
         props: { ...action }
       };
 
+    case 'table':
+      return {
+        id: action.id,
+        component: () => import('../components/preview/TableCanvas.vue'),
+        options: { ...options },
+        props: { ...action }
+      };
+
     case 'nativeText':
       return {
         id: action.id,
@@ -234,17 +246,7 @@ export const getDefaultGridOptions = () => {
 export const getDefaultTextOptions = () => {
   return {
     text: 'Sample',
-    options: {
-      fontSize: 16,
-      align: 'left',
-      lineSpace: 0,
-      wordGap: 0,
-      margin: 0,
-      fontFamily: 'sans-serif',
-      color: '#000',
-      weight: 400,
-      italic: false
-    },
+    options: getDefaultFontOptions(),
     imageOptions: getDefaultPrepareOptions()
   };
 };
@@ -289,5 +291,52 @@ export const getDefaultBarcodeOptions = () => {
 export const getDefaultSpacerOptions = () => {
   return {
     value: 0
+  };
+};
+
+export const FONT_ALIGN = Object.freeze({
+  LEFT: 'left',
+  CENTER: 'center',
+  RIGHT: 'right'
+});
+
+export const getDefaultFontOptions = () => {
+  return {
+    fontSize: 16,
+    align: FONT_ALIGN.LEFT,
+    lineSpace: 0,
+    wordGap: 0,
+    margin: 0,
+    fontFamily: 'sans-serif',
+    color: '#000',
+    weight: 400,
+    italic: false,
+    underline: false,
+    justify: false
+  };
+};
+export const getDefaultTableOptions = () => {
+  return {
+    data: [],
+    columns: [getDefaultTableColumnOptions()],
+    options: {
+      columnGutter: 0,
+      rowGutter: 0,
+      headActive: false,
+      footActive: false,
+      useColumnStyles: false,
+      bodyOptions: getDefaultTableColumnOptions(),
+      headOptions: getDefaultTableColumnOptions(),
+      footOptions: getDefaultTableColumnOptions()
+    }
+  };
+};
+
+export const getDefaultTableColumnOptions = () => {
+  return {
+    width: 1,
+    bodyOptions: getDefaultFontOptions(),
+    headOptions: getDefaultFontOptions(),
+    footOptions: getDefaultFontOptions()
   };
 };

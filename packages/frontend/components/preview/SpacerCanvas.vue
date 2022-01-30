@@ -56,8 +56,7 @@ export default {
         const ctx = this.ctx;
 
         const { value } = this.value;
-
-        let canvas = await render(value);
+        let canvas = (await definitions.spacer.beforePrinterCommand({ value: this.value }, false)).value;
 
         canvas = preparePreview(canvas, {
           background: this.colors.printer.preview.background,
@@ -65,7 +64,7 @@ export default {
         }, 0.6 + 0.4 * (this.options.density / MAX_DENSITY));
 
         ctx.canvas.width = this.width;
-        ctx.canvas.height = value;
+        ctx.canvas.height = Math.max(value, 1);
 
         const width = this.width;
         const margin = parseInt(this.options.margin * width);
@@ -86,10 +85,6 @@ export default {
       });
     }
   }
-};
-
-export const render = async (value) => {
-  return (await definitions.spacer.beforePrinterCommand({ value }, false)).value;
 };
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="controls-image-options">
     <div class="cols">
       <div><input-check-box v-model="model.grayscale" label="Grayscale" /></div>
       <div><input-check-box v-model="model.rotate" label="Rotate" /></div>
@@ -54,3 +54,12 @@ export default {
   }
 };
 </script>
+
+<style lang="postcss" scoped>
+.controls-image-options {
+  &:not(:first-child) {
+    margin-top: em(8);
+  }
+}
+
+</style>

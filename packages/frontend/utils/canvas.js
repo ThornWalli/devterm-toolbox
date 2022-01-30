@@ -3,9 +3,12 @@ import {
   MAX_DOTS, ALIGN
 } from 'devterm/config';
 
+import { CanvasTextWrapper } from 'canvas-text-wrapper';
+
 import {
   getImageWriteBuffersFromCanvas
 } from 'devterm/utils/printer';
+import { FONT_ALIGN, getDefaultFontOptions } from './action';
 
 export const toDataURL = (targetCanvas) => {
   const canvas = document.createElement('canvas');
@@ -80,7 +83,68 @@ export const getBuffersFromCanvas = (canvas) => {
 };
 
 export const drawText = (text, options, width, colors) => {
-  console.log('drawText', text, options, width, colors);
+  colors = { background: [255, 255, 255], foreground: [0, 0, 0], ...colors };
+  const {
+    fontSize,
+    align,
+    lineSpace,
+    wordGap,
+    margin,
+    fontFamily,
+    weight,
+    italic,
+    underline,
+    justify
+  } = {
+    ...getDefaultFontOptions(),
+    ...options
+  };
+
+  text = String(text);
+
+  // const canvas = new OffscreenCanvas(width, 0);
+  // const ctx = canvas.getContext('2d');
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.style.display = 'none';
+  document.body.append(canvas);
+  const ctx = canvas.getContext('2d');
+  ctx.canvas.style.letterSpacing = `${wordGap}px`;
+
+  const lineHeight = 1 + (lineSpace / fontSize);
+
+  const textWrapperOptions = {
+
+    font: `${italic ? 'italic ' : ''}${weight} ${fontSize}px ${fontFamily}`,
+    lineHeight,
+    textAlign: align,
+    verticalAlign: 'top',
+    paddingX: margin,
+    paddingY: 0,
+    fitParent: false,
+    lineBreak: 'auto',
+    strokeText: false,
+    sizeToFill: false,
+    maxFontSizeToFill: true,
+    allowNewLine: true,
+    justifyLines: justify,
+    renderHDPI: true,
+    textDecoration: underline ? 'underline' : 'none'
+
+  };
+
+  // prerender detect rows
+  const rows = CanvasTextWrapper(canvas, text, textWrapperOptions);
+
+  canvas.height = rows.length * fontSize * lineHeight;
+  CanvasTextWrapper(canvas, text, textWrapperOptions);
+
+  canvas.remove();
+  return canvas;
+};
+
+export const drawTextNative = (text, options, width, colors) => {
   colors = { background: [255, 255, 255], foreground: [0, 0, 0], ...colors };
   const {
     fontSize,
@@ -159,9 +223,9 @@ export const drawText = (text, options, width, colors) => {
   ctx.font = font;
   ctx.canvas.style.letterSpacing = `${wordGap}px`;
   ctx.textAlign = {
-    [ALIGN.LEFT]: 'left',
-    [ALIGN.CENTER]: 'center',
-    [ALIGN.RIGHT]: 'right'
+    [FONT_ALIGN.LEFT]: 'left',
+    [FONT_ALIGN.CENTER]: 'center',
+    [FONT_ALIGN.RIGHT]: 'right'
   }[Number(align)];
 
   ctx.translate(0, margin_[0]);
