@@ -469,6 +469,12 @@ export default {
   opacity: 0;
   transition: opacity 0.6s ease-in;
 
+  @nest body.electron & {
+    /* DevTerm Display Fix */
+    top: 4px;
+    height: calc(100% - 4px);
+  }
+
   @nest body:not(.electron) & {
     font-size: vw(calc(12 * var(--zoom)), 768, 10px);
 
