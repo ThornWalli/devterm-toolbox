@@ -125,7 +125,7 @@ export const drawText = (text, options, width, colors) => {
     maxFontSizeToFill: true,
     allowNewLine: true,
     justifyLines: justify,
-    renderHDPI: true,
+    renderHDPI: false,
     textDecoration: underline ? 'underline' : 'none'
   };
 
@@ -133,6 +133,11 @@ export const drawText = (text, options, width, colors) => {
   const rows = CanvasTextWrapper(canvas, text, textWrapperOptions);
   canvas.imageSmoothingEnabled = false;
   canvas.height = rows.length * fontSize * lineHeight;
+
+  ctx.fillStyle = `rgb(${colors.background.join(' ')})`;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = `rgb(${colors.foreground.join(' ')})`;
+
   CanvasTextWrapper(canvas, text, textWrapperOptions);
 
   canvas.remove();
