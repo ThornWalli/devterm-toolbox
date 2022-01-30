@@ -205,7 +205,9 @@ export default {
 
   &.fullscreen {
     position: fixed !important;
+    top: 0 !important;
     width: 100% !important;
+    height: 100% !important;
 
     & > .dialog-title,
     & > .dialog-content {

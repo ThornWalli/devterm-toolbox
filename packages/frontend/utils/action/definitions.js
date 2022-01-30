@@ -216,7 +216,7 @@ export default {
           const columnX = rows.reduce((result, row, rowIndex) => {
             const value = row[columnIndex];
             ctx.drawImage(value, x, y);
-            y += rowHeights[rowIndex] + (rowIndex < column.length ? rowGutter : 0);
+            y += rowHeights[rowIndex] + (rowIndex < rows.length ? rowGutter : 0);
             return Math.max(value.width, result);
           }, 0);
           x += columnX + (columnIndex < columns.length ? columnGutter : 0);

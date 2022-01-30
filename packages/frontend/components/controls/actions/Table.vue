@@ -32,11 +32,13 @@
               <input-text-button @click="onClickAddRow">
                 Add Row
               </input-text-button>
-              <input-text-button @click="onClickReset">
-                Reset
-              </input-text-button>
+            </div>
+            <div class="buttons">
               <input-text-button @click="onClickImportCsv">
                 Import CSV
+              </input-text-button>
+              <input-text-button @click="onClickReset">
+                Reset
               </input-text-button>
             </div>
           </base-tab-container-content>
@@ -249,7 +251,8 @@ export default {
               complete: result => resolve(result)
             });
           });
-          this.model.data = data;
+          this.model.data = data || [[]];
+          this.updateColumns(this.model.data[0].length);
         }
       } catch (error) {
         this.$errorList.add(error);

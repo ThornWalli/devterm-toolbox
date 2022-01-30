@@ -109,55 +109,6 @@ export default [
           },
           headOptions: getDefaultFontOptions(),
           footOptions: getDefaultFontOptions()
-        },
-        {
-          width: 1,
-          bodyOptions: {
-            fontSize: 16,
-            align: FONT_ALIGN.LEFT,
-            lineSpace: 0,
-            wordGap: 0,
-            margin: 0,
-            fontFamily: '"Arial"',
-            color: '#000',
-            weight: 400,
-            italic: false,
-            underline: true
-          },
-          headOptions: getDefaultFontOptions(),
-          footOptions: getDefaultFontOptions()
-        },
-        {
-          width: 1,
-          bodyOptions: {
-            fontSize: 16,
-            align: FONT_ALIGN.CENTER,
-            lineSpace: 0,
-            wordGap: 0,
-            margin: 0,
-            fontFamily: '"Arial"',
-            color: '#000',
-            weight: 400,
-            italic: false
-          },
-          headOptions: getDefaultFontOptions(),
-          footOptions: getDefaultFontOptions()
-        },
-        {
-          width: 1,
-          bodyOptions: {
-            fontSize: 16,
-            align: FONT_ALIGN.RIGHT,
-            lineSpace: 0,
-            wordGap: 0,
-            margin: 0,
-            fontFamily: '"Arial"',
-            color: '#000',
-            weight: 400,
-            italic: false
-          },
-          headOptions: getDefaultFontOptions(),
-          footOptions: getDefaultFontOptions()
         }
       ]
     },
