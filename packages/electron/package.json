@@ -1,7 +1,7 @@
 {
   "name": "@devterm-toolbox/electron",
   "productName": "DevTerm-ToolBox",
-  "version": "1.0.0-beta.42",
+  "version": "1.0.0-beta.43",
   "private": true,
   "description": "Electron App",
   "license": "MIT",

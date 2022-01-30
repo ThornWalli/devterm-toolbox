@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.43](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.42...v1.0.0-beta.43) (2022-01-30)
+
+
+### Bug Fixes
+
+* **app:** embed external package canvas-text-wrapper ([dbe0b18](https://github.com/ThornWalli/devterm-toolbox/commit/dbe0b18573e97bc09685b6f0f06fa814821d8968))
+
 # [1.0.0-beta.42](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.41...v1.0.0-beta.42) (2022-01-30)
 
 
