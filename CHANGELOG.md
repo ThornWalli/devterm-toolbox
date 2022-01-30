@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.44](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.43...v1.0.0-beta.44) (2022-01-30)
+
+
+### Bug Fixes
+
+* **app:** improve font rendering ([5506183](https://github.com/ThornWalli/devterm-toolbox/commit/5506183534e70218955885247ff8a0bdc6712673))
+
 # [1.0.0-beta.43](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.42...v1.0.0-beta.43) (2022-01-30)
 
 
