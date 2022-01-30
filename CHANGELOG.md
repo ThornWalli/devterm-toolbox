@@ -1,5 +1,13 @@
 # Project Changelog
 
+# [1.0.0-beta.42](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.41...v1.0.0-beta.42) (2022-01-30)
+
+
+### Bug Fixes
+
+* **app:** add devterm display fix ([a2d674e](https://github.com/ThornWalli/devterm-toolbox/commit/a2d674ede75320a27a5825a8c215dc3dd99955e2))
+* **app:** improve font ([02fa5ff](https://github.com/ThornWalli/devterm-toolbox/commit/02fa5ffb9e25cc8900b26a8e1259ca8d659a7ed9))
+
 # [1.0.0-beta.41](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.40...v1.0.0-beta.41) (2022-01-30)
 
 
