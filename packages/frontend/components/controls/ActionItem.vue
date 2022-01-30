@@ -73,6 +73,7 @@ export default {
     display: block;
     flex: 1;
     padding: em(8, 12) em(4, 12);
+    font-family: var(--font-primary);
     font-size: em(12);
     text-align: left;
     opacity: 0.6;

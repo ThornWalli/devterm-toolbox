@@ -48,7 +48,7 @@ textarea {
   width: 100%;
   height: 100%;
   padding: 0;
-  font-family: monospace;
+  font-family: var(--font-primary);
   font-size: em(12);
   line-height: calc(20 / 12);
   color: currentcolor;

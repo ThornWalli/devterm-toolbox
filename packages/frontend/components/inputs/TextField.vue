@@ -49,7 +49,7 @@ input {
   display: block;
   width: 100%;
   padding: em(5, 12);
-  font-family: monospace;
+  font-family: var(--font-primary);
   font-size: em(12, 16);
   color: currentcolor;
   resize: none;

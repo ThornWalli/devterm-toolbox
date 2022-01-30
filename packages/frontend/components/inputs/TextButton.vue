@@ -31,8 +31,9 @@ export default {
 <style lang="postcss" scoped>
 .input-text-button {
   padding: em(4, 12) em(8, 12);
-  font-family: monospace;
+  font-family: var(--font-primary);
   font-size: em(12);
+  line-height: 1;
   color: var(--color-primary);
   cursor: pointer;
   background: transparent;

@@ -83,7 +83,7 @@ export default {
     /* height: 1em; */
     padding: em(4, 12);
     overflow: hidden;
-    font-family: monospace;
+    font-family: var(--font-primary);
     font-size: em(12);
     color: currentcolor;
     text-align: center;

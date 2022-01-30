@@ -317,7 +317,7 @@ export const getDefaultFontOptions = () => {
 };
 export const getDefaultTableOptions = () => {
   return {
-    data: [],
+    data: [[]],
     columns: [getDefaultTableColumnOptions()],
     options: {
       columnGutter: 0,

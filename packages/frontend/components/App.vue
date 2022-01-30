@@ -418,6 +418,9 @@ export default {
 };
 
 </script>
+<style lang="postcss">
+@import "../assets/css/vars.pcss";
+</style>
 
 <style lang="postcss" scoped>
 @import "../assets/css/transitions.pcss";
@@ -461,7 +464,7 @@ export default {
   /* height: 480px; */
   width: 100%;
   height: 100%;
-  font-family: monospace;
+  font-family: var(--font-primary);
   font-size: max(calc(1em * var(--zoom)), em(12));
   color: var(--color-primary);
   user-select: none;

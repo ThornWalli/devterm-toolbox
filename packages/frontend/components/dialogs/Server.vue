@@ -18,18 +18,12 @@
       <app-tab-container class="tab-container">
         <template #general="options">
           <base-tab-container-content v-bind="options" title="General">
-            <div class="cols">
-              <div>
-                <base-input-label text="Status">
-                  <span class="status" :class="{active}">{{ active ? `listening on *:${$server.options.port}` : 'Offline' }}</span>
-                </base-input-label>
-              </div>
-              <div>
-                <base-input-label text="Active Sessions">
-                  <span>{{ $server.options.activeSessions }}</span>
-                </base-input-label>
-              </div>
-            </div>
+            <base-input-label text="Status">
+              <span class="status" :class="{active}">{{ active ? `listening on *:${$server.options.port}` : 'Offline' }}</span>
+            </base-input-label>
+            <base-input-label text="Active Sessions">
+              <span>{{ $server.options.activeSessions }}</span>
+            </base-input-label>
             <input-drop-down v-model="host" baseline-label size="5" label="For SSL, select valid host" :options="hostsOptions" />
             <input-text-field
               type="Number"
