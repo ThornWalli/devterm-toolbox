@@ -23,20 +23,20 @@
     "generate:icons": "npx -p electron-icon-maker -c 'mkdir -p src/main/assets && electron-icon-maker --input=../frontend/assets/img/icons/icon.png --output=build && electron-icon-maker --input=../frontend/assets/img/icons/icon-default.png --output=src/main/assets/icon-default && electron-icon-maker --input=../frontend/assets/img/icons/icon-dark.png --output=src/main/assets/icon-dark && electron-icon-maker --input=../frontend/assets/img/icons/icon-light.png --output=src/main/assets/icon-light && electron-icon-maker --input=../frontend/assets/img/icons/icon-offline-default.png --output=src/main/assets/icon-offline-default && electron-icon-maker --input=../frontend/assets/img/icons/icon-offline-dark.png --output=src/main/assets/icon-offline-dark && electron-icon-maker --input=../frontend/assets/img/icons/icon-offline-light.png --output=src/main/assets/icon-offline-light && electron-icon-maker --input=../frontend/assets/img/icons/icon-online-default.png --output=src/main/assets/icon-online-default &&  electron-icon-maker --input=../frontend/assets/img/icons/icon-online-dark.png --output=src/main/assets/icon-online-dark && electron-icon-maker --input=../frontend/assets/img/icons/icon-online-light.png --output=src/main/assets/icon-online-light && electron-icon-maker --input=../frontend/assets/img/icons/icon-remote-online-default.png --output=src/main/assets/icon-remote-online-default && electron-icon-maker --input=../frontend/assets/img/icons/icon-remote-online-dark.png --output=src/main/assets/icon-remote-online-dark && electron-icon-maker --input=../frontend/assets/img/icons/icon-remote-online-light.png --output=src/main/assets/icon-remote-online-light && electron-icon-maker --input=../frontend/assets/img/icons/icon-server-online-default.png --output=src/main/assets/icon-server-online-default && electron-icon-maker --input=../frontend/assets/img/icons/icon-server-online-dark.png --output=src/main/assets/icon-server-online-dark && electron-icon-maker --input=../frontend/assets/img/icons/icon-server-online-light.png --output=src/main/assets/icon-server-online-light'"
   },
   "devDependencies": {
-    "chalk": "^4.1.2",
-    "chokidar": "^3.5.2",
-    "cssnano": "^5.0.14",
+    "chalk": "2.4.2",
+    "chokidar": "3.5.3",
+    "cssnano": "5.0.16",
     "electron": "15.3.4",
-    "electron-builder": "^22.13.1",
-    "electron-rebuild": "^3.2.5"
+    "electron-builder": "22.14.5",
+    "electron-rebuild": "3.2.7"
   },
   "dependencies": {
-    "buffer": "^6.0.3",
-    "events": "^3.3.0",
-    "node-system-fonts": "^1.0.1",
+    "buffer": "6.0.3",
+    "events": "3.3.0",
+    "node-system-fonts": "1.0.1",
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.0",
-    "upath": "^2.0.1"
+    "upath": "2.0.1"
   },
   "optionalDependencies": {
     "canvas": "^2.8.0",
