@@ -36,4 +36,5 @@ jobs:
       - name: Test
         run: |
           npm set-script postinstall ""
+          npm set-script postinstall "" --workspace=@devterm-toolbox/electron
           npm run test
