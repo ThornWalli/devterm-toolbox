@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: Test
+    name: Test & Build
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -34,4 +34,6 @@ jobs:
         run: npm ci
 
       - name: Test
-        run: npm run test
+        run: |
+          npm set-script postinstall ""
+          npm run test
