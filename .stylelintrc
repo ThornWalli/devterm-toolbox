@@ -9,6 +9,15 @@
   ],
   "rules": {
     "max-line-length": null,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "function-no-unknown": [
+      true,
+      {
+        "ignoreFunctions": [
+          "em",
+          "vw"
+        ]
+      }
+    ]
   }
 }
