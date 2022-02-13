@@ -6,6 +6,6 @@
     "main", "beta"
   ],
   "ignoreDeps": [
-    "chalk"
+    "chalk", "vue"
   ]
 }
