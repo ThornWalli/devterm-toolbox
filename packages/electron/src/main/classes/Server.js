@@ -124,7 +124,7 @@ class Server extends Events {
     this.sockets.set(socket.id, socket);
     console.log(`a user connected \`${socket.id}\``);
     this.registerEvents(socket);
-  }
+  };
 };
 
 const onSocketExecuteActions = (printer, disabled) => async (actions) => {

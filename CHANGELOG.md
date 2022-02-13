@@ -1,5 +1,12 @@
 # Project Changelog
 
+# [1.0.0-beta.45](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.44...v1.0.0-beta.45) (2022-02-13)
+
+
+### Bug Fixes
+
+* **deps:** update deps ([5b7980b](https://github.com/ThornWalli/devterm-toolbox/commit/5b7980b68ba074ce7d14c58bc32ca529041cd407))
+
 # [1.0.0-beta.44](https://github.com/ThornWalli/devterm-toolbox/compare/v1.0.0-beta.43...v1.0.0-beta.44) (2022-01-30)
 
 
