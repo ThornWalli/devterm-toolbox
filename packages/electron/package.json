@@ -28,7 +28,7 @@
     "cssnano": "5.0.17",
     "electron": "17.0.0",
     "electron-builder": "22.14.13",
-    "electron-rebuild": "3.2.7"
+    "electron-rebuild": "3.2.9"
   },
   "dependencies": {
     "buffer": "6.0.3",
